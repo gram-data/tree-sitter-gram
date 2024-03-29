@@ -1,0 +1,61 @@
+==================
+1, 2 buckle your shoe
+==================
+
+(1)-->(2)
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node (identifier))
+      (relationship (right_relationship))
+      (node_pattern
+        (node (identifier)))
+    )
+  )
+)
+
+==================
+1 +1 = 2
+==================
+
+(1)-[`+1`]->(2)
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node (identifier))
+      (relationship (right_relationship (identifier)))
+      (node_pattern
+        (node (identifier)))
+    )
+  )
+)
+
+==================
+Hello dear world over there
+==================
+
+(hello)-[dear]->(world)-[over]->(there)
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node (identifier))
+      (relationship (right_relationship (identifier)))
+      (node_pattern
+        (node (identifier))
+        (relationship (right_relationship (identifier)))
+        (node_pattern
+          (node (identifier)))
+      )
+    )
+  )
+)
+

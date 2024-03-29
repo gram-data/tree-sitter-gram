@@ -1,0 +1,61 @@
+==================
+Hello world
+==================
+
+(hello)-->(world)
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node (identifier))
+      (relationship (right_relationship))
+      (node_pattern
+        (node (identifier)))
+    )
+  )
+)
+
+==================
+Hello dear world
+==================
+
+(hello)-[dear]->(world)
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node (identifier))
+      (relationship (right_relationship (identifier)))
+      (node_pattern
+        (node (identifier)))
+    )
+  )
+)
+
+==================
+Hello dear world over there
+==================
+
+(hello)-[dear]->(world)-[over]->(there)
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node (identifier))
+      (relationship (right_relationship (identifier)))
+      (node_pattern
+        (node (identifier))
+        (relationship (right_relationship (identifier)))
+        (node_pattern
+          (node (identifier)))
+      )
+    )
+  )
+)
+

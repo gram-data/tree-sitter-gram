@@ -1,0 +1,195 @@
+==================
+Undirected relationship pair
+==================
+
+()--()
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node)
+      (relationship (undirected_relationship))
+      (node_pattern
+        (node))
+    )
+  )
+)
+
+==================
+Right relationship pair
+==================
+
+()-->()
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node)
+      (relationship (right_relationship))
+      (node_pattern
+        (node))
+    )
+  )
+)
+
+==================
+Left relationship pair
+==================
+
+()<--()
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node)
+      (relationship (left_relationship))
+      (node_pattern
+        (node))
+    )
+  )
+)
+
+==================
+Undirected relationship triple
+==================
+
+()--()--()
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node)
+      (relationship (undirected_relationship))
+      (node_pattern
+        (node)
+        (relationship (undirected_relationship))
+        (node_pattern (node))
+      )
+    )
+  )
+)
+
+
+==================
+Right relationship triple
+==================
+
+()-->()-->()
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node)
+      (relationship (right_relationship))
+      (node_pattern
+        (node)
+        (relationship (right_relationship))
+        (node_pattern (node))
+      )
+    )
+  )
+)
+
+
+==================
+Left relationship triple
+==================
+
+()<--()<--()
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node)
+      (relationship (left_relationship))
+      (node_pattern
+        (node)
+        (relationship (left_relationship))
+        (node_pattern (node))
+      )
+    )
+  )
+)
+
+==================
+Alternating left, right relationship triple
+==================
+
+()<--()-->()
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node)
+      (relationship (left_relationship))
+      (node_pattern
+        (node)
+        (relationship (right_relationship))
+        (node_pattern (node))
+      )
+    )
+  )
+)
+
+==================
+Alternating right, left relationship triple
+==================
+
+()-->()<--()
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node)
+      (relationship (right_relationship))
+      (node_pattern
+        (node)
+        (relationship (left_relationship))
+        (node_pattern (node))
+      )
+    )
+  )
+)
+
+==================
+Alternating left, right, undirected relationship quad
+==================
+
+()<--()-->()--()
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node)
+      (relationship (left_relationship))
+      (node_pattern
+        (node)
+        (relationship (right_relationship))
+        (node_pattern 
+          (node)
+          (relationship (undirected_relationship))
+          (node_pattern (node))
+        )
+      )
+    )
+  )
+)
+
