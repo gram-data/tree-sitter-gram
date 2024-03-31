@@ -8,9 +8,10 @@ Double-arrow relationships: Undirected relationship
 
 (source_file
   (pattern
-    (node)
-    (undirected_double_arrow)
-    (node)
+    (part (node)
+      (undirected_double_arrow)
+      (node)
+    )
   )
 )
 
@@ -24,9 +25,10 @@ Double-arrow right
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_right)
-    (node)
+    (part (node)
+      (double_arrow_right)
+      (node)
+    )
   )
 )
 
@@ -40,9 +42,10 @@ Double-arrow right with feathers
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_right)
-    (node)
+    (part (node)
+      (double_arrow_right)
+      (node)
+    )
   )
 )
 
@@ -56,11 +59,12 @@ Double-arrow right with attributes
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_right
-      (attributes
-        (symbol)))
-    (node)
+    (part (node)
+      (double_arrow_right
+        (attributes
+          (symbol)))
+      (node)
+    )
   )
 )
 
@@ -74,11 +78,12 @@ Double-arrow right with attributes and feathers
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_right
-      (attributes
-        (symbol)))
-    (node)
+    (part (node)
+      (double_arrow_right
+        (attributes
+          (symbol)))
+      (node)
+    )
   )
 )
 ==================
@@ -91,9 +96,10 @@ Double-arrow relationships: Left relationship
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_left)
-    (node)
+    (part (node)
+      (double_arrow_left)
+      (node)
+    )
   )
 )
 
@@ -107,11 +113,12 @@ Double-arrow left with attributes
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_left
-      (attributes
-        (symbol)))
-    (node)
+    (part (node)
+      (double_arrow_left
+        (attributes
+          (symbol)))
+      (node)
+    )
   )
 )
 
@@ -125,11 +132,12 @@ Double-arrow relationships: Undirected relationships
 
 (source_file
   (pattern
-    (node)
-    (undirected_double_arrow)
-    (node)
-    (undirected_double_arrow)
-    (node)
+    (part (node)
+      (undirected_double_arrow)
+      (node)
+      (undirected_double_arrow)
+      (node)
+    )
   )
 )
 
@@ -144,11 +152,12 @@ Double-arrow relationships: Right relationships
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_right)
-    (node)
-    (double_arrow_right)
-    (node)
+    (part (node)
+      (double_arrow_right)
+      (node)
+      (double_arrow_right)
+      (node)
+    )
   )
 )
 
@@ -163,11 +172,12 @@ Double-arrow relationships: Left relationships
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_left)
-    (node)
-    (double_arrow_left)
-    (node)
+    (part (node)
+      (double_arrow_left)
+      (node)
+      (double_arrow_left)
+      (node)
+    )
   )
 )
 
@@ -181,11 +191,12 @@ Double-arrow relationships: Alternating left, right relationship
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_left)
-    (node)
-    (double_arrow_right)
-    (node)
+    (part (node)
+      (double_arrow_left)
+      (node)
+      (double_arrow_right)
+      (node)
+    )
   )
 )
 
@@ -199,11 +210,12 @@ Double-arrow relationships: Alternating right, left relationship
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_right)
-    (node)
-    (double_arrow_left)
-    (node)
+    (part (node)
+      (double_arrow_right)
+      (node)
+      (double_arrow_left)
+      (node)
+    )
   )
 )
 
@@ -217,13 +229,14 @@ Double-arrow relationships: Alternating left, right, undirected relationship
 
 (source_file
   (pattern
-    (node)
-    (double_arrow_left)
-    (node)
-    (double_arrow_right)
-    (node)
-    (undirected_double_arrow)
-    (node)
+    (part (node)
+      (double_arrow_left)
+      (node)
+      (double_arrow_right)
+      (node)
+      (undirected_double_arrow)
+      (node)
+    )
   )
 )
 

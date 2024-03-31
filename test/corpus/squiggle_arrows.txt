@@ -8,9 +8,10 @@ Squiggle-arrow relationships: Undirected relationship
 
 (source_file
   (pattern
-    (node)
-    (undirected_squiggle)
-    (node)
+    (part (node)
+      (undirected_squiggle)
+      (node)
+    )
   )
 )
 
@@ -24,9 +25,10 @@ Squiggle-arrow right
 
 (source_file
   (pattern
-    (node)
-    (squiggle_arrow_right)
-    (node)
+    (part (node)
+      (squiggle_arrow_right)
+      (node)
+    )
   )
 )
 
@@ -40,11 +42,12 @@ Squiggle-arrow right with attributes
 
 (source_file
   (pattern
-    (node)
-    (squiggle_arrow_right
-      (attributes
-        (symbol)))
-    (node)
+    (part (node)
+      (squiggle_arrow_right
+        (attributes
+          (symbol)))
+      (node)
+    )
   )
 )
 
@@ -58,9 +61,10 @@ Squiggle-arrow Left
 
 (source_file
   (pattern
-    (node)
-    (squiggle_arrow_left)
-    (node)
+    (part (node)
+      (squiggle_arrow_left)
+      (node)
+    )
   )
 )
 
@@ -74,11 +78,12 @@ Squiggle-arrow Left with Attributes
 
 (source_file
   (pattern
-    (node)
-    (squiggle_arrow_left
-      (attributes
-        (symbol)))
-    (node)
+    (part (node)
+      (squiggle_arrow_left
+        (attributes
+          (symbol)))
+      (node)
+    )
   )
 )
 
@@ -92,11 +97,12 @@ Squiggle-arrow relationships: Undirected relationships
 
 (source_file
   (pattern
-    (node)
-    (undirected_squiggle)
-    (node)
-    (undirected_squiggle)
-    (node)
+    (part (node)
+      (undirected_squiggle)
+      (node)
+      (undirected_squiggle)
+      (node)
+    )
   )
 )
 
@@ -111,11 +117,12 @@ Squiggle-arrow relationships: Right relationships
 
 (source_file
   (pattern
-    (node)
-    (squiggle_arrow_right)
-    (node)
-    (squiggle_arrow_right)
-    (node)
+    (part (node)
+      (squiggle_arrow_right)
+      (node)
+      (squiggle_arrow_right)
+      (node)
+    )
   )
 )
 
@@ -130,11 +137,12 @@ Squiggle-arrow relationships: Left relationships
 
 (source_file
   (pattern
-    (node)
-    (squiggle_arrow_left)
-    (node)
-    (squiggle_arrow_left)
-    (node)
+    (part (node)
+      (squiggle_arrow_left)
+      (node)
+      (squiggle_arrow_left)
+      (node)
+    )
   )
 )
 
@@ -148,11 +156,12 @@ Squiggle-arrow relationships: Alternating left, right relationship
 
 (source_file
   (pattern
-    (node)
-    (squiggle_arrow_left)
-    (node)
-    (squiggle_arrow_right)
-    (node)
+    (part (node)
+      (squiggle_arrow_left)
+      (node)
+      (squiggle_arrow_right)
+      (node)
+    )
   )
 )
 
@@ -166,11 +175,12 @@ Squiggle-arrow relationships: Alternating right, left relationship
 
 (source_file
   (pattern
-    (node)
-    (squiggle_arrow_right)
-    (node)
-    (squiggle_arrow_left)
-    (node)
+    (part (node)
+      (squiggle_arrow_right)
+      (node)
+      (squiggle_arrow_left)
+      (node)
+    )
   )
 )
 
@@ -184,13 +194,14 @@ Squiggle-arrow relationships: Alternating left, right, undirected relationship
 
 (source_file
   (pattern
-    (node)
-    (squiggle_arrow_left)
-    (node)
-    (squiggle_arrow_right)
-    (node)
-    (undirected_squiggle)
-    (node)
+    (part (node)
+      (squiggle_arrow_left)
+      (node)
+      (squiggle_arrow_right)
+      (node)
+      (undirected_squiggle)
+      (node)
+    )
   )
 )
 

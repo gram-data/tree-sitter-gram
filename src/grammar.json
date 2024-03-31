@@ -1,5 +1,5 @@
 {
-  "name": "pop",
+  "name": "gram",
   "rules": {
     "source_file": {
       "type": "REPEAT",
@@ -13,7 +13,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_node_pattern"
+          "name": "part"
         },
         {
           "type": "REPEAT",
@@ -26,36 +26,35 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "_node_pattern"
+                "name": "part"
               }
             ]
           }
         }
       ]
     },
-    "_node_pattern": {
-      "type": "CHOICE",
+    "part": {
+      "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
           "name": "node"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "node"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_relationship"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_node_pattern"
-            }
-          ]
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_relationship"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "node"
+              }
+            ]
+          }
         }
       ]
     },

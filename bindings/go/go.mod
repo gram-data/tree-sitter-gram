@@ -1,4 +1,4 @@
-module github.com/tree-sitter/tree-sitter-kgram
+module github.com/tree-sitter/tree-sitter-gram
 
 go 1.22
 

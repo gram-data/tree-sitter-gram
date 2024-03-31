@@ -1,5 +1,5 @@
 {
-  "name": "tree-sitter-kgram",
+  "name": "tree-sitter-gram",
   "version": "0.1.0",
   "description": "",
   "main": "bindings/node",
@@ -23,7 +23,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-addon-api": "^7.1.0",
+    "node-addon-api": "^8.0.0",
     "node-gyp-build": "^4.8.0"
   },
   "peerDependencies": {
@@ -36,15 +36,15 @@
   },
   "devDependencies": {
     "eslint": "^8.57.0",
-    "node-gyp": "^10.0.1",
+    "node-gyp": "^10.1.0",
     "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "^0.21.0"
+    "tree-sitter-cli": "^0.22.2"
   },
   "tree-sitter": [
     {
-      "scope": "source.kgram",
+      "scope": "source.gram",
       "file-types": [
-        "kgram"
+        "gram"
       ]
     }
   ]

@@ -8,7 +8,7 @@ Labeled nodes: No label
 
 (source_file
   (pattern
-    (node)
+    (part (node))
   )
 )
 
@@ -22,7 +22,7 @@ Labeled nodes: Single label
 
 (source_file
   (pattern
-    (node (attributes (labels (symbol))))
+    (part (node (attributes (labels (symbol)))))
   )
 )
 
@@ -36,7 +36,7 @@ Labeled nodes: Two labels
 
 (source_file
   (pattern
-    (node (attributes (labels (symbol) (symbol))))
+    (part (node (attributes (labels (symbol) (symbol)))))
   )
 )
 
@@ -51,6 +51,6 @@ Labeled nodes: Identity followed by labels
 
 (source_file
   (pattern
-    (node (attributes (symbol) (labels (symbol) (symbol))))
+    (part (node (attributes (symbol) (labels (symbol) (symbol)))))
   )
 )

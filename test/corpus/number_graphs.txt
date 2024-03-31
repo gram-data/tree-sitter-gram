@@ -8,11 +8,10 @@ Number graph: 1, 2 buckle your shoe
 
 (source_file
   (pattern
-    (node_pattern
-      (node (identifier (symbol)))
-      (relationship (right_relationship))
-      (node_pattern
-        (node (identifier (symbol))))
+    (part
+      (node (attributes (symbol)))
+      (single_arrow_right)
+      (node (attributes (symbol)))
     )
   )
 )
@@ -27,7 +26,7 @@ Number graph: 1 +1 = 2
 
 (source_file
   (pattern
-    (node_pattern
+    (part
       (node (attributes (symbol)))
       (single_arrow_right (attributes (backticked_string)))
       (node (attributes (symbol)))

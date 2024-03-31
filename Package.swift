@@ -2,14 +2,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "TreeSitterPop",
+    name: "TreeSitterGram",
     platforms: [.macOS(.v10_13), .iOS(.v11)],
     products: [
-        .library(name: "TreeSitterPop", targets: ["TreeSitterPop"]),
+        .library(name: "TreeSitterGram", targets: ["TreeSitterGram"]),
     ],
     dependencies: [],
     targets: [
-        .target(name: "TreeSitterPop",
+        .target(name: "TreeSitterGram",
                 path: ".",
                 exclude: [
                     "Cargo.toml",
@@ -20,14 +20,14 @@ let package = Package(
                     "bindings/node",
                     "bindings/python",
                     "bindings/rust",
-                    "examples",
+                    "prebuilds",
                     "grammar.js",
                     "package.json",
                     "package-lock.json",
                     "pyproject.toml",
                     "setup.py",
                     "test",
-                    "types",
+                    "examples",
                     ".editorconfig",
                     ".github",
                     ".gitignore",

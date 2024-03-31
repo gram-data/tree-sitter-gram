@@ -8,11 +8,10 @@ Hello world
 
 (source_file
   (pattern
-    (node_pattern
-      (node (identifier (symbol)))
-      (relationship (right_relationship))
-      (node_pattern
-        (node (identifier (symbol))))
+    (part
+      (node (attributes (symbol)))
+      (single_arrow_right)
+      (node (attributes (symbol)))
     )
   )
 )
@@ -27,11 +26,10 @@ Hello dear world
 
 (source_file
   (pattern
-    (node_pattern
-      (node (identifier (symbol)))
-      (relationship (right_relationship (identifier (symbol))))
-      (node_pattern
-        (node (identifier (symbol))))
+    (part
+      (node (attributes (symbol)))
+      (single_arrow_right (attributes (symbol)))
+      (node (attributes (symbol)))
     )
   )
 )
@@ -46,15 +44,12 @@ Hello dear world over there
 
 (source_file
   (pattern
-    (node_pattern
-      (node (identifier (symbol)))
-      (relationship (right_relationship (identifier (symbol))))
-      (node_pattern
-        (node (identifier (symbol)))
-        (relationship (right_relationship (identifier (symbol))))
-        (node_pattern
-          (node (identifier (symbol))))
-      )
+    (part
+      (node (attributes (symbol)))
+      (single_arrow_right (attributes (symbol)))
+      (node (attributes (symbol)))
+      (single_arrow_right (attributes (symbol)))
+      (node (attributes (symbol)))
     )
   )
 )
@@ -69,12 +64,10 @@ Hello "dear world" "over there"
 
 (source_file
   (pattern
-    (node_pattern
-      (node (identifier (symbol)))
-      (relationship (right_relationship (identifier (string))))
-      (node_pattern
-        (node (identifier (string)))
-      )
+    (part
+      (node (attributes (symbol)))
+      (single_arrow_right (attributes (backticked_string)))
+      (node (attributes (backticked_string)))
     )
   )
 )

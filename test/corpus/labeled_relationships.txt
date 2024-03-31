@@ -8,9 +8,10 @@ Labeled relationship: Single label
 
 (source_file
   (pattern
-    (node)
-    (undirected_single (attributes (labels (symbol))))
-    (node)
+    (part (node)
+      (undirected_single (attributes (labels (symbol))))
+      (node)
+    )
   )
 )
 
@@ -24,9 +25,10 @@ Labeled relationship: Two labels
 
 (source_file
   (pattern
-    (node)
-    (undirected_single (attributes (labels (symbol) (symbol))))
-    (node)
+    (part (node)
+      (undirected_single (attributes (labels (symbol) (symbol))))
+      (node)
+    )
   )
 )
 
@@ -40,9 +42,10 @@ Labeled relationship: Two labels with an identity
 
 (source_file
   (pattern
-    (node)
-    (undirected_single (attributes (symbol) (labels (symbol) (symbol))))
-    (node)
+    (part (node)
+      (undirected_single (attributes (symbol) (labels (symbol) (symbol))))
+      (node)
+    )
   )
 )
 

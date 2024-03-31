@@ -2,10 +2,10 @@ prefix=@PREFIX@
 libdir=@LIBDIR@
 includedir=@INCLUDEDIR@
 
-Name: tree-sitter-kgram
-Description: pop grammar for tree-sitter
+Name: tree-sitter-gram
+Description: Gram grammar for tree-sitter
 URL: @URL@
 Version: @VERSION@
 Requires: @REQUIRES@
-Libs: -L${libdir} @ADDITIONAL_LIBS@ -ltree-sitter-kgram
+Libs: -L${libdir} @ADDITIONAL_LIBS@ -ltree-sitter-gram
 Cflags: -I${includedir}

@@ -98,7 +98,7 @@
     }
   },
   {
-    "type": "pattern",
+    "type": "part",
     "named": true,
     "fields": {},
     "children": {
@@ -143,6 +143,21 @@
         },
         {
           "type": "undirected_squiggle",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "part",
           "named": true
         }
       ]

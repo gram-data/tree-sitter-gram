@@ -1,16 +1,18 @@
 module.exports = grammar({
-  name: 'pop',
+  name: 'gram',
 
   rules: {
     source_file: $ => repeat($.pattern),
 
-    pattern: $ => commaSep1($._node_pattern),
+    pattern: $ => commaSep1($.part),
 
-    _node_pattern: $ => choice(
-      $.node,
-      seq($.node, $._relationship, $._node_pattern)
-    ),
+    // segment: $ => choice(
+    //   $.node,
+    //   seq($.node, $._relationship, $._node_pattern)
+    // ),
     
+    part: $ => ruleSep1($.node, $._relationship),
+
     node: $ => seq("(", optional($.attributes),")"),
 
     attributes: $ => choice(
@@ -110,7 +112,7 @@ function commaSep(rule) {
 
 
 /**
- * Creates a rule to match one or more of the rules separated by a comma
+ * Creates a rule to match one or more of the rules separated by a colon
  *
  * @param {RuleOrLiteral} rule
  *
@@ -119,4 +121,17 @@ function commaSep(rule) {
  */
 function colonSep1(rule) {
   return seq(rule, repeat(seq(':', rule)));
+}
+
+
+/**
+ * Creates a rule to match one or more of the rules separated by another rule
+ *
+ * @param {RuleOrLiteral} rule
+ *
+ * @return {SeqRule}
+ *
+ */
+function ruleSep1(rule, separator) {
+  return seq(rule, repeat(seq(separator, rule)));
 }
