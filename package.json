@@ -1,5 +1,5 @@
 {
-  "name": "tree-sitter-gram",
+  "name": "@gather-data/tree-sitter-gram",
   "version": "0.1.0",
   "description": "",
   "main": "bindings/node",
@@ -47,5 +47,13 @@
         "gram"
       ]
     }
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gram-data/tree-sitter-gram.git"
+  }
+  
 }
