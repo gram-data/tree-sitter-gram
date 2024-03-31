@@ -1,5 +1,5 @@
 ==================
-Single empty node pattern
+Empty nodes: Single empty node pattern
 ==================
 
 ()
@@ -8,13 +8,12 @@ Single empty node pattern
 
 (source_file
   (pattern
-    (node_pattern
-      (node)
-  ))
+    (node)
+  )
 )
 
 ==================
-Two empty node patterns
+Empty nodes: Two empty node patterns
 ==================
 
 ()
@@ -24,17 +23,15 @@ Two empty node patterns
 
 (source_file
   (pattern
-    (node_pattern
-      (node)
-  ))
+    (node)
+  )
   (pattern
-    (node_pattern
-      (node)
-  ))
+    (node)
+  )
 )
 
 ==================
-Pair of empty nodes in a single pattern
+Empty nodes: Pair of empty nodes in a single pattern
 ==================
 
 (), ()
@@ -43,12 +40,8 @@ Pair of empty nodes in a single pattern
 
 (source_file
   (pattern
-    (node_pattern
-      (node)
-    )
-    (node_pattern
-      (node)
-    )
+    (node)
+    (node)
   )
 )
 

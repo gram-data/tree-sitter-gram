@@ -1,0 +1,160 @@
+==================
+Single-arrow: Undirected relationship
+==================
+
+()--()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (undirected_single)
+    (node)
+  )
+)
+
+==================
+Single-arrow: Right relationship
+==================
+
+()-->()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_right)
+    (node)
+  )
+)
+
+==================
+Single-arrow: Left relationship
+==================
+
+()<--()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_left)
+    (node)
+  )
+)
+
+==================
+Single-arrow: Undirected relationships
+==================
+
+()--()--()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (undirected_single)
+    (node)
+    (undirected_single)
+    (node)
+  )
+)
+
+
+==================
+Single-arrow: Right relationships
+==================
+
+()-->()-->()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_right)
+    (node)
+    (single_arrow_right)
+    (node)
+  )
+)
+
+
+==================
+Single-arrow: Left relationships
+==================
+
+()<--()<--()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_left)
+    (node)
+    (single_arrow_left)
+    (node)
+  )
+)
+
+==================
+Single-arrow: Alternating left, right relationship
+==================
+
+()<--()-->()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_left)
+    (node)
+    (single_arrow_right)
+    (node)
+  )
+)
+
+==================
+Single-arrow: Alternating right, left relationship
+==================
+
+()-->()<--()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_right)
+    (node)
+    (single_arrow_left)
+    (node)
+  )
+)
+
+==================
+Single-arrow: Alternating left, right, undirected relationship qd
+==================
+
+()<--()-->()--()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_left)
+    (node)
+    (single_arrow_right)
+    (node)
+    (undirected_single)
+    (node)
+  )
+)
+

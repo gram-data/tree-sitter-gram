@@ -4,41 +4,82 @@ module.exports = grammar({
   rules: {
     source_file: $ => repeat($.pattern),
 
-    pattern: $ => commaSep1($.node_pattern),
+    pattern: $ => commaSep1($._node_pattern),
 
-    node_pattern: $ => choice(
+    _node_pattern: $ => choice(
       $.node,
-      seq($.node, $.relationship, $.node_pattern)
+      seq($.node, $._relationship, $._node_pattern)
     ),
     
-    node: $ => seq("(", optional($.identifier),")"),
+    node: $ => seq("(", optional($.attributes),")"),
 
-    identifier: $ => choice(
-      $.symbol,
-      $.string_value
+    attributes: $ => choice(
+      choice(field("identifier", $._identifier), field("labels", $.labels)), 
+      seq(field("identifier", $._identifier), field("labels", $.labels))
     ),
+
+    _identifier: $ => choice(
+      $.symbol,
+      $._string_literal
+    ),
+
+    labels: $ => seq(":", colonSep1($.symbol)),
 
     symbol: $ => {
       const alphanumeric = /[0-9a-zA-Z_@.]+/;      
-      return token(repeat1(alphanumeric));
+      return token(alphanumeric);
     },
 
-    string_value: $ => {
-      const backticked = /`[^`]+`/;      
+    _string_literal: $ => choice(
+      $.single_quoted_string,
+      $.double_quoted_string,
+      $.backticked_string
+    ),
+
+    single_quoted_string: $ => {
+      const backticked = /'(\\['bfnrt/\\]|[^'])*'/;      
       return token(backticked);
     },
 
-    relationship: $ => choice(
-      $.undirected_relationship,
-      $.right_relationship,
-      $.left_relationship,
+    double_quoted_string: $ => {
+      const backticked = /"(\\["bfnrt/\\]|[^"])*"/;      
+      return token(backticked);
+    },
+
+    backticked_string: $ => {
+      const backticked = /`(\\[`bfnrt/\\]|[^`])*`/;      
+      return token(backticked);
+    },
+
+    _relationship: $ => choice(
+      $.undirected_single,
+      $.single_arrow_right,
+      $.single_arrow_left,
+      $.undirected_double_arrow,
+      $.double_arrow_right,
+      $.double_arrow_left,
+      $.undirected_squiggle,
+      $.squiggle_arrow_right,
+      $.squiggle_arrow_left,
     ),
       
-    undirected_relationship: $ => seq("-", optional(seq("[", $.identifier, "]")), "-"),
+    undirected_single: $ => seq("-", optional(seq("[", $.attributes, "]")), "-"),
 
-    right_relationship: $ => seq("-", optional(seq("[", $.identifier, "]")), "->"),
+    single_arrow_right: $ => seq("-", optional(seq("[", $.attributes, "]")), "->"),
 
-    left_relationship: $ => seq("<-", optional(seq("[", $.identifier, "]")), "-"),
+    single_arrow_left: $ => seq("<-", optional(seq("[", $.attributes, "]")), "-"),
+      
+    undirected_double_arrow: $ => seq("=", optional(seq("[", $.attributes, "]")), "="),
+
+    double_arrow_right: $ => seq("=", optional(seq("[", $.attributes, "]")), token(/>?=>/)),
+
+    double_arrow_left: $ => seq(token(/<=<?/), optional(seq("[", $.attributes, "]")), "="),
+      
+    undirected_squiggle: $ => seq("~", optional(seq("[", $.attributes, "]")), "~"),
+
+    squiggle_arrow_right: $ => seq("~", optional(seq("[", $.attributes, "]")), "~>"),
+
+    squiggle_arrow_left: $ => seq("<~", optional(seq("[", $.attributes, "]")), "~"),
 
   }
 });
@@ -65,4 +106,17 @@ function commaSep1(rule) {
  */
 function commaSep(rule) {
   return optional(commaSep1(rule));
+}
+
+
+/**
+ * Creates a rule to match one or more of the rules separated by a comma
+ *
+ * @param {RuleOrLiteral} rule
+ *
+ * @return {SeqRule}
+ *
+ */
+function colonSep1(rule) {
+  return seq(rule, repeat(seq(':', rule)));
 }

@@ -1,0 +1,76 @@
+==================
+Empty relationships: Single relationship pattern
+==================
+
+()-->()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_right)
+    (node)
+  )
+)
+
+==================
+Empty relationships: Two relationship patterns
+==================
+
+()-->()
+()<--()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_right)
+    (node)
+  )
+  (pattern
+    (node)
+    (single_arrow_left)
+    (node)
+  )
+)
+
+==================
+Empty relationships: Pair of relationships in a single pattern
+==================
+
+()-->(), ()<--()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_right)
+    (node)
+    (node)
+    (single_arrow_left)
+    (node)
+  )
+)
+
+==================
+Empty relationships: Three segment pattern
+==================
+
+()-->(), ()<--(), ()
+
+---
+
+(source_file
+  (pattern
+    (node)
+    (single_arrow_right)
+    (node)
+    (node)
+    (single_arrow_left)
+    (node)
+    (node)
+  )
+)

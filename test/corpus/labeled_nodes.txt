@@ -1,0 +1,56 @@
+==================
+Labeled nodes: No label
+==================
+
+()
+
+---
+
+(source_file
+  (pattern
+    (node)
+  )
+)
+
+==================
+Labeled nodes: Single label
+==================
+
+(:A)
+
+---
+
+(source_file
+  (pattern
+    (node (attributes (labels (symbol))))
+  )
+)
+
+==================
+Labeled nodes: Two labels
+==================
+
+(:A:B)
+
+---
+
+(source_file
+  (pattern
+    (node (attributes (labels (symbol) (symbol))))
+  )
+)
+
+
+==================
+Labeled nodes: Identity followed by labels
+==================
+
+(1:A:B)
+
+---
+
+(source_file
+  (pattern
+    (node (attributes (symbol) (labels (symbol) (symbol))))
+  )
+)

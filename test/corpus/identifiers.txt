@@ -1,6 +1,6 @@
 
 ==================
-Using '@' in identifiers
+Identifier using '@'
 ==================
 
 (@akollegger)
@@ -9,13 +9,13 @@ Using '@' in identifiers
 ---
 
 (source_file
-  (pattern (node_pattern (node (identifier))))
-  (pattern (node_pattern (node (identifier))))
+  (pattern (node_pattern (node (attributes (symbol)))))
+  (pattern (node_pattern (node (attributes (symbol)))))
 )
 
 
 ==================
-Using '_' and mixed case in identifiers
+Identifier using '_' and mixed case
 ==================
 
 (_0n96pdf6@E)
@@ -24,13 +24,13 @@ Using '_' and mixed case in identifiers
 ---
 
 (source_file
-  (pattern (node_pattern (node (identifier))))
-  (pattern (node_pattern (node (identifier))))
+  (pattern (node_pattern (node (attributes (symbol)))))
+  (pattern (node_pattern (node (attributes (symbol)))))
 )
 
 
 ==================
-Using numbers in identifiers
+Identifier using numbers
 ==================
 
 (42)
@@ -38,12 +38,12 @@ Using numbers in identifiers
 ---
 
 (source_file
-  (pattern (node_pattern (node (identifier))))
+  (pattern (node_pattern (node (attributes (symbol)))))
 )
 
 
 ==================
-Using numbers with units in identifiers
+Identifier using numbers with units
 ==================
 
 (12px)
@@ -51,12 +51,12 @@ Using numbers with units in identifiers
 ---
 
 (source_file
-  (pattern (node_pattern (node (identifier))))
+  (pattern (node_pattern (node (attributes (symbol)))))
 )
 
 
 ==================
-Using backtick delimited identifiers
+Identifier using backticks
 ==================
 
 (`+1`)
@@ -64,7 +64,61 @@ Using backtick delimited identifiers
 ---
 
 (source_file
-  (pattern (node_pattern (node (identifier))))
+  (pattern (node_pattern (node (attributes (backticked_string)))))
 )
 
+
+
+==================
+Identifier using backticks with escaped backtick
+==================
+
+(`escape \` the backtick`)
+
+---
+
+(source_file
+  (pattern (node_pattern (node (attributes (backticked_string)))))
+)
+
+==================
+Identifier using double-quotes
+==================
+
+("Hello World!")
+
+---
+
+(source_file
+  (pattern (node_pattern (node (attributes (double_quoted_string)))))
+)
+
+
+
+==================
+Identifier using double-quotes with escaped double-quote
+==================
+
+("escape \" the double-quote")
+
+---
+
+(source_file
+  (pattern (node_pattern (node (attributes (double_quoted_string)))))
+)
+
+==================
+Identifier pair
+==================
+
+(a),(b)
+
+---
+
+(source_file
+  (pattern 
+    (node_pattern (node (attributes (symbol))))
+    (node_pattern (node (attributes (symbol))))
+  )
+)
 

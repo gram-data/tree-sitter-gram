@@ -1,0 +1,40 @@
+==================
+GQL Node Type Definition
+:skip
+==================
+
+(:Form => {
+  formId :: string!,
+  cik :: int!,
+  source :: string,
+  embedding :: list<float>
+})
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node (identifier (symbol)))
+    )
+  )
+)
+
+==================
+GQL Relationship Type Definition
+:skip
+==================
+
+(:Form)=[:SECTION { item :: string }]=>(:Chunk)
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node (identifier (symbol)))
+      (relationship (right_relationship))
+      (node (identifier (symbol)))
+    )
+  )
+)

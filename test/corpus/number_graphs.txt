@@ -1,5 +1,5 @@
 ==================
-1, 2 buckle your shoe
+Number graph: 1, 2 buckle your shoe
 ==================
 
 (1)-->(2)
@@ -9,16 +9,16 @@
 (source_file
   (pattern
     (node_pattern
-      (node (identifier))
+      (node (identifier (symbol)))
       (relationship (right_relationship))
       (node_pattern
-        (node (identifier)))
+        (node (identifier (symbol))))
     )
   )
 )
 
 ==================
-1 +1 = 2
+Number graph: 1 +1 = 2
 ==================
 
 (1)-[`+1`]->(2)
@@ -28,33 +28,9 @@
 (source_file
   (pattern
     (node_pattern
-      (node (identifier))
-      (relationship (right_relationship (identifier)))
-      (node_pattern
-        (node (identifier)))
-    )
-  )
-)
-
-==================
-Hello dear world over there
-==================
-
-(hello)-[dear]->(world)-[over]->(there)
-
----
-
-(source_file
-  (pattern
-    (node_pattern
-      (node (identifier))
-      (relationship (right_relationship (identifier)))
-      (node_pattern
-        (node (identifier))
-        (relationship (right_relationship (identifier)))
-        (node_pattern
-          (node (identifier)))
-      )
+      (node (attributes (symbol)))
+      (single_arrow_right (attributes (backticked_string)))
+      (node (attributes (symbol)))
     )
   )
 )

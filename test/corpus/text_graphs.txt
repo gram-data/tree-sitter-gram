@@ -9,10 +9,10 @@ Hello world
 (source_file
   (pattern
     (node_pattern
-      (node (identifier))
+      (node (identifier (symbol)))
       (relationship (right_relationship))
       (node_pattern
-        (node (identifier)))
+        (node (identifier (symbol))))
     )
   )
 )
@@ -28,10 +28,10 @@ Hello dear world
 (source_file
   (pattern
     (node_pattern
-      (node (identifier))
-      (relationship (right_relationship (identifier)))
+      (node (identifier (symbol)))
+      (relationship (right_relationship (identifier (symbol))))
       (node_pattern
-        (node (identifier)))
+        (node (identifier (symbol))))
     )
   )
 )
@@ -47,15 +47,34 @@ Hello dear world over there
 (source_file
   (pattern
     (node_pattern
-      (node (identifier))
-      (relationship (right_relationship (identifier)))
+      (node (identifier (symbol)))
+      (relationship (right_relationship (identifier (symbol))))
       (node_pattern
-        (node (identifier))
-        (relationship (right_relationship (identifier)))
+        (node (identifier (symbol)))
+        (relationship (right_relationship (identifier (symbol))))
         (node_pattern
-          (node (identifier)))
+          (node (identifier (symbol))))
       )
     )
   )
 )
 
+==================
+Hello "dear world" "over there"
+==================
+
+(hello)-[`dear world`]->(`over there`)
+
+---
+
+(source_file
+  (pattern
+    (node_pattern
+      (node (identifier (symbol)))
+      (relationship (right_relationship (identifier (string))))
+      (node_pattern
+        (node (identifier (string)))
+      )
+    )
+  )
+)
