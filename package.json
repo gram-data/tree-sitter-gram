@@ -1,5 +1,5 @@
 {
-  "name": "@gather-data/tree-sitter-gram",
+  "name": "@gram-data/tree-sitter-gram",
   "version": "0.1.0",
   "description": "",
   "main": "bindings/node",
@@ -53,7 +53,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gram-data/tree-sitter-gram.git"
+    "url": "git+https://github.com/gram-data/tree-sitter-gram.git"
   }
-  
 }
