@@ -12,7 +12,6 @@ const gramCode = `(hello)
 `;
 const cst = parser.parse(gramCode);
 
-const patterns = new Map();
 const nodes = [];
 const relationships = [];
 const identifiers = new Set();

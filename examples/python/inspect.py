@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(1, '../../bindings/python')
+
 import tree_sitter_gram as tsgram
 # import tree_sitter_python as tspython
 from tree_sitter import Language, Parser
