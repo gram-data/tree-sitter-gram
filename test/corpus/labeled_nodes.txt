@@ -6,7 +6,7 @@ Labeled nodes: No label
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node))
   )
@@ -20,7 +20,7 @@ Labeled nodes: Single label
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node (attributes (labels (symbol)))))
   )
@@ -34,7 +34,7 @@ Labeled nodes: Two labels
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node (attributes (labels (symbol) (symbol)))))
   )
@@ -49,7 +49,7 @@ Labeled nodes: Identity followed by labels
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node (attributes (symbol) (labels (symbol) (symbol)))))
   )

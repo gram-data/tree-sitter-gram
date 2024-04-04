@@ -6,7 +6,7 @@ Double-arrow relationships: Undirected relationship
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (undirected_double_arrow)
@@ -23,7 +23,7 @@ Double-arrow right
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_right)
@@ -40,7 +40,7 @@ Double-arrow right with feathers
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_right)
@@ -57,7 +57,7 @@ Double-arrow right with attributes
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_right
@@ -76,7 +76,7 @@ Double-arrow right with attributes and feathers
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_right
@@ -94,7 +94,7 @@ Double-arrow relationships: Left relationship
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_left)
@@ -111,7 +111,7 @@ Double-arrow left with attributes
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_left
@@ -130,7 +130,7 @@ Double-arrow relationships: Undirected relationships
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (undirected_double_arrow)
@@ -150,7 +150,7 @@ Double-arrow relationships: Right relationships
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_right)
@@ -170,7 +170,7 @@ Double-arrow relationships: Left relationships
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_left)
@@ -189,7 +189,7 @@ Double-arrow relationships: Alternating left, right relationship
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_left)
@@ -208,7 +208,7 @@ Double-arrow relationships: Alternating right, left relationship
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_right)
@@ -227,7 +227,7 @@ Double-arrow relationships: Alternating left, right, undirected relationship
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (double_arrow_left)

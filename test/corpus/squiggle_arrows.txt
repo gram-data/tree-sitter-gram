@@ -6,7 +6,7 @@ Squiggle-arrow relationships: Undirected relationship
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (undirected_squiggle)
@@ -23,7 +23,7 @@ Squiggle-arrow right
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (squiggle_arrow_right)
@@ -40,7 +40,7 @@ Squiggle-arrow right with attributes
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (squiggle_arrow_right
@@ -59,7 +59,7 @@ Squiggle-arrow Left
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (squiggle_arrow_left)
@@ -76,7 +76,7 @@ Squiggle-arrow Left with Attributes
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (squiggle_arrow_left
@@ -95,7 +95,7 @@ Squiggle-arrow relationships: Undirected relationships
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (undirected_squiggle)
@@ -115,7 +115,7 @@ Squiggle-arrow relationships: Right relationships
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (squiggle_arrow_right)
@@ -135,7 +135,7 @@ Squiggle-arrow relationships: Left relationships
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (squiggle_arrow_left)
@@ -154,7 +154,7 @@ Squiggle-arrow relationships: Alternating left, right relationship
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (squiggle_arrow_left)
@@ -173,7 +173,7 @@ Squiggle-arrow relationships: Alternating right, left relationship
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (squiggle_arrow_right)
@@ -192,7 +192,7 @@ Squiggle-arrow relationships: Alternating left, right, undirected relationship
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (squiggle_arrow_left)

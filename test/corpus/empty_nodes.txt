@@ -6,7 +6,7 @@ Empty nodes: Single empty node pattern
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node))
   )
@@ -21,7 +21,7 @@ Empty nodes: Two empty node patterns
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node))
   )
@@ -38,7 +38,7 @@ Empty nodes: Pair of empty nodes in a single pattern
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node))
     (part (node))

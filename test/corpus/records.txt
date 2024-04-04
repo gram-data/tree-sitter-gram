@@ -1,0 +1,141 @@
+==================
+Record: No record
+==================
+
+()
+
+---
+
+(gram
+  (pattern
+    (part (node))
+  )
+)
+
+==================
+Record: empty
+:error
+==================
+
+({})
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (labels (symbol)))))
+  )
+)
+
+==================
+Record: single number property
+==================
+
+({ n : 1 })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (integer)) ) ) ) )
+  )
+)
+
+==================
+Record: decimal
+==================
+
+({ r : 3.1495 })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (decimal)) ) ) ) )
+  )
+)
+
+==================
+Record: hexadecimal
+==================
+
+({ h : 0xCAFE })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (hexadecimal)) ) ) ) )
+  )
+)
+
+==================
+Record: octal with an '0'
+==================
+
+({ o : 042 })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (octal)) ) ) ) )
+  )
+)
+
+
+==================
+Record: octal with an 'o'
+==================
+
+({ o : o42 })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (octal)) ) ) ) )
+  )
+)
+
+==================
+Record: double-quoted string property
+==================
+
+({ s : "a" })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (double_quoted_string)) ) ) ) )
+  )
+)
+
+==================
+Record: single-quoted string property
+==================
+
+({ s : 'a' })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+  )
+)
+
+==================
+Record: backtick-quoted string property
+==================
+
+({ s : `a` })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (backticked_string)) ) ) ) )
+  )
+)

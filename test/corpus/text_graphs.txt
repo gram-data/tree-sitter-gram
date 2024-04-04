@@ -6,7 +6,7 @@ Hello world
 
 ---
 
-(source_file
+(gram
   (pattern
     (part
       (node (attributes (symbol)))
@@ -24,7 +24,7 @@ Hello dear world
 
 ---
 
-(source_file
+(gram
   (pattern
     (part
       (node (attributes (symbol)))
@@ -42,7 +42,7 @@ Hello dear world over there
 
 ---
 
-(source_file
+(gram
   (pattern
     (part
       (node (attributes (symbol)))
@@ -62,7 +62,7 @@ Hello "dear world" "over there"
 
 ---
 
-(source_file
+(gram
   (pattern
     (part
       (node (attributes (symbol)))

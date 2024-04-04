@@ -12,7 +12,7 @@ GQL Node Type Definition
 
 ---
 
-(source_file
+(gram
   (pattern
     (node_pattern
       (node (identifier (symbol)))
@@ -29,7 +29,7 @@ GQL Relationship Type Definition
 
 ---
 
-(source_file
+(gram
   (pattern
     (node_pattern
       (node (identifier (symbol)))

@@ -2,7 +2,7 @@ module.exports = grammar({
   name: 'gram',
 
   rules: {
-    source_file: $ => repeat($.pattern),
+    gram: $ => repeat($.pattern),
 
     pattern: $ => commaSep1($.part),
 
@@ -16,7 +16,7 @@ module.exports = grammar({
     node: $ => seq("(", optional($.attributes),")"),
 
     attributes: $ => choice(
-      choice(field("identifier", $._identifier), field("labels", $.labels)), 
+      choice(field("identifier", $._identifier), field("labels", $.labels), field("record", $.record)), 
       seq(field("identifier", $._identifier), field("labels", $.labels))
     ),
 
@@ -27,9 +27,49 @@ module.exports = grammar({
 
     labels: $ => seq(":", colonSep1($.symbol)),
 
+    record: $ => seq("{", commaSep1($.pair), "}"),
+
+    pair: $ => seq(
+      field('key', $.symbol),
+      ':',
+      field('value', $._value),
+    ),
+
     symbol: $ => {
       const alphanumeric = /[0-9a-zA-Z_@.]+/;      
       return token(alphanumeric);
+    },
+
+    _value: $ => choice(
+      $._numeric_literal,
+      $._string_literal,
+    ),
+
+    _numeric_literal: $ => choice(
+      $.integer,
+      $.decimal,
+      $.hexadecimal,
+      $.octal
+    ),
+
+    integer: $ => {
+      const integer = /-?([1-9]\d*)/;      
+      return token(integer);
+    },
+
+    decimal: $ => {
+      const decimal = /-?(0|[1-9]\d*)\.\d+/;      
+      return token(decimal);
+    },
+
+    hexadecimal: $ => {
+      const hexadecimal = /0x[0-9a-fA-F]+/;      
+      return token(hexadecimal);
+    },
+
+    octal: $ => {
+      const octal = /[0o][0-7]+/;      
+      return token(octal);
     },
 
     _string_literal: $ => choice(

@@ -8,7 +8,7 @@ Identifier using '@'
 
 ---
 
-(source_file
+(gram
   (pattern (part (node (attributes (symbol)))))
   (pattern (part (node (attributes (symbol)))))
 )
@@ -23,7 +23,7 @@ Identifier using '_' and mixed case
 
 ---
 
-(source_file
+(gram
   (pattern (part (node (attributes (symbol)))))
   (pattern (part (node (attributes (symbol)))))
 )
@@ -37,7 +37,7 @@ Identifier using numbers
 
 ---
 
-(source_file
+(gram
   (pattern (part (node (attributes (symbol)))))
 )
 
@@ -50,7 +50,7 @@ Identifier using numbers with units
 
 ---
 
-(source_file
+(gram
   (pattern (part (node (attributes (symbol)))))
 )
 
@@ -63,7 +63,7 @@ Identifier using backticks
 
 ---
 
-(source_file
+(gram
   (pattern (part (node (attributes (backticked_string)))))
 )
 
@@ -77,7 +77,7 @@ Identifier using backticks with escaped backtick
 
 ---
 
-(source_file
+(gram
   (pattern (part (node (attributes (backticked_string)))))
 )
 
@@ -89,7 +89,7 @@ Identifier using double-quotes
 
 ---
 
-(source_file
+(gram
   (pattern (part (node (attributes (double_quoted_string)))))
 )
 
@@ -103,7 +103,7 @@ Identifier using double-quotes with escaped double-quote
 
 ---
 
-(source_file
+(gram
   (pattern (part (node (attributes (double_quoted_string)))))
 )
 
@@ -115,7 +115,7 @@ Identifier pair
 
 ---
 
-(source_file
+(gram
   (pattern 
     (part (node (attributes (symbol))))
     (part (node (attributes (symbol))))

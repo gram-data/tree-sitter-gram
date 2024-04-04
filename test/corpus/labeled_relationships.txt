@@ -6,7 +6,7 @@ Labeled relationship: Single label
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (undirected_single (attributes (labels (symbol))))
@@ -23,7 +23,7 @@ Labeled relationship: Two labels
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (undirected_single (attributes (labels (symbol) (symbol))))
@@ -40,7 +40,7 @@ Labeled relationship: Two labels with an identity
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (undirected_single (attributes (symbol) (labels (symbol) (symbol))))

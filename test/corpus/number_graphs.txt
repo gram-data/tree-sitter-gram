@@ -6,7 +6,7 @@ Number graph: 1, 2 buckle your shoe
 
 ---
 
-(source_file
+(gram
   (pattern
     (part
       (node (attributes (symbol)))
@@ -24,7 +24,7 @@ Number graph: 1 +1 = 2
 
 ---
 
-(source_file
+(gram
   (pattern
     (part
       (node (attributes (symbol)))

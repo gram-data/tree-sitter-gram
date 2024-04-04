@@ -34,6 +34,16 @@
             "named": true
           }
         ]
+      },
+      "record": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "record",
+            "named": true
+          }
+        ]
       }
     }
   },
@@ -68,6 +78,21 @@
     }
   },
   {
+    "type": "gram",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "labels",
     "named": true,
     "fields": {},
@@ -95,6 +120,56 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "pair",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "backticked_string",
+            "named": true
+          },
+          {
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "octal",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -164,6 +239,21 @@
     }
   },
   {
+    "type": "record",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pair",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "single_arrow_left",
     "named": true,
     "fields": {},
@@ -188,21 +278,6 @@
       "types": [
         {
           "type": "attributes",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "source_file",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "pattern",
           "named": true
         }
       ]
@@ -332,7 +407,23 @@
     "named": true
   },
   {
+    "type": "decimal",
+    "named": true
+  },
+  {
     "type": "double_quoted_string",
+    "named": true
+  },
+  {
+    "type": "hexadecimal",
+    "named": true
+  },
+  {
+    "type": "integer",
+    "named": true
+  },
+  {
+    "type": "octal",
     "named": true
   },
   {
@@ -342,6 +433,14 @@
   {
     "type": "symbol",
     "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
   },
   {
     "type": "~",

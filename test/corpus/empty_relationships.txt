@@ -6,7 +6,7 @@ Empty relationships: Single relationship pattern
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (single_arrow_right)
@@ -24,7 +24,7 @@ Empty relationships: Two relationship patterns
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (single_arrow_right)
@@ -47,7 +47,7 @@ Empty relationships: Pair of relationships in a single pattern
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (single_arrow_right)
@@ -68,7 +68,7 @@ Empty relationships: Three segment pattern
 
 ---
 
-(source_file
+(gram
   (pattern
     (part (node)
       (single_arrow_right)
