@@ -51,6 +51,6 @@ Labeled nodes: Identity followed by labels
 
 (gram
   (pattern
-    (path (node (attributes (symbol) (labels (symbol) (symbol)))))
+    (path (node (attributes (integer) (labels (symbol) (symbol)))))
   )
 )

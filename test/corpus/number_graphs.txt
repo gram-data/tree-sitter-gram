@@ -9,9 +9,9 @@ Number graph: 1, 2 buckle your shoe
 (gram
   (pattern
     (path
-      (node (attributes (symbol)))
+      (node (attributes (integer)))
       (single_arrow_right)
-      (node (attributes (symbol)))
+      (node (attributes (integer)))
     )
   )
 )
@@ -27,9 +27,9 @@ Number graph: 1 +1 = 2
 (gram
   (pattern
     (path
-      (node (attributes (symbol)))
+      (node (attributes (integer)))
       (single_arrow_right (attributes (backticked_string)))
-      (node (attributes (symbol)))
+      (node (attributes (integer)))
     )
   )
 )

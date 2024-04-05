@@ -35,25 +35,33 @@ module.exports = grammar({
 
     _identifier: $ => choice(
       $.symbol,
+      $._numeric_literal,
       $._string_literal
     ),
 
     labels: $ => seq(":", colonSep1($.symbol)),
 
-    record: $ => seq("{", commaSep1($.pair), "}"),
+    record: $ => seq("{", commaSep1(choice($.value_pair, $.type_pair)), "}"),
 
-    pair: $ => seq(
+    value_pair: $ => seq(
       field('key', $.symbol),
       ':',
       field('value', $._value),
     ),
 
+    type_pair: $ => seq(
+      field('key', $.symbol),
+      token('::'),
+      field('type', $.symbol),
+    ),
+
     symbol: $ => {
-      const alphanumeric = /[0-9a-zA-Z_@.]+/;      
+      const alphanumeric = /[a-zA-Z_@.][0-9a-zA-Z_@.]*/;      
       return token(alphanumeric);
     },
 
     _value: $ => choice(
+      $.symbol,
       $._numeric_literal,
       $._string_literal,
     ),
@@ -82,7 +90,7 @@ module.exports = grammar({
     },
 
     octal: $ => {
-      const octal = /[0o][0-7]+/;      
+      const octal = /0[0-7]+/;      
       return token(octal);
     },
 

@@ -9,7 +9,7 @@ Text: single character string
 
 (gram
   (pattern
-    (path (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+    (path (node (attributes (record (value_pair (symbol) (single_quoted_string)) ) ) ) )
   )
 )
 
@@ -24,7 +24,7 @@ Text: long string
 
 (gram
   (pattern
-    (path (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+    (path (node (attributes (record (value_pair (symbol) (single_quoted_string)) ) ) ) )
   )
 )
 
@@ -40,7 +40,7 @@ Here is the second sentence.' })
 
 (gram
   (pattern
-    (path (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+    (path (node (attributes (record (value_pair (symbol) (single_quoted_string)) ) ) ) )
   )
 )
 
@@ -54,7 +54,7 @@ Text: nested quotes within single-quoted string
 
 (gram
   (pattern
-    (path (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+    (path (node (attributes (record (value_pair (symbol) (single_quoted_string)) ) ) ) )
   )
 )
 
@@ -68,7 +68,7 @@ Text: nested quotes within double-quoted string
 
 (gram
   (pattern
-    (path (node (attributes (record (pair (symbol) (double_quoted_string)) ) ) ) )
+    (path (node (attributes (record (value_pair (symbol) (double_quoted_string)) ) ) ) )
   )
 )
 

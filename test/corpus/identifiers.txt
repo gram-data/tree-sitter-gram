@@ -38,7 +38,7 @@ Identifier using numbers
 ---
 
 (gram
-  (pattern (path (node (attributes (symbol)))))
+  (pattern (path (node (attributes (integer)))))
 )
 
 
@@ -51,7 +51,7 @@ Identifier using numbers with units
 ---
 
 (gram
-  (pattern (path (node (attributes (symbol)))))
+  (pattern (path (node (attributes (measurement)))))
 )
 
 
