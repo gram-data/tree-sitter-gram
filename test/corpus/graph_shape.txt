@@ -29,11 +29,11 @@ Graph: top-level record and a node
     (pair (symbol) (double_quoted_string)) 
     (pair (symbol) (tagged_string)) 
   )
-  (pattern (part (node (attributes (symbol)))))
+  (pattern (path (node (attributes (symbol)))))
 )
 
 ==================
-Graph: top-level record and a node-relationship-node
+Graph: top-level record and a path
 ==================
 
 { name : "Gram Graph", created : date`2024-04-05` }
@@ -47,10 +47,38 @@ Graph: top-level record and a node-relationship-node
     (pair (symbol) (double_quoted_string)) 
     (pair (symbol) (tagged_string)) 
   )
-  (pattern (part 
+  (pattern (path 
     (node (attributes (symbol)))
     (squiggle_arrow_right)
     (node (attributes (symbol)))
   ))
+)
+
+==================
+Graph: top-level record, a path and a series
+==================
+
+{ name : "Gram Graph", created : date`2024-04-05` }
+
+(n)~~>(m)
+
+[s | n, m]
+
+---
+
+(gram
+  (record 
+    (pair (symbol) (double_quoted_string)) 
+    (pair (symbol) (tagged_string)) 
+  )
+  (pattern (path 
+    (node (attributes (symbol)))
+    (squiggle_arrow_right)
+    (node (attributes (symbol)))
+  ))
+  (series
+    (attributes (symbol))
+    (members (symbol) (symbol))
+  )
 )
 

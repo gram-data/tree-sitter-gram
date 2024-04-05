@@ -22,7 +22,7 @@ console.log(cst.rootNode.toString());
 //the root node is a gram, containing a sequence of patterns as children
 for (const pattern of cst.rootNode.children) {
   for (const part of pattern.children) {
-    if (part.type === "part") {
+    if (path.type === "part") {
       for (const element of part.children) {
         switch (element.type) {
           case "node":

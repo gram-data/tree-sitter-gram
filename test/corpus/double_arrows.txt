@@ -8,7 +8,8 @@ Double-arrow relationships: Undirected relationship
 
 (gram
   (pattern
-    (part (node)
+    (path 
+      (node)
       (undirected_double_arrow)
       (node)
     )
@@ -25,7 +26,8 @@ Double-arrow right
 
 (gram
   (pattern
-    (part (node)
+    (path 
+      (node)
       (double_arrow_right)
       (node)
     )
@@ -42,7 +44,8 @@ Double-arrow right with feathers
 
 (gram
   (pattern
-    (part (node)
+    (path 
+      (node)
       (double_arrow_right)
       (node)
     )
@@ -59,10 +62,9 @@ Double-arrow right with attributes
 
 (gram
   (pattern
-    (part (node)
-      (double_arrow_right
-        (attributes
-          (symbol)))
+    (path 
+      (node)
+      (double_arrow_right (attributes (symbol)))
       (node)
     )
   )
@@ -78,14 +80,13 @@ Double-arrow right with attributes and feathers
 
 (gram
   (pattern
-    (part (node)
-      (double_arrow_right
-        (attributes
-          (symbol)))
+    (path (node)
+      (double_arrow_right (attributes (symbol)))
       (node)
     )
   )
 )
+
 ==================
 Double-arrow relationships: Left relationship
 ==================
@@ -96,7 +97,8 @@ Double-arrow relationships: Left relationship
 
 (gram
   (pattern
-    (part (node)
+    (path 
+      (node)
       (double_arrow_left)
       (node)
     )
@@ -113,10 +115,9 @@ Double-arrow left with attributes
 
 (gram
   (pattern
-    (part (node)
-      (double_arrow_left
-        (attributes
-          (symbol)))
+    (path 
+      (node)
+      (double_arrow_left (attributes (symbol)))
       (node)
     )
   )
@@ -132,7 +133,7 @@ Double-arrow relationships: Undirected relationships
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (undirected_double_arrow)
       (node)
       (undirected_double_arrow)
@@ -152,7 +153,7 @@ Double-arrow relationships: Right relationships
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (double_arrow_right)
       (node)
       (double_arrow_right)
@@ -172,7 +173,7 @@ Double-arrow relationships: Left relationships
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (double_arrow_left)
       (node)
       (double_arrow_left)
@@ -191,7 +192,7 @@ Double-arrow relationships: Alternating left, right relationship
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (double_arrow_left)
       (node)
       (double_arrow_right)
@@ -210,7 +211,7 @@ Double-arrow relationships: Alternating right, left relationship
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (double_arrow_right)
       (node)
       (double_arrow_left)
@@ -229,7 +230,7 @@ Double-arrow relationships: Alternating left, right, undirected relationship
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (double_arrow_left)
       (node)
       (double_arrow_right)

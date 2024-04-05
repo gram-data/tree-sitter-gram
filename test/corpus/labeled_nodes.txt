@@ -8,7 +8,7 @@ Labeled nodes: No label
 
 (gram
   (pattern
-    (part (node))
+    (path (node))
   )
 )
 
@@ -22,7 +22,7 @@ Labeled nodes: Single label
 
 (gram
   (pattern
-    (part (node (attributes (labels (symbol)))))
+    (path (node (attributes (labels (symbol)))))
   )
 )
 
@@ -36,7 +36,7 @@ Labeled nodes: Two labels
 
 (gram
   (pattern
-    (part (node (attributes (labels (symbol) (symbol)))))
+    (path (node (attributes (labels (symbol) (symbol)))))
   )
 )
 
@@ -51,6 +51,6 @@ Labeled nodes: Identity followed by labels
 
 (gram
   (pattern
-    (part (node (attributes (symbol) (labels (symbol) (symbol)))))
+    (path (node (attributes (symbol) (labels (symbol) (symbol)))))
   )
 )

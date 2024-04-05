@@ -26,7 +26,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "part"
+          "name": "path"
         },
         {
           "type": "REPEAT",
@@ -39,14 +39,14 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "part"
+                "name": "path"
               }
             ]
           }
         }
       ]
     },
-    "part": {
+    "path": {
       "type": "SEQ",
       "members": [
         {
@@ -200,7 +200,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "symbol"
+              "name": "_member"
             },
             {
               "type": "REPEAT",
@@ -213,12 +213,25 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "symbol"
+                    "name": "_member"
                   }
                 ]
               }
             }
           ]
+        }
+      ]
+    },
+    "_member": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "path"
         }
       ]
     },

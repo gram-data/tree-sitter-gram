@@ -11,7 +11,7 @@ Series: Empty
 )
 
 ==================
-Series: Named series
+Series: Named series, empty
 ==================
 
 [a]
@@ -24,7 +24,7 @@ Series: Named series
 
 
 ==================
-Series: Named series with members
+Series: Named series with identified members
 ==================
 
 [letters | a,b,c] 
@@ -38,18 +38,23 @@ Series: Named series with members
   )
 )
 
+
 ==================
-Series: Named series with members
+Series: Named series with in-line members
 ==================
 
-[numbers | 1,2,3] 
+[letters | (a),(b),(c)] 
 
 ---
 
 (gram
   (series 
     (attributes (symbol))
-    (members (symbol) (symbol) (symbol))
+    (members 
+      (path (node (attributes (symbol))))
+      (path (node (attributes (symbol))))
+      (path (node (attributes (symbol))))
+    )
   )
 )
 

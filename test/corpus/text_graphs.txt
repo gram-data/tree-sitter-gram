@@ -8,7 +8,7 @@ Hello world
 
 (gram
   (pattern
-    (part
+    (path
       (node (attributes (symbol)))
       (single_arrow_right)
       (node (attributes (symbol)))
@@ -26,7 +26,7 @@ Hello dear world
 
 (gram
   (pattern
-    (part
+    (path
       (node (attributes (symbol)))
       (single_arrow_right (attributes (symbol)))
       (node (attributes (symbol)))
@@ -44,7 +44,7 @@ Hello dear world over there
 
 (gram
   (pattern
-    (part
+    (path
       (node (attributes (symbol)))
       (single_arrow_right (attributes (symbol)))
       (node (attributes (symbol)))
@@ -64,7 +64,7 @@ Hello "dear world" "over there"
 
 (gram
   (pattern
-    (part
+    (path
       (node (attributes (symbol)))
       (single_arrow_right (attributes (backticked_string)))
       (node (attributes (backticked_string)))

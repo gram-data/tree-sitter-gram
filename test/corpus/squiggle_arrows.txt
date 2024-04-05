@@ -8,7 +8,7 @@ Squiggle-arrow relationships: Undirected relationship
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (undirected_squiggle)
       (node)
     )
@@ -25,7 +25,7 @@ Squiggle-arrow right
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (squiggle_arrow_right)
       (node)
     )
@@ -42,7 +42,7 @@ Squiggle-arrow right with attributes
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (squiggle_arrow_right
         (attributes
           (symbol)))
@@ -61,7 +61,7 @@ Squiggle-arrow Left
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (squiggle_arrow_left)
       (node)
     )
@@ -78,7 +78,7 @@ Squiggle-arrow Left with Attributes
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (squiggle_arrow_left
         (attributes
           (symbol)))
@@ -97,7 +97,7 @@ Squiggle-arrow relationships: Undirected relationships
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (undirected_squiggle)
       (node)
       (undirected_squiggle)
@@ -117,7 +117,7 @@ Squiggle-arrow relationships: Right relationships
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (squiggle_arrow_right)
       (node)
       (squiggle_arrow_right)
@@ -137,7 +137,7 @@ Squiggle-arrow relationships: Left relationships
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (squiggle_arrow_left)
       (node)
       (squiggle_arrow_left)
@@ -156,7 +156,7 @@ Squiggle-arrow relationships: Alternating left, right relationship
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (squiggle_arrow_left)
       (node)
       (squiggle_arrow_right)
@@ -175,7 +175,7 @@ Squiggle-arrow relationships: Alternating right, left relationship
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (squiggle_arrow_right)
       (node)
       (squiggle_arrow_left)
@@ -194,7 +194,7 @@ Squiggle-arrow relationships: Alternating left, right, undirected relationship
 
 (gram
   (pattern
-    (part (node)
+    (path (node)
       (squiggle_arrow_left)
       (node)
       (squiggle_arrow_right)

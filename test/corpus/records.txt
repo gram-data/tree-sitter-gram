@@ -8,7 +8,7 @@ Record: No record
 
 (gram
   (pattern
-    (part (node))
+    (path (node))
   )
 )
 
@@ -23,7 +23,7 @@ Record: empty
 
 (gram
   (pattern
-    (part (node (attributes (labels (symbol)))))
+    (path (node (attributes (labels (symbol)))))
   )
 )
 
@@ -37,7 +37,7 @@ Record: number properties
 
 (gram
   (pattern
-    (part (node (attributes (record 
+    (path (node (attributes (record 
       (pair (symbol) (integer)) 
       (pair (symbol) (integer)) 
     ) ) ) )
@@ -54,7 +54,7 @@ Record: double-quoted string property
 
 (gram
   (pattern
-    (part (node (attributes (record (pair (symbol) (double_quoted_string)) ) ) ) )
+    (path (node (attributes (record (pair (symbol) (double_quoted_string)) ) ) ) )
   )
 )
 
@@ -68,7 +68,7 @@ Record: single-quoted string property
 
 (gram
   (pattern
-    (part (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+    (path (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
   )
 )
 
@@ -82,7 +82,7 @@ Record: backtick-quoted string property
 
 (gram
   (pattern
-    (part (node (attributes (record (pair (symbol) (backticked_string)) ) ) ) )
+    (path (node (attributes (record (pair (symbol) (backticked_string)) ) ) ) )
   )
 )
 
@@ -96,7 +96,7 @@ Record: weird characters in string property
 
 (gram
   (pattern
-    (part (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+    (path (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
   )
 )
 
@@ -120,7 +120,7 @@ Record: tagged string properties
 
 (gram
   (pattern
-    (part (node (attributes (record 
+    (path (node (attributes (record 
       (pair (symbol) (tagged_string))
       (pair (symbol) (tagged_string)) 
       (pair (symbol) (tagged_string)) 

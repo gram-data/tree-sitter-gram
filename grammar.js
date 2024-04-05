@@ -8,14 +8,14 @@ module.exports = grammar({
       $.record
     )),
 
-    pattern: $ => commaSep1($.part),
+    pattern: $ => commaSep1($.path),
 
     // segment: $ => choice(
     //   $.node,
     //   seq($.node, $._relationship, $._node_pattern)
     // ),
     
-    part: $ => ruleSep1($.node, $._relationship),
+    path: $ => ruleSep1($.node, $._relationship),
 
     node: $ => seq("(", optional($.attributes),")"),
 
@@ -26,7 +26,12 @@ module.exports = grammar({
       seq(field("identifier", $._identifier), field("labels", $.labels))
     ),
 
-    members: $ => seq("|", commaSep1($.symbol)),
+    members: $ => seq("|", commaSep1($._member)),
+
+    _member: $ => choice(
+      $._identifier,
+      $.path
+    ),
 
     _identifier: $ => choice(
       $.symbol,
