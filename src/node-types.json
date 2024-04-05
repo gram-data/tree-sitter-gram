@@ -94,6 +94,10 @@
           "named": true
         },
         {
+          "type": "record",
+          "named": true
+        },
+        {
           "type": "series",
           "named": true
         }

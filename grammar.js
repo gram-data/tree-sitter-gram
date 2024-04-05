@@ -2,7 +2,11 @@ module.exports = grammar({
   name: 'gram',
 
   rules: {
-    gram: $ => repeat(choice($.pattern,$.series)),
+    gram: $ => repeat(choice(
+      $.pattern,
+      $.series,
+      $.record
+    )),
 
     pattern: $ => commaSep1($.part),
 

@@ -38,3 +38,18 @@ Series: Named series with members
   )
 )
 
+==================
+Series: Named series with members
+==================
+
+[numbers | 1,2,3] 
+
+---
+
+(gram
+  (series 
+    (attributes (symbol))
+    (members (symbol) (symbol) (symbol))
+  )
+)
+

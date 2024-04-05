@@ -1,0 +1,56 @@
+==================
+Graph: top-level record
+==================
+
+{ name : "Gram Graph", created : date`2024-04-05` }
+
+---
+
+(gram
+  (record 
+    (pair (symbol) (double_quoted_string)) 
+    (pair (symbol) (tagged_string)) 
+  )
+)
+
+
+==================
+Graph: top-level record and a node
+==================
+
+{ name : "Gram Graph", created : date`2024-04-05` }
+
+(n)
+
+---
+
+(gram
+  (record 
+    (pair (symbol) (double_quoted_string)) 
+    (pair (symbol) (tagged_string)) 
+  )
+  (pattern (part (node (attributes (symbol)))))
+)
+
+==================
+Graph: top-level record and a node-relationship-node
+==================
+
+{ name : "Gram Graph", created : date`2024-04-05` }
+
+(n)~~>(m)
+
+---
+
+(gram
+  (record 
+    (pair (symbol) (double_quoted_string)) 
+    (pair (symbol) (tagged_string)) 
+  )
+  (pattern (part 
+    (node (attributes (symbol)))
+    (squiggle_arrow_right)
+    (node (attributes (symbol)))
+  ))
+)
+
