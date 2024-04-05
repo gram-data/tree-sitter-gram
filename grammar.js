@@ -2,7 +2,7 @@ module.exports = grammar({
   name: 'gram',
 
   rules: {
-    gram: $ => repeat($.pattern),
+    gram: $ => repeat(choice($.pattern,$.series)),
 
     pattern: $ => commaSep1($.part),
 
@@ -15,10 +15,14 @@ module.exports = grammar({
 
     node: $ => seq("(", optional($.attributes),")"),
 
+    series: $ => seq("[", optional($.attributes), optional($.members),"]"),
+
     attributes: $ => choice(
       choice(field("identifier", $._identifier), field("labels", $.labels), field("record", $.record)), 
       seq(field("identifier", $._identifier), field("labels", $.labels))
     ),
+
+    members: $ => seq("|", commaSep1($.symbol)),
 
     _identifier: $ => choice(
       $.symbol,
@@ -49,11 +53,12 @@ module.exports = grammar({
       $.integer,
       $.decimal,
       $.hexadecimal,
-      $.octal
+      $.octal,
+      $.measurement
     ),
 
     integer: $ => {
-      const integer = /-?([1-9]\d*)/;      
+      const integer = /-?(0|[1-9]\d*)/;      
       return token(integer);
     },
 
@@ -72,25 +77,37 @@ module.exports = grammar({
       return token(octal);
     },
 
+    measurement: $ => {
+      // /-?(?:[0-9]|[1-9][0-9]+)(?:\.[0-9]+)?[a-zA-Z]+\b(?!@)/
+      const measurement = /-?(0|[1-9]\d*)([a-zA-Z]+)/;      
+      return token(measurement);
+    },
+
     _string_literal: $ => choice(
       $.single_quoted_string,
       $.double_quoted_string,
-      $.backticked_string
+      $.backticked_string,
+      $.tagged_string
     ),
 
     single_quoted_string: $ => {
-      const backticked = /'(\\['bfnrt/\\]|[^'])*'/;      
-      return token(backticked);
+      const quoted = /'(\\['bfnrt/\\]|[^'])*'/;      
+      return token(quoted);
     },
 
     double_quoted_string: $ => {
-      const backticked = /"(\\["bfnrt/\\]|[^"])*"/;      
-      return token(backticked);
+      const quoted = /"(\\["bfnrt/\\]|[^"])*"/;      
+      return token(quoted);
     },
 
     backticked_string: $ => {
-      const backticked = /`(\\[`bfnrt/\\]|[^`])*`/;      
-      return token(backticked);
+      const quoted = /`(\\[`bfnrt/\\]|[^`])*`/;      
+      return token(quoted);
+    },
+
+    tagged_string: $ => {
+      const tagged = /[a-zA-Z][0-9a-zA-Z_.@]*`[^`]*`/;      
+      return token(tagged);
     },
 
     _relationship: $ => choice(

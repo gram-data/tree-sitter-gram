@@ -28,73 +28,19 @@ Record: empty
 )
 
 ==================
-Record: single number property
+Record: number properties
 ==================
 
-({ n : 1 })
+({ n : 1, m : 2 })
 
 ---
 
 (gram
   (pattern
-    (part (node (attributes (record (pair (symbol) (integer)) ) ) ) )
-  )
-)
-
-==================
-Record: decimal
-==================
-
-({ r : 3.1495 })
-
----
-
-(gram
-  (pattern
-    (part (node (attributes (record (pair (symbol) (decimal)) ) ) ) )
-  )
-)
-
-==================
-Record: hexadecimal
-==================
-
-({ h : 0xCAFE })
-
----
-
-(gram
-  (pattern
-    (part (node (attributes (record (pair (symbol) (hexadecimal)) ) ) ) )
-  )
-)
-
-==================
-Record: octal with an '0'
-==================
-
-({ o : 042 })
-
----
-
-(gram
-  (pattern
-    (part (node (attributes (record (pair (symbol) (octal)) ) ) ) )
-  )
-)
-
-
-==================
-Record: octal with an 'o'
-==================
-
-({ o : o42 })
-
----
-
-(gram
-  (pattern
-    (part (node (attributes (record (pair (symbol) (octal)) ) ) ) )
+    (part (node (attributes (record 
+      (pair (symbol) (integer)) 
+      (pair (symbol) (integer)) 
+    ) ) ) )
   )
 )
 
@@ -137,5 +83,53 @@ Record: backtick-quoted string property
 (gram
   (pattern
     (part (node (attributes (record (pair (symbol) (backticked_string)) ) ) ) )
+  )
+)
+
+
+==================
+Record: weird characters in string property
+==================
+
+({ s : '😀 ø™µ ⚛︎♘' })
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+  )
+)
+
+
+==================
+Record: tagged string properties
+==================
+
+({  t1 : url`http://somewhere.org`,
+    t2 : md`# Title\nFirst paragraph about something.`,
+    t3 : date`2024-04-05`,
+    t4 : week`2024W35`,
+    t5 : weekDate`2024W35-5`,
+    t6 : time`17:35`,
+    t7 : time`17:42:03.149`,
+    t8 : duration`PT2H3M42S`,
+    t9 : point`30 10`
+})
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record 
+      (pair (symbol) (tagged_string))
+      (pair (symbol) (tagged_string)) 
+      (pair (symbol) (tagged_string)) 
+      (pair (symbol) (tagged_string)) 
+      (pair (symbol) (tagged_string)) 
+      (pair (symbol) (tagged_string)) 
+      (pair (symbol) (tagged_string)) 
+      (pair (symbol) (tagged_string)) 
+      (pair (symbol) (tagged_string)) 
+    ) ) ) )
   )
 )

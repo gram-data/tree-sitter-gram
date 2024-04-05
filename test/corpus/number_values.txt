@@ -1,0 +1,86 @@
+
+==================
+Numbers: integers
+==================
+
+({ i : 1 })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (integer)) ) ) ) )
+  )
+)
+
+
+==================
+Numbers: decimal
+==================
+
+({ d : 3.1495 })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (decimal)) ) ) ) )
+  )
+)
+
+==================
+Number: hexadecimal
+==================
+
+({ h : 0xCAFE })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (hexadecimal)) ) ) ) )
+  )
+)
+
+==================
+Number: octal with an '0'
+==================
+
+({ o : 042 })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (octal)) ) ) ) )
+  )
+)
+
+
+==================
+Number: octal with an 'o'
+==================
+
+({ o : o42 })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (octal)) ) ) ) )
+  )
+)
+
+==================
+Number: measurements are numbers with some letters as a suffix
+==================
+
+({ height : 168cm })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (measurement)) ) ) ) )
+  )
+)

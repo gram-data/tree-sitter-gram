@@ -1,0 +1,74 @@
+
+==================
+Text: single character string
+==================
+
+({ c : 'a' })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+  )
+)
+
+
+==================
+Text: long string
+==================
+
+({ s : 'This is a sentence, followed by another sentence. Here is the second sentence.' })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+  )
+)
+
+
+==================
+Text: multiline string
+==================
+
+({ s : 'This is a sentence, followed by another sentence on another line. 
+Here is the second sentence.' })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+  )
+)
+
+==================
+Text: nested quotes within single-quoted string
+==================
+
+({ s : 'I say, "let\'s try it!"' })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (single_quoted_string)) ) ) ) )
+  )
+)
+
+==================
+Text: nested quotes within double-quoted string
+==================
+
+({ s : "I say, \"let's try it!\"" })
+
+---
+
+(gram
+  (pattern
+    (part (node (attributes (record (pair (symbol) (double_quoted_string)) ) ) ) )
+  )
+)
+

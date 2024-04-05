@@ -4,8 +4,17 @@
     "gram": {
       "type": "REPEAT",
       "content": {
-        "type": "SYMBOL",
-        "name": "pattern"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "pattern"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "series"
+          }
+        ]
       }
     },
     "pattern": {
@@ -83,6 +92,43 @@
         }
       ]
     },
+    "series": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "attributes"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "members"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
     "attributes": {
       "type": "CHOICE",
       "members": [
@@ -132,6 +178,40 @@
               "content": {
                 "type": "SYMBOL",
                 "name": "labels"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "members": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "|"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "symbol"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ","
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "symbol"
+                  }
+                ]
               }
             }
           ]
@@ -286,6 +366,10 @@
         {
           "type": "SYMBOL",
           "name": "octal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "measurement"
         }
       ]
     },
@@ -293,7 +377,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "-?([1-9]\\d*)"
+        "value": "-?(0|[1-9]\\d*)"
       }
     },
     "decimal": {
@@ -317,6 +401,13 @@
         "value": "[0o][0-7]+"
       }
     },
+    "measurement": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "-?(0|[1-9]\\d*)([a-zA-Z]+)"
+      }
+    },
     "_string_literal": {
       "type": "CHOICE",
       "members": [
@@ -331,6 +422,10 @@
         {
           "type": "SYMBOL",
           "name": "backticked_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tagged_string"
         }
       ]
     },
@@ -353,6 +448,13 @@
       "content": {
         "type": "PATTERN",
         "value": "`(\\\\[`bfnrt/\\\\]|[^`])*`"
+      }
+    },
+    "tagged_string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[a-zA-Z][0-9a-zA-Z_.@]*`[^`]*`"
       }
     },
     "_relationship": {

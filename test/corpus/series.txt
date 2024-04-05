@@ -1,0 +1,40 @@
+==================
+Series: Empty
+==================
+
+[]
+
+---
+
+(gram
+  (series)
+)
+
+==================
+Series: Named series
+==================
+
+[a]
+
+---
+
+(gram
+  (series (attributes (symbol)))
+)
+
+
+==================
+Series: Named series with members
+==================
+
+[letters | a,b,c] 
+
+---
+
+(gram
+  (series 
+    (attributes (symbol))
+    (members (symbol) (symbol) (symbol))
+  )
+)
+

@@ -22,6 +22,10 @@
           {
             "type": "symbol",
             "named": true
+          },
+          {
+            "type": "tagged_string",
+            "named": true
           }
         ]
       },
@@ -88,12 +92,31 @@
         {
           "type": "pattern",
           "named": true
+        },
+        {
+          "type": "series",
+          "named": true
         }
       ]
     }
   },
   {
     "type": "labels",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symbol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "members",
     "named": true,
     "fields": {},
     "children": {
@@ -161,11 +184,19 @@
             "named": true
           },
           {
+            "type": "measurement",
+            "named": true
+          },
+          {
             "type": "octal",
             "named": true
           },
           {
             "type": "single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
             "named": true
           }
         ]
@@ -248,6 +279,25 @@
       "types": [
         {
           "type": "pair",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "series",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "attributes",
+          "named": true
+        },
+        {
+          "type": "members",
           "named": true
         }
       ]
@@ -423,6 +473,10 @@
     "named": true
   },
   {
+    "type": "measurement",
+    "named": true
+  },
+  {
     "type": "octal",
     "named": true
   },
@@ -435,7 +489,15 @@
     "named": true
   },
   {
+    "type": "tagged_string",
+    "named": true
+  },
+  {
     "type": "{",
+    "named": false
+  },
+  {
+    "type": "|",
     "named": false
   },
   {
