@@ -38,7 +38,7 @@ Double-arrow right
 Double-arrow right with feathers
 ==================
 
-()=>=>()
+()>==>()
 
 ---
 

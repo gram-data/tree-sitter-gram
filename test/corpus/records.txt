@@ -45,7 +45,7 @@ Record: number properties
 )
 
 ==================
-Record: double-quoted string property
+Record: double-quoted string properties
 ==================
 
 ({ s : "a" })
@@ -55,82 +55,6 @@ Record: double-quoted string property
 (gram
   (pattern
     (path (node (attributes (record (value_pair (symbol) (double_quoted_string)) ) ) ) )
-  )
-)
-
-==================
-Record: single-quoted string property
-==================
-
-({ s : 'a' })
-
----
-
-(gram
-  (pattern
-    (path (node (attributes (record (value_pair (symbol) (single_quoted_string)) ) ) ) )
-  )
-)
-
-==================
-Record: backtick-quoted string property
-==================
-
-({ s : `a` })
-
----
-
-(gram
-  (pattern
-    (path (node (attributes (record (value_pair (symbol) (backticked_string)) ) ) ) )
-  )
-)
-
-
-==================
-Record: weird characters in string property
-==================
-
-({ s : '😀 ø™µ ⚛︎♘' })
----
-
-(gram
-  (pattern
-    (path (node (attributes (record (value_pair (symbol) (single_quoted_string)) ) ) ) )
-  )
-)
-
-
-==================
-Record: tagged string properties
-==================
-
-({  t1 : url`http://somewhere.org`,
-    t2 : md`# Title\nFirst paragraph about something.`,
-    t3 : date`2024-04-05`,
-    t4 : week`2024W35`,
-    t5 : weekDate`2024W35-5`,
-    t6 : time`17:35`,
-    t7 : time`17:42:03.149`,
-    t8 : duration`PT2H3M42S`,
-    t9 : point`30 10`
-})
-
----
-
-(gram
-  (pattern
-    (path (node (attributes (record 
-      (value_pair (symbol) (tagged_string))
-      (value_pair (symbol) (tagged_string)) 
-      (value_pair (symbol) (tagged_string)) 
-      (value_pair (symbol) (tagged_string)) 
-      (value_pair (symbol) (tagged_string)) 
-      (value_pair (symbol) (tagged_string)) 
-      (value_pair (symbol) (tagged_string)) 
-      (value_pair (symbol) (tagged_string)) 
-      (value_pair (symbol) (tagged_string)) 
-    ) ) ) )
   )
 )
 
@@ -160,5 +84,55 @@ Record: arbitrary type pair
 (gram
   (pattern
     (path (node (attributes (record (type_pair (symbol) (symbol)) ) ) ) )
+  )
+)
+
+==================
+Record: identified and with a record
+==================
+
+(player1 { named : "it" })
+
+---
+
+(gram
+  (pattern
+    (path (node (attributes 
+      (symbol)
+      (record (value_pair (symbol) (double_quoted_string)) ) ) ) )
+  )
+)
+
+
+==================
+Record: identified, labeled and with a record
+==================
+
+(player1:Player { named : "it" })
+
+---
+
+(gram
+  (pattern
+    (path (node (attributes 
+      (symbol)
+      (labels (symbol))
+      (record (value_pair (symbol) (double_quoted_string)) ) ) ) )
+  )
+)
+
+==================
+Record: labeled with a record stating a type
+==================
+
+(:Player { named :: string })
+
+---
+
+(gram
+  (pattern
+    (path (node (attributes 
+      (labels (symbol))
+      (record (type_pair (symbol) (symbol)) ) ) ) )
   )
 )

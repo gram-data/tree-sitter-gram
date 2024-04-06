@@ -23,7 +23,10 @@ module.exports = grammar({
 
     attributes: $ => choice(
       choice(field("identifier", $._identifier), field("labels", $.labels), field("record", $.record)), 
-      seq(field("identifier", $._identifier), field("labels", $.labels))
+      seq(field("identifier", $._identifier), field("labels", $.labels)),
+      seq(field("identifier", $._identifier), field("record", $.record)),
+      seq(field("labels", $.labels), field("record", $.record)),
+      seq(field("identifier", $._identifier), field("labels", $.labels), field("record", $.record))
     ),
 
     members: $ => seq("|", commaSep1($._member)),
@@ -53,6 +56,7 @@ module.exports = grammar({
       field('key', $.symbol),
       token('::'),
       field('type', $.symbol),
+      optional(field('cardinality', choice('!', '?', '*', '+')))
     ),
 
     symbol: $ => {

@@ -185,6 +185,77 @@
               }
             }
           ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "identifier",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_identifier"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "record",
+              "content": {
+                "type": "SYMBOL",
+                "name": "record"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "labels",
+              "content": {
+                "type": "SYMBOL",
+                "name": "labels"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "record",
+              "content": {
+                "type": "SYMBOL",
+                "name": "record"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "identifier",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_identifier"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "labels",
+              "content": {
+                "type": "SYMBOL",
+                "name": "labels"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "record",
+              "content": {
+                "type": "SYMBOL",
+                "name": "record"
+              }
+            }
+          ]
         }
       ]
     },
@@ -399,7 +470,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[a-zA-Z_@.][0-9a-zA-Z_@.]*"
+        "value": "[a-zA-Z_@.][0-9a-zA-Z_@.]*!?"
       }
     },
     "_value": {
