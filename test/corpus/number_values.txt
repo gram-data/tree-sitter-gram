@@ -9,7 +9,7 @@ Numbers: integers
 
 (gram
   (pattern
-    (path (node (attributes (record (value_pair (symbol) (integer)) ) ) ) )
+    (node (record (value_pair (symbol) (integer))))
   )
 )
 
@@ -24,7 +24,7 @@ Numbers: decimal
 
 (gram
   (pattern
-    (path (node (attributes (record (value_pair (symbol) (decimal)) ) ) ) )
+    (node (record (value_pair (symbol) (decimal))))
   )
 )
 
@@ -38,7 +38,7 @@ Number: hexadecimal
 
 (gram
   (pattern
-    (path (node (attributes (record (value_pair (symbol) (hexadecimal)) ) ) ) )
+    (node (record (value_pair (symbol) (hexadecimal))))
   )
 )
 
@@ -52,7 +52,7 @@ Number: octal with an '0'
 
 (gram
   (pattern
-    (path (node (attributes (record (value_pair (symbol) (octal)) ) ) ) )
+    (node (record (value_pair (symbol) (octal))))
   )
 )
 
@@ -67,6 +67,6 @@ Number: measurements are numbers with some letters as a suffix
 
 (gram
   (pattern
-    (path (node (attributes (record (value_pair (symbol) (measurement)) ) ) ) )
+    (node (record (value_pair (symbol) (measurement))))
   )
 )

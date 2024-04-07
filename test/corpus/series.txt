@@ -19,7 +19,7 @@ Series: Named series, empty
 ---
 
 (gram
-  (series (attributes (symbol)))
+  (series (symbol))
 )
 
 
@@ -33,7 +33,7 @@ Series: Named series with identified members
 
 (gram
   (series 
-    (attributes (symbol))
+    (symbol)
     (members (symbol) (symbol) (symbol))
   )
 )
@@ -49,11 +49,11 @@ Series: Named series with in-line members
 
 (gram
   (series 
-    (attributes (symbol))
+    (symbol)
     (members 
-      (path (node (attributes (symbol))))
-      (path (node (attributes (symbol))))
-      (path (node (attributes (symbol))))
+      (node (symbol))
+      (node (symbol))
+      (node (symbol))
     )
   )
 )

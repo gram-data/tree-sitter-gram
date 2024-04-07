@@ -8,7 +8,7 @@ Empty nodes: Single empty node pattern
 
 (gram
   (pattern
-    (path (node))
+    (node)
   )
 )
 
@@ -23,10 +23,10 @@ Empty nodes: Two empty node patterns
 
 (gram
   (pattern
-    (path (node))
+    (node)
   )
   (pattern
-    (path (node))
+    (node)
   )
 )
 
@@ -40,8 +40,8 @@ Empty nodes: Pair of empty nodes in a single pattern
 
 (gram
   (pattern
-    (path (node))
-    (path (node))
+    (node)
+    (node)
   )
 )
 

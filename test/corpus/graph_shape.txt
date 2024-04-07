@@ -29,7 +29,7 @@ Graph: top-level record and a node
     (value_pair (symbol) (double_quoted_string)) 
     (value_pair (symbol) (tagged_string)) 
   )
-  (pattern (path (node (attributes (symbol)))))
+  (pattern (node (symbol)))
 )
 
 ==================
@@ -47,11 +47,13 @@ Graph: top-level record and a path
     (value_pair (symbol) (double_quoted_string)) 
     (value_pair (symbol) (tagged_string)) 
   )
-  (pattern (path 
-    (node (attributes (symbol)))
-    (squiggle_arrow_right)
-    (node (attributes (symbol)))
-  ))
+  (pattern 
+    (relationship 
+      (node (symbol))
+      (squiggle_arrow_right)
+      (node (symbol))
+    )
+  )
 )
 
 ==================
@@ -71,13 +73,15 @@ Graph: top-level record, a path and a series
     (value_pair (symbol) (double_quoted_string)) 
     (value_pair (symbol) (tagged_string)) 
   )
-  (pattern (path 
-    (node (attributes (symbol)))
-    (squiggle_arrow_right)
-    (node (attributes (symbol)))
-  ))
+  (pattern 
+    (relationship 
+      (node (symbol))
+      (squiggle_arrow_right)
+      (node (symbol))
+    )
+  )
   (series
-    (attributes (symbol))
+    (symbol)
     (members (symbol) (symbol))
   )
 )

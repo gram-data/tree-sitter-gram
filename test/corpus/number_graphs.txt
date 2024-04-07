@@ -8,10 +8,10 @@ Number graph: 1, 2 buckle your shoe
 
 (gram
   (pattern
-    (path
-      (node (attributes (integer)))
+    (relationship
+      (node (integer))
       (single_arrow_right)
-      (node (attributes (integer)))
+      (node (integer))
     )
   )
 )
@@ -26,10 +26,10 @@ Number graph: 1 +1 = 2
 
 (gram
   (pattern
-    (path
-      (node (attributes (integer)))
-      (single_arrow_right (attributes (backticked_string)))
-      (node (attributes (integer)))
+    (relationship
+      (node (integer))
+      (single_arrow_right (backticked_string))
+      (node (integer))
     )
   )
 )

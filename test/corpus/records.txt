@@ -8,7 +8,7 @@ Record: No record
 
 (gram
   (pattern
-    (path (node))
+    (node)
   )
 )
 
@@ -23,7 +23,7 @@ Record: empty
 
 (gram
   (pattern
-    (path (node (attributes (labels (symbol)))))
+    (node (labels (symbol)))
   )
 )
 
@@ -37,10 +37,10 @@ Record: number properties
 
 (gram
   (pattern
-    (path (node (attributes (record 
+    (node (record 
       (value_pair (symbol) (integer)) 
       (value_pair (symbol) (integer)) 
-    ) ) ) )
+    ))
   )
 )
 
@@ -54,7 +54,7 @@ Record: double-quoted string properties
 
 (gram
   (pattern
-    (path (node (attributes (record (value_pair (symbol) (double_quoted_string)) ) ) ) )
+    (node (record (value_pair (symbol) (double_quoted_string))))
   )
 )
 
@@ -68,7 +68,7 @@ Record: type pair
 
 (gram
   (pattern
-    (path (node (attributes (record (type_pair (symbol) (symbol)) ) ) ) )
+    (node (record (type_pair (symbol) (symbol))))
   )
 )
 
@@ -83,7 +83,7 @@ Record: arbitrary type pair
 
 (gram
   (pattern
-    (path (node (attributes (record (type_pair (symbol) (symbol)) ) ) ) )
+    (node (record (type_pair (symbol) (symbol))))
   )
 )
 
@@ -97,9 +97,9 @@ Record: identified and with a record
 
 (gram
   (pattern
-    (path (node (attributes 
+    (node 
       (symbol)
-      (record (value_pair (symbol) (double_quoted_string)) ) ) ) )
+      (record (value_pair (symbol) (double_quoted_string))))
   )
 )
 
@@ -114,10 +114,10 @@ Record: identified, labeled and with a record
 
 (gram
   (pattern
-    (path (node (attributes 
+    (node 
       (symbol)
       (labels (symbol))
-      (record (value_pair (symbol) (double_quoted_string)) ) ) ) )
+      (record (value_pair (symbol) (double_quoted_string))))
   )
 )
 
@@ -131,8 +131,8 @@ Record: labeled with a record stating a type
 
 (gram
   (pattern
-    (path (node (attributes 
+    (node 
       (labels (symbol))
-      (record (type_pair (symbol) (symbol)) ) ) ) )
+      (record (type_pair (symbol) (symbol))))
   )
 )

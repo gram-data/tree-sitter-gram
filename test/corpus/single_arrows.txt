@@ -8,7 +8,8 @@ Single-arrow: Undirected relationship
 
 (gram
   (pattern
-    (path (node)
+    (relationship
+      (node)
       (undirected_single)
       (node)
     )
@@ -25,7 +26,8 @@ Single-arrow: Right relationship
 
 (gram
   (pattern
-    (path (node)
+    (relationship
+      (node)
       (single_arrow_right)
       (node)
     )
@@ -42,7 +44,8 @@ Single-arrow: Left relationship
 
 (gram
   (pattern
-    (path (node)
+    (relationship
+      (node)
       (single_arrow_left)
       (node)
     )
@@ -59,11 +62,14 @@ Single-arrow: Undirected relationships
 
 (gram
   (pattern
-    (path (node)
-      (undirected_single)
+    (relationship
       (node)
       (undirected_single)
-      (node)
+      (relationship
+        (node)
+        (undirected_single)
+        (node)
+      )
     )
   )
 )
@@ -79,11 +85,14 @@ Single-arrow: Right relationships
 
 (gram
   (pattern
-    (path (node)
-      (single_arrow_right)
+    (relationship
       (node)
       (single_arrow_right)
-      (node)
+      (relationship
+        (node)
+        (single_arrow_right)
+        (node)
+      )
     )
   )
 )
@@ -99,11 +108,14 @@ Single-arrow: Left relationships
 
 (gram
   (pattern
-    (path (node)
-      (single_arrow_left)
+    (relationship
       (node)
       (single_arrow_left)
-      (node)
+      (relationship
+        (node)
+        (single_arrow_left)
+        (node)
+      )
     )
   )
 )
@@ -118,11 +130,14 @@ Single-arrow: Alternating left, right relationship
 
 (gram
   (pattern
-    (path (node)
+    (relationship
+      (node)
       (single_arrow_left)
-      (node)
-      (single_arrow_right)
-      (node)
+      (relationship
+        (node)
+        (single_arrow_right)
+        (node)
+      )
     )
   )
 )
@@ -137,11 +152,14 @@ Single-arrow: Alternating right, left relationship
 
 (gram
   (pattern
-    (path (node)
+    (relationship
+      (node)
       (single_arrow_right)
-      (node)
-      (single_arrow_left)
-      (node)
+      (relationship
+        (node)
+        (single_arrow_left)
+        (node)
+      )
     )
   )
 )
@@ -156,13 +174,18 @@ Single-arrow: Alternating left, right, undirected relationship qd
 
 (gram
   (pattern
-    (path (node)
+    (relationship
+      (node)
       (single_arrow_left)
-      (node)
-      (single_arrow_right)
-      (node)
-      (undirected_single)
-      (node)
+      (relationship 
+        (node)
+        (single_arrow_right)
+        (relationship
+          (node)
+          (undirected_single)
+          (node)
+        )
+      )
     )
   )
 )
