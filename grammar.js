@@ -28,19 +28,19 @@ module.exports = grammar({
 
     series: $ => seq("[", optional($._attributes), optional($.members),"]"),
 
+    members: $ => seq("|", commaSep1($._member)),
+
+    _member: $ => choice(
+      $._identifier,
+      $._path
+    ),
+
     _attributes: $ => choice(
       choice(field("identifier", $._identifier), field("labels", $.labels), field("record", $.record)), 
       seq(field("identifier", $._identifier), field("labels", $.labels)),
       seq(field("identifier", $._identifier), field("record", $.record)),
       seq(field("labels", $.labels), field("record", $.record)),
       seq(field("identifier", $._identifier), field("labels", $.labels), field("record", $.record))
-    ),
-
-    members: $ => seq("|", commaSep1($._member)),
-
-    _member: $ => choice(
-      $._identifier,
-      $._path
     ),
 
     _identifier: $ => choice(
