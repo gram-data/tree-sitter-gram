@@ -1,0 +1,43 @@
+==================
+GQL Node Type Definition
+==================
+
+(:Document {
+  uuid :: string!,
+  title :: string
+})
+
+---
+
+(gram
+  (pattern
+    (node 
+      (labels (symbol))
+      (record
+        (type_pair (symbol) (symbol))
+        (type_pair (symbol) (symbol))
+      )
+    )
+  )
+)
+
+==================
+GQL Relationship Type Definition
+==================
+
+(:Form)=[:SECTION { item :: string }]=>(:Chunk)
+
+---
+
+(gram
+  (pattern
+    (relationship
+      (node (labels (symbol)))
+      (double_arrow_right
+        (labels (symbol))
+        (record (type_pair (symbol) (symbol)))
+      )
+      (node (labels (symbol)))
+    )
+  )
+)

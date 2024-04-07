@@ -1,6 +1,8 @@
 module.exports = grammar({
   name: 'gram',
 
+  supertypes: $ => ['_path'],
+
   rules: {
     gram: $ => repeat(choice(
       $.pattern,

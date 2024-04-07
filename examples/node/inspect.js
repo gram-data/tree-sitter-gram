@@ -6,6 +6,7 @@ parser.setLanguage(GramLang);
 
 const gramCode = `(hello)
 (hello)-->(world)
+(hello:Greeting)-[dear:ADJECTIVE]->(world:Subject)
 `;
 const cst = parser.parse(gramCode);
 
@@ -23,18 +24,6 @@ const reduce = (cst, f, acc) => {
   return f(cst, result);
 
 }
-
-const pretty = (cst, acc) => {
-  return match(cst, 
-    (gram) => "gram...\n  " + acc, 
-    (pattern) => acc + "\n  ",
-    (node) => acc + " (node) ",
-    (relationship) => acc,
-    (rel_value) => acc + "-->", 
-    (cst) => acc
-  );
-}
-
 
 const match = (cst, onMatchGram, onMatchPattern, onMatchNode, onMatchRelationship, onMatchRelationshipValue, otherwise) => {
   switch (cst.type) {
@@ -60,11 +49,52 @@ const match = (cst, onMatchGram, onMatchPattern, onMatchNode, onMatchRelationshi
   }
 }
 
+const pretty = (cst, acc) => {
+  return match(cst, 
+    (gram) => "gram...\n  " + acc, 
+    (pattern) => acc + "\n  ",
+    (node) => acc + " (node) ",
+    (relationship) => acc,
+    (rel_value) => acc + "-->", 
+    (cst) => acc
+  );
+}
+
+
 console.log(reduce(cst.rootNode, pretty, ""));
 
 
-// console.log("---");
-// console.log("nodes: " + nodes.length);
-// console.log("relationships: " + relationships.length);
-// console.log("identifiers: " + Array.from(identifiers).join(", "));
-// console.log("labels: " + Array.from(labels).join(", "));
+const collectAttributes = (cst, acc) => {
+  console.log(cst.fields);
+  if (cst.identifierNode !== null) acc.identifiers.add(cst.identifierNode.text);
+  if (cst.labelsNode !== null) acc.labels.add(cst.labelsNode.text);
+  return acc;
+}
+
+const collectStats = (cst, acc) => {
+  return match(cst,
+    (gram) => acc,
+    (pattern) => acc,
+    (node) => { 
+      acc.nodes += 1; 
+      collectAttributes(node, acc);
+      return acc 
+    },
+    (relationship) => {acc.relationships += 1; return acc },
+    (rel_value) => collectAttributes(rel_value, acc),
+    (otherwise) => acc
+  )
+}
+
+const stats = reduce(cst.rootNode, collectStats, 
+  {
+    nodes:0, 
+    relationships:0,
+    labels: new Set(),
+    identifiers: new Set()
+  }
+)
+
+console.log("---");
+console.dir(stats);
+
