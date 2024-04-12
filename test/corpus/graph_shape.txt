@@ -64,7 +64,7 @@ Graph: top-level record, a path and a series
 
 (n)~~>(m)
 
-[s | n, m]
+[s => n, m]
 
 ---
 
@@ -82,7 +82,7 @@ Graph: top-level record, a path and a series
   )
   (series
     (symbol)
-    (members (symbol) (symbol))
+    (members (operator) (symbol) (symbol))
   )
 )
 

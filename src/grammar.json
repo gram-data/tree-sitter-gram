@@ -150,6 +150,64 @@
         }
       ]
     },
+    "members": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "operator",
+          "content": {
+            "type": "SYMBOL",
+            "name": "operator"
+          }
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_member"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ","
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_member"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "operator": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "<{0,2}[-~=\\/\\|+*%]{1,3}>{0,2}"
+      }
+    },
+    "_member": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_path"
+        }
+      ]
+    },
     "_attributes": {
       "type": "CHOICE",
       "members": [
@@ -273,53 +331,6 @@
               }
             }
           ]
-        }
-      ]
-    },
-    "members": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "|"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_member"
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": ","
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_member"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "_member": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_path"
         }
       ]
     },
@@ -1052,7 +1063,5 @@
   "precedences": [],
   "externals": [],
   "inline": [],
-  "supertypes": [
-    null
-  ]
+  "supertypes": []
 }

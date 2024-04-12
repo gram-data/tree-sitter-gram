@@ -1,8 +1,6 @@
 module.exports = grammar({
   name: 'gram',
 
-  supertypes: $ => ['_path'],
-
   rules: {
     gram: $ => repeat(choice(
       $.pattern,
@@ -28,7 +26,9 @@ module.exports = grammar({
 
     series: $ => seq("[", optional($._attributes), optional($.members),"]"),
 
-    members: $ => seq("|", commaSep1($._member)),
+    members: $ => seq(field("operator", $.operator), commaSep1($._member)),
+
+    operator: $ => token(/<{0,2}[-~=\/\|+*%]{1,3}>{0,2}/),
 
     _member: $ => choice(
       $._identifier,

@@ -1,4 +1,3 @@
-workspace = { members = ["examples/rust"] }
 [package]
 name = "tree-sitter-gram"
 description = "Gram grammar for tree-sitter"
