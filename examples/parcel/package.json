@@ -1,0 +1,19 @@
+{
+  "name": "tree-sitter-gram-parcel-example",
+  "version": "1.0.0",
+  "description": "example of using tree-sitter-gram with parcel",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html"
+  },
+  "keywords": [],
+  "author": "Andreas Kollegger",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "path-browserify": "^1.0.1"
+  },
+  "dependencies": {
+    "web-tree-sitter": "^0.22.5"
+  }
+}

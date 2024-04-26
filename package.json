@@ -9,7 +9,9 @@
     "lint": "eslint grammar.js",
     "test": "tree-sitter test",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
+    "prebuildify": "prebuildify --napi --strip",
+    "build-wasm": "tree-sitter build --wasm",
+    "playground": "tree-sitter playground"
   },
   "keywords": [],
   "files": [

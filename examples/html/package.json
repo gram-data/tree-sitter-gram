@@ -1,0 +1,20 @@
+{
+  "name": "html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tree-sitter.js",
+  "scripts": {
+    "postinstall": "shx cp ../../tree-sitter-gram.wasm .",
+    "start": "http-server ."
+  },
+  "keywords": [],
+  "author": "Andreas Kollegger",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "shx": "^0.3.4"
+  },
+  "dependencies": {
+    "web-tree-sitter": "^0.22.5"
+  }
+}

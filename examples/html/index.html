@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<script src="./node_modules/web-tree-sitter/tree-sitter.js"></script>
+
+<script>
+  const Parser = window.TreeSitter;
+  Parser.init().then(async () => { 
+    const parser = new Parser();
+    console.log("parser initialized");
+    const GramLang = await Parser.Language.load('./tree-sitter-gram.wasm');
+    parser.setLanguage(GramLang);
+    console.log("language loaded");
+
+    const gramCode = `(hello)-->(world)
+    (hello)-->(world)
+    (hello:Greeting)-[dear:ADJECTIVE]->(world:Subject)
+    `;
+    const cst = parser.parse(gramCode);
+    console.log(cst.rootNode.toString());
+  });
+</script>
