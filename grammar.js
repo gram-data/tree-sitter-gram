@@ -139,38 +139,34 @@ module.exports = grammar({
     },
 
     _relationship_value: $ => choice(
-      $.undirected_single,
-      $.single_arrow_right,
-      $.single_arrow_left,
-      $.undirected_double_arrow,
-      $.double_arrow_right,
-      $.double_arrow_left,
-      $.undirected_squiggle,
-      $.squiggle_arrow_right,
-      $.squiggle_arrow_left,
+      $.single_undirected,
+      $.single_bidirectional,
+      $.single_right,
+      $.single_left,
+      $.double_undirected,
+      $.double_bidirectional,
+      $.double_right,
+      $.double_left,
+      $.squiggle_undirected,
+      $.squiggle_bidirectional,
+      $.squiggle_right,
+      $.squiggle_left,
     ),
       
-    undirected_single: $ => seq("-", optional(seq("[", $._attributes, "]")), "-"),
+    single_undirected: $ => seq("-", optional(seq("[", $._attributes, "]")), "-"),
+    single_bidirectional: $ => seq("<-", optional(seq("[", $._attributes, "]")), "->"),
+    single_right: $ => seq("-", optional(seq("[", $._attributes, "]")), "->"),
+    single_left: $ => seq("<-", optional(seq("[", $._attributes, "]")), "-"),
 
-    single_arrow_right: $ => seq("-", optional(seq("[", $._attributes, "]")), "->"),
+    double_undirected: $ => seq("=", optional(seq("[", $._attributes, "]")), "="),
+    double_bidirectional: $ => seq("<=", optional(seq("[", $._attributes, "]")), "=>"),
+    double_right: $ => seq("=", optional(seq("[", $._attributes, "]")), "=>"),
+    double_left: $ => seq("<=", optional(seq("[", $._attributes, "]")), "="),
 
-    single_arrow_left: $ => seq("<-", optional(seq("[", $._attributes, "]")), "-"),
-      
-    undirected_double_arrow: $ => seq("=", optional(seq("[", $._attributes, "]")), "="),
-
-    double_arrow_right: $ => seq("=", optional(seq("[", $._attributes, "]")), "=>"),
-
-    double_arrow_left: $ => choice(
-      "<==",
-      seq("<==", optional(seq("[", $._attributes, "]")), "="),
-    ),
-      
-    undirected_squiggle: $ => seq("~", optional(seq("[", $._attributes, "]")), "~"),
-
-    squiggle_arrow_right: $ => seq("~", optional(seq("[", $._attributes, "]")), "~>"),
-
-    squiggle_arrow_left: $ => seq("<~", optional(seq("[", $._attributes, "]")), "~"),
-
+    squiggle_undirected: $ => seq("~", optional(seq("[", $._attributes, "]")), "~"),
+    squiggle_bidirectional: $ => seq("<~", optional(seq("[", $._attributes, "]")), "~>"),
+    squiggle_right: $ => seq("~", optional(seq("[", $._attributes, "]")), "~>"),
+    squiggle_left: $ => seq("<~", optional(seq("[", $._attributes, "]")), "~"),
   }
 });
 

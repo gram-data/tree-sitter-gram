@@ -33,7 +33,7 @@ GQL Relationship Type Definition
   (pattern
     (relationship
       (node (labels (symbol)))
-      (double_arrow_right
+      (double_right
         (labels (symbol))
         (record (type_pair (symbol) (symbol)))
       )

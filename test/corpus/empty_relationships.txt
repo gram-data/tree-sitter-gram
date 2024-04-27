@@ -10,7 +10,7 @@ Empty relationships: Single relationship pattern
   (pattern
     (relationship 
       (node)
-      (single_arrow_right)
+      (single_right)
       (node)
     )
   )
@@ -27,10 +27,10 @@ Empty relationships: Two relationship patterns
 
 (gram
   (pattern
-    (relationship (node) (single_arrow_right) (node))
+    (relationship (node) (single_right) (node))
   )
   (pattern
-    (relationship (node) (single_arrow_left) (node))
+    (relationship (node) (single_left) (node))
   )
 )
 
@@ -44,8 +44,8 @@ Empty relationships: Pair of relationships in a single pattern
 
 (gram
   (pattern
-    (relationship (node) (single_arrow_right) (node))
-    (relationship (node) (single_arrow_left) (node))
+    (relationship (node) (single_right) (node))
+    (relationship (node) (single_left) (node))
   )
 )
 
@@ -59,7 +59,7 @@ Empty relationships: Pattern with a relationship and isolated node
 
 (gram
   (pattern
-    (relationship (node) (single_arrow_right) (node))
+    (relationship (node) (single_right) (node))
     (node)
   )
 )
@@ -76,10 +76,10 @@ Empty relationships: Three node path
   (pattern
     (relationship 
       (node)
-      (single_arrow_right)
+      (single_right)
       (relationship
         (node)
-        (single_arrow_right)
+        (single_right)
         (node)
       )
     )

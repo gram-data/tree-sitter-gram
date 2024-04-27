@@ -37,12 +37,12 @@ const match = (cst, onMatchGram, onMatchPattern, onMatchNode, onMatchRelationshi
       return onMatchNode(cst);
     case "relationship":
       return onMatchRelationship(cst);
-    case "single_arrow_right":
-    case "double_arrow_right":
-    case "squiggle_arrow_right":
-    case "single_arrow_left":
-    case "double_arrow_left":
-    case "squiggle_arrow_left":
+    case "single_right":
+    case "double_right":
+    case "squiggle_right":
+    case "single_left":
+    case "double_left":
+    case "squiggle_left":
       return onMatchRelationshipValue(cst);
     default:
       return otherwise(cst);

@@ -10,7 +10,7 @@ Squiggle-arrow relationships: Undirected relationship
   (pattern
     (relationship
       (node)
-      (undirected_squiggle)
+      (squiggle_undirected)
       (node)
     )
   )
@@ -28,7 +28,7 @@ Squiggle-arrow right
   (pattern
     (relationship
       (node)
-      (squiggle_arrow_right)
+      (squiggle_right)
       (node)
     )
   )
@@ -46,7 +46,7 @@ Squiggle-arrow right with attributes
   (pattern
     (relationship
       (node)
-      (squiggle_arrow_right (symbol))
+      (squiggle_right (symbol))
       (node)
     )
   )
@@ -64,7 +64,7 @@ Squiggle-arrow Left
   (pattern
     (relationship
       (node)
-      (squiggle_arrow_left)
+      (squiggle_left)
       (node)
     )
   )
@@ -82,7 +82,7 @@ Squiggle-arrow Left with Attributes
   (pattern
     (relationship
       (node)
-      (squiggle_arrow_left (symbol))
+      (squiggle_left (symbol))
       (node)
     )
   )
@@ -100,10 +100,10 @@ Squiggle-arrow relationships: Undirected relationships
   (pattern
     (relationship
       (node)
-      (undirected_squiggle)
+      (squiggle_undirected)
       (relationship
         (node)
-        (undirected_squiggle)
+        (squiggle_undirected)
         (node)
       )
     )
@@ -123,10 +123,10 @@ Squiggle-arrow relationships: Right relationships
   (pattern
     (relationship
       (node)
-      (squiggle_arrow_right)
+      (squiggle_right)
       (relationship
         (node)
-        (squiggle_arrow_right)
+        (squiggle_right)
         (node)
       )
     )
@@ -146,10 +146,10 @@ Squiggle-arrow relationships: Left relationships
   (pattern
     (relationship
       (node)
-      (squiggle_arrow_left)
+      (squiggle_left)
       (relationship
         (node)
-        (squiggle_arrow_left)
+        (squiggle_left)
         (node)
       )
     )
@@ -168,10 +168,10 @@ Squiggle-arrow relationships: Alternating left, right relationship
   (pattern
     (relationship
       (node)
-      (squiggle_arrow_left)
+      (squiggle_left)
       (relationship
         (node)
-        (squiggle_arrow_right)
+        (squiggle_right)
         (node)
       )
     )
@@ -190,10 +190,10 @@ Squiggle-arrow relationships: Alternating right, left relationship
   (pattern
     (relationship
       (node)
-      (squiggle_arrow_right)
+      (squiggle_right)
       (relationship
         (node)
-        (squiggle_arrow_left)
+        (squiggle_left)
         (node)
       )
     )
@@ -212,13 +212,13 @@ Squiggle-arrow relationships: Alternating left, right, undirected relationship
   (pattern
     (relationship
       (node)
-      (squiggle_arrow_left)
+      (squiggle_left)
       (relationship
         (node)
-        (squiggle_arrow_right)
+        (squiggle_right)
         (relationship
           (node)
-          (undirected_squiggle)
+          (squiggle_undirected)
           (node)
         )
       )
