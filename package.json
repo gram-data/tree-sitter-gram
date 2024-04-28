@@ -1,6 +1,6 @@
 {
   "name": "@gram-data/tree-sitter-gram",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "main": "bindings/node",
   "types": "bindings/node",
