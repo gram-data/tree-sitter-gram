@@ -495,10 +495,6 @@
       "required": true,
       "types": [
         {
-          "type": "type_pair",
-          "named": true
-        },
-        {
           "type": "value_pair",
           "named": true
         }
@@ -1248,7 +1244,7 @@
     }
   },
   {
-    "type": "type_pair",
+    "type": "value_pair",
     "named": true,
     "fields": {
       "cardinality": {
@@ -1273,32 +1269,6 @@
           }
         ]
       },
-      "key": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "symbol",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "symbol",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "value_pair",
-    "named": true,
-    "fields": {
       "key": {
         "multiple": false,
         "required": true,
@@ -1391,10 +1361,6 @@
   },
   {
     "type": ":",
-    "named": false
-  },
-  {
-    "type": "::",
     "named": false
   },
   {

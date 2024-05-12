@@ -68,7 +68,7 @@ Record: type pair
 
 (gram
   (pattern
-    (node (record (type_pair (symbol) (symbol))))
+    (node (record (value_pair (symbol) (symbol))))
   )
 )
 
@@ -83,7 +83,7 @@ Record: arbitrary type pair
 
 (gram
   (pattern
-    (node (record (type_pair (symbol) (symbol))))
+    (node (record (value_pair (symbol) (symbol))))
   )
 )
 
@@ -133,6 +133,6 @@ Record: labeled with a record stating a type
   (pattern
     (node 
       (labels (symbol))
-      (record (type_pair (symbol) (symbol))))
+      (record (value_pair (symbol) (symbol))))
   )
 )

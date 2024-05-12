@@ -396,17 +396,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "value_pair"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "type_pair"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "value_pair"
             },
             {
               "type": "REPEAT",
@@ -418,17 +409,8 @@
                     "value": ","
                   },
                   {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "value_pair"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "type_pair"
-                      }
-                    ]
+                    "type": "SYMBOL",
+                    "name": "value_pair"
                   }
                 ]
               }
@@ -453,8 +435,11 @@
           }
         },
         {
-          "type": "STRING",
-          "value": ":"
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "!?[:=~]{1,2}"
+          }
         },
         {
           "type": "FIELD",
@@ -462,34 +447,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "_value"
-          }
-        }
-      ]
-    },
-    "type_pair": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "key",
-          "content": {
-            "type": "SYMBOL",
-            "name": "symbol"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "::"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "type",
-          "content": {
-            "type": "SYMBOL",
-            "name": "symbol"
           }
         },
         {

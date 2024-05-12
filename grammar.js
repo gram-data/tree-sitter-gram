@@ -51,18 +51,12 @@ module.exports = grammar({
 
     labels: $ => seq(":", colonSep1($.symbol)),
 
-    record: $ => seq("{", commaSep1(choice($.value_pair, $.type_pair)), "}"),
+    record: $ => seq("{", commaSep1($.value_pair), "}"),
 
     value_pair: $ => seq(
       field('key', $.symbol),
-      ':',
+      token(/!?[:=~]{1,2}/),
       field('value', $._value),
-    ),
-
-    type_pair: $ => seq(
-      field('key', $.symbol),
-      token('::'),
-      field('type', $.symbol),
       optional(field('cardinality', choice('!', '?', '*', '+')))
     ),
 
