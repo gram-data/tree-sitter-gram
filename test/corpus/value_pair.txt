@@ -40,3 +40,22 @@ Value pair: equal-sign variants
   )
 )
 
+==================
+Value pair: greater than, less than variants
+==================
+
+({ k1 > 1, k2 < 2,  k3 >= 3, k4 <= 4 })
+
+---
+
+(gram
+  (pattern
+    (node (record 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+    ))
+  )
+)
+
