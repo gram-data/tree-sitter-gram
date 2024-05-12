@@ -14,8 +14,8 @@ GQL Node Type Definition
     (node 
       (labels (symbol))
       (record
-        (value_pair (symbol) (symbol))
-        (value_pair (symbol) (symbol))
+        (property (symbol) (symbol))
+        (property (symbol) (symbol))
       )
     )
   )
@@ -35,7 +35,7 @@ GQL Relationship Type Definition
       (node (labels (symbol)))
       (double_right
         (labels (symbol))
-        (record (value_pair (symbol) (symbol)))
+        (record (property (symbol) (symbol)))
       )
       (node (labels (symbol)))
     )

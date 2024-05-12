@@ -397,7 +397,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "value_pair"
+              "name": "property"
             },
             {
               "type": "REPEAT",
@@ -410,7 +410,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "value_pair"
+                    "name": "property"
                   }
                 ]
               }
@@ -423,7 +423,7 @@
         }
       ]
     },
-    "value_pair": {
+    "property": {
       "type": "SEQ",
       "members": [
         {

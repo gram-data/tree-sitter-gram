@@ -38,8 +38,8 @@ Record: number properties
 (gram
   (pattern
     (node (record 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
     ))
   )
 )
@@ -54,7 +54,7 @@ Record: double-quoted string properties
 
 (gram
   (pattern
-    (node (record (value_pair (symbol) (double_quoted_string))))
+    (node (record (property (symbol) (double_quoted_string))))
   )
 )
 
@@ -68,7 +68,7 @@ Record: type pair
 
 (gram
   (pattern
-    (node (record (value_pair (symbol) (symbol))))
+    (node (record (property (symbol) (symbol))))
   )
 )
 
@@ -83,7 +83,7 @@ Record: arbitrary type pair
 
 (gram
   (pattern
-    (node (record (value_pair (symbol) (symbol))))
+    (node (record (property (symbol) (symbol))))
   )
 )
 
@@ -99,7 +99,7 @@ Record: identified and with a record
   (pattern
     (node 
       (symbol)
-      (record (value_pair (symbol) (double_quoted_string))))
+      (record (property (symbol) (double_quoted_string))))
   )
 )
 
@@ -117,7 +117,7 @@ Record: identified, labeled and with a record
     (node 
       (symbol)
       (labels (symbol))
-      (record (value_pair (symbol) (double_quoted_string))))
+      (record (property (symbol) (double_quoted_string))))
   )
 )
 
@@ -133,6 +133,6 @@ Record: labeled with a record stating a type
   (pattern
     (node 
       (labels (symbol))
-      (record (value_pair (symbol) (symbol))))
+      (record (property (symbol) (symbol))))
   )
 )

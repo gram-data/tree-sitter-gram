@@ -25,7 +25,7 @@ enum ts_symbol_identifiers {
   anon_sym_COLON = 7,
   anon_sym_LBRACE = 8,
   anon_sym_RBRACE = 9,
-  aux_sym_value_pair_token1 = 10,
+  aux_sym_property_token1 = 10,
   anon_sym_BANG = 11,
   anon_sym_QMARK = 12,
   anon_sym_STAR = 13,
@@ -61,7 +61,7 @@ enum ts_symbol_identifiers {
   sym__identifier = 43,
   sym_labels = 44,
   sym_record = 45,
-  sym_value_pair = 46,
+  sym_property = 46,
   sym__value = 47,
   sym__numeric_literal = 48,
   sym__string_literal = 49,
@@ -96,7 +96,7 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_COLON] = ":",
   [anon_sym_LBRACE] = "{",
   [anon_sym_RBRACE] = "}",
-  [aux_sym_value_pair_token1] = "value_pair_token1",
+  [aux_sym_property_token1] = "property_token1",
   [anon_sym_BANG] = "!",
   [anon_sym_QMARK] = "\?",
   [anon_sym_STAR] = "*",
@@ -132,7 +132,7 @@ static const char * const ts_symbol_names[] = {
   [sym__identifier] = "_identifier",
   [sym_labels] = "labels",
   [sym_record] = "record",
-  [sym_value_pair] = "value_pair",
+  [sym_property] = "property",
   [sym__value] = "_value",
   [sym__numeric_literal] = "_numeric_literal",
   [sym__string_literal] = "_string_literal",
@@ -167,7 +167,7 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_COLON] = anon_sym_COLON,
   [anon_sym_LBRACE] = anon_sym_LBRACE,
   [anon_sym_RBRACE] = anon_sym_RBRACE,
-  [aux_sym_value_pair_token1] = aux_sym_value_pair_token1,
+  [aux_sym_property_token1] = aux_sym_property_token1,
   [anon_sym_BANG] = anon_sym_BANG,
   [anon_sym_QMARK] = anon_sym_QMARK,
   [anon_sym_STAR] = anon_sym_STAR,
@@ -203,7 +203,7 @@ static const TSSymbol ts_symbol_map[] = {
   [sym__identifier] = sym__identifier,
   [sym_labels] = sym_labels,
   [sym_record] = sym_record,
-  [sym_value_pair] = sym_value_pair,
+  [sym_property] = sym_property,
   [sym__value] = sym__value,
   [sym__numeric_literal] = sym__numeric_literal,
   [sym__string_literal] = sym__string_literal,
@@ -268,7 +268,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
-  [aux_sym_value_pair_token1] = {
+  [aux_sym_property_token1] = {
     .visible = false,
     .named = false,
   },
@@ -412,7 +412,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [sym_value_pair] = {
+  [sym_property] = {
     .visible = true,
     .named = true,
   },
@@ -963,20 +963,20 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_RBRACE);
       END_STATE();
     case 32:
-      ACCEPT_TOKEN(aux_sym_value_pair_token1);
+      ACCEPT_TOKEN(aux_sym_property_token1);
       END_STATE();
     case 33:
-      ACCEPT_TOKEN(aux_sym_value_pair_token1);
+      ACCEPT_TOKEN(aux_sym_property_token1);
       if (lookahead == ':') ADVANCE(35);
       if (lookahead == '=' ||
           lookahead == '~') ADVANCE(32);
       END_STATE();
     case 34:
-      ACCEPT_TOKEN(aux_sym_value_pair_token1);
+      ACCEPT_TOKEN(aux_sym_property_token1);
       if (lookahead == '=') ADVANCE(32);
       END_STATE();
     case 35:
-      ACCEPT_TOKEN(aux_sym_value_pair_token1);
+      ACCEPT_TOKEN(aux_sym_property_token1);
       if (lookahead == '=' ||
           lookahead == '~') ADVANCE(32);
       END_STATE();
@@ -1994,7 +1994,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(190), 1,
       sym_symbol,
     STATE(51), 1,
-      sym_value_pair,
+      sym_property,
   [895] = 2,
     ACTIONS(192), 1,
       anon_sym_EQ,
@@ -2027,7 +2027,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(190), 1,
       sym_symbol,
     STATE(61), 1,
-      sym_value_pair,
+      sym_property,
   [940] = 1,
     ACTIONS(140), 2,
       anon_sym_COMMA,
@@ -2097,7 +2097,7 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_RBRACK,
   [1029] = 1,
     ACTIONS(252), 1,
-      aux_sym_value_pair_token1,
+      aux_sym_property_token1,
   [1033] = 1,
     ACTIONS(254), 1,
       anon_sym_RBRACK,
@@ -2294,7 +2294,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [83] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_labels_repeat1, 2, 0, 0), SHIFT_REPEAT(82),
   [86] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_pattern, 2, 0, 0),
   [88] = {.entry = {.count = 1, .reusable = true}}, SHIFT(36),
-  [90] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_value_pair, 3, 0, 11),
+  [90] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_property, 3, 0, 11),
   [92] = {.entry = {.count = 1, .reusable = true}}, SHIFT(63),
   [94] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_pattern, 1, 0, 0),
   [96] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_labels, 3, 0, 0),
@@ -2350,7 +2350,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [198] = {.entry = {.count = 1, .reusable = true}}, SHIFT(97),
   [200] = {.entry = {.count = 1, .reusable = false}}, SHIFT(102),
   [202] = {.entry = {.count = 1, .reusable = true}}, SHIFT(103),
-  [204] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_value_pair, 4, 0, 12),
+  [204] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_property, 4, 0, 12),
   [206] = {.entry = {.count = 1, .reusable = false}}, SHIFT(94),
   [208] = {.entry = {.count = 1, .reusable = true}}, SHIFT(95),
   [210] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_single_bidirectional, 2, 0, 0),

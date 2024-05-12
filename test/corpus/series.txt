@@ -91,7 +91,7 @@ Series: Named,labeled series with value and in-line members
     (symbol)
     (labels (symbol))
     (record 
-      (value_pair (symbol) (tagged_string))
+      (property (symbol) (tagged_string))
     )
     (members (operator)
       (node (symbol))

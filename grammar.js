@@ -51,9 +51,9 @@ module.exports = grammar({
 
     labels: $ => seq(":", colonSep1($.symbol)),
 
-    record: $ => seq("{", commaSep1($.value_pair), "}"),
+    record: $ => seq("{", commaSep1($.property), "}"),
 
-    value_pair: $ => seq(
+    property: $ => seq(
       field('key', $.symbol),
       token(/:{1,2}[=~]?|!?=[=~]?|[><]=?/),
       field('value', $._value),

@@ -10,12 +10,12 @@ Value pair: colon variants
 (gram
   (pattern
     (node (record 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
     ))
   )
 )
@@ -31,11 +31,11 @@ Value pair: equal-sign variants
 (gram
   (pattern
     (node (record 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
     ))
   )
 )
@@ -51,10 +51,10 @@ Value pair: greater than, less than variants
 (gram
   (pattern
     (node (record 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
-      (value_pair (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
     ))
   )
 )
