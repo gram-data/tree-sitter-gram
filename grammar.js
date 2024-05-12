@@ -55,7 +55,7 @@ module.exports = grammar({
 
     value_pair: $ => seq(
       field('key', $.symbol),
-      token(/!?[:=~]{1,2}/),
+      token(/:{1,2}[=~]?|!?=[=~]?|[><]=?/),
       field('value', $._value),
       optional(field('cardinality', choice('!', '?', '*', '+')))
     ),

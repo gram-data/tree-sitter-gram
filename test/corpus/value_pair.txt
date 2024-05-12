@@ -1,0 +1,42 @@
+
+==================
+Value pair: colon variants
+==================
+
+({ k1 : 1, k2 :: 2,  k3 := 3, k4 ::= 4, k5 :~ 5, k6 ::~ 6})
+
+---
+
+(gram
+  (pattern
+    (node (record 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+    ))
+  )
+)
+
+==================
+Value pair: equal-sign variants
+==================
+
+({ k1 = 1, k2 == 2,  k3 != 3, k4 !== 4, k5 =~ 5 })
+
+---
+
+(gram
+  (pattern
+    (node (record 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+      (value_pair (symbol) (integer)) 
+    ))
+  )
+)
+
