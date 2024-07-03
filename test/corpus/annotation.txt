@@ -1,0 +1,69 @@
+==================
+Annotate a single node with a string value
+==================
+
+@description("An empty node.")
+()
+
+---
+
+(gram
+  (pattern
+    (annotation (symbol) (double_quoted_string))
+    (node)
+  )
+)
+
+==================
+Annotate a single node with an integer value
+==================
+
+@score(10)
+()
+
+---
+
+(gram
+  (pattern
+    (annotation (symbol) (integer))
+    (node)
+  )
+)
+
+==================
+Annotate a relationship
+==================
+
+@description("Two nodes in a relationship")
+()-->()
+
+---
+
+(gram
+  (pattern
+    (annotation (symbol) (double_quoted_string))
+    (relationship
+      (node)
+      (single_right)
+      (node)
+    )
+  )
+)
+
+==================
+Annotate a node twice
+==================
+
+@title("Emptiness")
+@description("An empty node.")
+()
+
+---
+
+(gram
+  (pattern
+    (annotation (symbol) (double_quoted_string))
+    (annotation (symbol) (double_quoted_string))
+    (node)
+  )
+)

@@ -8,21 +8,24 @@ module.exports = grammar({
       $.record
     )),
 
-    pattern: $ => commaSep1($._path),
+    pattern: $ => seq(optional(repeat($.annotation)), commaSep1($._segment)),
 
-    // segment: $ => choice(
-    //   $.node,
-    //   seq($.node, $._relationship, $._node_pattern)
-    // ),
+    annotation: $ => prec(9999,seq(
+      "@", 
+      field('key', $.symbol),
+      "(",
+      field('value', $._value),
+      ")"
+    )),
     
-    _path: $ => choice(
+    _segment: $ => choice(
       $.relationship,
       $.node
     ),
 
     node: $ => seq("(", optional($._attributes),")"),
 
-    relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._path)),
+    relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._segment)),
 
     series: $ => seq("[", optional($._attributes), optional($.members),"]"),
 
@@ -32,7 +35,7 @@ module.exports = grammar({
 
     _member: $ => choice(
       $._identifier,
-      $._path
+      $._segment
     ),
 
     _attributes: $ => choice(
@@ -60,10 +63,7 @@ module.exports = grammar({
       optional(field('cardinality', choice('!', '?', '*', '+')))
     ),
 
-    symbol: $ => {
-      const alphanumeric = /[a-zA-Z_@.][0-9a-zA-Z_@.]*/;      
-      return token(alphanumeric);
-    },
+    symbol: $ => token(/[a-zA-Z_.@][0-9a-zA-Z_@.]*/),
 
     _value: $ => choice(
       $.symbol,
