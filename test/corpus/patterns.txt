@@ -1,5 +1,5 @@
 ==================
-Series: Empty
+Pattern: empty subject 
 ==================
 
 []
@@ -7,260 +7,78 @@ Series: Empty
 ---
 
 (gram
-  (series)
-)
-
-==================
-Series: Named series, empty
-==================
-
-[a]
-
----
-
-(gram
-  (series (symbol))
-)
-
-
-==================
-Series: Named series with identified members
-==================
-
-[letters | a,b,c] 
-
----
-
-(gram
-  (series 
-    (symbol)
-    (members (operator) (symbol) (symbol) (symbol))
-  )
-)
-
-
-==================
-Series: Named series with in-line members
-==================
-
-[letters => (a),(b),(c)] 
-
----
-
-(gram
-  (series 
-    (symbol)
-    (members (operator)
-      (node (symbol))
-      (node (symbol))
-      (node (symbol))
-    )
+  (pattern
+    (subject)
   )
 )
 
 ==================
-Series: Named,labeled series with in-line members
+Pattern: empty node 
 ==================
 
-[letters:Alpha => (a),(b),(c)] 
+()
 
 ---
 
 (gram
-  (series 
-    (symbol)
-    (labels (symbol))
-    (members (operator)
-      (node (symbol))
-      (node (symbol))
-      (node (symbol))
-    )
+  (pattern
+    (node)
   )
 )
 
 ==================
-Series: Named,labeled series with value and in-line members
+Pattern: two nodes
 ==================
 
-[letters:Alpha {since:date`1970-01-01`} => (a),(b),(c)] 
+(),()
 
 ---
 
 (gram
-  (series 
-    (symbol)
-    (labels (symbol))
-    (record 
-      (property (symbol) (tagged_string))
-    )
-    (members (operator)
-      (node (symbol))
-      (node (symbol))
-      (node (symbol))
-    )
+  (pattern
+    (node) (node)
   )
 )
 
 ==================
-Series: Named, with in-line members and various operators
+Pattern: 1 single-hop relationship 
 ==================
 
-[add + a,b,c] 
-[subtract - a,b,c]
-[multiply * a,b,c]
-[divide / a,b,c]
-[equal = a,b,c]
-[extra_equal == a,b,c]
-[not_equal =/= a,b,c]
-[single_right -> a,b,c]
-[implies => a,b,c]
-[function_arrow_right |-> a,b,c]
-[two_headed_right ->> a,b,c]
-[double_two_headed_right =>> a,b,c]
-[single_iff <-> a,b,c]
-[double_iff <=> a,b,c]
+()-->()
+
 ---
 
 (gram
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
+  (pattern
+    (relationship
+      (node)
+      (single_right)
+      (node)
     )
   )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-    (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-  (series 
-    (symbol)
-    (members (operator)
-      (symbol)
-      (symbol)
-      (symbol)
-    )
-  )
-
 )
 
+
 ==================
-Series: Math symbols as names
-:skip
+Pattern: 2 single-hop relationships
 ==================
 
-[ø] 
-[π]
-[𝛳]
-[𝜴] 
+()-->(), ()-->()
 
 ---
 
 (gram
-  (series 
-    (symbol)
-  )
-  (series 
-    (symbol)
-  )
-  (series 
-    (symbol)
-  )
-  (series 
-    (symbol)
-  )
+  (pattern
+    (relationship
+      (node)
+      (single_right)
+      (node)
+    )
+    (relationship
+      (node)
+      (single_right)
+      (node)
+    )
 
+  )
 )

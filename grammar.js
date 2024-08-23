@@ -4,49 +4,55 @@ module.exports = grammar({
   rules: {
     gram: $ => repeat(choice(
       $.pattern,
-      $.series,
       $.record
     )),
 
-    pattern: $ => seq(optional(repeat($.annotation)), commaSep1($._segment)),
+    // pattern: $ => seq(optional(repeat($.annotation)), commaSep1($._segment)),
+    pattern: $ => commaSep1($._anySubject),
+
+    _anySubject: $ => choice(
+      $.subject,
+      $._path_segment
+    ),
+
+
+    subject: $ => seq("[", optional($._attributes), optional($.members),"]"),
 
     annotation: $ => prec(9999,seq(
       "@", 
       field('key', $.symbol),
       "(",
-      field('value', $._value),
+      field('value', $._scalar),
       ")"
     )),
     
-    _segment: $ => choice(
+    _path_segment: $ => choice(
       $.relationship,
       $.node
     ),
 
     node: $ => seq("(", optional($._attributes),")"),
 
-    relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._segment)),
-
-    series: $ => seq("[", optional($._attributes), optional($.members),"]"),
+    relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._path_segment)),
 
     members: $ => seq(field("operator", $.operator), commaSep1($._member)),
 
-    operator: $ => token(/<{0,2}[-~=\/\|+*%]{1,3}>{0,2}/),
+    operator: $ => token(/<{0,2}[-=~\/\|+*%^]{1,3}>{0,2}/),
 
     _member: $ => choice(
-      $._identifier,
-      $._segment
+      $._scalar,
+      $._anySubject
     ),
 
     _attributes: $ => choice(
-      choice(field("identifier", $._identifier), field("labels", $.labels), field("record", $.record)), 
-      seq(field("identifier", $._identifier), field("labels", $.labels)),
-      seq(field("identifier", $._identifier), field("record", $.record)),
+      choice(field("identifier", $._scalar), field("labels", $.labels), field("record", $.record)), 
+      seq(field("identifier", $._scalar), field("labels", $.labels)),
+      seq(field("identifier", $._scalar), field("record", $.record)),
       seq(field("labels", $.labels), field("record", $.record)),
-      seq(field("identifier", $._identifier), field("labels", $.labels), field("record", $.record))
+      seq(field("identifier", $._scalar), field("labels", $.labels), field("record", $.record))
     ),
 
-    _identifier: $ => choice(
+    _scalar: $ => choice(
       $.symbol,
       $._numeric_literal,
       $._string_literal
@@ -54,22 +60,16 @@ module.exports = grammar({
 
     labels: $ => seq(":", colonSep1($.symbol)),
 
-    record: $ => seq("{", commaSep1($.property), "}"),
+    record: $ => seq("{", commaSep($.property), "}"),
 
     property: $ => seq(
       field('key', $.symbol),
-      token(/:{1,2}[=~]?|!?=[=~]?|[><]=?/),
-      field('value', $._value),
+      field('operator', token(/:{1,2}[=~]?|!?=[=~]?|[><]=?/)),
+      field('value', $._scalar),
       optional(field('cardinality', choice('!', '?', '*', '+')))
     ),
 
-    symbol: $ => token(/[a-zA-Z_.@][0-9a-zA-Z_@.]*/),
-
-    _value: $ => choice(
-      $.symbol,
-      $._numeric_literal,
-      $._string_literal,
-    ),
+    symbol: $ => token(/[a-zA-Z_][0-9a-zA-Z_@.\-]*/),
 
     _numeric_literal: $ => choice(
       $.integer,

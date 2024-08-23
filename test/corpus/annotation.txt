@@ -67,3 +67,19 @@ Annotate a node twice
     (node)
   )
 )
+
+==================
+Annotate an empty subject
+==================
+
+@description("A named, empty pattern.")
+[pat]
+
+---
+
+(gram
+  (pattern
+    (annotation (symbol) (double_quoted_string))
+  )
+)
+

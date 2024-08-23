@@ -3,8 +3,21 @@
 Identifier using '@'
 ==================
 
-(@akollegger)
 (akollegger@neo4j.com)
+
+---
+
+(gram
+  (pattern (node (symbol)))
+)
+
+
+==================
+Identifier using snakecase '_' and mixed case
+==================
+
+(_0n96pdf6@E)
+(Im0_pWk0g4@@)
 
 ---
 
@@ -15,16 +28,14 @@ Identifier using '@'
 
 
 ==================
-Identifier using '_' and mixed case
+Identifier using kebabcase '-' and mixed case
 ==================
 
-(_0n96pdf6@E)
-(Im0_pWk0g4@@)
+(hello-there)
 
 ---
 
 (gram
-  (pattern (node (symbol)))
   (pattern (node (symbol)))
 )
 

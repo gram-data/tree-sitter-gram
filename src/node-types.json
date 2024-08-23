@@ -1,67 +1,5 @@
 [
   {
-    "type": "annotation",
-    "named": true,
-    "fields": {
-      "key": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "symbol",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "double_bidirectional",
     "named": true,
     "fields": {
@@ -364,10 +302,6 @@
         {
           "type": "record",
           "named": true
-        },
-        {
-          "type": "series",
-          "named": true
         }
       ]
     }
@@ -444,6 +378,10 @@
         },
         {
           "type": "single_quoted_string",
+          "named": true
+        },
+        {
+          "type": "subject",
           "named": true
         },
         {
@@ -538,15 +476,15 @@
       "required": true,
       "types": [
         {
-          "type": "annotation",
-          "named": true
-        },
-        {
           "type": "node",
           "named": true
         },
         {
           "type": "relationship",
+          "named": true
+        },
+        {
+          "type": "subject",
           "named": true
         }
       ]
@@ -642,7 +580,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "property",
@@ -733,88 +671,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "series",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "members",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1391,6 +1247,88 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "subject",
+    "named": true,
+    "fields": {
+      "identifier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "backticked_string",
+            "named": true
+          },
+          {
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "octal",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
+            "named": true
+          }
+        ]
+      },
+      "labels": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "labels",
+            "named": true
+          }
+        ]
+      },
+      "record": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "record",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "members",
+          "named": true
+        }
+      ]
     }
   },
   {

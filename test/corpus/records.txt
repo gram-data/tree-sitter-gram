@@ -1,138 +1,75 @@
 ==================
-Record: No record
+Record empty
 ==================
+
+{}
+
+---
+
+(gram
+  (record)
+)
+
+==================
+Record with integer property
+==================
+
+{ n : 1 }
+
+---
+
+(gram
+  (record (property (symbol) (integer)) 
+  )
+)
+
+==================
+Record with double-quoted string property
+==================
+
+{ s : "a" }
+
+---
+
+(gram
+  (record (property (symbol) (double_quoted_string)))
+)
+
+==================
+Record with symbol property
+==================
+
+{ s : string }
+
+---
+
+(gram
+  (record (property (symbol) (symbol)))
+)
+
+==================
+Record followed by a Node
+==================
+
+{ s : "a" }
 
 ()
 
 ---
 
 (gram
-  (pattern
-    (node)
-  )
+  (record (property (symbol) (double_quoted_string)))
+  (pattern (node))
 )
 
 ==================
-Record: empty
-:error
+Record with greater than operator
 ==================
 
-({})
+{ n > 1 }
 
 ---
 
 (gram
-  (pattern
-    (node (labels (symbol)))
-  )
-)
-
-==================
-Record: number properties
-==================
-
-({ n : 1, m : 2 })
-
----
-
-(gram
-  (pattern
-    (node (record 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-    ))
-  )
-)
-
-==================
-Record: double-quoted string properties
-==================
-
-({ s : "a" })
-
----
-
-(gram
-  (pattern
-    (node (record (property (symbol) (double_quoted_string))))
-  )
-)
-
-==================
-Record: type pair
-==================
-
-({ s :: string })
-
----
-
-(gram
-  (pattern
-    (node (record (property (symbol) (symbol))))
-  )
-)
-
-
-==================
-Record: arbitrary type pair
-==================
-
-({ s :: abk })
-
----
-
-(gram
-  (pattern
-    (node (record (property (symbol) (symbol))))
-  )
-)
-
-==================
-Record: identified and with a record
-==================
-
-(player1 { named : "it" })
-
----
-
-(gram
-  (pattern
-    (node 
-      (symbol)
-      (record (property (symbol) (double_quoted_string))))
-  )
-)
-
-
-==================
-Record: identified, labeled and with a record
-==================
-
-(player1:Player { named : "it" })
-
----
-
-(gram
-  (pattern
-    (node 
-      (symbol)
-      (labels (symbol))
-      (record (property (symbol) (double_quoted_string))))
-  )
-)
-
-==================
-Record: labeled with a record stating a type
-==================
-
-(:Player { named :: string })
-
----
-
-(gram
-  (pattern
-    (node 
-      (labels (symbol))
-      (record (property (symbol) (symbol))))
-  )
+  (record (property (symbol) (integer)) )
 )
