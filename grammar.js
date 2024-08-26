@@ -2,17 +2,19 @@ module.exports = grammar({
   name: 'gram',
 
   rules: {
-    gram: $ => repeat(choice(
+
+    gram: $ => repeat($._description),
+
+    _description: $ => choice(
       $.pattern,
       $.record
-    )),
+    ),
 
-    // pattern: $ => seq(optional(repeat($.annotation)), commaSep1($._segment)),
-    pattern: $ => commaSep1($._anySubject),
+    pattern: $ => seq(optional(repeat($.annotation)), commaSep1($._patternComponent)),
 
-    _anySubject: $ => choice(
+    _patternComponent: $ => choice(
       $.subject,
-      $._path_segment
+      $._path
     ),
 
 
@@ -26,22 +28,24 @@ module.exports = grammar({
       ")"
     )),
     
-    _path_segment: $ => choice(
+    _path: $ => choice(
       $.relationship,
       $.node
     ),
 
     node: $ => seq("(", optional($._attributes),")"),
 
-    relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._path_segment)),
+    relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._path)),
 
     members: $ => seq(field("operator", $.operator), commaSep1($._member)),
 
     operator: $ => token(/<{0,2}[-=~\/\|+*%^]{1,3}>{0,2}/),
 
+    _references: $ => $._scalar,
+
     _member: $ => choice(
-      $._scalar,
-      $._anySubject
+      $._references,
+      $._patternComponent
     ),
 
     _attributes: $ => choice(
@@ -55,7 +59,10 @@ module.exports = grammar({
     _scalar: $ => choice(
       $.symbol,
       $._numeric_literal,
-      $._string_literal
+      $._string_literal,
+      $.math_symbol,
+      $.greek,
+      $.pictograph
     ),
 
     labels: $ => seq(":", colonSep1($.symbol)),
@@ -70,6 +77,10 @@ module.exports = grammar({
     ),
 
     symbol: $ => token(/[a-zA-Z_][0-9a-zA-Z_@.\-]*/),
+
+    greek: $ => token(/[\u03B1-\u03C9\u0391-\u03A9]/),
+    math_symbol: $ => token(/\p{Other_Math}/),
+    pictograph: $ => token(/[\u2650-\u26FF]/),
 
     _numeric_literal: $ => choice(
       $.integer,

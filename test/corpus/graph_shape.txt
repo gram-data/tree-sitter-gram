@@ -80,9 +80,11 @@ Graph: top-level record, a path and a series
       (node (symbol))
     )
   )
-  (series
-    (symbol)
-    (members (operator) (symbol) (symbol))
+  (pattern
+    (subject
+      (symbol)
+      (members (operator) (symbol) (symbol))
+    )
   )
 )
 

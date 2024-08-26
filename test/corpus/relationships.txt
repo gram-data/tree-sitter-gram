@@ -1,0 +1,18 @@
+==================
+Relationship: Right relationship
+==================
+
+()-->()
+
+---
+
+(gram
+  (pattern
+    (relationship
+      (node)
+      (single_right)
+      (node)
+    )
+  )
+)
+

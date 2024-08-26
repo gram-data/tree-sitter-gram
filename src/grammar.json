@@ -4,45 +4,69 @@
     "gram": {
       "type": "REPEAT",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "pattern"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "record"
-          }
-        ]
+        "type": "SYMBOL",
+        "name": "_description"
       }
+    },
+    "_description": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "record"
+        }
+      ]
     },
     "pattern": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_anySubject"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "annotation"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ","
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_anySubject"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_patternComponent"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ","
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_patternComponent"
+                  }
+                ]
               }
-            ]
-          }
+            }
+          ]
         }
       ]
     },
-    "_anySubject": {
+    "_patternComponent": {
       "type": "CHOICE",
       "members": [
         {
@@ -51,7 +75,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_path_segment"
+          "name": "_path"
         }
       ]
     },
@@ -129,7 +153,7 @@
         ]
       }
     },
-    "_path_segment": {
+    "_path": {
       "type": "CHOICE",
       "members": [
         {
@@ -191,7 +215,7 @@
           "name": "right",
           "content": {
             "type": "SYMBOL",
-            "name": "_path_segment"
+            "name": "_path"
           }
         }
       ]
@@ -238,19 +262,23 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "<{0,2}[-~=\\/\\|+*%^]{1,3}>{0,2}"
+        "value": "<{0,2}[-=~\\/\\|+*%^]{1,3}>{0,2}"
       }
+    },
+    "_references": {
+      "type": "SYMBOL",
+      "name": "_scalar"
     },
     "_member": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_scalar"
+          "name": "_references"
         },
         {
           "type": "SYMBOL",
-          "name": "_anySubject"
+          "name": "_patternComponent"
         }
       ]
     },
@@ -394,6 +422,18 @@
         {
           "type": "SYMBOL",
           "name": "_string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "math_symbol"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "greek"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "pictograph"
         }
       ]
     },
@@ -489,10 +529,14 @@
           }
         },
         {
-          "type": "TOKEN",
+          "type": "FIELD",
+          "name": "operator",
           "content": {
-            "type": "PATTERN",
-            "value": ":{1,2}[=~]?|!?=[=~]?|[><]=?"
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": ":{1,2}[=~]?|!?=[=~]?|[><]=?"
+            }
           }
         },
         {
@@ -543,6 +587,27 @@
       "content": {
         "type": "PATTERN",
         "value": "[a-zA-Z_][0-9a-zA-Z_@.\\-]*"
+      }
+    },
+    "greek": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[\\u03B1-\\u03C9\\u0391-\\u03A9]"
+      }
+    },
+    "math_symbol": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\p{Other_Math}"
+      }
+    },
+    "pictograph": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[\\u2650-\\u26FF]"
       }
     },
     "_numeric_literal": {

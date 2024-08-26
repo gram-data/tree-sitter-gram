@@ -118,17 +118,56 @@ Identifier using double-quotes with escaped double-quote
 )
 
 ==================
-Identifier pair
+Identifiers using various greek characters 
 ==================
 
-(a),(b)
+(π),(Α),(Ω),(α),(ω)
 
 ---
 
 (gram
   (pattern 
-    (node (symbol))
-    (node (symbol))
+    (node (greek))
+    (node (greek))
+    (node (greek))
+    (node (greek))
+    (node (greek))
   )
 )
 
+
+==================
+Identifiers using fancy math_symbols
+==================
+
+(𝐀),(𝐴),(𝑨),(𝒜),(𝓐),(𝓪),(𝔄)
+
+---
+
+(gram
+  (pattern 
+    (node (math_symbol))
+    (node (math_symbol))
+    (node (math_symbol))
+    (node (math_symbol))
+    (node (math_symbol))
+    (node (math_symbol))
+    (node (math_symbol))
+  )
+)
+
+
+==================
+Identifiers using emojis
+:error
+==================
+
+(😀)
+                                                                                                                                                                                                                                                                                                                                                                      
+---
+
+(gram
+  (pattern 
+    (node (emoji))
+  )
+)

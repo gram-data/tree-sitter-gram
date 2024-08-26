@@ -1,5 +1,79 @@
 [
   {
+    "type": "annotation",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "backticked_string",
+            "named": true
+          },
+          {
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "greek",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "double_bidirectional",
     "named": true,
     "fields": {
@@ -20,6 +94,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -28,11 +106,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -92,6 +178,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -100,11 +190,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -164,6 +262,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -172,11 +274,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -236,6 +346,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -244,11 +358,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -338,7 +460,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "backticked_string",
@@ -353,11 +475,19 @@
           "named": true
         },
         {
+          "type": "greek",
+          "named": true
+        },
+        {
           "type": "hexadecimal",
           "named": true
         },
         {
           "type": "integer",
+          "named": true
+        },
+        {
+          "type": "math_symbol",
           "named": true
         },
         {
@@ -370,6 +500,10 @@
         },
         {
           "type": "octal",
+          "named": true
+        },
+        {
+          "type": "pictograph",
           "named": true
         },
         {
@@ -416,6 +550,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -424,11 +562,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -475,6 +621,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
         {
           "type": "node",
           "named": true
@@ -543,6 +693,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -551,11 +705,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -694,6 +856,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -702,11 +868,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -766,6 +940,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -774,11 +952,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -838,6 +1024,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -846,11 +1036,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -910,6 +1108,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -918,11 +1120,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -982,6 +1192,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -990,11 +1204,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -1054,6 +1276,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -1062,11 +1288,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -1126,6 +1360,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -1134,11 +1372,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -1198,6 +1444,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -1206,11 +1456,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -1270,6 +1528,10 @@
             "named": true
           },
           {
+            "type": "greek",
+            "named": true
+          },
+          {
             "type": "hexadecimal",
             "named": true
           },
@@ -1278,11 +1540,19 @@
             "named": true
           },
           {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
             "named": true
           },
           {
@@ -1416,11 +1686,19 @@
     "named": true
   },
   {
+    "type": "greek",
+    "named": true
+  },
+  {
     "type": "hexadecimal",
     "named": true
   },
   {
     "type": "integer",
+    "named": true
+  },
+  {
+    "type": "math_symbol",
     "named": true
   },
   {
@@ -1433,6 +1711,10 @@
   },
   {
     "type": "operator",
+    "named": true
+  },
+  {
+    "type": "pictograph",
     "named": true
   },
   {

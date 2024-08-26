@@ -1,0 +1,383 @@
+==================
+Subject about nothing
+==================
+
+[]
+
+---
+
+(gram
+  (pattern
+    (subject)
+  )
+)
+
+==================
+Subject about another subject
+==================
+
+[ ^ []]
+
+---
+
+(gram
+  (pattern
+    (subject
+      (members (operator) (subject))
+    )
+  )
+)
+
+==================
+Subject about a reference
+==================
+
+[ ^ a]
+
+---
+
+(gram
+  (pattern
+    (subject
+      (members (operator) (symbol))
+    )
+  )
+)
+
+==================
+Subject with a name
+==================
+
+[ a ]
+
+---
+
+(gram
+  (pattern
+    (subject (symbol))
+  )
+)
+
+==================
+Subject named and labeled
+==================
+
+[letters:Alpha] 
+
+---
+
+(gram
+  (pattern
+    (subject 
+      (symbol)
+      (labels (symbol))
+    )
+  )
+)
+
+==================
+Subject named, labeled and with a record
+==================
+
+[player1:Player { named : "it" }]
+
+---
+
+(gram
+  (pattern
+    (subject 
+      (symbol)
+      (labels (symbol))
+      (record (property (symbol) (double_quoted_string))))
+  )
+)
+
+
+==================
+Subject about some integers
+==================
+
+[numbers | 1,2,3]
+
+---
+
+(gram
+  (pattern
+    (subject (symbol)
+      (members (operator) (integer) (integer) (integer))
+    )
+  )
+)
+
+
+==================
+Subject about some letters
+==================
+
+[letters | a,b,c]
+
+---
+
+(gram
+  (pattern
+    (subject (symbol)
+      (members (operator) (symbol) (symbol) (symbol))
+    )
+  )
+)
+
+==================
+Subject about some words
+==================
+
+[nouns | "tree", "branch", "leaf"]
+
+---
+
+(gram
+  (pattern
+    (subject (symbol)
+      (members (operator) (double_quoted_string) (double_quoted_string) (double_quoted_string))
+    )
+  )
+)
+==================
+Subject about a single node
+==================
+
+[ ^ ()]
+
+---
+
+(gram
+  (pattern
+    (subject
+      (members (operator) (node))
+    )
+  )
+)
+
+
+==================
+Subject about two nodes
+==================
+
+[ ^ (),()]
+
+---
+
+(gram
+  (pattern
+    (subject
+      (members (operator) (node) (node))
+    )
+  )
+)
+
+
+
+==================
+Subject about a single relationship
+==================
+
+[ ^ ()-->()]
+
+---
+
+(gram
+  (pattern
+    (subject
+      (members (operator) 
+        (relationship (node) (single_right) (node))
+      )
+    )
+  )
+)
+
+==================
+Subject named, labeled, with value and in-line members
+==================
+
+[letters:Alpha {since:date`1970-01-01`} => (a),(b),(c)] 
+
+---
+
+(gram
+  (pattern
+    (subject 
+      (symbol)
+      (labels (symbol))
+      (record 
+        (property (symbol) (tagged_string))
+      )
+      (members (operator)
+        (node (symbol))
+        (node (symbol))
+        (node (symbol))
+      )
+    )
+  )
+)
+
+==================
+Subjects with various operators
+==================
+
+[add + a,b,c] 
+[subtract - a,b,c]
+[multiply * a,b,c]
+[divide / a,b,c]
+[equal = a,b,c]
+[extra_equal == a,b,c]
+[not_equal =/= a,b,c]
+[single_right -> a,b,c]
+[implies => a,b,c]
+[function_arrow_right |-> a,b,c]
+[two_headed_right ->> a,b,c]
+[double_two_headed_right =>> a,b,c]
+[single_iff <-> a,b,c]
+[double_iff <=> a,b,c]
+---
+
+(gram
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+  (pattern
+    (subject 
+      (symbol)
+      (members (operator)
+        (symbol)
+        (symbol)
+        (symbol)
+      )
+    )
+  )
+)

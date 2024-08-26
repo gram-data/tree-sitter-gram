@@ -72,14 +72,15 @@ Annotate a node twice
 Annotate an empty subject
 ==================
 
-@description("A named, empty pattern.")
-[pat]
+@description("An empty subject.")
+[]
 
 ---
 
 (gram
   (pattern
     (annotation (symbol) (double_quoted_string))
+    (subject)
   )
 )
 
