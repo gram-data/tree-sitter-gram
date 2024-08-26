@@ -23,7 +23,7 @@ Subject about another subject
 (gram
   (pattern
     (subject
-      (members (operator) (subject))
+      (members (operator) (member (subject)))
     )
   )
 )
@@ -39,7 +39,7 @@ Subject about a reference
 (gram
   (pattern
     (subject
-      (members (operator) (symbol))
+      (members (operator) (member (symbol)))
     )
   )
 )
@@ -104,7 +104,7 @@ Subject about some integers
 (gram
   (pattern
     (subject (symbol)
-      (members (operator) (integer) (integer) (integer))
+      (members (operator) (member (integer)) (member (integer)) (member (integer)))
     )
   )
 )
@@ -121,7 +121,7 @@ Subject about some letters
 (gram
   (pattern
     (subject (symbol)
-      (members (operator) (symbol) (symbol) (symbol))
+      (members (operator) (member (symbol)) (member (symbol)) (member (symbol)))
     )
   )
 )
@@ -137,10 +137,13 @@ Subject about some words
 (gram
   (pattern
     (subject (symbol)
-      (members (operator) (double_quoted_string) (double_quoted_string) (double_quoted_string))
+      (members (operator) 
+        (member (double_quoted_string)) (member (double_quoted_string)) (member (double_quoted_string))
+      )
     )
   )
 )
+
 ==================
 Subject about a single node
 ==================
@@ -152,7 +155,9 @@ Subject about a single node
 (gram
   (pattern
     (subject
-      (members (operator) (node))
+      (members (operator) 
+       (member (node))
+      )
     )
   )
 )
@@ -169,7 +174,10 @@ Subject about two nodes
 (gram
   (pattern
     (subject
-      (members (operator) (node) (node))
+      (members (operator) 
+        (member (node))
+        (member (node))
+      )
     )
   )
 )
@@ -188,7 +196,7 @@ Subject about a single relationship
   (pattern
     (subject
       (members (operator) 
-        (relationship (node) (single_right) (node))
+        (member (relationship (node) (single_right) (node)))
       )
     )
   )
@@ -211,9 +219,9 @@ Subject named, labeled, with value and in-line members
         (property (symbol) (tagged_string))
       )
       (members (operator)
-        (node (symbol))
-        (node (symbol))
-        (node (symbol))
+        (member (node (symbol)))
+        (member (node (symbol)))
+        (member (node (symbol)))
       )
     )
   )
@@ -244,9 +252,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -254,9 +262,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -264,9 +272,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -274,9 +282,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -284,9 +292,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -294,9 +302,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -304,9 +312,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -314,9 +322,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -324,9 +332,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -334,9 +342,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -344,9 +352,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -354,9 +362,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -364,9 +372,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )
@@ -374,9 +382,9 @@ Subjects with various operators
     (subject 
       (symbol)
       (members (operator)
-        (symbol)
-        (symbol)
-        (symbol)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
       )
     )
   )

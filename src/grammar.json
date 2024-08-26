@@ -236,7 +236,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_member"
+              "name": "member"
             },
             {
               "type": "REPEAT",
@@ -249,7 +249,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_member"
+                    "name": "member"
                   }
                 ]
               }
@@ -265,20 +265,40 @@
         "value": "<{0,2}[-=~\\/\\|+*%^]{1,3}>{0,2}"
       }
     },
-    "_references": {
+    "_reference": {
       "type": "SYMBOL",
       "name": "_scalar"
     },
-    "_member": {
-      "type": "CHOICE",
+    "member": {
+      "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_references"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "annotation"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_patternComponent"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_reference"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_patternComponent"
+            }
+          ]
         }
       ]
     },

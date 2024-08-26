@@ -83,7 +83,10 @@ Graph: top-level record, a path and a series
   (pattern
     (subject
       (symbol)
-      (members (operator) (symbol) (symbol))
+      (members (operator) 
+        (member (symbol)) 
+        (member (symbol))
+      )
     )
   )
 )

@@ -37,15 +37,18 @@ module.exports = grammar({
 
     relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._path)),
 
-    members: $ => seq(field("operator", $.operator), commaSep1($._member)),
+    members: $ => seq(field("operator", $.operator), commaSep1($.member)),
 
     operator: $ => token(/<{0,2}[-=~\/\|+*%^]{1,3}>{0,2}/),
 
-    _references: $ => $._scalar,
+    _reference: $ => $._scalar,
 
-    _member: $ => choice(
-      $._references,
-      $._patternComponent
+    member: $ => seq(
+      optional(repeat($.annotation)), 
+      choice(
+        $._reference,
+        $._patternComponent
+      ),
     ),
 
     _attributes: $ => choice(

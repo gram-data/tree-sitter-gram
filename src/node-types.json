@@ -444,24 +444,17 @@
     }
   },
   {
-    "type": "members",
+    "type": "member",
     "named": true,
-    "fields": {
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "operator",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
         {
           "type": "backticked_string",
           "named": true
@@ -524,6 +517,32 @@
         },
         {
           "type": "tagged_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "members",
+    "named": true,
+    "fields": {
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "operator",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "member",
           "named": true
         }
       ]

@@ -84,3 +84,26 @@ Annotate an empty subject
   )
 )
 
+
+==================
+Annotate an in-line subject member
+==================
+
+[inline | @description("Member") () ]
+
+---
+
+(gram
+  (pattern
+    (subject
+      (symbol)
+      (members (operator)
+        (member
+          (annotation (symbol) (double_quoted_string))
+          (node)
+        )
+      )
+    )
+  )
+)
+
