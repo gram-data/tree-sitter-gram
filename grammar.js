@@ -17,7 +17,6 @@ module.exports = grammar({
       $._path
     ),
 
-
     subject: $ => seq("[", optional($._attributes), optional($.association),"]"),
 
     annotation: $ => prec(9999,seq(

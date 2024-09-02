@@ -44,26 +44,18 @@ It's ok to use multiple labels, which could be subsets, singletons, or intersect
 ```
 
 
-## Development
+## FAQ
 
-### Build
+- Annotation vs self-loop?
 
-```
-npm run prebuildify
-```
+  Q: What is the difference between an annotation and a self-loop? 
+  A: An annotation provides extra information about a single target, while a self-loop provides 
+  information about a source,target pair where either the source or target may have been different,
+  but happen to be the same. 
 
-```
-npm run build
-```
+  For example, `@physics("rigid")(a:Player)` annotates a player entity with information for the physics subsystem.
+  The information is particular to the player and not about how the player relates to itself. 
 
+  As a self-loop, `(a:Player)-[:MESSAGE]->(a:Player)` is a message a player sent to themselves that could've
+  been sent to another player. The message has a specific source and target, which happen to be the same.
 
-### Test
-
-```
-npx tree-sitter test
-```
-
-Run tests matching a specific filter:
-```
-npx tree-sitter test -f 'Node'
-```
