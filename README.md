@@ -13,7 +13,8 @@ The smallest graph pattern is an empty node.
 ```
 
 Nodes may include properties using classic curly-braces-styled notation. This expression
-is equivalent to an anoynmous object:
+is like an anonymous object that appears inside some other data structure, perhaps a list
+like `const people = [{name:ABK}]`:
 
 ```
 ({name:"ABK"})
@@ -25,15 +26,21 @@ name you've given it in a programming language -- `const abk = {name:"ABK"}`
 (abk {name:"ABK"})
 ```
 
-Nodes may also provide labels to associate sets of nodes. This is like having an 
+Or, the identity could be considered the representative value of the node as in these examples:
+```
+(1), (true), (`heir to the Iron Throne`)
+```
+
+Nodes may also provide labels to associate with other nodes. This is like having an 
 introspectable object in a programming language -- `const abk:Person = {name:"ABK"}`:
 ```
 (abk:Person {name:"ABK"}), (michael:Person {name:"Michael"})
 ```
 
-It's ok to add multiple labels, which could be subsets, or cross:
+It's ok to use multiple labels, which could be subsets, singletons, or intersections:
 ```
-(abk:Person:Author:Fictional {name:"ABK"})
+(abk:Person:Author {name:"ABK"}), (one:Person:King:Fictional {name: "John Snow"}),
+(drogon:Dragon:Fictional {name:"Drogon"})
 ```
 
 

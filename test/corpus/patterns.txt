@@ -1,5 +1,5 @@
 ==================
-Pattern: empty subject 
+Pattern: Empty
 ==================
 
 []
@@ -13,7 +13,7 @@ Pattern: empty subject
 )
 
 ==================
-Pattern: empty node 
+Pattern: Named series, empty
 ==================
 
 ()
@@ -27,7 +27,7 @@ Pattern: empty node
 )
 
 ==================
-Pattern: two nodes
+Pattern: Named series with identified members
 ==================
 
 (),()
@@ -41,7 +41,7 @@ Pattern: two nodes
 )
 
 ==================
-Pattern: 1 single-hop relationship 
+Pattern: Named series with in-line members
 ==================
 
 ()-->()
