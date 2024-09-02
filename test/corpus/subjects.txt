@@ -1,17 +1,81 @@
 ==================
-Subject: complete node
+Subject: empty
 ==================
 
-(abk:Person {name # "Andreas Kollegger"})
+[ ]
 
 ---
 
 (gram
   (pattern
-    (node 
+    (subject)
+  )
+)
+
+==================
+Subject: named
+==================
+
+[ a ]
+
+---
+
+(gram
+  (pattern
+    (subject (symbol))
+  )
+)
+
+==================
+Subject: named, labeled
+==================
+
+[ a:Subject ]
+
+---
+
+(gram
+  (pattern
+    (subject (symbol) (labels (symbol)))
+  )
+)
+
+==================
+Subject: named, labeled with a record
+==================
+
+[ a:Subject { title: "Generic Subject" } ]
+
+---
+
+(gram
+  (pattern
+    (subject (symbol) (labels (symbol)) (record (property (symbol) (double_quoted_string))))
+  )
+)
+
+==================
+Subject: complete subject with annotation, information and an association
+==================
+
+@description("Inspiring, collaborating, and educating a developer community")
+[ devrel:Team {name : "Developer Relations"} | abk, adam, alex, alexy ]
+
+---
+
+(gram
+  (pattern
+    (annotation (symbol) (double_quoted_string))
+    (subject 
       (symbol)
       (labels (symbol))
       (record (property (symbol) (double_quoted_string)))
+      (association (operator)
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
+        (member (symbol))
+      )
     )
   )
 )

@@ -18,7 +18,7 @@ module.exports = grammar({
     ),
 
 
-    subject: $ => seq("[", optional($._attributes), optional($.members),"]"),
+    subject: $ => seq("[", optional($._attributes), optional($.association),"]"),
 
     annotation: $ => prec(9999,seq(
       "@", 
@@ -37,7 +37,7 @@ module.exports = grammar({
 
     relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._path)),
 
-    members: $ => seq(field("operator", $.operator), commaSep1($.member)),
+    association: $ => seq(field("operator", $.operator), commaSep1($.member)),
 
     operator: $ => token(/<{0,2}[-=~\/\|+*%^]{1,3}>{0,2}/),
 

@@ -74,6 +74,32 @@
     }
   },
   {
+    "type": "association",
+    "named": true,
+    "fields": {
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "operator",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "member",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "double_bidirectional",
     "named": true,
     "fields": {
@@ -517,32 +543,6 @@
         },
         {
           "type": "tagged_string",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "members",
-    "named": true,
-    "fields": {
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "operator",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "member",
           "named": true
         }
       ]
@@ -1614,7 +1614,7 @@
       "required": false,
       "types": [
         {
-          "type": "members",
+          "type": "association",
           "named": true
         }
       ]

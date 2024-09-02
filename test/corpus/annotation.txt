@@ -97,7 +97,7 @@ Annotate an in-line subject member
   (pattern
     (subject
       (symbol)
-      (members (operator)
+      (association (operator)
         (member
           (annotation (symbol) (double_quoted_string))
           (node)

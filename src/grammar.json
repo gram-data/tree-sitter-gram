@@ -103,7 +103,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "members"
+              "name": "association"
             },
             {
               "type": "BLANK"
@@ -220,7 +220,7 @@
         }
       ]
     },
-    "members": {
+    "association": {
       "type": "SEQ",
       "members": [
         {
