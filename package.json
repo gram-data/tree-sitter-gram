@@ -5,13 +5,10 @@
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
-    "build": "tree-sitter generate && node-gyp build",
-    "lint": "eslint grammar.js",
-    "test": "tree-sitter test",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip",
-    "build-wasm": "tree-sitter build --wasm",
-    "playground": "tree-sitter playground"
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
   },
   "keywords": [],
   "files": [
@@ -25,8 +22,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-addon-api": "^8.0.0",
-    "node-gyp-build": "^4.8.1"
+    "node-gyp-build": "^4.8.2",
+    "node-addon-api": "^8.0.0"
   },
   "peerDependencies": {
     "tree-sitter": "^0.21.0"
@@ -37,10 +34,10 @@
     }
   },
   "devDependencies": {
-    "eslint": "^9.6.0",
-    "node-gyp": "^10.1.0",
+    "eslint": "^9.9.1",
+    "node-gyp": "^10.2.0",
     "prebuildify": "^6.0.1",
-    "tree-sitter-cli": "^0.22.6"
+    "tree-sitter-cli": "^0.23.0"
   },
   "tree-sitter": [
     {

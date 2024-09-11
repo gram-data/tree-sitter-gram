@@ -1,12 +1,7 @@
 import sys
-sys.path.insert(1, '../../bindings/python')
 
-import tree_sitter_gram as tsgram
-# import tree_sitter_python as tspython
+import tree_sitter, tree_sitter_gram
+
 from tree_sitter import Language, Parser
 
-# show the tsgram
-print(dir(tsgram))
-
-GRAM_LANGUAGE = Language(tsgram.language(), "gram")
-# PYTHON_LANGUAGE = Language(tspython.language(), "python")
+GRAM_LANGUAGE = Language(tree_sitter_gram.language())
