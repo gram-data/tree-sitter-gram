@@ -139,27 +139,33 @@ module.exports = grammar({
       $.single_quoted_string,
       $.double_quoted_string,
       $.backticked_string,
-      $.tagged_string
+      $.tagged_string,
+      $.fenced_string
     ),
 
     single_quoted_string: $ => {
-      const quoted = /'(\\['bfnrt/\\]|[^'])*'/;      
+      const quoted = /'(\\['bfnrt/\\]|[^'\n])*'/;      
       return token(quoted);
     },
 
     double_quoted_string: $ => {
-      const quoted = /"(\\["bfnrt/\\]|[^"])*"/;      
+      const quoted = /"(\\["bfnrt/\\]|[^"\n])*"/;      
       return token(quoted);
     },
 
     backticked_string: $ => {
-      const quoted = /`(\\[`bfnrt/\\]|[^`])*`/;      
+      const quoted = /`(\\[`bfnrt/\\]|[^`\n])*`/;      
       return token(quoted);
     },
 
     tagged_string: $ => {
-      const tagged = /[a-zA-Z][0-9a-zA-Z_.@]*`[^`]*`/;      
+      const tagged = /[a-zA-Z][0-9a-zA-Z_.@]*`[^`\n]*`/;      
       return token(tagged);
+    },
+
+    fenced_string: $ => {
+      const fenced = /```(\\[`bfnrt/\\]|[^`])*```/;      
+      return token(fenced);
     },
 
     _relationship_value: $ => choice(

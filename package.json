@@ -1,16 +1,14 @@
 {
   "name": "@gram-data/tree-sitter-gram",
-  "version": "0.1.5",
-  "description": "",
+  "version": "0.1.6",
+  "description": "subject-oriented notation for structured data",
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
-    "build": "tree-sitter generate",
-    "test": "tree-sitter test",
-    "test:bindings": "node --test bindings/node/*_test.js"
+    "test": "node --test bindings/node/*_test.js"
   },
   "keywords": [],
   "files": [

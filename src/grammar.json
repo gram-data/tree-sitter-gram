@@ -943,6 +943,10 @@
         {
           "type": "SYMBOL",
           "name": "tagged_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fenced_string"
         }
       ]
     },
@@ -950,28 +954,35 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "'(\\\\['bfnrt/\\\\]|[^'])*'"
+        "value": "'(\\\\['bfnrt/\\\\]|[^'\\n])*'"
       }
     },
     "double_quoted_string": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "\"(\\\\[\"bfnrt/\\\\]|[^\"])*\""
+        "value": "\"(\\\\[\"bfnrt/\\\\]|[^\"\\n])*\""
       }
     },
     "backticked_string": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "`(\\\\[`bfnrt/\\\\]|[^`])*`"
+        "value": "`(\\\\[`bfnrt/\\\\]|[^`\\n])*`"
       }
     },
     "tagged_string": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[a-zA-Z][0-9a-zA-Z_.@]*`[^`]*`"
+        "value": "[a-zA-Z][0-9a-zA-Z_.@]*`[^`\\n]*`"
+      }
+    },
+    "fenced_string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "```(\\\\[`bfnrt/\\\\]|[^`])*```"
       }
     },
     "_relationship_value": {

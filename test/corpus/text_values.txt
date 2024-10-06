@@ -30,17 +30,20 @@ Text: long string
 
 
 ==================
-Text: multiline string
+Text: fenced multiline string
 ==================
 
-({ s : 'This is a sentence, followed by another sentence on another line. 
-Here is the second sentence.' })
+({ s : ```
+This is a sentence, followed by another sentence on another line. 
+Here is the second sentence. But wait... it keeps going
+onto a third line. Note that these lines will have a lot of whitespace.
+``` })
 
 ---
 
 (gram
   (pattern
-    (node (record (property (symbol) (binder) (single_quoted_string))))
+    (node (record (property (symbol) (binder) (fenced_string))))
   )
 )
 

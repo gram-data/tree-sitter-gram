@@ -7,13 +7,8 @@ Follow [tree-sitter installation](https://tree-sitter.github.io/tree-sitter/crea
 ## Build testable grammar
 
 ```
-npm run prebuildify
+npx tree-sitter generate
 ```
-
-```
-npm run build
-```
-
 
 ## Test
 
