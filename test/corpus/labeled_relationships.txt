@@ -10,7 +10,7 @@ Labeled relationship: Single label
   (pattern
     (relationship 
       (node)
-      (single_undirected (labels (symbol)))
+      (single_undirected (labels (label (binder) (symbol))))
       (node)
     )
   )
@@ -28,7 +28,7 @@ Labeled relationship: Two labels
   (pattern
     (relationship 
       (node)
-      (single_undirected (labels (symbol) (symbol)))
+      (single_undirected (labels (label (binder) (symbol)) (label (binder) (symbol))))
       (node)
     )
   )
@@ -46,7 +46,7 @@ Labeled relationship: Two labels with an identity
   (pattern
     (relationship 
       (node)
-      (single_undirected (symbol) (labels (symbol) (symbol)))
+      (single_undirected (symbol) (labels (label (binder) (symbol)) (label (binder) (symbol))))
       (node)
     )
   )

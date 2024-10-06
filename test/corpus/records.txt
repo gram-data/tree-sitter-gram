@@ -19,7 +19,7 @@ Record with integer property
 ---
 
 (gram
-  (record (property (symbol) (integer)) 
+  (record (property (symbol) (binder) (integer)) 
   )
 )
 
@@ -32,19 +32,19 @@ Record with double-quoted string property
 ---
 
 (gram
-  (record (property (symbol) (double_quoted_string)))
+  (record (property (symbol) (binder) (double_quoted_string)))
 )
 
 ==================
-Record with symbol property
+Record with declare separator and a symbol property
 ==================
 
-{ s : string }
+{ s :: string }
 
 ---
 
 (gram
-  (record (property (symbol) (symbol)))
+  (record (property (symbol) (binder) (symbol)))
 )
 
 ==================
@@ -58,18 +58,16 @@ Record followed by a Node
 ---
 
 (gram
-  (record (property (symbol) (double_quoted_string)))
+  (record (property (symbol) (binder) (double_quoted_string)))
   (pattern (node))
 )
 
 ==================
-Record with greater than operator
+Record property may not us greater than operator
+:error
 ==================
 
 { n > 1 }
 
 ---
 
-(gram
-  (record (property (symbol) (integer)) )
-)

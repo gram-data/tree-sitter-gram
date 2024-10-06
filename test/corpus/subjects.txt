@@ -36,7 +36,7 @@ Subject: named, labeled
 
 (gram
   (pattern
-    (subject (symbol) (labels (symbol)))
+    (subject (symbol) (labels (label (binder) (symbol))))
   )
 )
 
@@ -50,16 +50,16 @@ Subject: named, labeled with a record
 
 (gram
   (pattern
-    (subject (symbol) (labels (symbol)) (record (property (symbol) (double_quoted_string))))
+    (subject (symbol) (labels (label (binder) (symbol))) (record (property (symbol) (binder) (double_quoted_string))))
   )
 )
 
 ==================
-Subject: complete subject with annotation, information and an association
+Subject: complete subject with annotation, attributes, and a qualified association
 ==================
 
 @description("Inspiring, collaborating, and educating a developer community")
-[ devrel:Team {name : "Developer Relations"} | abk, adam, alex, alexy ]
+[ devrel:Team {name : "Developer Relations"} |:MEMBER| abk, adam, alex, alexy ]
 
 ---
 
@@ -68,9 +68,10 @@ Subject: complete subject with annotation, information and an association
     (annotation (symbol) (double_quoted_string))
     (subject 
       (symbol)
-      (labels (symbol))
-      (record (property (symbol) (double_quoted_string)))
-      (association (operator)
+      (labels (label (binder) (symbol)))
+      (record (property (symbol) (binder) (double_quoted_string)))
+      (membership 
+        (labels (label (binder) (symbol)))
         (member (symbol))
         (member (symbol))
         (member (symbol))

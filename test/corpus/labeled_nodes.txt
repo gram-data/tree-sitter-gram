@@ -22,7 +22,7 @@ Labeled nodes: Single label
 
 (gram
   (pattern
-    (node (labels (symbol)))
+    (node (labels (label (binder) (symbol))))
   )
 )
 
@@ -36,7 +36,7 @@ Labeled nodes: Two labels
 
 (gram
   (pattern
-    (node (labels (symbol) (symbol)))
+    (node (labels (label (binder) (symbol)) (label (binder) (symbol))))
   )
 )
 
@@ -51,6 +51,6 @@ Labeled nodes: Identity followed by labels
 
 (gram
   (pattern
-    (node (integer) (labels (symbol) (symbol)))
+    (node (integer) (labels (label (binder) (symbol)) (label (binder) (symbol))))
   )
 )

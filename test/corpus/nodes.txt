@@ -37,7 +37,7 @@ Node with record
 (gram
   (pattern
     (node (record 
-      (property (symbol) (double_quoted_string)) 
+      (property (symbol) (binder) (double_quoted_string)) 
     ))
   )
 )
@@ -55,7 +55,7 @@ Node identified and with a record
   (pattern
     (node 
       (symbol)
-      (record (property (symbol) (double_quoted_string))))
+      (record (property (symbol) (binder) (double_quoted_string))))
   )
 )
 
@@ -72,8 +72,8 @@ Node identified, labeled and with a record
   (pattern
     (node 
       (symbol)
-      (labels (symbol))
-      (record (property (symbol) (double_quoted_string))))
+      (labels (label (binder) (symbol)))
+      (record (property (symbol) (binder) (double_quoted_string))))
   )
 )
 

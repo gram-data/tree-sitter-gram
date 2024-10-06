@@ -8,8 +8,8 @@ Graph: top-level record
 
 (gram
   (record 
-    (property (symbol) (double_quoted_string)) 
-    (property (symbol) (tagged_string)) 
+    (property (symbol) (binder) (double_quoted_string)) 
+    (property (symbol) (binder) (tagged_string)) 
   )
 )
 
@@ -26,8 +26,8 @@ Graph: top-level record and a node
 
 (gram
   (record 
-    (property (symbol) (double_quoted_string)) 
-    (property (symbol) (tagged_string)) 
+    (property (symbol) (binder) (double_quoted_string)) 
+    (property (symbol) (binder) (tagged_string)) 
   )
   (pattern (node (symbol)))
 )
@@ -44,8 +44,8 @@ Graph: top-level record and a path
 
 (gram
   (record 
-    (property (symbol) (double_quoted_string)) 
-    (property (symbol) (tagged_string)) 
+    (property (symbol) (binder) (double_quoted_string)) 
+    (property (symbol) (binder) (tagged_string)) 
   )
   (pattern 
     (relationship 
@@ -64,14 +64,14 @@ Graph: top-level record, a path and a path
 
 (n)~~>(m)
 
-[s => n, m]
+[s -> n, m]
 
 ---
 
 (gram
   (record 
-    (property (symbol) (double_quoted_string)) 
-    (property (symbol) (tagged_string)) 
+    (property (symbol) (binder) (double_quoted_string)) 
+    (property (symbol) (binder) (tagged_string)) 
   )
   (pattern 
     (relationship 
@@ -83,7 +83,7 @@ Graph: top-level record, a path and a path
   (pattern
     (subject
       (symbol)
-      (association (operator) 
+      (ordering  
         (member (symbol)) 
         (member (symbol))
       )

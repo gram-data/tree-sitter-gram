@@ -9,7 +9,7 @@ Text: single character string
 
 (gram
   (pattern
-    (node (record (property (symbol) (single_quoted_string))))
+    (node (record (property (symbol) (binder) (single_quoted_string))))
   )
 )
 
@@ -24,7 +24,7 @@ Text: long string
 
 (gram
   (pattern
-    (node (record (property (symbol) (single_quoted_string))))
+    (node (record (property (symbol) (binder) (single_quoted_string))))
   )
 )
 
@@ -40,7 +40,7 @@ Here is the second sentence.' })
 
 (gram
   (pattern
-    (node (record (property (symbol) (single_quoted_string))))
+    (node (record (property (symbol) (binder) (single_quoted_string))))
   )
 )
 
@@ -54,7 +54,7 @@ Text: nested quotes within single-quoted string
 
 (gram
   (pattern
-    (node (record (property (symbol) (single_quoted_string))))
+    (node (record (property (symbol) (binder) (single_quoted_string))))
   )
 )
 
@@ -68,7 +68,7 @@ Text: nested quotes within double-quoted string
 
 (gram
   (pattern
-    (node (record (property (symbol) (double_quoted_string))))
+    (node (record (property (symbol) (binder) (double_quoted_string))))
   )
 )
 
@@ -82,7 +82,7 @@ Text: single-quoted string property
 
 (gram
   (pattern
-    (node (record (property (symbol) (single_quoted_string))))
+    (node (record (property (symbol) (binder) (single_quoted_string))))
   )
 )
 
@@ -96,7 +96,7 @@ Text: backtick-quoted string property
 
 (gram
   (pattern
-    (node (record (property (symbol) (backticked_string))))
+    (node (record (property (symbol) (binder) (backticked_string))))
   )
 )
 
@@ -110,7 +110,7 @@ Text: weird characters in string property
 
 (gram
   (pattern
-    (node (record (property (symbol) (single_quoted_string))))
+    (node (record (property (symbol) (binder) (single_quoted_string))))
   )
 )
 
@@ -135,15 +135,15 @@ Text: tagged string properties
 (gram
   (pattern
     (node (record 
-      (property (symbol) (tagged_string))
-      (property (symbol) (tagged_string)) 
-      (property (symbol) (tagged_string)) 
-      (property (symbol) (tagged_string)) 
-      (property (symbol) (tagged_string)) 
-      (property (symbol) (tagged_string)) 
-      (property (symbol) (tagged_string)) 
-      (property (symbol) (tagged_string)) 
-      (property (symbol) (tagged_string)) 
+      (property (symbol) (binder) (tagged_string))
+      (property (symbol) (binder) (tagged_string)) 
+      (property (symbol) (binder) (tagged_string)) 
+      (property (symbol) (binder) (tagged_string)) 
+      (property (symbol) (binder) (tagged_string)) 
+      (property (symbol) (binder) (tagged_string)) 
+      (property (symbol) (binder) (tagged_string)) 
+      (property (symbol) (binder) (tagged_string)) 
+      (property (symbol) (binder) (tagged_string)) 
     ))
   )
 )

@@ -1,60 +1,51 @@
 
 ==================
-Value pair: colon variants
+Value pair: define values
 ==================
 
-({ k1 : 1, k2 :: 2,  k3 := 3, k4 ::= 4, k5 :~ 5, k6 ::~ 6})
+({ k1 : 1, k2 : 2 })
 
 ---
 
 (gram
   (pattern
     (node (record 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
+      (property (symbol) (binder) (integer)) 
+      (property (symbol) (binder) (integer)) 
     ))
   )
 )
 
 ==================
-Value pair: equal-sign variants
+Value pair: declare values 
 ==================
 
-({ k1 = 1, k2 == 2,  k3 != 3, k4 !== 4, k5 =~ 5 })
+({ k1 :: 1, k2 :: 2,  k3 :: number })
 
 ---
 
 (gram
   (pattern
     (node (record 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
+      (property (symbol) (binder) (integer)) 
+      (property (symbol) (binder) (integer)) 
+      (property (symbol) (binder) (symbol)) 
     ))
   )
 )
 
 ==================
-Value pair: greater than, less than variants
+Value pair: annotate values
 ==================
 
-({ k1 > 1, k2 < 2,  k3 >= 3, k4 <= 4 })
+({ k1 @ "first number" })
 
 ---
 
 (gram
   (pattern
     (node (record 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
+      (property (symbol) (binder) (double_quoted_string)) 
     ))
   )
 )

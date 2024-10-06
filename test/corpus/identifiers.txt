@@ -1,23 +1,20 @@
 
 ==================
 Identifier using '@'
+:error
 ==================
 
 (akollegger@neo4j.com)
 
 ---
 
-(gram
-  (pattern (node (symbol)))
-)
-
 
 ==================
 Identifier using snakecase '_' and mixed case
 ==================
 
-(_0n96pdf6@E)
-(Im0_pWk0g4@@)
+(_0n96pdf6E)
+(Im0_pWk0g4)
 
 ---
 
