@@ -1,61 +1,27 @@
-# Gram - a lightweight, flexible graph notation
+# tree-sitter-gram
 
-Gram describes the structure and content of graphs, without semantics. 
+A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar 
+for [gram](https://gram-data.github.io) notation.
 
-A graph is composed from a sequence of patterns, where each pattern
-is a sequence of graph elements.
+Gram is a subject based notation for structured data.
 
-## Graph elements - nodes
-
-The smallest graph pattern is an empty node. 
+If this is an object:
 ```
-()
-```
-
-Nodes may include properties using classic curly-braces-styled notation. This expression
-is like an anonymous object that appears inside some other data structure, perhaps a list
-like `const people = [{name:ABK}]`:
-
-```
-({name:"ABK"})
+{
+  "name":"Andreas",
+  "roles":["author"]
+}
 ```
 
-Nodes may self-identify themselves. This is like an object that is aware of the variable
-name you've given it in a programming language -- `const abk = {name:"ABK"}`
-```
-(abk {name:"ABK"})
-```
+Implicitly it is about a person. To become a subject, the implicit
+information can be explicit.
 
-Or, the identity could be considered the representative value of the node as in these examples:
+As a subject:
 ```
-(1), (true), (`heir to the Iron Throne`)
-```
-
-Nodes may also provide labels to associate with other nodes. This is like having an 
-introspectable object in a programming language -- `const abk:Person = {name:"ABK"}`:
-```
-(abk:Person {name:"ABK"}), (michael:Person {name:"Michael"})
+[:Person {
+  name: "Andreas",
+  roles: ["author"]
+}]
 ```
 
-It's ok to use multiple labels, which could be subsets, singletons, or intersections:
-```
-(abk:Person:Author {name:"ABK"}), (one:Person:King:Fictional {name: "John Snow"}),
-(drogon:Dragon:Fictional {name:"Drogon"})
-```
-
-
-## FAQ
-
-- Annotation vs self-loop?
-
-  Q: What is the difference between an annotation and a self-loop? 
-  A: An annotation provides extra information about a single target, while a self-loop provides 
-  information about a source,target pair where either the source or target may have been different,
-  but happen to be the same. 
-
-  For example, `@physics("rigid")(a:Player)` annotates a player entity with information for the physics subsystem.
-  The information is particular to the player and not about how the player relates to itself. 
-
-  As a self-loop, `(a:Player)-[:MESSAGE]->(a:Player)` is a message a player sent to themselves that could've
-  been sent to another player. The message has a specific source and target, which happen to be the same.
-
+Learn more about `gram` at the [gram-data github org](https://github.com/gram-data) notation.
