@@ -11,13 +11,13 @@ GQL Node Type Definition
 
 (gram
   (pattern
-    (node 
+    (pattern_element (node 
       (labels (label (binder) (symbol)))
       (record
         (property (symbol) (binder) (symbol))
         (property (symbol) (binder) (symbol))
       )
-    )
+    ))
   )
 )
 
@@ -31,13 +31,13 @@ GQL Relationship Type Definition
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node (labels (label (binder) (symbol))))
       (double_right
         (labels (label (binder) (symbol)))
         (record (property (symbol) (binder) (symbol)))
       )
       (node (labels (label (binder) (symbol))))
-    )
+    ))
   )
 )

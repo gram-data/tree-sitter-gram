@@ -457,6 +457,7 @@
   {
     "type": "gram",
     "named": true,
+    "root": true,
     "fields": {
       "root": {
         "multiple": false,
@@ -516,129 +517,6 @@
       "types": [
         {
           "type": "label",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "member",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "backticked_string",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "fenced_string",
-          "named": true
-        },
-        {
-          "type": "greek",
-          "named": true
-        },
-        {
-          "type": "hexadecimal",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "math_symbol",
-          "named": true
-        },
-        {
-          "type": "measurement",
-          "named": true
-        },
-        {
-          "type": "node",
-          "named": true
-        },
-        {
-          "type": "octal",
-          "named": true
-        },
-        {
-          "type": "pictograph",
-          "named": true
-        },
-        {
-          "type": "range",
-          "named": true
-        },
-        {
-          "type": "relationship",
-          "named": true
-        },
-        {
-          "type": "single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "subject",
-          "named": true
-        },
-        {
-          "type": "symbol",
-          "named": true
-        },
-        {
-          "type": "tagged_string",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "membership",
-    "named": true,
-    "fields": {
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "member",
           "named": true
         }
       ]
@@ -737,42 +615,6 @@
     }
   },
   {
-    "type": "ordering",
-    "named": true,
-    "fields": {
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "member",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "pattern",
     "named": true,
     "fields": {},
@@ -781,7 +623,58 @@
       "required": true,
       "types": [
         {
+          "type": "pattern_element",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern_element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
           "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "backticked_string",
+          "named": true
+        },
+        {
+          "type": "decimal",
+          "named": true
+        },
+        {
+          "type": "double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "fenced_string",
+          "named": true
+        },
+        {
+          "type": "greek",
+          "named": true
+        },
+        {
+          "type": "hexadecimal",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "math_symbol",
+          "named": true
+        },
+        {
+          "type": "measurement",
           "named": true
         },
         {
@@ -789,11 +682,35 @@
           "named": true
         },
         {
+          "type": "octal",
+          "named": true
+        },
+        {
+          "type": "pictograph",
+          "named": true
+        },
+        {
+          "type": "range",
+          "named": true
+        },
+        {
           "type": "relationship",
           "named": true
         },
         {
+          "type": "single_quoted_string",
+          "named": true
+        },
+        {
           "type": "subject",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        },
+        {
+          "type": "tagged_string",
           "named": true
         }
       ]
@@ -840,7 +757,27 @@
         "required": true,
         "types": [
           {
+            "type": "backticked_string",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "fenced_string",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          },
+          {
             "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
             "named": true
           }
         ]
@@ -1811,15 +1748,89 @@
     "named": true,
     "fields": {
       "association": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "membership",
+            "type": "pattern",
             "named": true
           },
           {
-            "type": "ordering",
+            "type": "|",
+            "named": false
+          }
+        ]
+      },
+      "attributes": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "backticked_string",
+            "named": true
+          },
+          {
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "fenced_string",
+            "named": true
+          },
+          {
+            "type": "greek",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "labels",
+            "named": true
+          },
+          {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
+            "named": true
+          },
+          {
+            "type": "range",
+            "named": true
+          },
+          {
+            "type": "record",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
             "named": true
           }
         ]
@@ -1981,10 +1992,6 @@
     "named": false
   },
   {
-    "type": ">",
-    "named": false
-  },
-  {
     "type": "?",
     "named": false
   },
@@ -1998,10 +2005,6 @@
   },
   {
     "type": "]",
-    "named": false
-  },
-  {
-    "type": "]-",
     "named": false
   },
   {

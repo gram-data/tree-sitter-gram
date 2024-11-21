@@ -1,5 +1,5 @@
 ==================
-Annotate a single node with a string value
+Annotate a single node with a named string value
 ==================
 
 @description("An empty node.")
@@ -9,15 +9,18 @@ Annotate a single node with a string value
 
 (gram
   (pattern
-    (annotation (symbol) (double_quoted_string))
-    (node)
+    (pattern_element
+      (annotation (symbol) (double_quoted_string))
+      (node)
+    )
   )
 )
 
 ==================
-Annotate a single node with an integer value
+Annotate a single node with a named string & integer value
 ==================
 
+@description("an example")
 @score(10)
 ()
 
@@ -25,8 +28,11 @@ Annotate a single node with an integer value
 
 (gram
   (pattern
-    (annotation (symbol) (integer))
-    (node)
+    (pattern_element
+      (annotation (symbol) (double_quoted_string))
+      (annotation (symbol) (integer))
+      (node)
+    )
   )
 )
 
@@ -41,11 +47,13 @@ Annotate a relationship
 
 (gram
   (pattern
-    (annotation (symbol) (double_quoted_string))
-    (relationship
-      (node)
-      (single_right)
-      (node)
+    (pattern_element
+      (annotation (symbol) (double_quoted_string))
+      (relationship
+        (node)
+        (single_right)
+        (node)
+      )
     )
   )
 )
@@ -62,9 +70,11 @@ Annotate a node twice
 
 (gram
   (pattern
-    (annotation (symbol) (double_quoted_string))
-    (annotation (symbol) (double_quoted_string))
-    (node)
+    (pattern_element 
+      (annotation (symbol) (double_quoted_string))
+      (annotation (symbol) (double_quoted_string))
+      (node)
+    )
   )
 )
 
@@ -79,8 +89,10 @@ Annotate an empty subject
 
 (gram
   (pattern
-    (annotation (symbol) (double_quoted_string))
-    (subject)
+    (pattern_element
+      (annotation (symbol) (double_quoted_string))
+      (subject)
+    )
   )
 )
 
@@ -95,15 +107,15 @@ Annotate an in-line subject member
 
 (gram
   (pattern
-    (subject
+    (pattern_element (subject
       (symbol)
-      (membership
-        (member
+      (pattern
+        (pattern_element
           (annotation (symbol) (double_quoted_string))
           (node)
         )
       )
-    )
+    ))
   )
 )
 

@@ -9,10 +9,10 @@ Value pair: define values
 
 (gram
   (pattern
-    (node (record 
+    (pattern_element (node (record 
       (property (symbol) (binder) (integer)) 
       (property (symbol) (binder) (integer)) 
-    ))
+    )))
   )
 )
 
@@ -26,27 +26,34 @@ Value pair: declare values
 
 (gram
   (pattern
-    (node (record 
+    (pattern_element (node (record 
       (property (symbol) (binder) (integer)) 
       (property (symbol) (binder) (integer)) 
       (property (symbol) (binder) (symbol)) 
-    ))
+    )))
   )
 )
 
 ==================
-Value pair: annotate values
+Value pair: un-quoted key names can NOT start with '@'
+:error
 ==================
 
-({ k1 @ "first number" })
+({ @k1 : "first number" })
+
+==================
+Value pair: key names which start with '@' must be quoted
+==================
+
+({ "@k1" : "first number" })
 
 ---
 
 (gram
   (pattern
-    (node (record 
-      (property (symbol) (binder) (double_quoted_string)) 
-    ))
+    (pattern_element (node (record 
+      (property (double_quoted_string) (binder) (double_quoted_string)) 
+    )))
   )
 )
 

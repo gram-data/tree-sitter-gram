@@ -59,7 +59,7 @@ Record followed by a Node
 
 (gram
   (record (property (symbol) (binder) (double_quoted_string)))
-  (pattern (node))
+  (pattern (pattern_element (node)))
 )
 
 ==================

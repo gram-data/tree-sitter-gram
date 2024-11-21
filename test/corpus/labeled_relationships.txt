@@ -8,11 +8,11 @@ Labeled relationship: Single label
 
 (gram
   (pattern
-    (relationship 
+    (pattern_element (relationship 
       (node)
       (single_undirected (labels (label (binder) (symbol))))
       (node)
-    )
+    ))
   )
 )
 
@@ -26,11 +26,11 @@ Labeled relationship: Two labels
 
 (gram
   (pattern
-    (relationship 
+    (pattern_element (relationship 
       (node)
       (single_undirected (labels (label (binder) (symbol)) (label (binder) (symbol))))
       (node)
-    )
+    ))
   )
 )
 
@@ -44,11 +44,11 @@ Labeled relationship: Two labels with an identity
 
 (gram
   (pattern
-    (relationship 
+    (pattern_element (relationship 
       (node)
       (single_undirected (symbol) (labels (label (binder) (symbol)) (label (binder) (symbol))))
-      (node)
-    )
+       (node)
+    ))
   )
 )
 

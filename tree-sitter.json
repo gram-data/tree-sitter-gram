@@ -1,0 +1,29 @@
+{
+  "grammars": [
+    {
+      "name": "@gram-data/gram",
+      "camelcase": "GramDataGram",
+      "scope": "source.gram",
+      "path": ".",
+      "file-types": [
+        "gram"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "0.1.7",
+    "license": "ISC",
+    "description": "subject-oriented notation for structured data",
+    "links": {
+      "repository": "https://github.com/gram-data/tree-sitter-gram"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

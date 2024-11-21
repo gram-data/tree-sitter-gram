@@ -8,22 +8,29 @@ module.exports = grammar({
       repeat($.pattern)
     ),
 
-    pattern: $ => seq(optional(repeat($.annotation)), commaSep1($._patternComponent)),
+    pattern: $ => commaSep1($.pattern_element),
 
-    _patternComponent: $ => choice(
-      $.subject,
-      $._path
+    pattern_element: $ => seq(
+      optional(repeat($.annotation)), 
+      choice(
+        $.subject,
+        $._path,
+        $._reference
+      )
     ),
 
-    subject: $ => seq("[", optional($._attributes), optional(field("association", $._association)),"]"),
+    // ABKNOTE -- consider the naming of the two parts of a subject
+    // attributes & association
+    // information & association
+    subject: $ => seq("[", optional(field("attributes", $._attributes)), optional(field("association", $._association)),"]"),
 
-    annotation: $ => prec(9999,seq(
-      "@", 
+    annotation: $ => seq(
+      "@",
       field('key', $.symbol),
       "(",
       field('value', $._value),
       ")"
-    )),
+    ),
     
     _path: $ => choice(
       $.relationship,
@@ -33,28 +40,13 @@ module.exports = grammar({
     node: $ => seq("(", optional($._attributes),")"),
 
     relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._path)),
-
-    _association: $ => choice($.membership, $.ordering),
     
-    membership: $ => seq(
-      "|", 
-      optional(seq(optional(field("labels", $.labels)), optional(field("record", $.record)), "|")), 
-      commaSep1($.member)),
-
-    ordering: $ => seq(
-      "-", 
-      optional(seq("[", optional(field("labels", $.labels)), optional(field("record", $.record)), "]-")), ">", 
-      commaSep1($.member)),
+    _association: $ => seq(
+      token("|"),
+      $.pattern
+    ),
 
     _reference: $ => $._value,
-
-    member: $ => seq(
-      optional(repeat($.annotation)), 
-      choice(
-        $._reference,
-        $._patternComponent
-      ),
-    ),
 
     _attributes: $ => choice(
       choice(field("identifier", $._value), field("labels", $.labels), field("record", $.record)), 
@@ -65,10 +57,10 @@ module.exports = grammar({
     ),
 
     _value: $ => choice(
+      prec.right(2, $.range),
+      prec.right(1, $._numeric_literal),
       $.symbol,
-      $._numeric_literal,
       $._string_literal,
-      $.range,
       $.math_symbol,
       $.greek,
       $.pictograph
@@ -78,18 +70,25 @@ module.exports = grammar({
 
     label: $ => seq(field("binder", $.binder), $.symbol),
 
-    binder: $ => choice(token(":"), token("::"), token("@")),
+    binder: $ => choice(token(":"), token("::")),
 
     record: $ => seq("{", commaSep($.property), "}"),
 
     property: $ => seq(
-      field('key', $.symbol),
+      field('key', $._key),
       field('binder', $.binder),
       field('value', $._value),
       optional(field('cardinality', choice('!', '?', '*', '+')))
     ),
 
-    symbol: $ => token(/[a-zA-Z_][0-9a-zA-Z_.\-]*/),
+
+    _key: $ => choice(
+      $.symbol,
+      $._string_literal
+    ),
+
+    symbol: $ => token(/[a-zA-Z_][0-9a-zA-Z_.\-@]*/),
+
 
     greek: $ => token(/[\u03B1-\u03C9\u0391-\u03A9]/),
     math_symbol: $ => token(/\p{Other_Math}/),
@@ -159,7 +158,7 @@ module.exports = grammar({
     },
 
     tagged_string: $ => {
-      const tagged = /[a-zA-Z][0-9a-zA-Z_.@]*`[^`\n]*`/;      
+      const tagged = /[a-zA-Z@][0-9a-zA-Z_.@]*`[^`\n]*`/;      
       return token(tagged);
     },
 

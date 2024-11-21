@@ -29,7 +29,7 @@ Graph: top-level record and a node
     (property (symbol) (binder) (double_quoted_string)) 
     (property (symbol) (binder) (tagged_string)) 
   )
-  (pattern (node (symbol)))
+  (pattern (pattern_element (node (symbol))))
 )
 
 ==================
@@ -48,11 +48,11 @@ Graph: top-level record and a path
     (property (symbol) (binder) (tagged_string)) 
   )
   (pattern 
-    (relationship 
+    (pattern_element (relationship 
       (node (symbol))
       (squiggle_right)
       (node (symbol))
-    )
+    ))
   )
 )
 
@@ -64,7 +64,7 @@ Graph: top-level record, a path and a path
 
 (n)~~>(m)
 
-[s -> n, m]
+[s | n, m]
 
 ---
 
@@ -74,18 +74,20 @@ Graph: top-level record, a path and a path
     (property (symbol) (binder) (tagged_string)) 
   )
   (pattern 
-    (relationship 
+    (pattern_element (relationship 
       (node (symbol))
       (squiggle_right)
       (node (symbol))
-    )
+    ))
   )
   (pattern
-    (subject
-      (symbol)
-      (ordering  
-        (member (symbol)) 
-        (member (symbol))
+    (pattern_element 
+      (subject 
+        (symbol)
+        (pattern 
+          (pattern_element (symbol)) 
+          (pattern_element (symbol))
+        )
       )
     )
   )

@@ -9,7 +9,7 @@ Numbers: integers
 
 (gram
   (pattern
-    (node (record (property (symbol) (binder) (integer))))
+    (pattern_element (node (record (property (symbol) (binder) (integer)))))
   )
 )
 
@@ -24,7 +24,7 @@ Numbers: decimal
 
 (gram
   (pattern
-    (node (record (property (symbol) (binder) (decimal))))
+    (pattern_element (node (record (property (symbol) (binder) (decimal)))))
   )
 )
 
@@ -38,7 +38,7 @@ Number: hexadecimal
 
 (gram
   (pattern
-    (node (record (property (symbol) (binder) (hexadecimal))))
+    (pattern_element (node (record (property (symbol) (binder) (hexadecimal)))))
   )
 )
 
@@ -52,7 +52,7 @@ Number: octal with an '0'
 
 (gram
   (pattern
-    (node (record (property (symbol) (binder) (octal))))
+    (pattern_element (node (record (property (symbol) (binder) (octal)))))
   )
 )
 
@@ -67,6 +67,6 @@ Number: measurements are numbers with some letters as a suffix
 
 (gram
   (pattern
-    (node (record (property (symbol) (binder) (measurement))))
+    (pattern_element (node (record (property (symbol) (binder) (measurement)))))
   )
 )

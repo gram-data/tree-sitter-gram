@@ -1,5 +1,5 @@
 ==================
-Pattern: Empty
+Pattern: Single member subject
 ==================
 
 []
@@ -8,12 +8,12 @@ Pattern: Empty
 
 (gram
   (pattern
-    (subject)
+    (pattern_element (subject))
   )
 )
 
 ==================
-Pattern: Named series, empty
+Pattern: single member node
 ==================
 
 ()
@@ -22,12 +22,12 @@ Pattern: Named series, empty
 
 (gram
   (pattern
-    (node)
+    (pattern_element (node))
   )
 )
 
 ==================
-Pattern: Named series with identified members
+Pattern: Two node members
 ==================
 
 (),()
@@ -36,12 +36,13 @@ Pattern: Named series with identified members
 
 (gram
   (pattern
-    (node) (node)
+    (pattern_element (node))
+    (pattern_element (node))
   )
 )
 
 ==================
-Pattern: Named series with in-line members
+Pattern: one relationship
 ==================
 
 ()-->()
@@ -50,11 +51,11 @@ Pattern: Named series with in-line members
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_right)
       (node)
-    )
+    ))
   )
 )
 
@@ -69,14 +70,37 @@ Pattern: 2 single-hop relationships
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_right)
+      (node)
+    ))
+    (pattern_element (relationship
+      (node)
+      (single_right)
+      (node)
+    ))
+  )
+)
+
+
+==================
+Pattern: 2 annotated nodes
+==================
+
+@description("first empty node") (), 
+@description("second empty node") ()
+
+---
+
+(gram
+  (pattern
+    (pattern_element
+      (annotation (symbol) (double_quoted_string))
       (node)
     )
-    (relationship
-      (node)
-      (single_right)
+    (pattern_element
+      (annotation (symbol) (double_quoted_string))
       (node)
     )
 

@@ -8,12 +8,12 @@ Single-arrow: Undirected relationship
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_undirected)
       (node)
     )
-  )
+  ))
 )
 
 ==================
@@ -26,12 +26,12 @@ Single-arrow: Bidirectional relationship
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_bidirectional)
       (node)
     )
-  )
+  ))
 )
 
 ==================
@@ -44,12 +44,12 @@ Single-arrow: Right relationship
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_right)
       (node)
     )
-  )
+  ))
 )
 
 ==================
@@ -62,12 +62,12 @@ Single-arrow: Left relationship
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_left)
       (node)
     )
-  )
+  ))
 )
 
 ==================
@@ -80,7 +80,7 @@ Single-arrow: Undirected relationships
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_undirected)
       (relationship
@@ -88,7 +88,7 @@ Single-arrow: Undirected relationships
         (single_undirected)
         (node)
       )
-    )
+    ))
   )
 )
 
@@ -103,7 +103,7 @@ Single-arrow: Right relationships
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_right)
       (relationship
@@ -111,7 +111,7 @@ Single-arrow: Right relationships
         (single_right)
         (node)
       )
-    )
+    ))
   )
 )
 
@@ -126,7 +126,7 @@ Single-arrow: Left relationships
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_left)
       (relationship
@@ -134,7 +134,7 @@ Single-arrow: Left relationships
         (single_left)
         (node)
       )
-    )
+    ))
   )
 )
 
@@ -148,7 +148,7 @@ Single-arrow: Alternating left, right relationship
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_left)
       (relationship
@@ -156,7 +156,7 @@ Single-arrow: Alternating left, right relationship
         (single_right)
         (node)
       )
-    )
+    ))
   )
 )
 
@@ -170,7 +170,7 @@ Single-arrow: Alternating right, left relationship
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_right)
       (relationship
@@ -178,7 +178,7 @@ Single-arrow: Alternating right, left relationship
         (single_left)
         (node)
       )
-    )
+    ))
   )
 )
 
@@ -192,7 +192,7 @@ Single-arrow: Alternating left, right, undirected relationship qd
 
 (gram
   (pattern
-    (relationship
+    (pattern_element (relationship
       (node)
       (single_left)
       (relationship 
@@ -204,7 +204,7 @@ Single-arrow: Alternating left, right, undirected relationship qd
           (node)
         )
       )
-    )
+    ))
   )
 )
 

@@ -1,13 +1,24 @@
 
 ==================
-Identifier using '@'
+Identifier cannot start with '@' 
 :error
+==================
+
+(@neo4j.com)
+
+---
+
+==================
+Identifier can '@' after first character
 ==================
 
 (akollegger@neo4j.com)
 
 ---
 
+(gram
+  (pattern (pattern_element (node (symbol))))
+)
 
 ==================
 Identifier using snakecase '_' and mixed case
@@ -19,8 +30,8 @@ Identifier using snakecase '_' and mixed case
 ---
 
 (gram
-  (pattern (node (symbol)))
-  (pattern (node (symbol)))
+  (pattern (pattern_element (node (symbol))))
+  (pattern (pattern_element (node (symbol))))
 )
 
 
@@ -33,7 +44,7 @@ Identifier using kebabcase '-' and mixed case
 ---
 
 (gram
-  (pattern (node (symbol)))
+  (pattern (pattern_element (node (symbol))))
 )
 
 
@@ -46,7 +57,7 @@ Identifier using numbers
 ---
 
 (gram
-  (pattern (node (integer)))
+  (pattern (pattern_element (node (integer))))
 )
 
 
@@ -59,7 +70,7 @@ Identifier using numbers with units
 ---
 
 (gram
-  (pattern (node (measurement)))
+  (pattern (pattern_element (node (measurement))))
 )
 
 
@@ -72,7 +83,7 @@ Identifier using backticks
 ---
 
 (gram
-  (pattern (node (backticked_string)))
+  (pattern (pattern_element (node (backticked_string))))
 )
 
 
@@ -85,7 +96,7 @@ Identifier using backticks with escaped backtick
 ---
 
 (gram
-  (pattern (node (backticked_string)))
+  (pattern (pattern_element (node (backticked_string))))
 )
 
 ==================
@@ -97,7 +108,7 @@ Identifier using double-quotes
 ---
 
 (gram
-  (pattern (node (double_quoted_string)))
+  (pattern (pattern_element (node (double_quoted_string))))
 )
 
 
@@ -111,7 +122,7 @@ Identifier using double-quotes with escaped double-quote
 ---
 
 (gram
-  (pattern (node (double_quoted_string)))
+  (pattern (pattern_element (node (double_quoted_string))))
 )
 
 ==================
@@ -124,11 +135,11 @@ Identifiers using various greek characters
 
 (gram
   (pattern 
-    (node (greek))
-    (node (greek))
-    (node (greek))
-    (node (greek))
-    (node (greek))
+    (pattern_element (node (greek)))
+    (pattern_element (node (greek)))
+    (pattern_element (node (greek)))
+    (pattern_element (node (greek)))
+    (pattern_element (node (greek)))
   )
 )
 
@@ -143,13 +154,13 @@ Identifiers using fancy math_symbols
 
 (gram
   (pattern 
-    (node (math_symbol))
-    (node (math_symbol))
-    (node (math_symbol))
-    (node (math_symbol))
-    (node (math_symbol))
-    (node (math_symbol))
-    (node (math_symbol))
+    (pattern_element (node (math_symbol)))
+    (pattern_element (node (math_symbol)))
+    (pattern_element (node (math_symbol)))
+    (pattern_element (node (math_symbol)))
+    (pattern_element (node (math_symbol)))
+    (pattern_element (node (math_symbol)))
+    (pattern_element (node (math_symbol)))
   )
 )
 
@@ -165,6 +176,6 @@ Identifiers using emojis
 
 (gram
   (pattern 
-    (node (emoji))
+    (pattern_element (node (emoji)))
   )
 )
