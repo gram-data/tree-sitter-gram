@@ -1,6 +1,6 @@
 {
   "name": "@gram-data/tree-sitter-gram",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "subject-oriented notation for structured data",
   "homepage": "https://gram-data.github.io",
   "repository": "github:gram-data/tree-sitter-gram",
@@ -29,8 +29,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-gyp-build": "^4.8.2",
-    "node-addon-api": "^8.2.1"
+    "node-gyp-build": "^4.8.4",
+    "node-addon-api": "^8.2.2"
   },
   "peerDependencies": {
     "tree-sitter": "^0.21.0"
@@ -41,9 +41,9 @@
     }
   },
   "devDependencies": {
-    "eslint": "^9.13.0",
+    "eslint": "^9.15.0",
     "node-gyp": "^10.2.0",
     "prebuildify": "^6.0.1",
-    "tree-sitter-cli": "^0.24.3"
+    "tree-sitter-cli": "^0.24.4"
   }
 }

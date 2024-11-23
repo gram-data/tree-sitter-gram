@@ -20,3 +20,13 @@ Run tests matching a specific filter:
 ```
 npx tree-sitter test -f 'Node'
 ```
+
+# Publish
+
+## Python
+
+Publish locally.
+
+```
+python -m pip install .
+```
