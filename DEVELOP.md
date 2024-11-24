@@ -30,3 +30,6 @@ Publish locally.
 ```
 python -m pip install .
 ```
+
+Publish to pypi with a tagged github commit.
+
