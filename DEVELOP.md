@@ -23,13 +23,15 @@ npx tree-sitter test -f 'Node'
 
 # Publish
 
-## Python
-
-Publish locally.
+## Local Python
 
 ```
 python -m pip install .
 ```
 
-Publish to pypi with a tagged github commit.
+## Release to npm, pypi
 
+1. Bump all build files to matching version (global search & replace)
+2. Commit changes
+3. Tag with new version using `git tag -a <version> -m "<description>"
+4. `git push --follow-tags`
