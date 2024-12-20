@@ -37,7 +37,7 @@ module.exports = grammar({
       $.node
     ),
 
-    node: $ => seq("(", optional($._attributes),")"),
+    node: $ => seq(token("("), optional($._attributes), token(")")),
 
     relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._path)),
     

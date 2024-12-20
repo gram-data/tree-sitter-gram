@@ -1,8 +1,8 @@
 {
   "grammars": [
     {
-      "name": "@gram-data/gram",
-      "camelcase": "GramDataGram",
+      "name": "gram",
+      "camelcase": "Gram",
       "scope": "source.gram",
       "path": ".",
       "file-types": [
@@ -11,7 +11,7 @@
     }
   ],
   "metadata": {
-    "version": "0.1.7",
+    "version": "0.1.8",
     "license": "ISC",
     "description": "subject-oriented notation for structured data",
     "links": {
