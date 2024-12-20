@@ -11,18 +11,18 @@ module.exports = grammar({
     pattern: $ => commaSep1($.pattern_element),
 
     pattern_element: $ => seq(
-      optional(repeat($.annotation)), 
-      choice(
+      field("annotations", optional(repeat($.annotation))), 
+      field("element", choice(
         $.subject,
         $._path,
         $._reference
-      )
+      ))
     ),
 
     // ABKNOTE -- consider the naming of the two parts of a subject
     // attributes & association
     // information & association
-    subject: $ => seq("[", optional(field("attributes", $._attributes)), optional(field("association", $._association)),"]"),
+    subject: $ => seq("[", field("attributes", optional($._attributes)), field("association", optional($._association)),"]"),
 
     annotation: $ => seq(
       "@",
@@ -37,7 +37,7 @@ module.exports = grammar({
       $.node
     ),
 
-    node: $ => seq(token("("), optional($._attributes), token(")")),
+    node: $ => seq(token("("), field("attributes", optional($._attributes)), token(")")),
 
     relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._path)),
     
@@ -68,7 +68,7 @@ module.exports = grammar({
 
     labels: $ => repeat1($.label),
 
-    label: $ => seq(field("binder", $.binder), $.symbol),
+    label: $ => seq(field("binder", $.binder), field("symbol", $.symbol)),
 
     binder: $ => choice(token(":"), token("::")),
 
