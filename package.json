@@ -1,6 +1,6 @@
 {
   "name": "@gram-data/tree-sitter-gram",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "subject-oriented notation for structured data",
   "homepage": "https://gram-data.github.io",
   "repository": "github:gram-data/tree-sitter-gram",
