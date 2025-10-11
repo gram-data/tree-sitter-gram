@@ -66,17 +66,17 @@ module.exports = grammar({
       $.pictograph
     ),
 
+    _binder: $ => token(":"),
+
     labels: $ => repeat1($.label),
 
-    label: $ => seq(field("binder", $.binder), field("symbol", $.symbol)),
-
-    binder: $ => choice(token(":"), token("::")),
+    label: $ => seq($._binder, field("symbol", $.symbol)),
 
     record: $ => seq("{", commaSep($.property), "}"),
 
     property: $ => seq(
       field('key', $._key),
-      field('binder', $.binder),
+      field('_binder', $._binder),
       field('value', $._value),
       optional(field('cardinality', choice('!', '?', '*', '+')))
     ),

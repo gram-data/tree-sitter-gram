@@ -9,7 +9,7 @@ Text: single character string
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (binder) (single_quoted_string)))))
+    (pattern_element (node (record (property (symbol) (single_quoted_string)))))
   )
 )
 
@@ -24,7 +24,7 @@ Text: long string
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (binder) (single_quoted_string)))))
+    (pattern_element (node (record (property (symbol) (single_quoted_string)))))
   )
 )
 
@@ -43,7 +43,7 @@ onto a third line. Note that these lines will have a lot of whitespace.
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (binder) (fenced_string)))))
+    (pattern_element (node (record (property (symbol) (fenced_string)))))
   )
 )
 
@@ -57,7 +57,7 @@ Text: nested quotes within single-quoted string
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (binder) (single_quoted_string)))))
+    (pattern_element (node (record (property (symbol) (single_quoted_string)))))
   )
 )
 
@@ -71,7 +71,7 @@ Text: nested quotes within double-quoted string
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (binder) (double_quoted_string)))))
+    (pattern_element (node (record (property (symbol) (double_quoted_string)))))
   )
 )
 
@@ -85,7 +85,7 @@ Text: single-quoted string property
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (binder) (single_quoted_string)))))
+    (pattern_element (node (record (property (symbol) (single_quoted_string)))))
   )
 )
 
@@ -99,7 +99,7 @@ Text: backtick-quoted string property
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (binder) (backticked_string)))))
+    (pattern_element (node (record (property (symbol) (backticked_string)))))
   )
 )
 
@@ -113,7 +113,7 @@ Text: weird characters in string property
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (binder) (single_quoted_string)))))
+    (pattern_element (node (record (property (symbol) (single_quoted_string)))))
   )
 )
 
@@ -138,15 +138,15 @@ Text: tagged string properties
 (gram
   (pattern
     (pattern_element (node (record 
-      (property (symbol) (binder) (tagged_string))
-      (property (symbol) (binder) (tagged_string)) 
-      (property (symbol) (binder) (tagged_string)) 
-      (property (symbol) (binder) (tagged_string)) 
-      (property (symbol) (binder) (tagged_string)) 
-      (property (symbol) (binder) (tagged_string)) 
-      (property (symbol) (binder) (tagged_string)) 
-      (property (symbol) (binder) (tagged_string)) 
-      (property (symbol) (binder) (tagged_string)) 
+      (property (symbol) (tagged_string))
+      (property (symbol) (tagged_string)) 
+      (property (symbol) (tagged_string)) 
+      (property (symbol) (tagged_string)) 
+      (property (symbol) (tagged_string)) 
+      (property (symbol) (tagged_string)) 
+      (property (symbol) (tagged_string)) 
+      (property (symbol) (tagged_string)) 
+      (property (symbol) (tagged_string)) 
     )))
   )
 )

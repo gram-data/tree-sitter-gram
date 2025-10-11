@@ -10,14 +10,15 @@ Value pair: define values
 (gram
   (pattern
     (pattern_element (node (record 
-      (property (symbol) (binder) (integer)) 
-      (property (symbol) (binder) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
     )))
   )
 )
 
 ==================
 Value pair: declare values 
+:error
 ==================
 
 ({ k1 :: 1, k2 :: 2,  k3 :: number })
@@ -27,9 +28,9 @@ Value pair: declare values
 (gram
   (pattern
     (pattern_element (node (record 
-      (property (symbol) (binder) (integer)) 
-      (property (symbol) (binder) (integer)) 
-      (property (symbol) (binder) (symbol)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (integer)) 
+      (property (symbol) (symbol)) 
     )))
   )
 )
@@ -52,7 +53,7 @@ Value pair: key names which start with '@' must be quoted
 (gram
   (pattern
     (pattern_element (node (record 
-      (property (double_quoted_string) (binder) (double_quoted_string)) 
+      (property (double_quoted_string) (double_quoted_string)) 
     )))
   )
 )

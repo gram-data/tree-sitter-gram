@@ -442,6 +442,13 @@
         }
       ]
     },
+    "_binder": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": ":"
+      }
+    },
     "labels": {
       "type": "REPEAT1",
       "content": {
@@ -453,12 +460,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "binder",
-          "content": {
-            "type": "SYMBOL",
-            "name": "binder"
-          }
+          "type": "SYMBOL",
+          "name": "_binder"
         },
         {
           "type": "FIELD",
@@ -466,25 +469,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "symbol"
-          }
-        }
-      ]
-    },
-    "binder": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": ":"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "::"
           }
         }
       ]
@@ -548,10 +532,10 @@
         },
         {
           "type": "FIELD",
-          "name": "binder",
+          "name": "_binder",
           "content": {
             "type": "SYMBOL",
-            "name": "binder"
+            "name": "_binder"
           }
         },
         {

@@ -37,7 +37,7 @@ Subject: named, labeled
 (gram
   (pattern
     (pattern_element
-      (subject (symbol) (labels (label (binder) (symbol))))
+      (subject (symbol) (labels (label (symbol))))
     )
   )
 )
@@ -54,7 +54,7 @@ Subject: named, labeled with a record
   (pattern
     (pattern_element
       (subject (symbol) 
-        (labels (label (binder) (symbol))) (record (property (symbol) (binder) (double_quoted_string))))
+        (labels (label (symbol))) (record (property (symbol) (double_quoted_string))))
     )
   )
 )
@@ -74,8 +74,8 @@ Subject: complete subject with annotation, attributes, and a qualified associati
       (annotation (symbol) (double_quoted_string))
       (subject 
         (symbol)
-        (labels (label (binder) (symbol)))
-        (record (property (symbol) (binder) (double_quoted_string)))
+        (labels (label (symbol)))
+        (record (property (symbol) (double_quoted_string)))
         (pattern
           (pattern_element (symbol))
           (pattern_element (symbol))

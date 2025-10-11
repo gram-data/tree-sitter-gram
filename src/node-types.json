@@ -82,11 +82,6 @@
     }
   },
   {
-    "type": "binder",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "double_bidirectional",
     "named": true,
     "fields": {
@@ -485,16 +480,6 @@
     "type": "label",
     "named": true,
     "fields": {
-      "binder": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "binder",
-            "named": true
-          }
-        ]
-      },
       "symbol": {
         "multiple": false,
         "required": true,
@@ -801,13 +786,13 @@
     "type": "property",
     "named": true,
     "fields": {
-      "binder": {
+      "_binder": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "binder",
-            "named": true
+            "type": ":",
+            "named": false
           }
         ]
       },
@@ -2046,10 +2031,6 @@
   },
   {
     "type": ":",
-    "named": false
-  },
-  {
-    "type": "::",
     "named": false
   },
   {

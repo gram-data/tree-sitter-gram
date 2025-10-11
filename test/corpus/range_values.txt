@@ -14,7 +14,6 @@ Range: 1 to 10
         record: (record 
           (property 
             key: (symbol)
-            binder: (binder) 
             value: (range lower: (integer) upper: (integer))
           )
     )))
@@ -36,7 +35,6 @@ Range: 1 to infinity!
         record: (record 
           (property 
             key: (symbol)
-            binder: (binder) 
             value: (range lower: (integer) )
           )
     )))
@@ -58,7 +56,6 @@ Range: up to 100
         record: (record 
           (property 
             key: (symbol) 
-            binder: (binder) 
             value: (range upper: (integer) )
           )
     )))
