@@ -9,12 +9,14 @@ Range: 1 to 10
 
 (gram
   (pattern
-    (pattern_element (node record: (record 
-      (property 
-        key: (symbol)
-        binder: (binder) 
-        value: (range lower: (integer) upper: (integer))
-      )
+    (pattern_element 
+      element: (node 
+        record: (record 
+          (property 
+            key: (symbol)
+            binder: (binder) 
+            value: (range lower: (integer) upper: (integer))
+          )
     )))
   )
 )
@@ -29,12 +31,14 @@ Range: 1 to infinity!
 
 (gram
   (pattern
-    (pattern_element (node record: (record 
-      (property 
-        key: (symbol)
-        binder: (binder) 
-        value: (range lower: (integer) )
-      )
+    (pattern_element 
+      element: (node 
+        record: (record 
+          (property 
+            key: (symbol)
+            binder: (binder) 
+            value: (range lower: (integer) )
+          )
     )))
   )
 )
@@ -49,12 +53,14 @@ Range: up to 100
 
 (gram
   (pattern
-    (pattern_element (node record: (record 
-      (property 
-        key: (symbol) 
-        binder: (binder) 
-        value: (range upper: (integer) )
-      )
+    (pattern_element 
+      element: (node 
+        record: (record 
+          (property 
+            key: (symbol) 
+            binder: (binder) 
+            value: (range upper: (integer) )
+          )
     )))
   )
 )

@@ -29,11 +29,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-gyp-build": "^4.8.4",
-    "node-addon-api": "^8.3.0"
+    "node-addon-api": "^8.5.0",
+    "node-gyp-build": "^4.8.4"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.25.0"
   },
   "peerDependenciesMeta": {
     "tree_sitter": {
@@ -41,9 +41,9 @@
     }
   },
   "devDependencies": {
-    "eslint": "^9.17.0",
-    "node-gyp": "^11.0.0",
+    "eslint": "^9.37.0",
+    "node-gyp": "^11.4.2",
     "prebuildify": "^6.0.1",
-    "tree-sitter-cli": "^0.24.5"
+    "tree-sitter-cli": "^0.25.10"
   }
 }

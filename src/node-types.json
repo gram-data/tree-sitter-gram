@@ -494,17 +494,17 @@
             "named": true
           }
         ]
+      },
+      "symbol": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "symbol",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -526,6 +526,80 @@
     "type": "node",
     "named": true,
     "fields": {
+      "attributes": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "backticked_string",
+            "named": true
+          },
+          {
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "fenced_string",
+            "named": true
+          },
+          {
+            "type": "greek",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "labels",
+            "named": true
+          },
+          {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
+            "named": true
+          },
+          {
+            "type": "range",
+            "named": true
+          },
+          {
+            "type": "record",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
+            "named": true
+          }
+        ]
+      },
       "identifier": {
         "multiple": false,
         "required": false,
@@ -632,88 +706,95 @@
   {
     "type": "pattern_element",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "backticked_string",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "double_quoted_string",
-          "named": true
-        },
-        {
-          "type": "fenced_string",
-          "named": true
-        },
-        {
-          "type": "greek",
-          "named": true
-        },
-        {
-          "type": "hexadecimal",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "math_symbol",
-          "named": true
-        },
-        {
-          "type": "measurement",
-          "named": true
-        },
-        {
-          "type": "node",
-          "named": true
-        },
-        {
-          "type": "octal",
-          "named": true
-        },
-        {
-          "type": "pictograph",
-          "named": true
-        },
-        {
-          "type": "range",
-          "named": true
-        },
-        {
-          "type": "relationship",
-          "named": true
-        },
-        {
-          "type": "single_quoted_string",
-          "named": true
-        },
-        {
-          "type": "subject",
-          "named": true
-        },
-        {
-          "type": "symbol",
-          "named": true
-        },
-        {
-          "type": "tagged_string",
-          "named": true
-        }
-      ]
+    "fields": {
+      "annotations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          }
+        ]
+      },
+      "element": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "backticked_string",
+            "named": true
+          },
+          {
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "fenced_string",
+            "named": true
+          },
+          {
+            "type": "greek",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "node",
+            "named": true
+          },
+          {
+            "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
+            "named": true
+          },
+          {
+            "type": "range",
+            "named": true
+          },
+          {
+            "type": "relationship",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "subject",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

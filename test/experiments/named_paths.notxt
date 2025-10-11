@@ -1,0 +1,52 @@
+---
+
+[ trip:Trip | ... ]
+
+(a:Person)-[:TAKES {date:08-04-25}]->[trip:Trip | ... ]
+
+
+---
+
+<| trip:Trip | ... |>
+
+(a:Person)-[:TAKES {date:08-04-25}]-><| trip:Trip | ... |>
+
+---
+
+(| trip:Trip | ... |)
+
+(a:Person)-[:TAKES {date:08-04-25}]->(| trip:Trip | ... |)
+
+---
+
+[| trip:Trip | ... |]
+
+(a:Person)-[:TAKES {date:08-04-25}]->[|trip:Trip | ... |]
+
+---
+
+[> trip:Trip | ... <]
+(a:Person)-[:TAKES {date:08-04-25}]->[>trip:Trip | ... <]
+
+---
+
+(> trip:Trip | ... <)
+(a:Person)-[:TAKES {date:08-04-25}]->(>trip:Trip | ... <)
+
+
+---
+
+=> trip:Trip | ... <=
+(a:Person)-[:TAKES {date:08-04-25}]->=>trip:Trip | ... <=
+
+---
+
+| trip:Trip => ... |
+(a:Person)-[:TAKES {date:08-04-25}]->|trip:Trip => ... |
+
+---
+
+([ trip:Trip => ... ])
+(a:Person)-[:TAKES {date:08-04-25}]->([trip:Trip => ... ])
+
+
