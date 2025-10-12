@@ -18,7 +18,6 @@ Value pair: define values
 
 ==================
 Value pair: declare values 
-:error
 ==================
 
 ({ k1 :: 1, k2 :: 2,  k3 :: number })

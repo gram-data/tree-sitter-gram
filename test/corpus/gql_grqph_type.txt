@@ -12,7 +12,6 @@ GQL Node Type Definition
 
 ==================
 GQL Relationship Type Definition
-:error
 ==================
 
 (:Form)=[:SECTION { item :: string }]=>(:Chunk)
@@ -23,7 +22,7 @@ GQL Relationship Type Definition
   (pattern
     (pattern_element (relationship
       (node (labels (label (symbol))))
-      (double_right
+      (right
         (labels (label (symbol)))
         (record (property (symbol) (symbol)))
       )

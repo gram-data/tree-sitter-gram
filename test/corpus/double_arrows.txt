@@ -10,7 +10,7 @@ Double-arrow relationships: Undirected relationship
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_undirected)
+      (undirected)
       (node)
     ))
   )
@@ -28,7 +28,7 @@ Double-arrow relationships: Bidirectional relationship
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_bidirectional)
+      (bidirectional)
       (node)
     ))
   )
@@ -46,7 +46,7 @@ Double-arrow right
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_right)
+      (right)
       (node)
     ))
   )
@@ -65,7 +65,7 @@ Double-arrow right with identifier
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_right (symbol))
+      (right (symbol))
       (node)
     ))
   )
@@ -84,7 +84,7 @@ Double-arrow left relationship
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_left)
+      (left)
       (node)
     ))
   )
@@ -102,7 +102,7 @@ Double-arrow left with identifier
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_left (symbol))
+      (left (symbol))
       (node)
     ))
   )
@@ -120,10 +120,10 @@ Double-arrow relationships: Undirected relationships
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_undirected)
+      (undirected)
       (relationship
         (node)
-        (double_undirected)
+        (undirected)
         (node)
       )
     ))
@@ -143,10 +143,10 @@ Double-arrow relationships: Right relationships
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_right)
+      (right)
       (relationship
         (node)
-        (double_right)
+        (right)
         (node)
       )
     ))
@@ -166,10 +166,10 @@ Double-arrow relationships: Left relationships
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_left)
+      (left)
       (relationship
         (node)
-        (double_left)
+        (left)
         (node)
       )
     ))
@@ -188,10 +188,10 @@ Double-arrow relationships: Alternating left, right relationship
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_left)
+      (left)
       (relationship
         (node)
-        (double_right)
+        (right)
         (node)
       )
     ))
@@ -210,10 +210,10 @@ Double-arrow relationships: Alternating right, left relationship
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_right)
+      (right)
       (relationship
         (node)
-        (double_left)
+        (left)
         (node)
       )
     ))
@@ -232,13 +232,13 @@ Double-arrow relationships: Alternating left, right, undirected relationship
   (pattern
     (pattern_element (relationship 
       (node)
-      (double_left)
+      (left)
       (relationship
         (node)
-        (double_right)
+        (right)
         (relationship
           (node)
-          (double_undirected)
+          (undirected)
           (node)
         )
       )

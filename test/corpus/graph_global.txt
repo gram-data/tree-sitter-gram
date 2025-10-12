@@ -50,7 +50,7 @@ Graph: top-level record and a path
   (pattern 
     (pattern_element (relationship 
       (node (symbol))
-      (squiggle_right)
+      (right)
       (node (symbol))
     ))
   )
@@ -76,7 +76,7 @@ Graph: top-level record, a path and a path
   (pattern 
     (pattern_element (relationship 
       (node (symbol))
-      (squiggle_right)
+      (right)
       (node (symbol))
     ))
   )

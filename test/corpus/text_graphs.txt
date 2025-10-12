@@ -10,7 +10,7 @@ Hello world
   (pattern
     (pattern_element (relationship
       (node (symbol))
-      (single_right)
+      (right)
       (node (symbol))
     ))
   )
@@ -28,7 +28,7 @@ Hello dear world
   (pattern
     (pattern_element (relationship
       (node (symbol))
-      (single_right (symbol))
+      (right (symbol))
       (node (symbol))
     ))
   )
@@ -46,10 +46,10 @@ Hello dear world over there
   (pattern
     (pattern_element (relationship
       (node (symbol))
-      (single_right (symbol))
+      (right (symbol))
       (relationship
         (node (symbol))
-        (single_right (symbol))
+        (right (symbol))
         (node (symbol))
       )
     ))
@@ -68,7 +68,7 @@ Hello "dear world" "over there"
   (pattern
     (pattern_element (relationship
       (node (symbol))
-      (single_right (backticked_string))
+      (right (backticked_string))
       (node (backticked_string))
     ))
   )

@@ -51,7 +51,7 @@ Annotate a relationship
       (annotation (symbol) (double_quoted_string))
       (relationship
         (node)
-        (single_right)
+        (right)
         (node)
       )
     )
@@ -59,7 +59,7 @@ Annotate a relationship
 )
 
 ==================
-Annotate a node twice
+Annotate a node twice, stacking the annotations
 ==================
 
 @title("Emptiness")

@@ -66,7 +66,7 @@ module.exports = grammar({
       $.pictograph
     ),
 
-    _binder: $ => token(":"),
+    _binder: $ => token(/::?/),
 
     labels: $ => repeat1($.label),
 
@@ -74,17 +74,15 @@ module.exports = grammar({
 
     record: $ => seq("{", commaSep($.property), "}"),
 
-    property: $ => seq(
-      field('key', $._key),
-      field('_binder', $._binder),
-      field('value', $._value),
-      optional(field('cardinality', choice('!', '?', '*', '+')))
-    ),
-
-
     _key: $ => choice(
       $.symbol,
       $._string_literal
+    ),
+
+    property: $ => seq(
+      field('key', $._key),
+      $._binder,
+      field('value', $._value)
     ),
 
     symbol: $ => token(/[a-zA-Z_][0-9a-zA-Z_.\-@]*/),
@@ -168,20 +166,26 @@ module.exports = grammar({
     },
 
     _relationship_value: $ => choice(
-      $.single_undirected,
-      $.single_bidirectional,
-      $.single_right,
-      $.single_left,
-      $.double_undirected,
-      $.double_bidirectional,
-      $.double_right,
-      $.double_left,
-      $.squiggle_undirected,
-      $.squiggle_bidirectional,
-      $.squiggle_right,
-      $.squiggle_left,
+      alias($.single_undirected, $.undirected),
+      alias($.double_undirected, $.undirected),
+      alias($.squiggle_undirected, $.undirected),
+      alias($.single_bidirectional, $.bidirectional),
+      alias($.double_bidirectional, $.bidirectional),
+      alias($.squiggle_bidirectional, $.bidirectional),
+      alias($.single_left, $.left),
+      alias($.double_left, $.left),
+      alias($.squiggle_left, $.left),
+      alias($.single_right, $.right),
+      alias($.double_right, $.right),
+      alias($.squiggle_right, $.right)
     ),
-      
+    
+    // undirected: $ => alias(choice(
+    //   $.single_undirected,
+    //   $.double_undirected,
+    //   $.squiggle_undirected
+    // ), $.undirected),
+
     single_undirected: $ => seq("-", optional(seq("[", $._attributes, "]")), "-"),
     single_bidirectional: $ => seq("<-", optional(seq("[", $._attributes, "]")), "->"),
     single_right: $ => seq("-", optional(seq("[", $._attributes, "]")), "->"),

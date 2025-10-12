@@ -53,7 +53,7 @@ Pattern: one relationship
   (pattern
     (pattern_element (relationship
       (node)
-      (single_right)
+      (right)
       (node)
     ))
   )
@@ -72,16 +72,41 @@ Pattern: 2 single-hop relationships
   (pattern
     (pattern_element (relationship
       (node)
-      (single_right)
+      (right)
       (node)
     ))
     (pattern_element (relationship
       (node)
-      (single_right)
+      (right)
       (node)
     ))
   )
 )
+
+
+==================
+Pattern: two-hop path
+==================
+
+()-->()-->()
+
+---
+
+(gram
+  (pattern
+    (pattern_element (relationship
+      (node)
+      (right)
+      (relationship
+        (node)
+        (right)
+        (node)
+      )
+    ))
+  )
+)
+
+
 
 
 ==================

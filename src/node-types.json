@@ -82,283 +82,7 @@
     }
   },
   {
-    "type": "double_bidirectional",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "double_left",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "double_right",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "double_undirected",
+    "type": "bidirectional",
     "named": true,
     "fields": {
       "identifier": {
@@ -505,6 +229,98 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "left",
+    "named": true,
+    "fields": {
+      "identifier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "backticked_string",
+            "named": true
+          },
+          {
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "fenced_string",
+            "named": true
+          },
+          {
+            "type": "greek",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
+            "named": true
+          },
+          {
+            "type": "range",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
+            "named": true
+          }
+        ]
+      },
+      "labels": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "labels",
+            "named": true
+          }
+        ]
+      },
+      "record": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "record",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -786,38 +602,6 @@
     "type": "property",
     "named": true,
     "fields": {
-      "_binder": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          }
-        ]
-      },
-      "cardinality": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "!",
-            "named": false
-          },
-          {
-            "type": "*",
-            "named": false
-          },
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "?",
-            "named": false
-          }
-        ]
-      },
       "key": {
         "multiple": false,
         "required": true,
@@ -1022,51 +806,19 @@
         "required": true,
         "types": [
           {
-            "type": "double_bidirectional",
+            "type": "bidirectional",
             "named": true
           },
           {
-            "type": "double_left",
+            "type": "left",
             "named": true
           },
           {
-            "type": "double_right",
+            "type": "right",
             "named": true
           },
           {
-            "type": "double_undirected",
-            "named": true
-          },
-          {
-            "type": "single_bidirectional",
-            "named": true
-          },
-          {
-            "type": "single_left",
-            "named": true
-          },
-          {
-            "type": "single_right",
-            "named": true
-          },
-          {
-            "type": "single_undirected",
-            "named": true
-          },
-          {
-            "type": "squiggle_bidirectional",
-            "named": true
-          },
-          {
-            "type": "squiggle_left",
-            "named": true
-          },
-          {
-            "type": "squiggle_right",
-            "named": true
-          },
-          {
-            "type": "squiggle_undirected",
+            "type": "undirected",
             "named": true
           }
         ]
@@ -1074,651 +826,7 @@
     }
   },
   {
-    "type": "single_bidirectional",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "single_left",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "single_right",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "single_undirected",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "squiggle_bidirectional",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "squiggle_left",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "squiggle_right",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      },
-      "labels": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "labels",
-            "named": true
-          }
-        ]
-      },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "record",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "squiggle_undirected",
+    "type": "right",
     "named": true,
     "fields": {
       "identifier": {
@@ -1990,8 +1098,96 @@
     }
   },
   {
-    "type": "!",
-    "named": false
+    "type": "undirected",
+    "named": true,
+    "fields": {
+      "identifier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "backticked_string",
+            "named": true
+          },
+          {
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "fenced_string",
+            "named": true
+          },
+          {
+            "type": "greek",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "math_symbol",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "octal",
+            "named": true
+          },
+          {
+            "type": "pictograph",
+            "named": true
+          },
+          {
+            "type": "range",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
+            "named": true
+          }
+        ]
+      },
+      "labels": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "labels",
+            "named": true
+          }
+        ]
+      },
+      "record": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "record",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "(",
@@ -1999,14 +1195,6 @@
   },
   {
     "type": ")",
-    "named": false
-  },
-  {
-    "type": "*",
-    "named": false
-  },
-  {
-    "type": "+",
     "named": false
   },
   {
@@ -2030,10 +1218,6 @@
     "named": false
   },
   {
-    "type": ":",
-    "named": false
-  },
-  {
     "type": "<-",
     "named": false
   },
@@ -2051,10 +1235,6 @@
   },
   {
     "type": "=>",
-    "named": false
-  },
-  {
-    "type": "?",
     "named": false
   },
   {

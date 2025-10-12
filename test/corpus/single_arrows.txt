@@ -10,7 +10,7 @@ Single-arrow: Undirected relationship
   (pattern
     (pattern_element (relationship
       (node)
-      (single_undirected)
+      (undirected)
       (node)
     )
   ))
@@ -28,7 +28,7 @@ Single-arrow: Bidirectional relationship
   (pattern
     (pattern_element (relationship
       (node)
-      (single_bidirectional)
+      (bidirectional)
       (node)
     )
   ))
@@ -46,7 +46,7 @@ Single-arrow: Right relationship
   (pattern
     (pattern_element (relationship
       (node)
-      (single_right)
+      (right)
       (node)
     )
   ))
@@ -64,7 +64,7 @@ Single-arrow: Left relationship
   (pattern
     (pattern_element (relationship
       (node)
-      (single_left)
+      (left)
       (node)
     )
   ))
@@ -82,10 +82,10 @@ Single-arrow: Undirected relationships
   (pattern
     (pattern_element (relationship
       (node)
-      (single_undirected)
+      (undirected)
       (relationship
         (node)
-        (single_undirected)
+        (undirected)
         (node)
       )
     ))
@@ -105,10 +105,10 @@ Single-arrow: Right relationships
   (pattern
     (pattern_element (relationship
       (node)
-      (single_right)
+      (right)
       (relationship
         (node)
-        (single_right)
+        (right)
         (node)
       )
     ))
@@ -128,10 +128,10 @@ Single-arrow: Left relationships
   (pattern
     (pattern_element (relationship
       (node)
-      (single_left)
+      (left)
       (relationship
         (node)
-        (single_left)
+        (left)
         (node)
       )
     ))
@@ -150,10 +150,10 @@ Single-arrow: Alternating left, right relationship
   (pattern
     (pattern_element (relationship
       (node)
-      (single_left)
+      (left)
       (relationship
         (node)
-        (single_right)
+        (right)
         (node)
       )
     ))
@@ -172,10 +172,10 @@ Single-arrow: Alternating right, left relationship
   (pattern
     (pattern_element (relationship
       (node)
-      (single_right)
+      (right)
       (relationship
         (node)
-        (single_left)
+        (left)
         (node)
       )
     ))
@@ -194,13 +194,13 @@ Single-arrow: Alternating left, right, undirected relationship qd
   (pattern
     (pattern_element (relationship
       (node)
-      (single_left)
+      (left)
       (relationship 
         (node)
-        (single_right)
+        (right)
         (relationship
           (node)
-          (single_undirected)
+          (undirected)
           (node)
         )
       )

@@ -37,7 +37,6 @@ Record with double-quoted string property
 
 ==================
 Record with declare separator and a symbol property
-:error
 ==================
 
 { s :: string }

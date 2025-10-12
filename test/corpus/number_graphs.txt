@@ -10,7 +10,7 @@ Number graph: 1, 2 buckle your shoe
   (pattern
     (pattern_element (relationship
       (node (integer))
-      (single_right)
+      (right)
       (node (integer))
     ))
   )
@@ -28,7 +28,7 @@ Number graph: 1 +1 = 2
   (pattern
     (pattern_element (relationship
       (node (integer))
-      (single_right (backticked_string))
+      (right (backticked_string))
       (node (integer))
     ))
   )
