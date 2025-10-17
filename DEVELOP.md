@@ -32,6 +32,8 @@ python -m pip install .
 ## Release to npm, pypi
 
 1. Bump all build files to matching version (global search & replace)
+  - `tree-sitter version 1.2.3`
 2. Commit changes
+  - `git commit -am "Release 1.2.3" `
 3. Tag with new version using `git tag -a <version> -m "<description>"
 4. `git push --follow-tags`
