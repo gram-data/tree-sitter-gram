@@ -592,16 +592,16 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
 
 enum ts_field_identifiers {
   field_annotations = 1,
-  field_association = 2,
-  field_attributes = 3,
-  field_content = 4,
-  field_element = 5,
-  field_identifier = 6,
-  field_key = 7,
-  field_kind = 8,
-  field_labels = 9,
-  field_left = 10,
-  field_lower = 11,
+  field_attributes = 2,
+  field_content = 3,
+  field_element = 4,
+  field_identifier = 5,
+  field_key = 6,
+  field_kind = 7,
+  field_labels = 8,
+  field_left = 9,
+  field_lower = 10,
+  field_pattern = 11,
   field_record = 12,
   field_right = 13,
   field_root = 14,
@@ -613,7 +613,6 @@ enum ts_field_identifiers {
 static const char * const ts_field_names[] = {
   [0] = NULL,
   [field_annotations] = "annotations",
-  [field_association] = "association",
   [field_attributes] = "attributes",
   [field_content] = "content",
   [field_element] = "element",
@@ -623,6 +622,7 @@ static const char * const ts_field_names[] = {
   [field_labels] = "labels",
   [field_left] = "left",
   [field_lower] = "lower",
+  [field_pattern] = "pattern",
   [field_record] = "record",
   [field_right] = "right",
   [field_root] = "root",
@@ -685,7 +685,7 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
   [11] =
     {field_content, 1},
   [12] =
-    {field_association, 1},
+    {field_pattern, 1},
   [13] =
     {field_attributes, 1},
     {field_identifier, 1, .inherited = true},
@@ -713,10 +713,10 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
   [30] =
     {field_tag, 1},
   [31] =
-    {field_association, 2},
     {field_attributes, 1},
     {field_identifier, 1, .inherited = true},
     {field_labels, 1, .inherited = true},
+    {field_pattern, 2},
     {field_record, 1, .inherited = true},
   [36] =
     {field_identifier, 0},

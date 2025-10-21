@@ -109,7 +109,7 @@ Graph: top-level record, a path and a path
     (pattern_element
       element: (subject
         identifier: (symbol)
-        association: (pattern
+        pattern: (pattern
           (pattern_element
             element: (symbol))
           (pattern_element

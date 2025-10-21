@@ -728,20 +728,6 @@
     "type": "subject",
     "named": true,
     "fields": {
-      "association": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "pattern",
-            "named": true
-          },
-          {
-            "type": "|",
-            "named": false
-          }
-        ]
-      },
       "attributes": {
         "multiple": true,
         "required": false,
@@ -841,6 +827,20 @@
           {
             "type": "labels",
             "named": true
+          }
+        ]
+      },
+      "pattern": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "|",
+            "named": false
           }
         ]
       },

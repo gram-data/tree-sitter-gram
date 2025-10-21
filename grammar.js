@@ -29,11 +29,7 @@ module.exports = grammar({
       ))
     ),
 
-    // ABKNOTE -- consider the naming of the two parts of a subject
-    // attributes & association
-    // information & association
-
-    subject: $ => seq($._open_bracket, field("attributes", optional($._attributes)), field("association", optional($._association)), $._close_bracket),
+    subject: $ => seq($._open_bracket, field("attributes", optional($._attributes)), field("pattern", optional($._association)), $._close_bracket),
 
     annotation: $ => seq(
       "@",

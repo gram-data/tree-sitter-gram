@@ -118,7 +118,7 @@ Annotate an in-line subject member
     (pattern_element
       element: (subject
         identifier: (symbol)
-        association: (pattern
+        pattern: (pattern
           (pattern_element
             annotations: (annotations
               (annotation

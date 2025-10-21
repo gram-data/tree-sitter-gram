@@ -88,7 +88,7 @@ Subject: complete subject with annotation, attributes, and a qualified associati
             key: (symbol)
             value: (string_literal
               content: (string_content))))
-        association: (pattern
+        pattern: (pattern
           (pattern_element
             element: (symbol))
           (pattern_element
