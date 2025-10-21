@@ -18,23 +18,7 @@
         "required": true,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -46,10 +30,6 @@
             "named": true
           },
           {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
             "type": "measurement",
             "named": true
           },
@@ -58,15 +38,11 @@
             "named": true
           },
           {
-            "type": "pictograph",
-            "named": true
-          },
-          {
             "type": "range",
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -82,7 +58,7 @@
     }
   },
   {
-    "type": "bidirectional",
+    "type": "bidirectional_arrow",
     "named": true,
     "fields": {
       "identifier": {
@@ -90,23 +66,7 @@
         "required": false,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -118,10 +78,6 @@
             "named": true
           },
           {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
             "type": "measurement",
             "named": true
           },
@@ -130,15 +86,11 @@
             "named": true
           },
           {
-            "type": "pictograph",
-            "named": true
-          },
-          {
             "type": "range",
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -201,22 +153,6 @@
     }
   },
   {
-    "type": "label",
-    "named": true,
-    "fields": {
-      "symbol": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "symbol",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "labels",
     "named": true,
     "fields": {},
@@ -225,14 +161,14 @@
       "required": true,
       "types": [
         {
-          "type": "label",
+          "type": "symbol",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "left",
+    "type": "left_arrow",
     "named": true,
     "fields": {
       "identifier": {
@@ -240,23 +176,7 @@
         "required": false,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -268,10 +188,6 @@
             "named": true
           },
           {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
             "type": "measurement",
             "named": true
           },
@@ -280,15 +196,11 @@
             "named": true
           },
           {
-            "type": "pictograph",
-            "named": true
-          },
-          {
             "type": "range",
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -332,23 +244,7 @@
         "required": false,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -364,19 +260,11 @@
             "named": true
           },
           {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
             "named": true
           },
           {
@@ -388,7 +276,7 @@
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -406,23 +294,7 @@
         "required": false,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -434,10 +306,6 @@
             "named": true
           },
           {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
             "type": "measurement",
             "named": true
           },
@@ -446,15 +314,11 @@
             "named": true
           },
           {
-            "type": "pictograph",
-            "named": true
-          },
-          {
             "type": "range",
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -523,23 +387,7 @@
         "required": true,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -548,10 +396,6 @@
           },
           {
             "type": "integer",
-            "named": true
-          },
-          {
-            "type": "math_symbol",
             "named": true
           },
           {
@@ -567,10 +411,6 @@
             "named": true
           },
           {
-            "type": "pictograph",
-            "named": true
-          },
-          {
             "type": "range",
             "named": true
           },
@@ -579,7 +419,7 @@
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -607,27 +447,11 @@
         "required": true,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
             "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
             "named": true
           }
         ]
@@ -637,23 +461,7 @@
         "required": true,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -665,10 +473,6 @@
             "named": true
           },
           {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
             "type": "measurement",
             "named": true
           },
@@ -677,15 +481,11 @@
             "named": true
           },
           {
-            "type": "pictograph",
-            "named": true
-          },
-          {
             "type": "range",
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -777,6 +577,28 @@
     "type": "relationship",
     "named": true,
     "fields": {
+      "kind": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "bidirectional_arrow",
+            "named": true
+          },
+          {
+            "type": "left_arrow",
+            "named": true
+          },
+          {
+            "type": "right_arrow",
+            "named": true
+          },
+          {
+            "type": "undirected_arrow",
+            "named": true
+          }
+        ]
+      },
       "left": {
         "multiple": false,
         "required": true,
@@ -800,33 +622,11 @@
             "named": true
           }
         ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "bidirectional",
-            "named": true
-          },
-          {
-            "type": "left",
-            "named": true
-          },
-          {
-            "type": "right",
-            "named": true
-          },
-          {
-            "type": "undirected",
-            "named": true
-          }
-        ]
       }
     }
   },
   {
-    "type": "right",
+    "type": "right_arrow",
     "named": true,
     "fields": {
       "identifier": {
@@ -834,23 +634,7 @@
         "required": false,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -862,10 +646,6 @@
             "named": true
           },
           {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
             "type": "measurement",
             "named": true
           },
@@ -874,15 +654,11 @@
             "named": true
           },
           {
-            "type": "pictograph",
-            "named": true
-          },
-          {
             "type": "range",
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -916,6 +692,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "string_literal",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "subject",
@@ -940,23 +721,7 @@
         "required": false,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -972,19 +737,11 @@
             "named": true
           },
           {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
             "type": "measurement",
             "named": true
           },
           {
             "type": "octal",
-            "named": true
-          },
-          {
-            "type": "pictograph",
             "named": true
           },
           {
@@ -996,7 +753,7 @@
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -1014,23 +771,7 @@
         "required": false,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -1042,10 +783,6 @@
             "named": true
           },
           {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
             "type": "measurement",
             "named": true
           },
@@ -1054,15 +791,11 @@
             "named": true
           },
           {
-            "type": "pictograph",
-            "named": true
-          },
-          {
             "type": "range",
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -1098,7 +831,33 @@
     }
   },
   {
-    "type": "undirected",
+    "type": "tagged_string",
+    "named": true,
+    "fields": {
+      "string": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      },
+      "tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "undirected_arrow",
     "named": true,
     "fields": {
       "identifier": {
@@ -1106,23 +865,7 @@
         "required": false,
         "types": [
           {
-            "type": "backticked_string",
-            "named": true
-          },
-          {
             "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string",
-            "named": true
-          },
-          {
-            "type": "fenced_string",
-            "named": true
-          },
-          {
-            "type": "greek",
             "named": true
           },
           {
@@ -1134,10 +877,6 @@
             "named": true
           },
           {
-            "type": "math_symbol",
-            "named": true
-          },
-          {
             "type": "measurement",
             "named": true
           },
@@ -1146,15 +885,11 @@
             "named": true
           },
           {
-            "type": "pictograph",
-            "named": true
-          },
-          {
             "type": "range",
             "named": true
           },
           {
-            "type": "single_quoted_string",
+            "type": "string_literal",
             "named": true
           },
           {
@@ -1250,23 +985,7 @@
     "named": false
   },
   {
-    "type": "backticked_string",
-    "named": true
-  },
-  {
     "type": "decimal",
-    "named": true
-  },
-  {
-    "type": "double_quoted_string",
-    "named": true
-  },
-  {
-    "type": "fenced_string",
-    "named": true
-  },
-  {
-    "type": "greek",
     "named": true
   },
   {
@@ -1278,10 +997,6 @@
     "named": true
   },
   {
-    "type": "math_symbol",
-    "named": true
-  },
-  {
     "type": "measurement",
     "named": true
   },
@@ -1290,19 +1005,7 @@
     "named": true
   },
   {
-    "type": "pictograph",
-    "named": true
-  },
-  {
-    "type": "single_quoted_string",
-    "named": true
-  },
-  {
     "type": "symbol",
-    "named": true
-  },
-  {
-    "type": "tagged_string",
     "named": true
   },
   {

@@ -8,6 +8,16 @@ module.exports = grammar({
       repeat($.pattern)
     ),
 
+    // delimiters and other structural characters 
+    _open_bracket: $ => "[",
+    _close_bracket: $ => "]", 
+    _open_parens: $ => "(",
+    _close_parens: $ => ")",
+    _open_brace: $ => "{",
+    _close_brace: $ => "}",
+
+    _binder: $ => /::?/,
+
     pattern: $ => commaSep1($.pattern_element),
 
     pattern_element: $ => seq(
@@ -22,14 +32,15 @@ module.exports = grammar({
     // ABKNOTE -- consider the naming of the two parts of a subject
     // attributes & association
     // information & association
-    subject: $ => seq("[", field("attributes", optional($._attributes)), field("association", optional($._association)),"]"),
+
+    subject: $ => seq($._open_bracket, field("attributes", optional($._attributes)), field("association", optional($._association)), $._close_bracket),
 
     annotation: $ => seq(
       "@",
       field('key', $.symbol),
-      "(",
+      $._open_parens,
       field('value', $._value),
-      ")"
+      $._close_parens
     ),
     
     _path: $ => choice(
@@ -37,9 +48,10 @@ module.exports = grammar({
       $.node
     ),
 
-    node: $ => seq(token("("), field("attributes", optional($._attributes)), token(")")),
 
-    relationship: $ => seq(field("left", $.node), field("value", $._relationship_value), field("right", $._path)),
+    node: $ => seq($._open_parens, field("attributes", optional($._attributes)), $._close_parens),
+
+    relationship: $ => seq(field("left", $.node), field("kind", $._relationship_kind), field("right", $._path)),
     
     _association: $ => seq(
       token("|"),
@@ -59,24 +71,20 @@ module.exports = grammar({
     _value: $ => choice(
       prec.right(2, $.range),
       prec.right(1, $._numeric_literal),
-      $.symbol,
-      $._string_literal,
-      $.math_symbol,
-      $.greek,
-      $.pictograph
+      prec(2, $.tagged_string),
+      prec(1, $.symbol),
+      $.string_literal
     ),
 
-    _binder: $ => token(/::?/),
+    labels: $ => repeat1($._label),
 
-    labels: $ => repeat1($.label),
+    _label: $ => seq($._binder, $.symbol),
 
-    label: $ => seq($._binder, field("symbol", $.symbol)),
-
-    record: $ => seq("{", commaSep($.property), "}"),
+    record: $ => seq($._open_brace, commaSep($.property), $._close_brace),
 
     _key: $ => choice(
       $.symbol,
-      $._string_literal
+      $.string_literal
     ),
 
     property: $ => seq(
@@ -86,11 +94,6 @@ module.exports = grammar({
     ),
 
     symbol: $ => token(/[a-zA-Z_][0-9a-zA-Z_.\-@]*/),
-
-
-    greek: $ => token(/[\u03B1-\u03C9\u0391-\u03A9]/),
-    math_symbol: $ => token(/\p{Other_Math}/),
-    pictograph: $ => token(/[\u2650-\u26FF]/),
 
     range: $ => choice(
       seq(field("lower", $._numeric_literal), "..", field("upper", $._numeric_literal)),
@@ -132,74 +135,68 @@ module.exports = grammar({
       return token(measurement);
     },
 
-    _string_literal: $ => choice(
-      $.single_quoted_string,
-      $.double_quoted_string,
-      $.backticked_string,
-      $.tagged_string,
-      $.fenced_string
+    string_literal: $ => choice(
+      $._single_quoted_string,
+      $._double_quoted_string,
+      $._backticked_string,
+      $._fenced_string
     ),
 
-    single_quoted_string: $ => {
+    _single_quoted_string: $ => {
       const quoted = /'(\\['bfnrt/\\]|[^'\n])*'/;      
       return token(quoted);
     },
 
-    double_quoted_string: $ => {
+    _double_quoted_string: $ => {
       const quoted = /"(\\["bfnrt/\\]|[^"\n])*"/;      
       return token(quoted);
     },
 
-    backticked_string: $ => {
+    _backticked_string: $ => {
       const quoted = /`(\\[`bfnrt/\\]|[^`\n])*`/;      
       return token(quoted);
     },
 
-    tagged_string: $ => {
-      const tagged = /[a-zA-Z@][0-9a-zA-Z_.@]*`[^`\n]*`/;      
-      return token(tagged);
-    },
-
-    fenced_string: $ => {
+    _fenced_string: $ => {
       const fenced = /```(\\[`bfnrt/\\]|[^`])*```/;      
       return token(fenced);
     },
 
-    _relationship_value: $ => choice(
-      alias($.single_undirected, $.undirected),
-      alias($.double_undirected, $.undirected),
-      alias($.squiggle_undirected, $.undirected),
-      alias($.single_bidirectional, $.bidirectional),
-      alias($.double_bidirectional, $.bidirectional),
-      alias($.squiggle_bidirectional, $.bidirectional),
-      alias($.single_left, $.left),
-      alias($.double_left, $.left),
-      alias($.squiggle_left, $.left),
-      alias($.single_right, $.right),
-      alias($.double_right, $.right),
-      alias($.squiggle_right, $.right)
+    tagged_string: $ => seq(
+      field("tag", $.symbol),
+      field("string", alias($._backticked_string, $.string_literal))
+    ),
+
+    _relationship_kind: $ => choice(
+      $.undirected_arrow,
+      $.left_arrow,
+      $.right_arrow,
+      $.bidirectional_arrow
     ),
     
-    // undirected: $ => alias(choice(
-    //   $.single_undirected,
-    //   $.double_undirected,
-    //   $.squiggle_undirected
-    // ), $.undirected),
+    undirected_arrow: $ => choice(
+      seq("-", optional(seq("[", $._attributes, "]")), "-"),
+      seq("=", optional(seq("[", $._attributes, "]")), "="),
+      seq("~", optional(seq("[", $._attributes, "]")), "~") 
+    ),
 
-    single_undirected: $ => seq("-", optional(seq("[", $._attributes, "]")), "-"),
-    single_bidirectional: $ => seq("<-", optional(seq("[", $._attributes, "]")), "->"),
-    single_right: $ => seq("-", optional(seq("[", $._attributes, "]")), "->"),
-    single_left: $ => seq("<-", optional(seq("[", $._attributes, "]")), "-"),
+    right_arrow: $ => choice(
+      seq("-", optional(seq("[", $._attributes, "]")), "->"),
+      seq("=", optional(seq("[", $._attributes, "]")), "=>"),
+      seq("~", optional(seq("[", $._attributes, "]")), "~>"),
+    ),
 
-    double_undirected: $ => seq("=", optional(seq("[", $._attributes, "]")), "="),
-    double_bidirectional: $ => seq("<=", optional(seq("[", $._attributes, "]")), "=>"),
-    double_right: $ => seq("=", optional(seq("[", $._attributes, "]")), "=>"),
-    double_left: $ => seq("<=", optional(seq("[", $._attributes, "]")), "="),
+    left_arrow: $ => choice(
+      seq("<-", optional(seq("[", $._attributes, "]")), "-"),
+      seq("<=", optional(seq("[", $._attributes, "]")), "="),
+      seq("<~", optional(seq("[", $._attributes, "]")), "~"),
+    ),
 
-    squiggle_undirected: $ => seq("~", optional(seq("[", $._attributes, "]")), "~"),
-    squiggle_bidirectional: $ => seq("<~", optional(seq("[", $._attributes, "]")), "~>"),
-    squiggle_right: $ => seq("~", optional(seq("[", $._attributes, "]")), "~>"),
-    squiggle_left: $ => seq("<~", optional(seq("[", $._attributes, "]")), "~"),
+    bidirectional_arrow: $ => choice(
+      seq("<-", optional(seq("[", $._attributes, "]")), "->"),
+      seq("<=", optional(seq("[", $._attributes, "]")), "=>"),
+      seq("<~", optional(seq("[", $._attributes, "]")), "~>"),
+    )
   }
 });
 

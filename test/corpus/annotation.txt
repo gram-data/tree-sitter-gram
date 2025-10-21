@@ -10,7 +10,7 @@ Annotate a single node with a named string value
 (gram
   (pattern
     (pattern_element
-      (annotation (symbol) (double_quoted_string))
+      (annotation (symbol) (string_literal))
       (node)
     )
   )
@@ -29,7 +29,7 @@ Annotate a single node with a named string & integer value
 (gram
   (pattern
     (pattern_element
-      (annotation (symbol) (double_quoted_string))
+      (annotation (symbol) (string_literal))
       (annotation (symbol) (integer))
       (node)
     )
@@ -48,10 +48,10 @@ Annotate a relationship
 (gram
   (pattern
     (pattern_element
-      (annotation (symbol) (double_quoted_string))
+      (annotation (symbol) (string_literal))
       (relationship
         (node)
-        (right)
+        (right_arrow)
         (node)
       )
     )
@@ -71,8 +71,8 @@ Annotate a node twice, stacking the annotations
 (gram
   (pattern
     (pattern_element 
-      (annotation (symbol) (double_quoted_string))
-      (annotation (symbol) (double_quoted_string))
+      (annotation (symbol) (string_literal))
+      (annotation (symbol) (string_literal))
       (node)
     )
   )
@@ -90,7 +90,7 @@ Annotate an empty subject
 (gram
   (pattern
     (pattern_element
-      (annotation (symbol) (double_quoted_string))
+      (annotation (symbol) (string_literal))
       (subject)
     )
   )
@@ -111,7 +111,7 @@ Annotate an in-line subject member
       (symbol)
       (pattern
         (pattern_element
-          (annotation (symbol) (double_quoted_string))
+          (annotation (symbol) (string_literal))
           (node)
         )
       )

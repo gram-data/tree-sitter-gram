@@ -32,7 +32,7 @@ Record with double-quoted string property
 ---
 
 (gram
-  (record (property (symbol) (double_quoted_string)))
+  (record (property (symbol) (string_literal)))
 )
 
 ==================
@@ -58,7 +58,7 @@ Record followed by a Node
 ---
 
 (gram
-  (record (property (symbol) (double_quoted_string)))
+  (record (property (symbol) (string_literal)))
   (pattern (pattern_element (node)))
 )
 

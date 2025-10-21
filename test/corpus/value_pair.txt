@@ -52,7 +52,7 @@ Value pair: key names which start with '@' must be quoted
 (gram
   (pattern
     (pattern_element (node (record 
-      (property (double_quoted_string) (double_quoted_string)) 
+      (property (string_literal) (string_literal)) 
     )))
   )
 )

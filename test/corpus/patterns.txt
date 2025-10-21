@@ -53,7 +53,7 @@ Pattern: one relationship
   (pattern
     (pattern_element (relationship
       (node)
-      (right)
+      (right_arrow)
       (node)
     ))
   )
@@ -72,12 +72,12 @@ Pattern: 2 single-hop relationships
   (pattern
     (pattern_element (relationship
       (node)
-      (right)
+      (right_arrow)
       (node)
     ))
     (pattern_element (relationship
       (node)
-      (right)
+      (right_arrow)
       (node)
     ))
   )
@@ -96,10 +96,10 @@ Pattern: two-hop path
   (pattern
     (pattern_element (relationship
       (node)
-      (right)
+      (right_arrow)
       (relationship
         (node)
-        (right)
+        (right_arrow)
         (node)
       )
     ))
@@ -121,11 +121,11 @@ Pattern: 2 annotated nodes
 (gram
   (pattern
     (pattern_element
-      (annotation (symbol) (double_quoted_string))
+      (annotation (symbol) (string_literal))
       (node)
     )
     (pattern_element
-      (annotation (symbol) (double_quoted_string))
+      (annotation (symbol) (string_literal))
       (node)
     )
 

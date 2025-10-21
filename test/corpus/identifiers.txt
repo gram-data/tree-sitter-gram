@@ -83,7 +83,7 @@ Identifier using backticks
 ---
 
 (gram
-  (pattern (pattern_element (node (backticked_string))))
+  (pattern (pattern_element (node (string_literal))))
 )
 
 
@@ -96,7 +96,7 @@ Identifier using backticks with escaped backtick
 ---
 
 (gram
-  (pattern (pattern_element (node (backticked_string))))
+  (pattern (pattern_element (node (string_literal))))
 )
 
 ==================
@@ -108,7 +108,7 @@ Identifier using double-quotes
 ---
 
 (gram
-  (pattern (pattern_element (node (double_quoted_string))))
+  (pattern (pattern_element (node (string_literal))))
 )
 
 
@@ -122,60 +122,6 @@ Identifier using double-quotes with escaped double-quote
 ---
 
 (gram
-  (pattern (pattern_element (node (double_quoted_string))))
+  (pattern (pattern_element (node (string_literal))))
 )
 
-==================
-Identifiers using various greek characters 
-==================
-
-(π),(Α),(Ω),(α),(ω)
-
----
-
-(gram
-  (pattern 
-    (pattern_element (node (greek)))
-    (pattern_element (node (greek)))
-    (pattern_element (node (greek)))
-    (pattern_element (node (greek)))
-    (pattern_element (node (greek)))
-  )
-)
-
-
-==================
-Identifiers using fancy math_symbols
-==================
-
-(𝐀),(𝐴),(𝑨),(𝒜),(𝓐),(𝓪),(𝔄)
-
----
-
-(gram
-  (pattern 
-    (pattern_element (node (math_symbol)))
-    (pattern_element (node (math_symbol)))
-    (pattern_element (node (math_symbol)))
-    (pattern_element (node (math_symbol)))
-    (pattern_element (node (math_symbol)))
-    (pattern_element (node (math_symbol)))
-    (pattern_element (node (math_symbol)))
-  )
-)
-
-
-==================
-Identifiers using emojis
-:error
-==================
-
-(😀)
-                                                                                                                                                                                                                                                                                                                                                                      
----
-
-(gram
-  (pattern 
-    (pattern_element (node (emoji)))
-  )
-)
