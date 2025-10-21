@@ -10,11 +10,11 @@ Annotate a single node with a named string value
 (gram
   (pattern
     (pattern_element
-      (annotation (symbol) (string_literal))
-      (node)
-    )
-  )
-)
+      annotations: (annotation
+        key: (symbol)
+        value: (string_literal
+          content: (string_content)))
+      element: (node))))
 
 ==================
 Annotate a single node with a named string & integer value
@@ -29,12 +29,14 @@ Annotate a single node with a named string & integer value
 (gram
   (pattern
     (pattern_element
-      (annotation (symbol) (string_literal))
-      (annotation (symbol) (integer))
-      (node)
-    )
-  )
-)
+      annotations: (annotation
+        key: (symbol)
+        value: (string_literal
+          content: (string_content)))
+      annotations: (annotation
+        key: (symbol)
+        value: (integer))
+      element: (node))))
 
 ==================
 Annotate a relationship
@@ -48,15 +50,14 @@ Annotate a relationship
 (gram
   (pattern
     (pattern_element
-      (annotation (symbol) (string_literal))
-      (relationship
-        (node)
-        (right_arrow)
-        (node)
-      )
-    )
-  )
-)
+      annotations: (annotation
+        key: (symbol)
+        value: (string_literal
+          content: (string_content)))
+      element: (relationship
+        left: (node)
+        kind: (right_arrow)
+        right: (node)))))
 
 ==================
 Annotate a node twice, stacking the annotations
@@ -70,13 +71,16 @@ Annotate a node twice, stacking the annotations
 
 (gram
   (pattern
-    (pattern_element 
-      (annotation (symbol) (string_literal))
-      (annotation (symbol) (string_literal))
-      (node)
-    )
-  )
-)
+    (pattern_element
+      annotations: (annotation
+        key: (symbol)
+        value: (string_literal
+          content: (string_content)))
+      annotations: (annotation
+        key: (symbol)
+        value: (string_literal
+          content: (string_content)))
+      element: (node))))
 
 ==================
 Annotate an empty subject
@@ -90,12 +94,11 @@ Annotate an empty subject
 (gram
   (pattern
     (pattern_element
-      (annotation (symbol) (string_literal))
-      (subject)
-    )
-  )
-)
-
+      annotations: (annotation
+        key: (symbol)
+        value: (string_literal
+          content: (string_content)))
+      element: (subject))))
 
 ==================
 Annotate an in-line subject member
@@ -107,15 +110,13 @@ Annotate an in-line subject member
 
 (gram
   (pattern
-    (pattern_element (subject
-      (symbol)
-      (pattern
-        (pattern_element
-          (annotation (symbol) (string_literal))
-          (node)
-        )
-      )
-    ))
-  )
-)
-
+    (pattern_element
+      element: (subject
+        identifier: (symbol)
+        association: (pattern
+          (pattern_element
+            annotations: (annotation
+              key: (symbol)
+              value: (string_literal
+                content: (string_content)))
+            element: (node)))))))

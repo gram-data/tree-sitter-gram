@@ -696,7 +696,18 @@
   {
     "type": "string_literal",
     "named": true,
-    "fields": {}
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "string_content",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "subject",
@@ -834,12 +845,12 @@
     "type": "tagged_string",
     "named": true,
     "fields": {
-      "string": {
+      "content": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
-            "type": "string_literal",
+            "type": "string_content",
             "named": true
           }
         ]
@@ -925,6 +936,18 @@
     }
   },
   {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "'",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -985,6 +1008,14 @@
     "named": false
   },
   {
+    "type": "`",
+    "named": false
+  },
+  {
+    "type": "```",
+    "named": false
+  },
+  {
     "type": "decimal",
     "named": true
   },
@@ -1002,6 +1033,10 @@
   },
   {
     "type": "octal",
+    "named": true
+  },
+  {
+    "type": "string_content",
     "named": true
   },
   {

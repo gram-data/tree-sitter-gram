@@ -7,19 +7,16 @@ Graph: top-level record
 ---
 
 (gram
-  root: (record 
-    (property 
-      key: (symbol) 
-      value: (string_literal)) 
-    (property 
-      key: (symbol) 
+  root: (record
+    (property
+      key: (symbol)
+      value: (string_literal
+        content: (string_content)))
+    (property
+      key: (symbol)
       value: (tagged_string
         tag: (symbol)
-        string: (string_literal))
-      ) 
-  )
-)
-
+        content: (string_content)))))
 
 ==================
 Graph: top-level record and a node
@@ -32,12 +29,20 @@ Graph: top-level record and a node
 ---
 
 (gram
-  (record 
-    (property (symbol) (string_literal)) 
-    (property (symbol) (tagged_string (symbol) (string_literal))) 
-  )
-  (pattern (pattern_element (node (symbol))))
-)
+  root: (record
+    (property
+      key: (symbol)
+      value: (string_literal
+        content: (string_content)))
+    (property
+      key: (symbol)
+      value: (tagged_string
+        tag: (symbol)
+        content: (string_content))))
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (symbol)))))
 
 ==================
 Graph: top-level record and a path
@@ -50,18 +55,24 @@ Graph: top-level record and a path
 ---
 
 (gram
-  (record 
-    (property (symbol) (string_literal)) 
-    (property (symbol) (tagged_string (symbol) (string_literal))) 
-  )
-  (pattern 
-    (pattern_element (relationship 
-      (node (symbol))
-      (right_arrow)
-      (node (symbol))
-    ))
-  )
-)
+  root: (record
+    (property
+      key: (symbol)
+      value: (string_literal
+        content: (string_content)))
+    (property
+      key: (symbol)
+      value: (tagged_string
+        tag: (symbol)
+        content: (string_content))))
+  (pattern
+    (pattern_element
+      element: (relationship
+        left: (node
+          identifier: (symbol))
+        kind: (right_arrow)
+        right: (node
+          identifier: (symbol))))))
 
 ==================
 Graph: top-level record, a path and a path
@@ -76,27 +87,30 @@ Graph: top-level record, a path and a path
 ---
 
 (gram
-  (record 
-    (property (symbol) (string_literal)) 
-    (property (symbol) (tagged_string (symbol) (string_literal))) 
-  )
-  (pattern 
-    (pattern_element (relationship 
-      (node (symbol))
-      (right_arrow)
-      (node (symbol))
-    ))
-  )
+  root: (record
+    (property
+      key: (symbol)
+      value: (string_literal
+        content: (string_content)))
+    (property
+      key: (symbol)
+      value: (tagged_string
+        tag: (symbol)
+        content: (string_content))))
   (pattern
-    (pattern_element 
-      (subject 
-        (symbol)
-        (pattern 
-          (pattern_element (symbol)) 
-          (pattern_element (symbol))
-        )
-      )
-    )
-  )
-)
-
+    (pattern_element
+      element: (relationship
+        left: (node
+          identifier: (symbol))
+        kind: (right_arrow)
+        right: (node
+          identifier: (symbol)))))
+  (pattern
+    (pattern_element
+      element: (subject
+        identifier: (symbol)
+        association: (pattern
+          (pattern_element
+            element: (symbol))
+          (pattern_element
+            element: (symbol)))))))

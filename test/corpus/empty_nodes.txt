@@ -8,9 +8,8 @@ Empty nodes: Single empty node pattern
 
 (gram
   (pattern
-    (pattern_element (node))
-  )
-)
+    (pattern_element
+      element: (node))))
 
 ==================
 Empty nodes: Two empty node patterns
@@ -23,12 +22,11 @@ Empty nodes: Two empty node patterns
 
 (gram
   (pattern
-    (pattern_element (node))
-  )
+    (pattern_element
+      element: (node)))
   (pattern
-    (pattern_element (node))
-  )
-)
+    (pattern_element
+      element: (node))))
 
 ==================
 Empty nodes: Pair of empty nodes in a single pattern
@@ -40,8 +38,7 @@ Empty nodes: Pair of empty nodes in a single pattern
 
 (gram
   (pattern
-    (pattern_element (node))
-    (pattern_element (node))
-  )
-)
-
+    (pattern_element
+      element: (node))
+    (pattern_element
+      element: (node))))

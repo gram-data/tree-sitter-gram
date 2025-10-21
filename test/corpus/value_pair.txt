@@ -1,4 +1,3 @@
-
 ==================
 Value pair: define values
 ==================
@@ -9,15 +8,18 @@ Value pair: define values
 
 (gram
   (pattern
-    (pattern_element (node (record 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-    )))
-  )
-)
+    (pattern_element
+      element: (node
+        record: (record
+          (property
+            key: (symbol)
+            value: (integer))
+          (property
+            key: (symbol)
+            value: (integer)))))))
 
 ==================
-Value pair: declare values 
+Value pair: declare values
 ==================
 
 ({ k1 :: 1, k2 :: 2,  k3 :: number })
@@ -26,20 +28,18 @@ Value pair: declare values
 
 (gram
   (pattern
-    (pattern_element (node (record 
-      (property (symbol) (integer)) 
-      (property (symbol) (integer)) 
-      (property (symbol) (symbol)) 
-    )))
-  )
-)
-
-==================
-Value pair: un-quoted key names can NOT start with '@'
-:error
-==================
-
-({ @k1 : "first number" })
+    (pattern_element
+      element: (node
+        record: (record
+          (property
+            key: (symbol)
+            value: (integer))
+          (property
+            key: (symbol)
+            value: (integer))
+          (property
+            key: (symbol)
+            value: (symbol)))))))
 
 ==================
 Value pair: key names which start with '@' must be quoted
@@ -51,9 +51,11 @@ Value pair: key names which start with '@' must be quoted
 
 (gram
   (pattern
-    (pattern_element (node (record 
-      (property (string_literal) (string_literal)) 
-    )))
-  )
-)
-
+    (pattern_element
+      element: (node
+        record: (record
+          (property
+            key: (string_literal
+              content: (string_content))
+            value: (string_literal
+              content: (string_content))))))))

@@ -7,8 +7,7 @@ Record empty
 ---
 
 (gram
-  (record)
-)
+  root: (record))
 
 ==================
 Record with integer property
@@ -19,9 +18,10 @@ Record with integer property
 ---
 
 (gram
-  (record (property (symbol) (integer)) 
-  )
-)
+  root: (record
+    (property
+      key: (symbol)
+      value: (integer))))
 
 ==================
 Record with double-quoted string property
@@ -32,8 +32,11 @@ Record with double-quoted string property
 ---
 
 (gram
-  (record (property (symbol) (string_literal)))
-)
+  root: (record
+    (property
+      key: (symbol)
+      value: (string_literal
+        content: (string_content)))))
 
 ==================
 Record with declare separator and a symbol property
@@ -44,8 +47,10 @@ Record with declare separator and a symbol property
 ---
 
 (gram
-  (record (property (symbol) (symbol)))
-)
+  root: (record
+    (property
+      key: (symbol)
+      value: (symbol))))
 
 ==================
 Record followed by a Node
@@ -58,9 +63,14 @@ Record followed by a Node
 ---
 
 (gram
-  (record (property (symbol) (string_literal)))
-  (pattern (pattern_element (node)))
-)
+  root: (record
+    (property
+      key: (symbol)
+      value: (string_literal
+        content: (string_content))))
+  (pattern
+    (pattern_element
+      element: (node))))
 
 ==================
 Record property may not us greater than operator
@@ -70,4 +80,5 @@ Record property may not us greater than operator
 { n > 1 }
 
 ---
+
 

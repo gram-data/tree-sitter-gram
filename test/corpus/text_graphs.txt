@@ -8,13 +8,13 @@ Hello world
 
 (gram
   (pattern
-    (pattern_element (relationship
-      (node (symbol))
-      (right_arrow)
-      (node (symbol))
-    ))
-  )
-)
+    (pattern_element
+      element: (relationship
+        left: (node
+          identifier: (symbol))
+        kind: (right_arrow)
+        right: (node
+          identifier: (symbol))))))
 
 ==================
 Hello dear world
@@ -26,13 +26,14 @@ Hello dear world
 
 (gram
   (pattern
-    (pattern_element (relationship
-      (node (symbol))
-      (right_arrow (symbol))
-      (node (symbol))
-    ))
-  )
-)
+    (pattern_element
+      element: (relationship
+        left: (node
+          identifier: (symbol))
+        kind: (right_arrow
+          identifier: (symbol))
+        right: (node
+          identifier: (symbol))))))
 
 ==================
 Hello dear world over there
@@ -44,17 +45,19 @@ Hello dear world over there
 
 (gram
   (pattern
-    (pattern_element (relationship
-      (node (symbol))
-      (right_arrow (symbol))
-      (relationship
-        (node (symbol))
-        (right_arrow (symbol))
-        (node (symbol))
-      )
-    ))
-  )
-)
+    (pattern_element
+      element: (relationship
+        left: (node
+          identifier: (symbol))
+        kind: (right_arrow
+          identifier: (symbol))
+        right: (relationship
+          left: (node
+            identifier: (symbol))
+          kind: (right_arrow
+            identifier: (symbol))
+          right: (node
+            identifier: (symbol)))))))
 
 ==================
 Hello "dear world" "over there"
@@ -66,10 +69,13 @@ Hello "dear world" "over there"
 
 (gram
   (pattern
-    (pattern_element (relationship
-      (node (symbol))
-      (right_arrow (string_literal))
-      (node (string_literal))
-    ))
-  )
-)
+    (pattern_element
+      element: (relationship
+        left: (node
+          identifier: (symbol))
+        kind: (right_arrow
+          identifier: (string_literal
+            content: (string_content)))
+        right: (node
+          identifier: (string_literal
+            content: (string_content)))))))

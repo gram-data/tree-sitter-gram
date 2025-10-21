@@ -1,4 +1,3 @@
-
 ==================
 Numbers: integers
 ==================
@@ -9,10 +8,12 @@ Numbers: integers
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (integer)))))
-  )
-)
-
+    (pattern_element
+      element: (node
+        record: (record
+          (property
+            key: (symbol)
+            value: (integer)))))))
 
 ==================
 Numbers: decimal
@@ -24,9 +25,12 @@ Numbers: decimal
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (decimal)))))
-  )
-)
+    (pattern_element
+      element: (node
+        record: (record
+          (property
+            key: (symbol)
+            value: (decimal)))))))
 
 ==================
 Number: hexadecimal
@@ -38,9 +42,12 @@ Number: hexadecimal
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (hexadecimal)))))
-  )
-)
+    (pattern_element
+      element: (node
+        record: (record
+          (property
+            key: (symbol)
+            value: (hexadecimal)))))))
 
 ==================
 Number: octal with an '0'
@@ -52,10 +59,12 @@ Number: octal with an '0'
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (octal)))))
-  )
-)
-
+    (pattern_element
+      element: (node
+        record: (record
+          (property
+            key: (symbol)
+            value: (octal)))))))
 
 ==================
 Number: measurements are numbers with some letters as a suffix
@@ -67,6 +76,9 @@ Number: measurements are numbers with some letters as a suffix
 
 (gram
   (pattern
-    (pattern_element (node (record (property (symbol) (measurement)))))
-  )
-)
+    (pattern_element
+      element: (node
+        record: (record
+          (property
+            key: (symbol)
+            value: (measurement)))))))

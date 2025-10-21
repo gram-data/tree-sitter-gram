@@ -1,12 +1,13 @@
-
 ==================
-Identifier cannot start with '@' 
+Identifier cannot start with '@'
 :error
 ==================
 
 (@neo4j.com)
 
 ---
+
+
 
 ==================
 Identifier can '@' after first character
@@ -17,8 +18,10 @@ Identifier can '@' after first character
 ---
 
 (gram
-  (pattern (pattern_element (node (symbol))))
-)
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (symbol)))))
 
 ==================
 Identifier using snakecase '_' and mixed case
@@ -30,10 +33,14 @@ Identifier using snakecase '_' and mixed case
 ---
 
 (gram
-  (pattern (pattern_element (node (symbol))))
-  (pattern (pattern_element (node (symbol))))
-)
-
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (symbol))))
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (symbol)))))
 
 ==================
 Identifier using kebabcase '-' and mixed case
@@ -44,9 +51,10 @@ Identifier using kebabcase '-' and mixed case
 ---
 
 (gram
-  (pattern (pattern_element (node (symbol))))
-)
-
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (symbol)))))
 
 ==================
 Identifier using numbers
@@ -57,9 +65,10 @@ Identifier using numbers
 ---
 
 (gram
-  (pattern (pattern_element (node (integer))))
-)
-
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (integer)))))
 
 ==================
 Identifier using numbers with units
@@ -70,9 +79,10 @@ Identifier using numbers with units
 ---
 
 (gram
-  (pattern (pattern_element (node (measurement))))
-)
-
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (measurement)))))
 
 ==================
 Identifier using backticks
@@ -83,9 +93,11 @@ Identifier using backticks
 ---
 
 (gram
-  (pattern (pattern_element (node (string_literal))))
-)
-
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (string_literal
+          content: (string_content))))))
 
 ==================
 Identifier using backticks with escaped backtick
@@ -96,8 +108,11 @@ Identifier using backticks with escaped backtick
 ---
 
 (gram
-  (pattern (pattern_element (node (string_literal))))
-)
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (string_literal
+          content: (string_content))))))
 
 ==================
 Identifier using double-quotes
@@ -108,10 +123,11 @@ Identifier using double-quotes
 ---
 
 (gram
-  (pattern (pattern_element (node (string_literal))))
-)
-
-
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (string_literal
+          content: (string_content))))))
 
 ==================
 Identifier using double-quotes with escaped double-quote
@@ -122,6 +138,8 @@ Identifier using double-quotes with escaped double-quote
 ---
 
 (gram
-  (pattern (pattern_element (node (string_literal))))
-)
-
+  (pattern
+    (pattern_element
+      element: (node
+        identifier: (string_literal
+          content: (string_content))))))

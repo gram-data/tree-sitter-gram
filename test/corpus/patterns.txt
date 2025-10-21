@@ -8,9 +8,8 @@ Pattern: Single member subject
 
 (gram
   (pattern
-    (pattern_element (subject))
-  )
-)
+    (pattern_element
+      element: (subject))))
 
 ==================
 Pattern: single member node
@@ -22,9 +21,8 @@ Pattern: single member node
 
 (gram
   (pattern
-    (pattern_element (node))
-  )
-)
+    (pattern_element
+      element: (node))))
 
 ==================
 Pattern: Two node members
@@ -36,10 +34,10 @@ Pattern: Two node members
 
 (gram
   (pattern
-    (pattern_element (node))
-    (pattern_element (node))
-  )
-)
+    (pattern_element
+      element: (node))
+    (pattern_element
+      element: (node))))
 
 ==================
 Pattern: one relationship
@@ -51,14 +49,11 @@ Pattern: one relationship
 
 (gram
   (pattern
-    (pattern_element (relationship
-      (node)
-      (right_arrow)
-      (node)
-    ))
-  )
-)
-
+    (pattern_element
+      element: (relationship
+        left: (node)
+        kind: (right_arrow)
+        right: (node)))))
 
 ==================
 Pattern: 2 single-hop relationships
@@ -70,19 +65,16 @@ Pattern: 2 single-hop relationships
 
 (gram
   (pattern
-    (pattern_element (relationship
-      (node)
-      (right_arrow)
-      (node)
-    ))
-    (pattern_element (relationship
-      (node)
-      (right_arrow)
-      (node)
-    ))
-  )
-)
-
+    (pattern_element
+      element: (relationship
+        left: (node)
+        kind: (right_arrow)
+        right: (node)))
+    (pattern_element
+      element: (relationship
+        left: (node)
+        kind: (right_arrow)
+        right: (node)))))
 
 ==================
 Pattern: two-hop path
@@ -94,20 +86,14 @@ Pattern: two-hop path
 
 (gram
   (pattern
-    (pattern_element (relationship
-      (node)
-      (right_arrow)
-      (relationship
-        (node)
-        (right_arrow)
-        (node)
-      )
-    ))
-  )
-)
-
-
-
+    (pattern_element
+      element: (relationship
+        left: (node)
+        kind: (right_arrow)
+        right: (relationship
+          left: (node)
+          kind: (right_arrow)
+          right: (node))))))
 
 ==================
 Pattern: 2 annotated nodes
@@ -121,14 +107,14 @@ Pattern: 2 annotated nodes
 (gram
   (pattern
     (pattern_element
-      (annotation (symbol) (string_literal))
-      (node)
-    )
+      annotations: (annotation
+        key: (symbol)
+        value: (string_literal
+          content: (string_content)))
+      element: (node))
     (pattern_element
-      (annotation (symbol) (string_literal))
-      (node)
-    )
-
-  )
-)
-
+      annotations: (annotation
+        key: (symbol)
+        value: (string_literal
+          content: (string_content)))
+      element: (node))))

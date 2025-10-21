@@ -10,6 +10,8 @@ GQL Node Type Definition
 
 ---
 
+
+
 ==================
 GQL Relationship Type Definition
 ==================
@@ -20,13 +22,18 @@ GQL Relationship Type Definition
 
 (gram
   (pattern
-    (pattern_element (relationship
-      (node (labels (symbol)))
-      (right_arrow
-        (labels (symbol))
-        (record (property (symbol) (symbol)))
-      )
-      (node (labels (symbol)))
-    ))
-  )
-)
+    (pattern_element
+      element: (relationship
+        left: (node
+          labels: (labels
+            (symbol)))
+        kind: (right_arrow
+          labels: (labels
+            (symbol))
+          record: (record
+            (property
+              key: (symbol)
+              value: (symbol))))
+        right: (node
+          labels: (labels
+            (symbol)))))))

@@ -21,7 +21,7 @@ module.exports = grammar({
     pattern: $ => commaSep1($.pattern_element),
 
     pattern_element: $ => seq(
-      field("annotations", optional(repeat($.annotation))), 
+      field("annotations", repeat($.annotation)),
       field("element", choice(
         $.subject,
         $._path,
@@ -73,7 +73,7 @@ module.exports = grammar({
       prec.right(1, $._numeric_literal),
       prec(2, $.tagged_string),
       prec(1, $.symbol),
-      $.string_literal
+      $.string_literal,
     ),
 
     labels: $ => repeat1($._label),
@@ -142,29 +142,54 @@ module.exports = grammar({
       $._fenced_string
     ),
 
-    _single_quoted_string: $ => {
-      const quoted = /'(\\['bfnrt/\\]|[^'\n])*'/;      
-      return token(quoted);
-    },
+    _single_quoted_string: $ => delimit_string(
+      alias($._single_quoted_text, $.string_content),
+      "'"
+    ),
 
-    _double_quoted_string: $ => {
-      const quoted = /"(\\["bfnrt/\\]|[^"\n])*"/;      
-      return token(quoted);
-    },
+    _single_quoted_text: $ => token.immediate(/(\\['bfnrt/\\]|[^'\\\n])*/),
 
-    _backticked_string: $ => {
-      const quoted = /`(\\[`bfnrt/\\]|[^`\n])*`/;      
-      return token(quoted);
-    },
+    _double_quoted_string: $ => delimit_string(
+      alias($._double_quoted_text, $.string_content),
+      "\""
+    ),
 
-    _fenced_string: $ => {
-      const fenced = /```(\\[`bfnrt/\\]|[^`])*```/;      
-      return token(fenced);
-    },
+    _double_quoted_text: $ => token.immediate(/(\\["bfnrt/\\]|[^"\\\n])*/),
 
-    tagged_string: $ => seq(
-      field("tag", $.symbol),
-      field("string", alias($._backticked_string, $.string_literal))
+    _backticked_string: $ => delimit_string(
+      alias($._backticked_text, $.string_content),
+      "`"
+    ),
+
+    _backticked_text: $ => token.immediate(/(\\[`bfnrt/\\]|[^`\\\n])*/),
+
+    _fenced_string: $ => seq("```", $._fenced_string_body),
+
+    _fenced_string_body: $ => seq(
+      "\n",
+      field(
+        "content",
+        optional(alias($._fenced_string_content, $.string_content))
+      ),
+      "```"
+    ),
+
+    _fenced_string_content: $ => token.immediate(/([^`]|`[^`]|``[^`])+/),
+
+    tagged_string: $ => choice(
+      seq(
+        field("tag", $.symbol),
+        "`",
+        field("content", alias($._backticked_text, $.string_content)),
+        "`"
+      ),
+      seq(
+        "```",
+        field("tag", $.symbol),
+        "\n",
+        field("content", optional(alias($._fenced_string_content, $.string_content))),
+        "```"
+      )
     ),
 
     _relationship_kind: $ => choice(
@@ -200,6 +225,9 @@ module.exports = grammar({
   }
 });
 
+function delimit_string(rule, delimiter) {
+  return seq(delimiter, field("content", rule), delimiter);
+}
 /**
  * Creates a rule to match one or more of the rules separated by a comma
  *
