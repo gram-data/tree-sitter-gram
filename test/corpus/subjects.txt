@@ -74,10 +74,11 @@ Subject: complete subject with annotation, attributes, and a qualified associati
 (gram
   (pattern
     (pattern_element
-      annotations: (annotation
-        key: (symbol)
-        value: (string_literal
-          content: (string_content)))
+      annotations: (annotations
+        (annotation
+          key: (symbol)
+          value: (string_literal
+            content: (string_content))))
       element: (subject
         identifier: (symbol)
         labels: (labels

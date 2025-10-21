@@ -58,6 +58,21 @@
     }
   },
   {
+    "type": "annotations",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "bidirectional_arrow",
     "named": true,
     "fields": {
@@ -373,11 +388,11 @@
     "named": true,
     "fields": {
       "annotations": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "annotation",
+            "type": "annotations",
             "named": true
           }
         ]

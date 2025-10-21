@@ -107,14 +107,16 @@ Pattern: 2 annotated nodes
 (gram
   (pattern
     (pattern_element
-      annotations: (annotation
-        key: (symbol)
-        value: (string_literal
-          content: (string_content)))
+      annotations: (annotations
+        (annotation
+          key: (symbol)
+          value: (string_literal
+            content: (string_content))))
       element: (node))
     (pattern_element
-      annotations: (annotation
-        key: (symbol)
-        value: (string_literal
-          content: (string_content)))
+      annotations: (annotations
+        (annotation
+          key: (symbol)
+          value: (string_literal
+            content: (string_content))))
       element: (node))))

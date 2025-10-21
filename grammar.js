@@ -21,7 +21,7 @@ module.exports = grammar({
     pattern: $ => commaSep1($.pattern_element),
 
     pattern_element: $ => seq(
-      field("annotations", repeat($.annotation)),
+      field("annotations", optional($.annotations)),
       field("element", choice(
         $.subject,
         $._path,
@@ -77,6 +77,8 @@ module.exports = grammar({
     ),
 
     labels: $ => repeat1($._label),
+
+    annotations: $ => repeat1($.annotation),
 
     _label: $ => seq($._binder, $.symbol),
 
