@@ -19,6 +19,8 @@
 [
     "@"
     "|"
+    ":"
+    "::"
 ] @operator
 
 ; Brackets and delimiters
@@ -36,8 +38,13 @@
     ","
 ] @punctuation.delimiter
 
-; Field names in records
+; Field names in records and maps
 (property key: (symbol) @property)
+(property key: (string_literal) @property)
+(property key: (integer) @property)
+(mapping key: (symbol) @property)
+(mapping key: (string_literal) @property)
+(mapping key: (integer) @property)
 
 ; Annotation keys
 (annotation key: (symbol) @attribute)

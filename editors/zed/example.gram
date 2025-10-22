@@ -20,7 +20,7 @@
   active: true,
   started: "2023-01-15",
   skills: ["JavaScript", "Rust", "Python", "Go"],
-  manager: (:Person {name: "Jane Smith", id: 67890})
+  manager: 67890
 }]
 
 (client:Company {name: "ACME Corp"})
@@ -60,9 +60,9 @@
 })
 
 [
-  (:Book {title: "The Pragmatic Programmer", isbn: "978-0201616224"}),
-  (:Book {title: "Clean Code", isbn: "978-0132350884"}),
-  (:Book {title: "Design Patterns", isbn: "978-0201633610"})
+  "The Pragmatic Programmer",
+  "Clean Code",
+  "Design Patterns"
 ]
 
 (:Project {
@@ -73,19 +73,13 @@
     type: "git",
     url: "https://github.com/gram-data/tree-sitter-gram"
   },
-  dependencies: [
-    {name: "tree-sitter", version: "^0.25.0"},
-    {name: "node-gyp-build", version: "^4.8.4"}
-  ],
-  contributors: [
-    (:Person {name: "Andreas", role: "maintainer"}),
-    (:Person {name: "Community", role: "contributor"})
-  ]
+  dependencies: { tree-sitter: "^0.25.0", node-gyp-build: "^4.8.4" },
+  contributors: { Andreas: "maintainer", Community: "contributor" }
 })
 
 (:EdgeCases {
-  empty_array: [],
-  empty_object: {},
+  sample_array: ["example"],
+  sample_map: { a: 1 },
   unicode: "Hello 世界 🌍",
   escaped_chars: "Line 1\nLine 2\tTabbed",
   special_symbols: "@#$%^&*()_+-=[]{}|;:,.<>?",
