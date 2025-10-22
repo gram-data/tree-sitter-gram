@@ -18,7 +18,7 @@ Annotate a single node with a named string value
       element: (node))))
 
 ==================
-Annotate a single node with a named string & integer value
+Annotate a single node twice
 ==================
 
 @description("an example")
@@ -106,7 +106,8 @@ Annotate an empty subject
       element: (subject))))
 
 ==================
-Annotate an in-line subject member
+Annotate an in-line subject member is not allowed
+:error
 ==================
 
 [inline | @description("Member") () ]

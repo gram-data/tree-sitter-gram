@@ -18,6 +18,14 @@
         "required": true,
         "types": [
           {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
             "type": "decimal",
             "named": true
           },
@@ -73,6 +81,61 @@
     }
   },
   {
+    "type": "array",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "decimal",
+          "named": true
+        },
+        {
+          "type": "hexadecimal",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "measurement",
+          "named": true
+        },
+        {
+          "type": "octal",
+          "named": true
+        },
+        {
+          "type": "range",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        },
+        {
+          "type": "tagged_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "bidirectional_arrow",
     "named": true,
     "fields": {
@@ -80,6 +143,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
           {
             "type": "decimal",
             "named": true
@@ -141,6 +208,11 @@
     }
   },
   {
+    "type": "boolean_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "gram",
     "named": true,
     "root": true,
@@ -190,6 +262,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
           {
             "type": "decimal",
             "named": true
@@ -259,6 +335,10 @@
         "required": false,
         "types": [
           {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
             "type": "decimal",
             "named": true
           },
@@ -308,6 +388,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
           {
             "type": "decimal",
             "named": true
@@ -402,31 +486,7 @@
         "required": true,
         "types": [
           {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
             "type": "node",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -434,19 +494,7 @@
             "named": true
           },
           {
-            "type": "string_literal",
-            "named": true
-          },
-          {
             "type": "subject",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
             "named": true
           }
         ]
@@ -475,6 +523,14 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "array",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
           {
             "type": "decimal",
             "named": true
@@ -649,6 +705,10 @@
         "required": false,
         "types": [
           {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
             "type": "decimal",
             "named": true
           },
@@ -725,6 +785,85 @@
     }
   },
   {
+    "type": "sub_pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sub_pattern_element",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sub_pattern_element",
+    "named": true,
+    "fields": {
+      "element": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "node",
+            "named": true
+          },
+          {
+            "type": "octal",
+            "named": true
+          },
+          {
+            "type": "range",
+            "named": true
+          },
+          {
+            "type": "relationship",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "subject",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "subject",
     "named": true,
     "fields": {
@@ -732,6 +871,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
           {
             "type": "decimal",
             "named": true
@@ -782,6 +925,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
           {
             "type": "decimal",
             "named": true
@@ -835,7 +982,7 @@
         "required": false,
         "types": [
           {
-            "type": "pattern",
+            "type": "sub_pattern",
             "named": true
           },
           {
@@ -890,6 +1037,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
           {
             "type": "decimal",
             "named": true
@@ -1035,6 +1186,10 @@
     "named": true
   },
   {
+    "type": "false",
+    "named": false
+  },
+  {
     "type": "hexadecimal",
     "named": true
   },
@@ -1057,6 +1212,10 @@
   {
     "type": "symbol",
     "named": true
+  },
+  {
+    "type": "true",
+    "named": false
   },
   {
     "type": "{",

@@ -82,3 +82,21 @@ Number: measurements are numbers with some letters as a suffix
           (property
             key: (symbol)
             value: (measurement)))))))
+
+
+==================
+Number: boolean true
+==================
+
+({ great_day : true })
+
+---
+
+(gram
+  (pattern
+    (pattern_element
+      element: (node
+        record: (record
+          (property
+            key: (symbol)
+            value: (boolean_literal)))))))

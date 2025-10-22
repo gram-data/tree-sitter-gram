@@ -10,7 +10,7 @@
 (measurement) @number
 
 ; Boolean literals
-; (boolean_literal) @boolean
+(boolean_literal) @boolean
 
 ; Symbols and identifiers
 (symbol) @variable

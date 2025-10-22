@@ -109,8 +109,8 @@ Graph: top-level record, a path and a path
     (pattern_element
       element: (subject
         identifier: (symbol)
-        pattern: (pattern
-          (pattern_element
+        pattern: (sub_pattern
+          (sub_pattern_element
             element: (symbol))
-          (pattern_element
+          (sub_pattern_element
             element: (symbol)))))))

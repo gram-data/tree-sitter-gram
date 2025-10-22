@@ -88,12 +88,12 @@ Subject: complete subject with annotation, attributes, and a qualified associati
             key: (symbol)
             value: (string_literal
               content: (string_content))))
-        pattern: (pattern
-          (pattern_element
+        pattern: (sub_pattern
+          (sub_pattern_element
             element: (symbol))
-          (pattern_element
+          (sub_pattern_element
             element: (symbol))
-          (pattern_element
+          (sub_pattern_element
             element: (symbol))
-          (pattern_element
+          (sub_pattern_element
             element: (symbol)))))))

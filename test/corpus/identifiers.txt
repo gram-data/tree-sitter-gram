@@ -10,7 +10,7 @@ Identifier cannot start with '@'
 
 
 ==================
-Identifier can '@' after first character
+Identifier can use '@' after first character
 ==================
 
 (akollegger@neo4j.com)

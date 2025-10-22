@@ -1,0 +1,18 @@
+
+/////////////////////////
+// pair of nodes
+
+@pair("letters")
+(a),(b)
+
+[{pair: "letters"} | (a), (b)]
+
+(a)-[{pair:"letters"}]->(b)
+
+/////////////////////////
+// annotated relationship
+
+@related("nodes")
+(a)-->(b)
+
+[{related:"nodes"} | (a)-->(b)]

@@ -1,0 +1,12 @@
+==================
+Array of numbers in a property
+==================
+
+{ count: [1,2,3] }
+
+---
+
+(gram (record (property
+    (symbol)
+    (array (integer) (integer) (integer))
+)))
