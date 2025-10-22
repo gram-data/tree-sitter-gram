@@ -69,8 +69,7 @@ Record followed by a Node
       value: (string_literal
         content: (string_content))))
   (pattern
-    (pattern_element
-      element: (node))))
+    elements: (node)))
 
 ==================
 Record property may not us greater than operator

@@ -8,13 +8,12 @@ Number graph: 1, 2 buckle your shoe
 
 (gram
   (pattern
-    (pattern_element
-      element: (relationship
-        left: (node
-          identifier: (integer))
-        kind: (right_arrow)
-        right: (node
-          identifier: (integer))))))
+    elements: (relationship
+      left: (node
+        identifier: (integer))
+      kind: (right_arrow)
+      right: (node
+        identifier: (integer)))))
 
 ==================
 Number graph: 1 +1 = 2
@@ -26,12 +25,11 @@ Number graph: 1 +1 = 2
 
 (gram
   (pattern
-    (pattern_element
-      element: (relationship
-        left: (node
-          identifier: (integer))
-        kind: (right_arrow
-          identifier: (string_literal
-            content: (string_content)))
-        right: (node
-          identifier: (integer))))))
+    elements: (relationship
+      left: (node
+        identifier: (integer))
+      kind: (right_arrow
+        identifier: (string_literal
+          content: (string_content)))
+      right: (node
+        identifier: (integer)))))

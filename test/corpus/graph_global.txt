@@ -40,9 +40,8 @@ Graph: top-level record and a node
         tag: (symbol)
         content: (string_content))))
   (pattern
-    (pattern_element
-      element: (node
-        identifier: (symbol)))))
+    elements: (node
+      identifier: (symbol))))
 
 ==================
 Graph: top-level record and a path
@@ -66,13 +65,12 @@ Graph: top-level record and a path
         tag: (symbol)
         content: (string_content))))
   (pattern
-    (pattern_element
-      element: (relationship
-        left: (node
-          identifier: (symbol))
-        kind: (right_arrow)
-        right: (node
-          identifier: (symbol))))))
+    elements: (relationship
+      left: (node
+        identifier: (symbol))
+      kind: (right_arrow)
+      right: (node
+        identifier: (symbol)))))
 
 ==================
 Graph: top-level record, a path and a path
@@ -98,19 +96,15 @@ Graph: top-level record, a path and a path
         tag: (symbol)
         content: (string_content))))
   (pattern
-    (pattern_element
-      element: (relationship
-        left: (node
-          identifier: (symbol))
-        kind: (right_arrow)
-        right: (node
-          identifier: (symbol)))))
+    elements: (relationship
+      left: (node
+        identifier: (symbol))
+      kind: (right_arrow)
+      right: (node
+        identifier: (symbol))))
   (pattern
-    (pattern_element
-      element: (subject
-        identifier: (symbol)
-        pattern: (sub_pattern
-          (sub_pattern_element
-            element: (symbol))
-          (sub_pattern_element
-            element: (symbol)))))))
+    elements: (subject
+      identifier: (symbol)
+      pattern: (sub_pattern
+        (symbol)
+        (symbol)))))

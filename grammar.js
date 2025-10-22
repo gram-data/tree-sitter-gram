@@ -4,13 +4,12 @@ module.exports = grammar({
   rules: {
     gram: ($) => seq(field("root", optional($.record)), repeat($.pattern)),
 
-    pattern: ($) => commaSep1($.pattern_element),
-
-    pattern_element: ($) =>
+    pattern: ($) =>
       seq(
         field("annotations", optional($.annotations)),
-        field("element", choice($.subject, $._path)),
+        field("elements", commaSep1($._pattern_element)),
       ),
+    _pattern_element: ($) => choice($.subject, $._path),
 
     subject: ($) =>
       seq(
@@ -20,10 +19,9 @@ module.exports = grammar({
         "]",
       ),
 
-    sub_pattern: ($) => commaSep1($.sub_pattern_element),
+    sub_pattern: ($) => commaSep1($._sub_pattern_element),
 
-    sub_pattern_element: ($) =>
-      field("element", choice($.subject, $._path, $._reference)),
+    _sub_pattern_element: ($) => choice($.subject, $._path, $._reference),
 
     annotations: ($) => repeat1($.annotation),
 

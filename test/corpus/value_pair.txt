@@ -8,15 +8,14 @@ Value pair: define values
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (integer))
-          (property
-            key: (symbol)
-            value: (integer)))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (integer))
+        (property
+          key: (symbol)
+          value: (integer))))))
 
 ==================
 Value pair: declare values
@@ -28,18 +27,17 @@ Value pair: declare values
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (integer))
-          (property
-            key: (symbol)
-            value: (integer))
-          (property
-            key: (symbol)
-            value: (symbol)))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (integer))
+        (property
+          key: (symbol)
+          value: (integer))
+        (property
+          key: (symbol)
+          value: (symbol))))))
 
 ==================
 Value pair: key names which start with '@' must be quoted
@@ -51,11 +49,10 @@ Value pair: key names which start with '@' must be quoted
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (string_literal
-              content: (string_content))
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (string_literal
+            content: (string_content))
+          value: (string_literal
+            content: (string_content)))))))

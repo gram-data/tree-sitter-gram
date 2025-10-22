@@ -8,13 +8,12 @@ Hello world
 
 (gram
   (pattern
-    (pattern_element
-      element: (relationship
-        left: (node
-          identifier: (symbol))
-        kind: (right_arrow)
-        right: (node
-          identifier: (symbol))))))
+    elements: (relationship
+      left: (node
+        identifier: (symbol))
+      kind: (right_arrow)
+      right: (node
+        identifier: (symbol)))))
 
 ==================
 Hello dear world
@@ -26,14 +25,13 @@ Hello dear world
 
 (gram
   (pattern
-    (pattern_element
-      element: (relationship
-        left: (node
-          identifier: (symbol))
-        kind: (right_arrow
-          identifier: (symbol))
-        right: (node
-          identifier: (symbol))))))
+    elements: (relationship
+      left: (node
+        identifier: (symbol))
+      kind: (right_arrow
+        identifier: (symbol))
+      right: (node
+        identifier: (symbol)))))
 
 ==================
 Hello dear world over there
@@ -45,19 +43,18 @@ Hello dear world over there
 
 (gram
   (pattern
-    (pattern_element
-      element: (relationship
+    elements: (relationship
+      left: (node
+        identifier: (symbol))
+      kind: (right_arrow
+        identifier: (symbol))
+      right: (relationship
         left: (node
           identifier: (symbol))
         kind: (right_arrow
           identifier: (symbol))
-        right: (relationship
-          left: (node
-            identifier: (symbol))
-          kind: (right_arrow
-            identifier: (symbol))
-          right: (node
-            identifier: (symbol)))))))
+        right: (node
+          identifier: (symbol))))))
 
 ==================
 Hello "dear world" "over there"
@@ -69,13 +66,12 @@ Hello "dear world" "over there"
 
 (gram
   (pattern
-    (pattern_element
-      element: (relationship
-        left: (node
-          identifier: (symbol))
-        kind: (right_arrow
-          identifier: (string_literal
-            content: (string_content)))
-        right: (node
-          identifier: (string_literal
-            content: (string_content)))))))
+    elements: (relationship
+      left: (node
+        identifier: (symbol))
+      kind: (right_arrow
+        identifier: (string_literal
+          content: (string_content)))
+      right: (node
+        identifier: (string_literal
+          content: (string_content))))))

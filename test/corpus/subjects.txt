@@ -8,8 +8,7 @@ Subject: empty
 
 (gram
   (pattern
-    (pattern_element
-      element: (subject))))
+    elements: (subject)))
 
 ==================
 Subject: named
@@ -21,9 +20,8 @@ Subject: named
 
 (gram
   (pattern
-    (pattern_element
-      element: (subject
-        identifier: (symbol)))))
+    elements: (subject
+      identifier: (symbol))))
 
 ==================
 Subject: named, labeled
@@ -35,11 +33,10 @@ Subject: named, labeled
 
 (gram
   (pattern
-    (pattern_element
-      element: (subject
-        identifier: (symbol)
-        labels: (labels
-          (symbol))))))
+    elements: (subject
+      identifier: (symbol)
+      labels: (labels
+        (symbol)))))
 
 ==================
 Subject: named, labeled with a record
@@ -51,16 +48,15 @@ Subject: named, labeled with a record
 
 (gram
   (pattern
-    (pattern_element
-      element: (subject
-        identifier: (symbol)
-        labels: (labels
-          (symbol))
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (subject
+      identifier: (symbol)
+      labels: (labels
+        (symbol))
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Subject: complete subject with annotation, attributes, and a qualified association
@@ -73,27 +69,22 @@ Subject: complete subject with annotation, attributes, and a qualified associati
 
 (gram
   (pattern
-    (pattern_element
-      annotations: (annotations
-        (annotation
+    annotations: (annotations
+      (annotation
+        key: (symbol)
+        value: (string_literal
+          content: (string_content))))
+    elements: (subject
+      identifier: (symbol)
+      labels: (labels
+        (symbol))
+      record: (record
+        (property
           key: (symbol)
           value: (string_literal
             content: (string_content))))
-      element: (subject
-        identifier: (symbol)
-        labels: (labels
-          (symbol))
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))
-        pattern: (sub_pattern
-          (sub_pattern_element
-            element: (symbol))
-          (sub_pattern_element
-            element: (symbol))
-          (sub_pattern_element
-            element: (symbol))
-          (sub_pattern_element
-            element: (symbol)))))))
+      pattern: (sub_pattern
+        (symbol)
+        (symbol)
+        (symbol)
+        (symbol)))))

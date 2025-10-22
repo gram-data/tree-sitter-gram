@@ -8,8 +8,7 @@ Pattern: Single member subject
 
 (gram
   (pattern
-    (pattern_element
-      element: (subject))))
+    elements: (subject)))
 
 ==================
 Pattern: single member node
@@ -21,8 +20,7 @@ Pattern: single member node
 
 (gram
   (pattern
-    (pattern_element
-      element: (node))))
+    elements: (node)))
 
 ==================
 Pattern: Two node members
@@ -34,10 +32,8 @@ Pattern: Two node members
 
 (gram
   (pattern
-    (pattern_element
-      element: (node))
-    (pattern_element
-      element: (node))))
+    elements: (node)
+    elements: (node)))
 
 ==================
 Pattern: one relationship
@@ -49,11 +45,10 @@ Pattern: one relationship
 
 (gram
   (pattern
-    (pattern_element
-      element: (relationship
-        left: (node)
-        kind: (right_arrow)
-        right: (node)))))
+    elements: (relationship
+      left: (node)
+      kind: (right_arrow)
+      right: (node))))
 
 ==================
 Pattern: 2 single-hop relationships
@@ -65,16 +60,14 @@ Pattern: 2 single-hop relationships
 
 (gram
   (pattern
-    (pattern_element
-      element: (relationship
-        left: (node)
-        kind: (right_arrow)
-        right: (node)))
-    (pattern_element
-      element: (relationship
-        left: (node)
-        kind: (right_arrow)
-        right: (node)))))
+    elements: (relationship
+      left: (node)
+      kind: (right_arrow)
+      right: (node))
+    elements: (relationship
+      left: (node)
+      kind: (right_arrow)
+      right: (node))))
 
 ==================
 Pattern: two-hop path
@@ -86,37 +79,20 @@ Pattern: two-hop path
 
 (gram
   (pattern
-    (pattern_element
-      element: (relationship
+    elements: (relationship
+      left: (node)
+      kind: (right_arrow)
+      right: (relationship
         left: (node)
         kind: (right_arrow)
-        right: (relationship
-          left: (node)
-          kind: (right_arrow)
-          right: (node))))))
+        right: (node)))))
 
 ==================
-Pattern: 2 annotated nodes
+Pattern: 2 annotated nodes is not allowed. annotation applies to the complete pattern, not individual elements within the pattern
+:error
 ==================
 
-@description("first empty node") (), 
+@description("first empty node") (),
 @description("second empty node") ()
 
 ---
-
-(gram
-  (pattern
-    (pattern_element
-      annotations: (annotations
-        (annotation
-          key: (symbol)
-          value: (string_literal
-            content: (string_content))))
-      element: (node))
-    (pattern_element
-      annotations: (annotations
-        (annotation
-          key: (symbol)
-          value: (string_literal
-            content: (string_content))))
-      element: (node))))

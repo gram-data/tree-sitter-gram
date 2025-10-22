@@ -8,12 +8,11 @@ Numbers: integers
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (integer)))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (integer))))))
 
 ==================
 Numbers: decimal
@@ -25,12 +24,11 @@ Numbers: decimal
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (decimal)))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (decimal))))))
 
 ==================
 Number: hexadecimal
@@ -42,12 +40,11 @@ Number: hexadecimal
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (hexadecimal)))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (hexadecimal))))))
 
 ==================
 Number: octal with an '0'
@@ -59,12 +56,11 @@ Number: octal with an '0'
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (octal)))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (octal))))))
 
 ==================
 Number: measurements are numbers with some letters as a suffix
@@ -76,13 +72,11 @@ Number: measurements are numbers with some letters as a suffix
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (measurement)))))))
-
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (measurement))))))
 
 ==================
 Number: boolean true
@@ -94,9 +88,8 @@ Number: boolean true
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (boolean_literal)))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (boolean_literal))))))

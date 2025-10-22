@@ -455,21 +455,6 @@
   {
     "type": "pattern",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "pattern_element",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "pattern_element",
-    "named": true,
     "fields": {
       "annotations": {
         "multiple": false,
@@ -481,10 +466,14 @@
           }
         ]
       },
-      "element": {
-        "multiple": false,
+      "elements": {
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ",",
+            "named": false
+          },
           {
             "type": "node",
             "named": true
@@ -790,77 +779,61 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "sub_pattern_element",
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "decimal",
+          "named": true
+        },
+        {
+          "type": "hexadecimal",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "measurement",
+          "named": true
+        },
+        {
+          "type": "node",
+          "named": true
+        },
+        {
+          "type": "octal",
+          "named": true
+        },
+        {
+          "type": "range",
+          "named": true
+        },
+        {
+          "type": "relationship",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "subject",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        },
+        {
+          "type": "tagged_string",
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "sub_pattern_element",
-    "named": true,
-    "fields": {
-      "element": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "node",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
-            "named": true
-          },
-          {
-            "type": "relationship",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "subject",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {

@@ -8,8 +8,7 @@ Node empty
 
 (gram
   (pattern
-    (pattern_element
-      element: (node))))
+    elements: (node)))
 
 ==================
 Node with empty record
@@ -21,9 +20,8 @@ Node with empty record
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record)))))
+    elements: (node
+      record: (record))))
 
 ==================
 Node with record
@@ -35,13 +33,12 @@ Node with record
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Node identified and with a record
@@ -53,14 +50,13 @@ Node identified and with a record
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        identifier: (symbol)
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      identifier: (symbol)
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Node identified, labeled and with a record
@@ -72,13 +68,12 @@ Node identified, labeled and with a record
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        identifier: (symbol)
-        labels: (labels
-          (symbol))
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      identifier: (symbol)
+      labels: (labels
+        (symbol))
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))

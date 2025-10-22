@@ -8,13 +8,12 @@ Text: single character string
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Text: long string
@@ -26,13 +25,12 @@ Text: long string
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Text: fenced multiline string
@@ -48,13 +46,12 @@ onto a third line. Note that these lines will have a lot of whitespace.
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Text: tagged fence multiline string
@@ -70,14 +67,13 @@ onto a third line. Note that these lines will have a lot of whitespace.
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (tagged_string
-              tag: (symbol)
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (tagged_string
+            tag: (symbol)
+            content: (string_content)))))))
 
 ==================
 Text: nested quotes within single-quoted string
@@ -89,13 +85,12 @@ Text: nested quotes within single-quoted string
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Text: nested quotes within double-quoted string
@@ -107,13 +102,12 @@ Text: nested quotes within double-quoted string
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Text: single-quoted string property
@@ -125,13 +119,12 @@ Text: single-quoted string property
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Text: backtick-quoted string property
@@ -143,13 +136,12 @@ Text: backtick-quoted string property
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Text: weird characters in string property
@@ -160,13 +152,12 @@ Text: weird characters in string property
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
 
 ==================
 Text: tagged string properties
@@ -187,51 +178,50 @@ Text: tagged string properties
 
 (gram
   (pattern
-    (pattern_element
-      element: (node
-        record: (record
-          (property
-            key: (symbol)
-            value: (tagged_string
-              tag: (symbol)
-              content: (string_content)))
-          (property
-            key: (symbol)
-            value: (tagged_string
-              tag: (symbol)
-              content: (string_content)))
-          (property
-            key: (symbol)
-            value: (tagged_string
-              tag: (symbol)
-              content: (string_content)))
-          (property
-            key: (symbol)
-            value: (tagged_string
-              tag: (symbol)
-              content: (string_content)))
-          (property
-            key: (symbol)
-            value: (tagged_string
-              tag: (symbol)
-              content: (string_content)))
-          (property
-            key: (symbol)
-            value: (tagged_string
-              tag: (symbol)
-              content: (string_content)))
-          (property
-            key: (symbol)
-            value: (tagged_string
-              tag: (symbol)
-              content: (string_content)))
-          (property
-            key: (symbol)
-            value: (tagged_string
-              tag: (symbol)
-              content: (string_content)))
-          (property
-            key: (symbol)
-            value: (tagged_string
-              tag: (symbol)
-              content: (string_content))))))))
+    elements: (node
+      record: (record
+        (property
+          key: (symbol)
+          value: (tagged_string
+            tag: (symbol)
+            content: (string_content)))
+        (property
+          key: (symbol)
+          value: (tagged_string
+            tag: (symbol)
+            content: (string_content)))
+        (property
+          key: (symbol)
+          value: (tagged_string
+            tag: (symbol)
+            content: (string_content)))
+        (property
+          key: (symbol)
+          value: (tagged_string
+            tag: (symbol)
+            content: (string_content)))
+        (property
+          key: (symbol)
+          value: (tagged_string
+            tag: (symbol)
+            content: (string_content)))
+        (property
+          key: (symbol)
+          value: (tagged_string
+            tag: (symbol)
+            content: (string_content)))
+        (property
+          key: (symbol)
+          value: (tagged_string
+            tag: (symbol)
+            content: (string_content)))
+        (property
+          key: (symbol)
+          value: (tagged_string
+            tag: (symbol)
+            content: (string_content)))
+        (property
+          key: (symbol)
+          value: (tagged_string
+            tag: (symbol)
+            content: (string_content)))))))
