@@ -32,22 +32,54 @@ npx tree-sitter generate
 echo "🧪 Running grammar tests..."
 npx tree-sitter test
 
-# Copy latest grammar and parser to extension
-echo "📋 Copying grammar files to extension..."
-cp "$PROJECT_ROOT/grammar.js" "$ZED_EXTENSION_DIR/grammars/tree-sitter-gram/"
-cp -r "$PROJECT_ROOT/src" "$ZED_EXTENSION_DIR/grammars/tree-sitter-gram/"
+# Sync top-level queries into Zed extension
+echo "📝 Syncing Tree-sitter queries into Zed extension..."
+QUERIES_SRC="$PROJECT_ROOT/queries"
+QUERIES_DST="$ZED_EXTENSION_DIR/languages/gram/queries"
+
+if [ ! -d "$QUERIES_SRC" ] || [ ! -f "$QUERIES_SRC/highlights.scm" ]; then
+    echo "❌ Error: Missing canonical queries. Expected at: $QUERIES_SRC/highlights.scm"
+    exit 1
+fi
+
+rm -rf "$QUERIES_DST"
+mkdir -p "$QUERIES_DST"
+cp "$QUERIES_SRC"/*.scm "$QUERIES_DST"/
+
+
 
 # Update version in extension.toml to match package.json
 PACKAGE_VERSION=$(node -p "require('$PROJECT_ROOT/package.json').version")
 echo "🔄 Updating extension version to $PACKAGE_VERSION..."
 
+# Configure repository mode (dev|pub)
+ZED_REPO_MODE="${ZED_REPO_MODE:-dev}"
+COMMIT_SHA=$(git -C "$PROJECT_ROOT" rev-parse HEAD)
+
+if [ "$ZED_REPO_MODE" = "pub" ] || [ "$ZED_REPO_MODE" = "publish" ]; then
+    # Use the public repository URL from package.json, normalized to https
+    REPO_URL=$(node -p "require('$PROJECT_ROOT/package.json').repository.url")
+    REPO_URL=${REPO_URL#git+}
+    REPO_URL=${REPO_URL%.git}
+else
+    # Use local repository for development
+    REPO_URL="file://$PROJECT_ROOT"
+fi
+
+echo "🔗 Repository: $REPO_URL"
+echo "🔖 Rev: $COMMIT_SHA"
+
 # Use sed in a cross-platform way
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS
     sed -i '' "s/^version = \".*\"/version = \"$PACKAGE_VERSION\"/" "$ZED_EXTENSION_DIR/extension.toml"
+    sed -i '' "s#^repository = \".*\"#repository = \"$REPO_URL\"#" "$ZED_EXTENSION_DIR/extension.toml"
+    sed -i '' "s/^rev = \".*\"/rev = \"$COMMIT_SHA\"/" "$ZED_EXTENSION_DIR/extension.toml"
 else
     # Linux and others
     sed -i "s/^version = \".*\"/version = \"$PACKAGE_VERSION\"/" "$ZED_EXTENSION_DIR/extension.toml"
+    sed -i "s#^repository = \".*\"#repository = \"$REPO_URL\"#" "$ZED_EXTENSION_DIR/extension.toml"
+    sed -i "s/^rev = \".*\"/rev = \"$COMMIT_SHA\"/" "$ZED_EXTENSION_DIR/extension.toml"
 fi
 
 # Validate extension structure
@@ -56,8 +88,6 @@ required_files=(
     "$ZED_EXTENSION_DIR/extension.toml"
     "$ZED_EXTENSION_DIR/languages/gram/config.toml"
     "$ZED_EXTENSION_DIR/languages/gram/queries/highlights.scm"
-    "$ZED_EXTENSION_DIR/grammars/tree-sitter-gram/grammar.js"
-    "$ZED_EXTENSION_DIR/grammars/tree-sitter-gram/src/parser.c"
 )
 
 for file in "${required_files[@]}"; do
@@ -66,6 +96,13 @@ for file in "${required_files[@]}"; do
         exit 1
     fi
 done
+
+# Explicit check for highlights.scm copied from queries/
+HIGHLIGHTS_FILE="$ZED_EXTENSION_DIR/languages/gram/queries/highlights.scm"
+if [ ! -f "$HIGHLIGHTS_FILE" ]; then
+    echo "❌ Error: Missing required file: $HIGHLIGHTS_FILE"
+    exit 1
+fi
 
 echo "✅ Extension validation passed!"
 
