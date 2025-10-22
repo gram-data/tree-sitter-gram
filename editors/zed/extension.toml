@@ -8,4 +8,4 @@ description = "Support for Gram notation - a subject-oriented notation for struc
 # path = "grammars/tree-sitter-gram"
 [grammars.gram]
 repository = "file:///Users/akollegger/Developer/gram-data/tree-sitter-gram"
-rev = "d8715db6306c6db0d41a4bde9749a6c5fd30602a"
+rev = "6752e508ab89c4a39cf590feb28bb49370fa6302"

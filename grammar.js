@@ -92,12 +92,16 @@ module.exports = grammar({
 
     labels: ($) => repeat1($._label),
 
-    _label: ($) => seq(/::?/, $.symbol),
+    _label: ($) => seq(choice(":", "::"), $.symbol),
 
     record: ($) => seq("{", commaSep($.property), "}"),
 
     property: ($) =>
-      seq(field("key", $._identifier), /::?/, field("value", $._value)),
+      seq(
+        field("key", $._identifier),
+        choice(":", "::"),
+        field("value", $._value),
+      ),
 
     map: ($) => seq("{", commaSep($.mapping), "}"),
 
