@@ -1,0 +1,93 @@
+(:Person {
+  name: "Andreas Kollegger",
+  age: 42,
+  active: true,
+  roles: ["author", "developer", "architect"]
+})
+
+(alice:Person {name: "Alice", department: "Engineering"})
+  -[:WORKS_WITH]->
+(bob:Person {name: "Bob", role: "Designer"})
+
+@version("1.0")
+@created("2024-01-15")
+[:Employee {
+  id: 12345,
+  name: "John Doe",
+  email: "john.doe@company.com",
+  department: "Engineering",
+  salary: 125000.75,
+  active: true,
+  started: "2023-01-15",
+  skills: ["JavaScript", "Rust", "Python", "Go"],
+  manager: (:Person {name: "Jane Smith", id: 67890})
+}]
+
+(client:Company {name: "ACME Corp"})
+  <-[:CONTRACTS]->
+(vendor:Company {name: "Tech Solutions Inc"})
+
+(user:Person {name: "Charlie"})-[:OWNS]->(car:Vehicle {
+  make: "Tesla",
+  model: "Model 3",
+  year: 2023
+}),
+(user)-[:LIVES_IN]->(city:Location {
+  name: "San Francisco",
+  state: "CA",
+  country: "USA"
+}),
+(user)-[:WORKS_FOR]->(company:Company {name: "Startup Inc"})
+
+(:DataTypes {
+  integer: 42,
+  negative: -17,
+  decimal: 3.14159,
+  scientific: 1.23e-4,
+  hexadecimal: 0xFF00,
+  octal: 0755,
+  binary: 0b1010,
+  distance: 100km,
+  weight: 5.5kg,
+  temperature: -10.5celsius,
+  time: 30min,
+  single_quoted: 'Hello World',
+  double_quoted: "Hello \"quoted\" World",
+  backtick: `Template string with ${variable}`,
+  is_active: true,
+  is_deleted: false,
+  optional_field: null
+})
+
+[
+  (:Book {title: "The Pragmatic Programmer", isbn: "978-0201616224"}),
+  (:Book {title: "Clean Code", isbn: "978-0132350884"}),
+  (:Book {title: "Design Patterns", isbn: "978-0201633610"})
+]
+
+(:Project {
+  name: "Gram Parser",
+  version: "0.1.11",
+  description: "A tree-sitter grammar for Gram notation",
+  repository: {
+    type: "git",
+    url: "https://github.com/gram-data/tree-sitter-gram"
+  },
+  dependencies: [
+    {name: "tree-sitter", version: "^0.25.0"},
+    {name: "node-gyp-build", version: "^4.8.4"}
+  ],
+  contributors: [
+    (:Person {name: "Andreas", role: "maintainer"}),
+    (:Person {name: "Community", role: "contributor"})
+  ]
+})
+
+(:EdgeCases {
+  empty_array: [],
+  empty_object: {},
+  unicode: "Hello 世界 🌍",
+  escaped_chars: "Line 1\nLine 2\tTabbed",
+  special_symbols: "@#$%^&*()_+-=[]{}|;:,.<>?",
+  very_long_string: "This is a very long string that spans multiple conceptual lines to test how the syntax highlighter handles long content without breaking the highlighting engine or causing performance issues in the editor"
+})

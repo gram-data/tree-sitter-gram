@@ -1,0 +1,2 @@
+// Minimal Gram test file
+(:Person {name: "Test"})-[:TO]->(b)

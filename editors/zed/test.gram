@@ -1,0 +1,8 @@
+// Test Gram file for syntax highlighting
+(:Person {
+  name: "Test User",
+  age: 30,
+  active: true
+})
+
+(user:Person)-[:KNOWS]->(friend:Person {name: "Friend"})

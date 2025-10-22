@@ -19,7 +19,10 @@
     "tree-sitter",
     "parser",
     "gram",
-    "json"
+    "json",
+    "zed",
+    "editor",
+    "syntax-highlighting"
   ],
   "files": [
     "grammar.js",
@@ -27,7 +30,8 @@
     "prebuilds/**",
     "bindings/node/*",
     "queries/*",
-    "src/**"
+    "src/**",
+    "editors/**"
   ],
   "author": "",
   "license": "ISC",
