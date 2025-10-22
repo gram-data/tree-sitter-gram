@@ -30,7 +30,13 @@ module.exports = grammar({
 
     _path: ($) => choice($.relationship, $.node),
 
-    node: ($) => seq("(", field("attributes", optional($._attributes)), ")"),
+    node: ($) =>
+      seq(
+        "(",
+        field("annotations", optional($.annotations)),
+        field("attributes", optional($._attributes)),
+        ")",
+      ),
 
     relationship: ($) =>
       seq(

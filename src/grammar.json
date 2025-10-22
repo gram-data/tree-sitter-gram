@@ -251,6 +251,22 @@
         },
         {
           "type": "FIELD",
+          "name": "annotations",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "annotations"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "FIELD",
           "name": "attributes",
           "content": {
             "type": "CHOICE",

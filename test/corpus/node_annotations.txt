@@ -1,0 +1,94 @@
+==================
+Node: single annotation, no attributes
+==================
+
+( @description("An empty node.") )
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      annotations: (annotations
+        (annotation
+          key: (symbol)
+          value: (string_literal
+            content: (string_content))))))))
+
+==================
+Node: two annotations, no attributes
+==================
+
+( @a(1) @b("two") )
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      annotations: (annotations
+        (annotation
+          key: (symbol)
+          value: (integer))
+        (annotation
+          key: (symbol)
+          value: (string_literal
+            content: (string_content))))))))
+
+==================
+Node: annotation with identifier
+==================
+
+( @desc("n") player1 )
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      annotations: (annotations
+        (annotation
+          key: (symbol)
+          value: (string_literal
+            content: (string_content))))
+      identifier: (symbol)))))
+
+==================
+Node: annotation with identifier, labels, and record
+==================
+
+( @meta("m") player1:Player { k : "v" } )
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      annotations: (annotations
+        (annotation
+          key: (symbol)
+          value: (string_literal
+            content: (string_content))))
+      identifier: (symbol)
+      labels: (labels
+        (symbol))
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content))))))))
+
+==================
+Node: annotation must precede attributes (disallowed after identifier)
+:error
+==================
+
+( player1 @tag("x") )
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      identifier: (symbol)
+      (ERROR)))))

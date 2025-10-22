@@ -330,6 +330,16 @@
     "type": "node",
     "named": true,
     "fields": {
+      "annotations": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "annotations",
+            "named": true
+          }
+        ]
+      },
       "attributes": {
         "multiple": true,
         "required": false,
