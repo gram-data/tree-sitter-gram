@@ -1,0 +1,192 @@
+==================
+Relationship annotation: undirected, annotations only
+==================
+
+()-[ @desc("edge") ]-()
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node)
+      kind: (undirected_arrow
+        annotations: (annotations
+          (annotation
+            key: (symbol)
+            value: (string_literal
+              content: (string_content)))))
+      right: (node))))
+
+==================
+Relationship annotation: undirected, two annotations
+==================
+
+()-[ @a(1) @b("two") ]-()
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node)
+      kind: (undirected_arrow
+        annotations: (annotations
+          (annotation
+            key: (symbol)
+            value: (integer))
+          (annotation
+            key: (symbol)
+            value: (string_literal
+              content: (string_content)))))
+      right: (node))))
+
+==================
+Relationship annotation: undirected with identifier
+==================
+
+()-[ @meta("m") r ]-()
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node)
+      kind: (undirected_arrow
+        annotations: (annotations
+          (annotation
+            key: (symbol)
+            value: (string_literal
+              content: (string_content))))
+        identifier: (symbol))
+      right: (node))))
+
+==================
+Relationship annotation: undirected with labels
+==================
+
+()-[ @meta("m") :A:B ]-()
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node)
+      kind: (undirected_arrow
+        annotations: (annotations
+          (annotation
+            key: (symbol)
+            value: (string_literal
+              content: (string_content))))
+        labels: (labels
+          (symbol)
+          (symbol)))
+      right: (node))))
+
+==================
+Relationship annotation: undirected with identifier, labels, and record
+==================
+
+()-[ @meta("m") r:A { k : "v" } ]-()
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node)
+      kind: (undirected_arrow
+        annotations: (annotations
+          (annotation
+            key: (symbol)
+            value: (string_literal
+              content: (string_content))))
+        identifier: (symbol)
+        labels: (labels
+          (symbol))
+        record: (record
+          (property
+            key: (symbol)
+            value: (string_literal
+              content: (string_content)))))
+      right: (node))))
+
+==================
+Relationship annotation: right arrow, annotations only
+==================
+
+()-[ @x("y") ]->()
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node)
+      kind: (right_arrow
+        annotations: (annotations
+          (annotation
+            key: (symbol)
+            value: (string_literal
+              content: (string_content)))))
+      right: (node))))
+
+==================
+Relationship annotation: left arrow, annotations only
+==================
+
+()<-[ @x("y") ]-()
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node)
+      kind: (left_arrow
+        annotations: (annotations
+          (annotation
+            key: (symbol)
+            value: (string_literal
+              content: (string_content)))))
+      right: (node))))
+
+==================
+Relationship annotation: bidirectional arrow, annotations only
+==================
+
+()<-[ @x("y") ]->()
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node)
+      kind: (bidirectional_arrow
+        annotations: (annotations
+          (annotation
+            key: (symbol)
+            value: (string_literal
+              content: (string_content)))))
+      right: (node))))
+
+==================
+Relationship annotation: undirected, annotation after identifier is not allowed
+:error
+==================
+
+()-[ r @meta("x") ]-()
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node)
+      kind: (undirected_arrow
+        identifier: (symbol)
+        (ERROR))
+      right: (node))))

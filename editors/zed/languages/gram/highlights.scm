@@ -42,6 +42,17 @@
 ; Annotation keys
 (annotation key: (symbol) @attribute)
 
+; Annotations inside nodes
+(node annotations: (annotations) @attribute)
+
+; Annotations inside relationship arrows
+[
+    (right_arrow annotations: (annotations) @attribute)
+    (left_arrow annotations: (annotations) @attribute)
+    (undirected_arrow annotations: (annotations) @attribute)
+    (bidirectional_arrow annotations: (annotations) @attribute)
+]
+
 ; Subject brackets (special highlighting)
 (subject) @type
 

@@ -1,0 +1,3 @@
+(@meta("info") a:Person)
+
+(a:Person)-[@context("social") :LIKES]->(b:Person)
