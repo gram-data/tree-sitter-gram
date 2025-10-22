@@ -21,7 +21,7 @@ module.exports = grammar({
 
     sub_pattern: ($) => commaSep1($._sub_pattern_element),
 
-    _sub_pattern_element: ($) => choice($.subject, $._path, $._reference),
+    _sub_pattern_element: ($) => choice($.subject, $._path, $.reference),
 
     annotations: ($) => repeat1($.annotation),
 
@@ -45,20 +45,22 @@ module.exports = grammar({
         field("right", $._path),
       ),
 
-    _reference: ($) => $._ref_value,
+    reference: ($) => field("identifier", $._identifier),
+
+    _identifier: ($) => choice($.symbol, $.string_literal, $.integer),
 
     _attributes: ($) =>
       choice(
         choice(
-          field("identifier", $._ref_value),
+          field("identifier", $._identifier),
           field("labels", $.labels),
           field("record", $.record),
         ),
-        seq(field("identifier", $._ref_value), field("labels", $.labels)),
-        seq(field("identifier", $._ref_value), field("record", $.record)),
+        seq(field("identifier", $._identifier), field("labels", $.labels)),
+        seq(field("identifier", $._identifier), field("record", $.record)),
         seq(field("labels", $.labels), field("record", $.record)),
         seq(
-          field("identifier", $._ref_value),
+          field("identifier", $._identifier),
           field("labels", $.labels),
           field("record", $.record),
         ),
@@ -73,9 +75,10 @@ module.exports = grammar({
         prec(1, $.symbol),
         $.string_literal,
         $.array,
+        $.map,
       ),
 
-    _ref_value: ($) =>
+    _scalar_value: ($) =>
       choice(
         prec.right(2, $.range),
         prec.right(1, $._numeric_literal),
@@ -85,7 +88,7 @@ module.exports = grammar({
         $.string_literal,
       ),
 
-    array: ($) => seq("[", commaSep1($._ref_value), "]"),
+    array: ($) => seq("[", commaSep1($._scalar_value), "]"),
 
     labels: ($) => repeat1($._label),
 
@@ -93,9 +96,13 @@ module.exports = grammar({
 
     record: ($) => seq("{", commaSep($.property), "}"),
 
-    _key: ($) => choice($.symbol, $.string_literal),
+    property: ($) =>
+      seq(field("key", $._identifier), /::?/, field("value", $._value)),
 
-    property: ($) => seq(field("key", $._key), /::?/, field("value", $._value)),
+    map: ($) => seq("{", commaSep($.mapping), "}"),
+
+    mapping: ($) =>
+      seq(field("key", $._identifier), ":", field("value", $._scalar_value)),
 
     symbol: ($) => token(/[a-zA-Z_][0-9a-zA-Z_.\-@]*/),
 

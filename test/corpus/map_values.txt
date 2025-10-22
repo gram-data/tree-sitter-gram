@@ -1,0 +1,127 @@
+==================
+Map values are non-nested maps, similar in syntax to records but only accepting scalar values.
+==================
+
+{
+  address: {
+    street: "123 Main St",
+    city: "Anytown",
+    state: "CA",
+    zip: "12345"
+  }
+}
+
+---
+
+(gram
+  root: (record
+    (property
+      key: (symbol)
+      value: (map
+        (mapping
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))
+        (mapping
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))
+        (mapping
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))
+        (mapping
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
+
+==================
+Map values may not be nested
+:error
+==================
+
+{
+  address: {
+    street: {
+      number: "123",
+      name: "Main St"
+    },
+    city: "Anytown"
+  }
+}
+
+---
+
+
+
+==================
+Map values may appear in node properties
+==================
+
+(a:Person {
+  address: {
+    street: "123 Main St",
+    city: "Anytown",
+    state: "CA",
+    zip: "12345"
+  }
+})
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      identifier: (symbol)
+      labels: (labels
+        (symbol))
+      record: (record
+        (property
+          key: (symbol)
+          value: (map
+            (mapping
+              key: (symbol)
+              value: (string_literal
+                content: (string_content)))
+            (mapping
+              key: (symbol)
+              value: (string_literal
+                content: (string_content)))
+            (mapping
+              key: (symbol)
+              value: (string_literal
+                content: (string_content)))
+            (mapping
+              key: (symbol)
+              value: (string_literal
+                content: (string_content)))))))))
+
+==================
+Map values may not appear within an array
+:error
+==================
+
+(a:Person {
+  addresses [{
+    street: "123 Main St",
+    city: "Anytown",
+    state: "CA",
+    zip: "12345"
+  }]
+})
+
+---
+
+==================
+Map values may not contain arrays
+:error
+==================
+
+(a:Person {
+  identity: {
+    name: "John Doe",
+    aliases: ["John", "Johnny"]
+  }
+})
+
+---

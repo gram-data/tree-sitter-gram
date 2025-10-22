@@ -185,7 +185,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_reference"
+          "name": "reference"
         }
       ]
     },
@@ -316,9 +316,30 @@
         }
       ]
     },
-    "_reference": {
-      "type": "SYMBOL",
-      "name": "_ref_value"
+    "reference": {
+      "type": "FIELD",
+      "name": "identifier",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_identifier"
+      }
+    },
+    "_identifier": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "symbol"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "integer"
+        }
+      ]
     },
     "_attributes": {
       "type": "CHOICE",
@@ -331,7 +352,7 @@
               "name": "identifier",
               "content": {
                 "type": "SYMBOL",
-                "name": "_ref_value"
+                "name": "_identifier"
               }
             },
             {
@@ -360,7 +381,7 @@
               "name": "identifier",
               "content": {
                 "type": "SYMBOL",
-                "name": "_ref_value"
+                "name": "_identifier"
               }
             },
             {
@@ -381,7 +402,7 @@
               "name": "identifier",
               "content": {
                 "type": "SYMBOL",
-                "name": "_ref_value"
+                "name": "_identifier"
               }
             },
             {
@@ -423,7 +444,7 @@
               "name": "identifier",
               "content": {
                 "type": "SYMBOL",
-                "name": "_ref_value"
+                "name": "_identifier"
               }
             },
             {
@@ -496,10 +517,14 @@
         {
           "type": "SYMBOL",
           "name": "array"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "map"
         }
       ]
     },
-    "_ref_value": {
+    "_scalar_value": {
       "type": "CHOICE",
       "members": [
         {
@@ -560,7 +585,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_ref_value"
+              "name": "_scalar_value"
             },
             {
               "type": "REPEAT",
@@ -573,7 +598,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_ref_value"
+                    "name": "_scalar_value"
                   }
                 ]
               }
@@ -652,19 +677,6 @@
         }
       ]
     },
-    "_key": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "symbol"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "string_literal"
-        }
-      ]
-    },
     "property": {
       "type": "SEQ",
       "members": [
@@ -673,7 +685,7 @@
           "name": "key",
           "content": {
             "type": "SYMBOL",
-            "name": "_key"
+            "name": "_identifier"
           }
         },
         {
@@ -686,6 +698,77 @@
           "content": {
             "type": "SYMBOL",
             "name": "_value"
+          }
+        }
+      ]
+    },
+    "map": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "mapping"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "mapping"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "mapping": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "key",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_scalar_value"
           }
         }
       ]

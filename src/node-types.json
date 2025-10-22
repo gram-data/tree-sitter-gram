@@ -38,6 +38,10 @@
             "named": true
           },
           {
+            "type": "map",
+            "named": true
+          },
+          {
             "type": "measurement",
             "named": true
           },
@@ -150,35 +154,11 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
             "named": true
           },
           {
             "type": "labels",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -192,10 +172,6 @@
           {
             "type": "symbol",
             "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
           }
         ]
       },
@@ -204,31 +180,7 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -237,10 +189,6 @@
           },
           {
             "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
             "named": true
           }
         ]
@@ -333,35 +281,11 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
             "named": true
           },
           {
             "type": "labels",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -375,10 +299,6 @@
           {
             "type": "symbol",
             "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
           }
         ]
       },
@@ -387,31 +307,7 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -420,10 +316,6 @@
           },
           {
             "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
             "named": true
           }
         ]
@@ -451,6 +343,91 @@
     }
   },
   {
+    "type": "map",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "mapping",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapping",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "octal",
+            "named": true
+          },
+          {
+            "type": "range",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "tagged_string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "node",
     "named": true,
     "fields": {
@@ -469,35 +446,11 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
             "named": true
           },
           {
             "type": "labels",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -511,10 +464,6 @@
           {
             "type": "symbol",
             "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
           }
         ]
       },
@@ -523,31 +472,7 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -556,10 +481,6 @@
           },
           {
             "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
             "named": true
           }
         ]
@@ -633,6 +554,10 @@
         "required": true,
         "types": [
           {
+            "type": "integer",
+            "named": true
+          },
+          {
             "type": "string_literal",
             "named": true
           },
@@ -664,6 +589,10 @@
           },
           {
             "type": "integer",
+            "named": true
+          },
+          {
+            "type": "map",
             "named": true
           },
           {
@@ -768,6 +697,30 @@
     }
   },
   {
+    "type": "reference",
+    "named": true,
+    "fields": {
+      "identifier": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "relationship",
     "named": true,
     "fields": {
@@ -838,35 +791,11 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
             "named": true
           },
           {
             "type": "labels",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -880,10 +809,6 @@
           {
             "type": "symbol",
             "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
           }
         ]
       },
@@ -892,31 +817,7 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -925,10 +826,6 @@
           },
           {
             "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
             "named": true
           }
         ]
@@ -977,38 +874,14 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
-        {
-          "type": "boolean_literal",
-          "named": true
-        },
-        {
-          "type": "decimal",
-          "named": true
-        },
-        {
-          "type": "hexadecimal",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "measurement",
-          "named": true
-        },
         {
           "type": "node",
           "named": true
         },
         {
-          "type": "octal",
-          "named": true
-        },
-        {
-          "type": "range",
+          "type": "reference",
           "named": true
         },
         {
@@ -1016,19 +889,7 @@
           "named": true
         },
         {
-          "type": "string_literal",
-          "named": true
-        },
-        {
           "type": "subject",
-          "named": true
-        },
-        {
-          "type": "symbol",
-          "named": true
-        },
-        {
-          "type": "tagged_string",
           "named": true
         }
       ]
@@ -1043,35 +904,11 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
             "named": true
           },
           {
             "type": "labels",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -1085,10 +922,6 @@
           {
             "type": "symbol",
             "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
           }
         ]
       },
@@ -1097,31 +930,7 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -1130,10 +939,6 @@
           },
           {
             "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
             "named": true
           }
         ]
@@ -1219,35 +1024,11 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
             "named": true
           },
           {
             "type": "labels",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -1261,10 +1042,6 @@
           {
             "type": "symbol",
             "named": true
-          },
-          {
-            "type": "tagged_string",
-            "named": true
           }
         ]
       },
@@ -1273,31 +1050,7 @@
         "required": false,
         "types": [
           {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
             "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          },
-          {
-            "type": "range",
             "named": true
           },
           {
@@ -1306,10 +1059,6 @@
           },
           {
             "type": "symbol",
-            "named": true
-          },
-          {
-            "type": "tagged_string",
             "named": true
           }
         ]
@@ -1374,6 +1123,10 @@
   },
   {
     "type": "...",
+    "named": false
+  },
+  {
+    "type": ":",
     "named": false
   },
   {

@@ -84,7 +84,11 @@ Subject: complete subject with annotation, attributes, and a qualified associati
           value: (string_literal
             content: (string_content))))
       pattern: (sub_pattern
-        (symbol)
-        (symbol)
-        (symbol)
-        (symbol)))))
+        (reference
+          identifier: (symbol))
+        (reference
+          identifier: (symbol))
+        (reference
+          identifier: (symbol))
+        (reference
+          identifier: (symbol))))))

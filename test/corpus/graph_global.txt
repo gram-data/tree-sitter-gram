@@ -106,5 +106,7 @@ Graph: top-level record, a path and a path
     elements: (subject
       identifier: (symbol)
       pattern: (sub_pattern
-        (symbol)
-        (symbol)))))
+        (reference
+          identifier: (symbol))
+        (reference
+          identifier: (symbol))))))
