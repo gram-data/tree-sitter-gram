@@ -13,7 +13,7 @@ Node: single annotation, no attributes
         (annotation
           key: (symbol)
           value: (string_literal
-            content: (string_content))))))))
+            content: (string_content)))))))
 
 ==================
 Node: two annotations, no attributes
@@ -33,7 +33,7 @@ Node: two annotations, no attributes
         (annotation
           key: (symbol)
           value: (string_literal
-            content: (string_content))))))))
+            content: (string_content)))))))
 
 ==================
 Node: annotation with identifier
@@ -51,7 +51,7 @@ Node: annotation with identifier
           key: (symbol)
           value: (string_literal
             content: (string_content))))
-      identifier: (symbol)))))
+      identifier: (symbol))))
 
 ==================
 Node: annotation with identifier, labels, and record
@@ -76,7 +76,7 @@ Node: annotation with identifier, labels, and record
         (property
           key: (symbol)
           value: (string_literal
-            content: (string_content))))))))
+            content: (string_content)))))))
 
 ==================
 Node: annotation must precede attributes (disallowed after identifier)
@@ -91,4 +91,4 @@ Node: annotation must precede attributes (disallowed after identifier)
   (pattern
     elements: (node
       identifier: (symbol)
-      (ERROR)))))
+      (ERROR))))

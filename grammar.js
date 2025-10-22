@@ -208,30 +208,162 @@ module.exports = grammar({
 
     undirected_arrow: ($) =>
       choice(
-        seq("-", optional(seq("[", $._attributes, "]")), "-"),
-        seq("=", optional(seq("[", $._attributes, "]")), "="),
-        seq("~", optional(seq("[", $._attributes, "]")), "~"),
+        seq(
+          "-",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "-",
+        ),
+        seq(
+          "=",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "=",
+        ),
+        seq(
+          "~",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "~",
+        ),
       ),
 
     right_arrow: ($) =>
       choice(
-        seq("-", optional(seq("[", $._attributes, "]")), "->"),
-        seq("=", optional(seq("[", $._attributes, "]")), "=>"),
-        seq("~", optional(seq("[", $._attributes, "]")), "~>"),
+        seq(
+          "-",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "->",
+        ),
+        seq(
+          "=",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "=>",
+        ),
+        seq(
+          "~",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "~>",
+        ),
       ),
 
     left_arrow: ($) =>
       choice(
-        seq("<-", optional(seq("[", $._attributes, "]")), "-"),
-        seq("<=", optional(seq("[", $._attributes, "]")), "="),
-        seq("<~", optional(seq("[", $._attributes, "]")), "~"),
+        seq(
+          "<-",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "-",
+        ),
+        seq(
+          "<=",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "=",
+        ),
+        seq(
+          "<~",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "~",
+        ),
       ),
 
     bidirectional_arrow: ($) =>
       choice(
-        seq("<-", optional(seq("[", $._attributes, "]")), "->"),
-        seq("<=", optional(seq("[", $._attributes, "]")), "=>"),
-        seq("<~", optional(seq("[", $._attributes, "]")), "~>"),
+        seq(
+          "<-",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "->",
+        ),
+        seq(
+          "<=",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "=>",
+        ),
+        seq(
+          "<~",
+          optional(
+            seq(
+              "[",
+              field("annotations", optional($.annotations)),
+              field("attributes", optional($._attributes)),
+              "]",
+            ),
+          ),
+          "~>",
+        ),
       ),
   },
 });
