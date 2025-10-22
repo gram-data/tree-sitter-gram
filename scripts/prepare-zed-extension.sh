@@ -35,14 +35,13 @@ npx tree-sitter test
 # Sync top-level queries into Zed extension
 echo "📝 Syncing Tree-sitter queries into Zed extension..."
 QUERIES_SRC="$PROJECT_ROOT/queries"
-QUERIES_DST="$ZED_EXTENSION_DIR/languages/gram/queries"
+QUERIES_DST="$ZED_EXTENSION_DIR/languages/gram"
 
 if [ ! -d "$QUERIES_SRC" ] || [ ! -f "$QUERIES_SRC/highlights.scm" ]; then
     echo "❌ Error: Missing canonical queries. Expected at: $QUERIES_SRC/highlights.scm"
     exit 1
 fi
 
-rm -rf "$QUERIES_DST"
 mkdir -p "$QUERIES_DST"
 cp "$QUERIES_SRC"/*.scm "$QUERIES_DST"/
 
@@ -87,7 +86,7 @@ echo "✅ Validating extension structure..."
 required_files=(
     "$ZED_EXTENSION_DIR/extension.toml"
     "$ZED_EXTENSION_DIR/languages/gram/config.toml"
-    "$ZED_EXTENSION_DIR/languages/gram/queries/highlights.scm"
+    "$ZED_EXTENSION_DIR/languages/gram/highlights.scm"
 )
 
 for file in "${required_files[@]}"; do
@@ -98,7 +97,7 @@ for file in "${required_files[@]}"; do
 done
 
 # Explicit check for highlights.scm copied from queries/
-HIGHLIGHTS_FILE="$ZED_EXTENSION_DIR/languages/gram/queries/highlights.scm"
+HIGHLIGHTS_FILE="$ZED_EXTENSION_DIR/languages/gram/highlights.scm"
 if [ ! -f "$HIGHLIGHTS_FILE" ]; then
     echo "❌ Error: Missing required file: $HIGHLIGHTS_FILE"
     exit 1
