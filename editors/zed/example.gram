@@ -85,3 +85,5 @@
   special_symbols: "@#$%^&*()_+-=[]{}|;:,.<>?",
   very_long_string: "This is a very long string that spans multiple conceptual lines to test how the syntax highlighter handles long content without breaking the highlighting engine or causing performance issues in the editor"
 })
+
+(::Double::Trouble)
