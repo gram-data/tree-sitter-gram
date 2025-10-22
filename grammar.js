@@ -85,7 +85,7 @@ module.exports = grammar({
         $.string_literal,
       ),
 
-    array: ($) => seq("[", commaSep1($._value), "]"),
+    array: ($) => seq("[", commaSep1($._ref_value), "]"),
 
     labels: ($) => repeat1($._label),
 

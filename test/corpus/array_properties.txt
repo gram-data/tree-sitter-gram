@@ -10,3 +10,13 @@ Array of numbers in a property
     (symbol)
     (array (integer) (integer) (integer))
 )))
+
+
+==================
+Array of arrays is not ok.
+:error
+==================
+
+{ count: [[1,2],[3,4]] }
+
+---

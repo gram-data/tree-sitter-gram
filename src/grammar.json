@@ -560,7 +560,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_value"
+              "name": "_ref_value"
             },
             {
               "type": "REPEAT",
@@ -573,7 +573,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_value"
+                    "name": "_ref_value"
                   }
                 ]
               }
