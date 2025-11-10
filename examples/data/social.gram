@@ -1,0 +1,21 @@
+// A simple social graph
+
+
+// Meet ABK, a person.
+(abk:Person {name: "Andreas"})
+
+// Some more people.
+// Use a `,` to concatenate a series of elements.
+(ee:Person {name: "Emil"}), (mh:Person {name: "Michael"})
+
+// These 3 people know each other, explicitly.
+(abk)-[:KNOWS]-(ee)
+(ee)-[:KNOWS]-(mh)
+(mh)-[:KNOWS]-(abk)
+
+// Yet more people.
+(le:Person {name: "Leonhard"}), (fh:Person {name: "Frank"})
+
+// These are all members of a group, not all of whom directly know each other
+[graphistas:Group {topic: "Graph Theory"} | abk, ee, mh, le, fh]
+

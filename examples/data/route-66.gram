@@ -1,0 +1,118 @@
+// # Route-66 - the historic American highway
+
+// ## Santa Monica to San Bernardino
+// The original western terminus of Route 66 was in downtown Los Angeles at the intersection of 7th street and Broadway Ave. In 1935, the route was extended to Santa Monica. 
+// In Santa Monica, US 66 started at the intersection of Lincoln and Olympic Blvd at U.S. 101A. Route 66 headed north on Lincoln and then turned east onto Santa Monica Boulevard, which was, from the Santa Monica city line with Los Angeles up to U.S. Route 101, added to SR 2 during the 1964 renumbering, the same name it had before 1936.[9] In today's terms, it followed Santa Monica Boulevard to its eastern terminus, then continued to the southeast as Sunset Boulevard up to the Arroyo Seco (110) Parkway, at the interchange with the Hollywood (101) Freeway.
+// The highway then ran northwards on SR 110 from Los Angeles to Colorado Boulevard in Pasadena. Prior to the opening of the Arroyo Seco Parkway, US 66 began north on Broadway which curves east, ending at Mission Avenue. The highway then continued north on Mission which turns into Huntington Drive and then turns north onto Fair Oaks Avenue until meeting Colorado Boulevard. After the extension to Santa Monica, the route moved to Figueroa Street from Sunset Boulevard to Colorado Boulevard until the opening of the Arroyo Seco.
+// From Downtown Pasadena, the highway continued east on Colorado Boulevard. In Arcadia, when crossing North Baldwin Avenue, Colorado Boulevard becomes Colorado Street, and after 0.3 miles (0.48 km) it changes again to Colorado Place. The highway then continues as Huntington Drive eastwards through Arcadia, Monrovia, and Duarte. After the road crosses the San Gabriel River into Irwindale, it becomes Foothill Boulevard after 5.7 miles (9.2 km). In Azusa, the highway veers away from Foothill Boulevard, becoming Alosta Avenue. The city of Glendora renamed their segment of Alosta Avenue to Route 66; the highway is known as Foothill Boulevard again when it enters into San Dimas.
+// Foothill Boulevard is then numbered SR 66 from the interchange with the Foothill (210) Freeway in La Verne onward until the road crosses into San Bernardino, where it becomes Fifth Street. SR 66 ends at the 5th Street interchange with I-215 in San Bernardino.
+
+// Western terminus - Santa Monica
+(sm1:Junction {
+    streets: ["Lincoln", "Olympic Blvd"],
+    city: "Santa Monica",
+    description: "Starting point at U.S. 101A"
+})
+
+// Santa Monica Boulevard junction
+(sm2:Junction {
+    streets: ["Lincoln", "Santa Monica Boulevard"],
+    city: "Santa Monica",
+    description: "Turn east onto Santa Monica Boulevard"
+})
+
+// Los Angeles - Sunset Boulevard / Arroyo Seco interchange
+(la1:Junction {
+    streets: ["Sunset Boulevard", "Arroyo Seco Parkway (SR 110)", "Hollywood Freeway (US 101)"],
+    city: "Los Angeles",
+    description: "Interchange with Hollywood Freeway"
+})
+
+// Pasadena - Colorado Boulevard
+(pas1:Junction {
+    streets: ["Colorado Boulevard", "SR 110"],
+    city: "Pasadena",
+    description: "Route continues east on Colorado Boulevard"
+})
+
+// Arcadia - Colorado Boulevard / North Baldwin Avenue
+(arc1:Junction {
+    streets: ["Colorado Boulevard", "North Baldwin Avenue"],
+    city: "Arcadia",
+    description: "Colorado Boulevard becomes Colorado Street"
+})
+
+// Arcadia/Monrovia - Huntington Drive
+(mon1:Junction {
+    streets: ["Huntington Drive"],
+    city: "Monrovia",
+    description: "Route continues as Huntington Drive"
+})
+
+// Duarte - Huntington Drive
+(dua1:Junction {
+    streets: ["Huntington Drive"],
+    city: "Duarte",
+    description: "Continuing east on Huntington Drive"
+})
+
+// Irwindale - San Gabriel River crossing / Foothill Boulevard
+(irw1:Junction {
+    streets: ["Huntington Drive", "Foothill Boulevard"],
+    city: "Irwindale",
+    description: "Becomes Foothill Boulevard after crossing San Gabriel River"
+})
+
+// Azusa - Alosta Avenue
+(azu1:Junction {
+    streets: ["Foothill Boulevard", "Alosta Avenue"],
+    city: "Azusa",
+    description: "Highway veers away from Foothill, becoming Alosta Avenue"
+})
+
+// Glendora - Route 66
+(gle1:Junction {
+    streets: ["Route 66", "Alosta Avenue"],
+    city: "Glendora",
+    description: "City renamed segment to Route 66"
+})
+
+// San Dimas - Foothill Boulevard
+(sdm1:Junction {
+    streets: ["Foothill Boulevard", "Route 66"],
+    city: "San Dimas",
+    description: "Highway becomes Foothill Boulevard again"
+})
+
+// La Verne - Foothill (210) Freeway interchange
+(lav1:Junction {
+    streets: ["Foothill Boulevard (SR 66)", "Foothill Freeway (I-210)"],
+    city: "La Verne",
+    description: "SR 66 begins at interchange with Foothill Freeway"
+})
+
+// San Bernardino - Eastern terminus
+(sb1:Junction {
+    streets: ["Fifth Street", "I-215"],
+    city: "San Bernardino",
+    description: "SR 66 ends at 5th Street interchange with I-215"
+})
+
+// Complete segment from Santa Monica to San Bernardino
+[sm2sb:Segment {
+    route: 66,
+    description: "Route 66 from Santa Monica to San Bernardino"
+} |
+    (sm1)-[:Route {number: 66, street: "Lincoln"}]->(sm2),
+    (sm2)-[:Route {number: 66, street: "Santa Monica Boulevard"}]->(la1),
+    (la1)-[:Route {number: 66, street: "SR 110 (Arroyo Seco Parkway)"}]->(pas1),
+    (pas1)-[:Route {number: 66, street: "Colorado Boulevard"}]->(arc1),
+    (arc1)-[:Route {number: 66, street: "Huntington Drive"}]->(mon1),
+    (mon1)-[:Route {number: 66, street: "Huntington Drive"}]->(dua1),
+    (dua1)-[:Route {number: 66, street: "Huntington Drive"}]->(irw1),
+    (irw1)-[:Route {number: 66, street: "Foothill Boulevard"}]->(azu1),
+    (azu1)-[:Route {number: 66, street: "Alosta Avenue"}]->(gle1),
+    (gle1)-[:Route {number: 66, street: "Route 66"}]->(sdm1),
+    (sdm1)-[:Route {number: 66, street: "Foothill Boulevard (SR 66)"}]->(lav1),
+    (lav1)-[:Route {number: 66, street: "Fifth Street"}]->(sb1)
+]

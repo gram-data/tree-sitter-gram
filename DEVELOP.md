@@ -36,5 +36,7 @@ python -m pip install .
   - `npm run zed:publish`
 2. Commit changes
   - `git commit -am "Release 1.2.3" `
-3. Tag with new version using `git tag -a <version> -m "<description>"
-4. `git push --follow-tags`
+3. Tag with new version using 
+  - `git tag -a <version> -m "<description>"`
+4. Push the tags to trigger deployment
+  - `git push --follow-tags`
