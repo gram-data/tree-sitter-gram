@@ -1,6 +1,11 @@
 module.exports = grammar({
   name: "gram",
 
+  extras: ($) => [
+    /\s/,
+    $.comment,
+  ],
+
   rules: {
     gram: ($) => seq(field("root", optional($.record)), repeat($.pattern)),
 
@@ -376,6 +381,8 @@ module.exports = grammar({
           "~>",
         ),
       ),
+
+    comment: ($) => token(seq("//", /.*/)),
   },
 });
 

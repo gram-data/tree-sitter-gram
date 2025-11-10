@@ -1,2 +1,2 @@
-
-(a)-->(b)-->(c)
+// Chain of relationships
+(a)-->(b)-->(c)  // a connects to b, b connects to c
