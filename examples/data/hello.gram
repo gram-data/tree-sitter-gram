@@ -1,1 +1,2 @@
-(hello)-->(world)
+// Simple hello world example
+(hello)-->(world)  // Relationship between hello and world

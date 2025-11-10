@@ -4,9 +4,10 @@ const GramLang = require('tree-sitter-gram');
 const parser = new Parser();
 parser.setLanguage(GramLang);
 
-const gramCode = `(hello)
-(hello)-->(world)
-(hello:Greeting)-[dear:ADJECTIVE]->(world:Subject)
+const gramCode = `// Example gram file with comments
+(hello)  // Simple node
+(hello)-->(world)  // Relationship between nodes
+(hello:Greeting)-[dear:ADJECTIVE]->(world:Subject)  // Labeled nodes and relationship
 `;
 const cst = parser.parse(gramCode);
 

@@ -24,6 +24,12 @@ As a subject:
 })
 ```
 
+Gram files support comments using `//` syntax for line-based and end-of-line comments:
+```
+// This is a line comment
+(hello)-->(world)  // End-of-line comment
+```
+
 Learn more about `gram` at the [gram-data github org](https://github.com/gram-data) notation.
 
 ## Editor Support

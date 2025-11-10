@@ -24,9 +24,9 @@
 
 **Purpose**: Verify prerequisites and prepare for grammar modification
 
-- [ ] T001 Verify tree-sitter CLI is installed and accessible (`npx tree-sitter --version`)
-- [ ] T002 [P] Verify existing grammar tests pass (`npx tree-sitter test`)
-- [ ] T003 [P] Create backup or branch checkpoint before grammar modifications
+- [x] T001 Verify tree-sitter CLI is installed and accessible (`npx tree-sitter --version`)
+- [x] T002 [P] Verify existing grammar tests pass (`npx tree-sitter test`)
+- [x] T003 [P] Create backup or branch checkpoint before grammar modifications
 
 ---
 
@@ -36,8 +36,8 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Add `extras` array to grammar.js if not present (check current grammar.js structure)
-- [ ] T005 Add `comment` rule definition to grammar.js using `token(seq('//', /.*/))` pattern
+- [x] T004 Add `extras` array to grammar.js if not present (check current grammar.js structure)
+- [x] T005 Add `comment` rule definition to grammar.js using `token(seq('//', /.*/))` pattern
 
 **Checkpoint**: Foundation ready - comment rule infrastructure in place, user story implementation can now begin
 
@@ -53,21 +53,21 @@
 
 > **NOTE**: Corpus tests are required for tree-sitter grammar changes. Write tests covering line-based comment scenarios.
 
-- [ ] T006 [P] [US1] Create corpus test file `test/corpus/comments.txt` with line-based comment test cases
-- [ ] T007 [P] [US1] Add test case for standalone line comment in `test/corpus/comments.txt`
-- [ ] T008 [P] [US1] Add test case for multiple line comments in `test/corpus/comments.txt`
-- [ ] T009 [P] [US1] Add test case for line comment with special characters in `test/corpus/comments.txt`
-- [ ] T010 [P] [US1] Add test case for line comment at file start in `test/corpus/comments.txt`
-- [ ] T011 [P] [US1] Add test case for line comment at file end in `test/corpus/comments.txt`
-- [ ] T012 [P] [US1] Add test case for empty line comment (`//` only) in `test/corpus/comments.txt`
-- [ ] T013 [P] [US1] Add test case verifying comment markers in string literals are preserved in `test/corpus/comments.txt`
+- [x] T006 [P] [US1] Create corpus test file `test/corpus/comments.txt` with line-based comment test cases
+- [x] T007 [P] [US1] Add test case for standalone line comment in `test/corpus/comments.txt`
+- [x] T008 [P] [US1] Add test case for multiple line comments in `test/corpus/comments.txt`
+- [x] T009 [P] [US1] Add test case for line comment with special characters in `test/corpus/comments.txt`
+- [x] T010 [P] [US1] Add test case for line comment at file start in `test/corpus/comments.txt`
+- [x] T011 [P] [US1] Add test case for line comment at file end in `test/corpus/comments.txt`
+- [x] T012 [P] [US1] Add test case for empty line comment (`//` only) in `test/corpus/comments.txt`
+- [x] T013 [P] [US1] Add test case verifying comment markers in string literals are preserved in `test/corpus/comments.txt`
 
 ### Implementation for User Story 1
 
-- [ ] T014 [US1] Add `comment` rule to `extras` array in `grammar.js` (if not already done in Phase 2)
-- [ ] T015 [US1] Regenerate parser from grammar (`npx tree-sitter generate`)
-- [ ] T016 [US1] Run corpus tests to verify line-based comments work (`npx tree-sitter test -f 'comments'`)
-- [ ] T017 [US1] Verify existing tests still pass (`npx tree-sitter test`)
+- [x] T014 [US1] Add `comment` rule to `extras` array in `grammar.js` (if not already done in Phase 2)
+- [x] T015 [US1] Regenerate parser from grammar (`npx tree-sitter generate`)
+- [x] T016 [US1] Run corpus tests to verify line-based comments work (`npx tree-sitter test -f 'comments'`)
+- [x] T017 [US1] Verify existing tests still pass (`npx tree-sitter test`)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional - line-based comments are supported and tested
 
@@ -83,20 +83,20 @@
 
 ### Tests for User Story 2
 
-- [ ] T018 [P] [US2] Add test case for end-of-line comment after node in `test/corpus/comments.txt`
-- [ ] T019 [P] [US2] Add test case for end-of-line comment after relationship in `test/corpus/comments.txt`
-- [ ] T020 [P] [US2] Add test case for end-of-line comment after subject in `test/corpus/comments.txt`
-- [ ] T021 [P] [US2] Add test case for end-of-line comment after pattern element in `test/corpus/comments.txt`
-- [ ] T022 [P] [US2] Add test case for multiple end-of-line comments in `test/corpus/comments.txt`
-- [ ] T023 [P] [US2] Add test case for end-of-line comment with special characters in `test/corpus/comments.txt`
-- [ ] T024 [P] [US2] Add test case for comment between pattern elements (after comma) in `test/corpus/comments.txt`
-- [ ] T025 [P] [US2] Add negative test case verifying in-line comments are rejected (comment between adjacent tokens) in `test/corpus/comments.txt`
+- [x] T018 [P] [US2] Add test case for end-of-line comment after node in `test/corpus/comments.txt`
+- [x] T019 [P] [US2] Add test case for end-of-line comment after relationship in `test/corpus/comments.txt`
+- [x] T020 [P] [US2] Add test case for end-of-line comment after subject in `test/corpus/comments.txt`
+- [x] T021 [P] [US2] Add test case for end-of-line comment after pattern element in `test/corpus/comments.txt`
+- [x] T022 [P] [US2] Add test case for multiple end-of-line comments in `test/corpus/comments.txt`
+- [x] T023 [P] [US2] Add test case for end-of-line comment with special characters in `test/corpus/comments.txt`
+- [x] T024 [P] [US2] Add test case for comment between pattern elements (after comma) in `test/corpus/comments.txt`
+- [x] T025 [P] [US2] Add negative test case verifying in-line comments are rejected (comment between adjacent tokens) in `test/corpus/comments.txt`
 
 ### Implementation for User Story 2
 
-- [ ] T026 [US2] Verify end-of-line comments work with existing grammar rule (no additional grammar changes needed)
-- [ ] T027 [US2] Run corpus tests to verify end-of-line comments work (`npx tree-sitter test -f 'comments'`)
-- [ ] T028 [US2] Verify all existing tests still pass (`npx tree-sitter test`)
+- [x] T026 [US2] Verify end-of-line comments work with existing grammar rule (no additional grammar changes needed)
+- [x] T027 [US2] Run corpus tests to verify end-of-line comments work (`npx tree-sitter test -f 'comments'`)
+- [x] T028 [US2] Verify all existing tests still pass (`npx tree-sitter test`)
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently - both line-based and end-of-line comments are supported and tested
 
@@ -106,16 +106,16 @@
 
 **Purpose**: Improvements that affect multiple user stories and ensure completeness
 
-- [ ] T029 [P] Verify backward compatibility by running all existing corpus tests (`npx tree-sitter test`)
-- [ ] T030 [P] Verify comment markers in string literals are preserved (test with all string literal types: single-quoted, double-quoted, backticked, tagged, fenced)
-- [ ] T031 [P] Update minimal binding examples in `examples/node/inspect.js` to demonstrate comment usage
-- [ ] T032 [P] Update minimal binding examples in `examples/python/inspect.py` to demonstrate comment usage
-- [ ] T033 [P] Update minimal binding examples in `examples/rust/src/main.rs` to demonstrate comment usage
-- [ ] T034 [P] Update minimal binding examples in `examples/go/inspect.go` to demonstrate comment usage
-- [ ] T035 Run Node.js binding tests (`npm test`) to verify bindings work with comments
-- [ ] T036 Verify AST equivalence: parse a gram file with comments, remove comments, parse again, compare ASTs
-- [ ] T037 Update README.md or documentation to mention comment support (if documentation exists)
-- [ ] T038 Run quickstart.md validation: verify examples in quickstart.md work correctly
+- [x] T029 [P] Verify backward compatibility by running all existing corpus tests (`npx tree-sitter test`)
+- [x] T030 [P] Verify comment markers in string literals are preserved (test with all string literal types: single-quoted, double-quoted, backticked, tagged, fenced)
+- [x] T031 [P] Update minimal binding examples in `examples/node/inspect.js` to demonstrate comment usage
+- [x] T032 [P] Update minimal binding examples in `examples/python/inspect.py` to demonstrate comment usage
+- [x] T033 [P] Update minimal binding examples in `examples/rust/src/main.rs` to demonstrate comment usage
+- [x] T034 [P] Update minimal binding examples in `examples/go/inspect.go` to demonstrate comment usage
+- [x] T035 Run Node.js binding tests (`npm test`) to verify bindings work with comments
+- [x] T036 Verify AST equivalence: parse a gram file with comments, remove comments, parse again, compare ASTs
+- [x] T037 Update README.md or documentation to mention comment support (if documentation exists)
+- [x] T038 Run quickstart.md validation: verify examples in quickstart.md work correctly
 
 ---
 
