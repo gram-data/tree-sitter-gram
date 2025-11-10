@@ -1,0 +1,29 @@
+# tree-sitter-gram Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2025-11-10
+
+## Active Technologies
+
+- JavaScript (Node.js), tree-sitter grammar DSL + ree-sitter-cli ^0.25.10, tree-sitter ^0.25.0 (001-line-comments)
+
+## Project Structure
+
+```text
+src/
+tests/
+```
+
+## Commands
+
+npm test && npm run lint
+
+## Code Style
+
+JavaScript (Node.js), tree-sitter grammar DSL: Follow standard conventions
+
+## Recent Changes
+
+- 001-line-comments: Added JavaScript (Node.js), tree-sitter grammar DSL + ree-sitter-cli ^0.25.10, tree-sitter ^0.25.0
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->
