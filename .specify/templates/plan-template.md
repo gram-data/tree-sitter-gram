@@ -31,7 +31,24 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+**Grammar Expressiveness and Clarity (Principle I)**:
+- [ ] Grammar rules use descriptive names aligned with Gram terminology
+- [ ] Rule structure is organized hierarchically
+- [ ] Complex rules are decomposed into named helper functions
+- [ ] Field annotations used for important AST components
+- [ ] Precedence and associativity explicitly declared
+
+**Comprehensive and Illustrative Testing (Principle II)**:
+- [ ] Corpus tests added/updated in `test/corpus/` with descriptive names
+- [ ] Tests include both positive and negative cases
+- [ ] Tests follow "source ===> tree" format with minimal examples
+- [ ] Binding tests added for affected language adapters
+- [ ] All test suites pass (`npx tree-sitter test`, `npm test`, etc.)
+
+**Minimal Binding Examples (Principle III)**:
+- [ ] Examples updated in `examples/` if AST structure changes
+- [ ] Examples remain minimal and focused on core usage
+- [ ] Examples are executable and independently verifiable
 
 ## Project Structure
 
