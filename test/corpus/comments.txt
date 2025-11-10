@@ -1,0 +1,198 @@
+==================
+Line comment standalone
+==================
+
+// This is a line comment
+(hello)
+
+---
+
+(gram
+  (comment)
+  (pattern
+    elements: (node
+      identifier: (symbol))))
+
+==================
+Multiple line comments
+==================
+
+// First comment
+// Second comment
+(hello)
+// Third comment
+
+---
+
+(gram
+  (comment)
+  (comment)
+  (pattern
+    elements: (node
+      identifier: (symbol)))
+  (comment))
+
+==================
+Line comment with special characters
+==================
+
+// This comment has [brackets] and (parens) and {braces}
+(hello)
+
+---
+
+(gram
+  (comment)
+  (pattern
+    elements: (node
+      identifier: (symbol))))
+
+==================
+Line comment at file start
+==================
+
+// File header comment
+(hello)-->(world)
+
+---
+
+(gram
+  (comment)
+  (pattern
+    elements: (relationship
+      left: (node
+        identifier: (symbol))
+      kind: (right_arrow)
+      right: (node
+        identifier: (symbol)))))
+
+==================
+Line comment at file end
+==================
+
+(hello)-->(world)
+// End of file comment
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node
+        identifier: (symbol))
+      kind: (right_arrow)
+      right: (node
+        identifier: (symbol))))
+  (comment))
+
+==================
+Empty line comment
+==================
+
+//
+(hello)
+
+---
+
+(gram
+  (comment)
+  (pattern
+    elements: (node
+      identifier: (symbol))))
+
+==================
+Comment markers in string literals preserved
+==================
+
+(hello {text: "URL: https://example.com // not a comment"})
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      identifier: (symbol)
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
+
+==================
+Comment before top-level node
+==================
+
+// Comment before a node
+(hello)
+
+---
+
+(gram
+  (comment)
+  (pattern
+    elements: (node
+      identifier: (symbol))))
+
+==================
+Comment before top-level relationship
+==================
+
+// Comment before a relationship
+(hello)-->(world)
+
+---
+
+(gram
+  (comment)
+  (pattern
+    elements: (relationship
+      left: (node
+        identifier: (symbol))
+      kind: (right_arrow)
+      right: (node
+        identifier: (symbol)))))
+
+==================
+Comment before top-level pattern
+==================
+
+// Comment before a pattern
+[Person {name: "Alice"}]
+
+---
+
+(gram
+  (comment)
+  (pattern
+    elements: (subject
+      identifier: (symbol)
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content)))))))
+
+==================
+Comment before graph-level record
+==================
+
+// Comment before graph-level record
+{name: "Graph", version: 1.0}
+(hello)
+
+---
+
+(gram
+  (comment)
+  root: (record
+    (property
+      key: (symbol)
+      value: (string_literal
+        content: (string_content)))
+    (property
+      key: (symbol)
+      value: (decimal)))
+  (pattern
+    elements: (node
+      identifier: (symbol))))
+
