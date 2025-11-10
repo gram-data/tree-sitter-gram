@@ -196,3 +196,159 @@ Comment before graph-level record
     elements: (node
       identifier: (symbol))))
 
+==================
+End-of-line comment after node
+==================
+
+(hello)  // End-of-line comment after node
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      identifier: (symbol)))
+  (comment))
+
+==================
+End-of-line comment after relationship
+==================
+
+(hello)-->(world)  // End-of-line comment after relationship
+
+---
+
+(gram
+  (pattern
+    elements: (relationship
+      left: (node
+        identifier: (symbol))
+      kind: (right_arrow)
+      right: (node
+        identifier: (symbol))))
+  (comment))
+
+==================
+End-of-line comment after subject
+==================
+
+[Person {name: "Alice"}]  // End-of-line comment after subject
+
+---
+
+(gram
+  (pattern
+    elements: (subject
+      identifier: (symbol)
+      record: (record
+        (property
+          key: (symbol)
+          value: (string_literal
+            content: (string_content))))))
+  (comment))
+
+==================
+End-of-line comment after pattern element
+==================
+
+(hello), (world)  // End-of-line comment after pattern elements
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      identifier: (symbol))
+    elements: (node
+      identifier: (symbol)))
+  (comment))
+
+==================
+Multiple end-of-line comments
+==================
+
+(hello)  // First comment
+(world)  // Second comment
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      identifier: (symbol)))
+  (comment)
+  (pattern
+    elements: (node
+      identifier: (symbol)))
+  (comment))
+
+==================
+End-of-line comment with special characters
+==================
+
+(hello)  // This comment has [brackets] and (parens) and {braces}
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      identifier: (symbol)))
+  (comment))
+
+==================
+Comment between pattern elements after comma
+==================
+
+(hello),  // Comment after comma
+(world)
+
+---
+
+(gram
+  (pattern
+    elements: (node
+      identifier: (symbol))
+    (comment)
+    elements: (node
+      identifier: (symbol))))
+
+==================
+In-line comment between adjacent tokens (brackets)
+:error
+==================
+
+[// comment]
+
+---
+
+(gram
+  (ERROR)
+  (comment))
+
+==================
+In-line comment between adjacent tokens (braces)
+:error
+==================
+
+{// comment}
+
+---
+
+(gram
+  (ERROR)
+  (comment))
+
+==================
+In-line comment between adjacent tokens (parentheses)
+:error
+==================
+
+(// comment)
+
+---
+
+(gram
+  (ERROR)
+  (comment))
+
