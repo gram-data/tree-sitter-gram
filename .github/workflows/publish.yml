@@ -37,13 +37,41 @@ jobs:
         run: |
           VERSION=$(grep '^version = ' Cargo.toml | sed 's/version = "\(.*\)"/\1/')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Publishing tree-sitter-gram version: $VERSION"
-      - name: Publish tree-sitter-gram
-        run: cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
-      - name: Update gram-lint dependency and publish
+          echo "Checking tree-sitter-gram version: $VERSION"
+      - name: Check if tree-sitter-gram version exists
+        id: check_gram
         run: |
-          # Update dependency to use published version (remove path)
+          VERSION="${{ steps.version.outputs.version }}"
+          # Check crates.io API to see if this version already exists
+          RESPONSE=$(curl -s "https://crates.io/api/v1/crates/tree-sitter-gram/$VERSION" || echo "")
+          if echo "$RESPONSE" | grep -q '"version"'; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "tree-sitter-gram $VERSION already published, skipping"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "tree-sitter-gram $VERSION not found, will publish"
+          fi
+      - name: Publish tree-sitter-gram
+        if: steps.check_gram.outputs.exists != 'true'
+        run: cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      - name: Update gram-lint dependency
+        run: |
           VERSION="${{ steps.version.outputs.version }}"
           sed -i "s|tree-sitter-gram = { version = \"[^\"]*\", path = \"../..\" }|tree-sitter-gram = \"$VERSION\"|" tools/gram-lint/Cargo.toml
           echo "Updated gram-lint to depend on tree-sitter-gram = \"$VERSION\""
-          cargo publish --package gram-lint --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      - name: Check if gram-lint version exists
+        id: check_lint
+        run: |
+          LINT_VERSION=$(grep '^version = ' tools/gram-lint/Cargo.toml | sed 's/version = "\(.*\)"/\1/')
+          # Check crates.io API to see if this version already exists
+          RESPONSE=$(curl -s "https://crates.io/api/v1/crates/gram-lint/$LINT_VERSION" || echo "")
+          if echo "$RESPONSE" | grep -q '"version"'; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "gram-lint $LINT_VERSION already published, skipping"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "gram-lint $LINT_VERSION not found, will publish"
+          fi
+      - name: Publish gram-lint
+        if: steps.check_lint.outputs.exists != 'true'
+        run: cargo publish --package gram-lint --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
