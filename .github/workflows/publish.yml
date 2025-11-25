@@ -39,7 +39,7 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Publishing tree-sitter-gram version: $VERSION"
       - name: Publish tree-sitter-gram
-        run: cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
       - name: Update gram-lint dependency and publish
         run: |
           # Update dependency to use published version (remove path)
