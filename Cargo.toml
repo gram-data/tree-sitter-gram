@@ -1,3 +1,10 @@
+[workspace]
+members = [
+    ".",
+    "tools/gram-lint"
+]
+resolver = "2"
+
 [package]
 name = "tree-sitter-gram"
 description = "Gram grammar for tree-sitter"
@@ -6,9 +13,10 @@ license = "MIT"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "gram"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/tree-sitter/tree-sitter-gram"
+repository = "https://github.com/gram-data/tree-sitter-gram"
 edition = "2021"
 autoexamples = false
+publish = true
 
 build = "bindings/rust/build.rs"
 include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
@@ -20,7 +28,7 @@ path = "bindings/rust/lib.rs"
 tree-sitter-language = "0.1"
 
 [dev-dependencies]
-tree-sitter = { version = "0.22" }
+tree-sitter = { version = "0.25" }
 
 [build-dependencies]
 cc = "1.0.87"
