@@ -7,12 +7,12 @@ Hello world
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow)
-      right: (node
+      right: (node_pattern
         identifier: (symbol)))))
 
 ==================
@@ -24,13 +24,13 @@ Hello dear world
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow
         identifier: (symbol))
-      right: (node
+      right: (node_pattern
         identifier: (symbol)))))
 
 ==================
@@ -42,18 +42,18 @@ Hello dear world over there
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow
         identifier: (symbol))
-      right: (relationship
-        left: (node
+      right: (relationship_pattern
+        left: (node_pattern
           identifier: (symbol))
         kind: (right_arrow
           identifier: (symbol))
-        right: (node
+        right: (node_pattern
           identifier: (symbol))))))
 
 ==================
@@ -65,13 +65,13 @@ Hello "dear world" "over there"
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow
         identifier: (string_literal
           content: (string_content)))
-      right: (node
+      right: (node_pattern
         identifier: (string_literal
           content: (string_content))))))

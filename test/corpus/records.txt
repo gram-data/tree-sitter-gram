@@ -19,7 +19,7 @@ Record with integer property
 
 (gram
   root: (record
-    (property
+    (record_property
       key: (symbol)
       value: (integer))))
 
@@ -33,7 +33,7 @@ Record with double-quoted string property
 
 (gram
   root: (record
-    (property
+    (record_property
       key: (symbol)
       value: (string_literal
         content: (string_content)))))
@@ -48,7 +48,7 @@ Record with declare separator and a symbol property
 
 (gram
   root: (record
-    (property
+    (record_property
       key: (symbol)
       value: (symbol))))
 
@@ -64,12 +64,12 @@ Record followed by a Node
 
 (gram
   root: (record
-    (property
+    (record_property
       key: (symbol)
       value: (string_literal
         content: (string_content))))
-  (pattern
-    elements: (node)))
+  (annotated_pattern
+    elements: (node_pattern)))
 
 ==================
 Record property may not us greater than operator

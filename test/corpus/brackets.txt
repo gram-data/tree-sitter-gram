@@ -1,5 +1,5 @@
 ==================
-Subject: empty
+Bracket: empty
 ==================
 
 [ ]
@@ -7,11 +7,11 @@ Subject: empty
 ---
 
 (gram
-  (pattern
-    elements: (subject)))
+  (annotated_pattern
+    elements: (subject_pattern)))
 
 ==================
-Subject: named
+Bracket: named
 ==================
 
 [ a ]
@@ -19,12 +19,12 @@ Subject: named
 ---
 
 (gram
-  (pattern
-    elements: (subject
+  (annotated_pattern
+    elements: (subject_pattern
       identifier: (symbol))))
 
 ==================
-Subject: named, labeled
+Bracket: named, labeled
 ==================
 
 [ a:Subject ]
@@ -32,14 +32,14 @@ Subject: named, labeled
 ---
 
 (gram
-  (pattern
-    elements: (subject
+  (annotated_pattern
+    elements: (subject_pattern
       identifier: (symbol)
       labels: (labels
         (symbol)))))
 
 ==================
-Subject: named, labeled with a record
+Bracket: named, labeled with a record
 ==================
 
 [ a:Subject { title: "Generic Subject" } ]
@@ -47,19 +47,19 @@ Subject: named, labeled with a record
 ---
 
 (gram
-  (pattern
-    elements: (subject
+  (annotated_pattern
+    elements: (subject_pattern
       identifier: (symbol)
       labels: (labels
         (symbol))
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (string_literal
             content: (string_content)))))))
 
 ==================
-Subject: complete subject with annotation, attributes, and a qualified association
+Bracket: complete bracket with annotation, subject, and a qualified association
 ==================
 
 @description("Inspiring, collaborating, and educating a developer community")
@@ -68,27 +68,27 @@ Subject: complete subject with annotation, attributes, and a qualified associati
 ---
 
 (gram
-  (pattern
+  (annotated_pattern
     annotations: (annotations
       (annotation
         key: (symbol)
         value: (string_literal
           content: (string_content))))
-    elements: (subject
+    elements: (subject_pattern
       identifier: (symbol)
       labels: (labels
         (symbol))
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (string_literal
             content: (string_content))))
-      pattern: (sub_pattern
-        (reference
+      elements: (subject_pattern_elements
+        (pattern_reference
           identifier: (symbol))
-        (reference
+        (pattern_reference
           identifier: (symbol))
-        (reference
+        (pattern_reference
           identifier: (symbol))
-        (reference
+        (pattern_reference
           identifier: (symbol))))))

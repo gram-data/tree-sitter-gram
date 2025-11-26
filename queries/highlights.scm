@@ -39,18 +39,15 @@
 ] @punctuation.delimiter
 
 ; Field names in records and maps
-(property key: (symbol) @property)
-(property key: (string_literal) @property)
-(property key: (integer) @property)
-(mapping key: (symbol) @property)
-(mapping key: (string_literal) @property)
-(mapping key: (integer) @property)
+(record_property key: (symbol) @property)
+(record_property key: (string_literal) @property)
+(record_property key: (integer) @property)
+(map_entry key: (symbol) @property)
+(map_entry key: (string_literal) @property)
+(map_entry key: (integer) @property)
 
 ; Annotation keys
 (annotation key: (symbol) @attribute)
-
-; Annotations inside nodes
-(node annotations: (annotations) @attribute)
 
 ; Annotations inside relationship arrows
 [
@@ -60,14 +57,14 @@
     (bidirectional_arrow annotations: (annotations) @attribute)
 ]
 
-; Subject brackets (special highlighting)
-(subject) @type
+; Bracket notation (special highlighting)
+(subject_pattern) @type
 
 ; Node with labels
-(node (labels (symbol) @type))
+(node_pattern (labels (symbol) @type))
 
 ; Relationship arrows (special highlighting for graph syntax)
-(relationship) @keyword
+(relationship_pattern) @keyword
 
 ; Arrow operators in relationships
 (right_arrow) @operator

@@ -1,5 +1,6 @@
 ==================
-Node: single annotation, no attributes
+Node: single annotation, no subject (disallowed)
+:error
 ==================
 
 ( @description("An empty node.") )
@@ -7,16 +8,13 @@ Node: single annotation, no attributes
 ---
 
 (gram
-  (pattern
-    elements: (node
-      annotations: (annotations
-        (annotation
-          key: (symbol)
-          value: (string_literal
-            content: (string_content)))))))
+  (annotated_pattern
+    elements: (node_pattern
+      (ERROR))))
 
 ==================
-Node: two annotations, no attributes
+Node: two annotations, no subject (disallowed)
+:error
 ==================
 
 ( @a(1) @b("two") )
@@ -24,19 +22,13 @@ Node: two annotations, no attributes
 ---
 
 (gram
-  (pattern
-    elements: (node
-      annotations: (annotations
-        (annotation
-          key: (symbol)
-          value: (integer))
-        (annotation
-          key: (symbol)
-          value: (string_literal
-            content: (string_content)))))))
+  (annotated_pattern
+    elements: (node_pattern
+      (ERROR))))
 
 ==================
-Node: annotation with identifier
+Node: annotation with identifier (disallowed)
+:error
 ==================
 
 ( @desc("n") player1 )
@@ -44,17 +36,13 @@ Node: annotation with identifier
 ---
 
 (gram
-  (pattern
-    elements: (node
-      annotations: (annotations
-        (annotation
-          key: (symbol)
-          value: (string_literal
-            content: (string_content))))
-      identifier: (symbol))))
+  (annotated_pattern
+    elements: (node_pattern
+      (ERROR))))
 
 ==================
-Node: annotation with identifier, labels, and record
+Node: annotation with identifier, labels, and record (disallowed)
+:error
 ==================
 
 ( @meta("m") player1:Player { k : "v" } )
@@ -62,24 +50,12 @@ Node: annotation with identifier, labels, and record
 ---
 
 (gram
-  (pattern
-    elements: (node
-      annotations: (annotations
-        (annotation
-          key: (symbol)
-          value: (string_literal
-            content: (string_content))))
-      identifier: (symbol)
-      labels: (labels
-        (symbol))
-      record: (record
-        (property
-          key: (symbol)
-          value: (string_literal
-            content: (string_content)))))))
+  (annotated_pattern
+    elements: (node_pattern
+      (ERROR))))
 
 ==================
-Node: annotation must precede attributes (disallowed after identifier)
+Node: annotation must precede subject (disallowed after identifier)
 :error
 ==================
 
@@ -88,7 +64,7 @@ Node: annotation must precede attributes (disallowed after identifier)
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (symbol)
       (ERROR))))

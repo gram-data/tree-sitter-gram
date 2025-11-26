@@ -7,54 +7,55 @@ module.exports = grammar({
   ],
 
   rules: {
-    gram: ($) => seq(field("root", optional($.record)), repeat($.pattern)),
+    // top-level rule, forming an outer pattern shaped like `[ record | sequence-of-top-level-elements ]`
+    gram: ($) => seq(field("root", optional($.record)), repeat($.annotated_pattern)),
 
-    pattern: ($) =>
+    // top-level elements are annotated patterns shaped like `[annotation-record | pattern-elements]`
+    annotated_pattern: ($) =>
       seq(
         field("annotations", optional($.annotations)),
-        field("elements", commaSep1($._pattern_element)),
+        field("elements", commaSep1($._annotated_pattern_element)),
       ),
-    _pattern_element: ($) => choice($.subject, $._path),
+    _annotated_pattern_element: ($) => choice($.subject_pattern, $._path_pattern),
 
-    subject: ($) =>
+    subject_pattern: ($) =>
       seq(
         "[",
-        field("attributes", optional($._attributes)),
-        field("pattern", optional(seq("|", $.sub_pattern))),
+        field("subject", optional($._subject)),
+        field("elements", optional(seq("|", $.subject_pattern_elements))),
         "]",
       ),
 
-    sub_pattern: ($) => commaSep1($._sub_pattern_element),
+    subject_pattern_elements: ($) => commaSep1($._subject_pattern_element),
 
-    _sub_pattern_element: ($) => choice($.subject, $._path, $.reference),
+    _subject_pattern_element: ($) => choice($.subject_pattern, $._path_pattern, $.pattern_reference),
 
     annotations: ($) => repeat1($.annotation),
 
     annotation: ($) =>
       seq("@", field("key", $.symbol), "(", field("value", $._value), ")"),
 
-    _path: ($) => choice($.relationship, $.node),
+    _path_pattern: ($) => choice($.relationship_pattern, $.node_pattern),
 
-    node: ($) =>
+    node_pattern: ($) =>
       seq(
         "(",
-        field("annotations", optional($.annotations)),
-        field("attributes", optional($._attributes)),
+        field("subject", optional($._subject)),
         ")",
       ),
 
-    relationship: ($) =>
+    relationship_pattern: ($) =>
       seq(
-        field("left", $.node),
+        field("left", $.node_pattern),
         field("kind", $._relationship_kind),
-        field("right", $._path),
+        field("right", $._path_pattern),
       ),
 
-    reference: ($) => field("identifier", $._identifier),
+    pattern_reference: ($) => field("identifier", $._identifier),
 
     _identifier: ($) => choice($.symbol, $.string_literal, $.integer),
 
-    _attributes: ($) =>
+    _subject: ($) =>
       choice(
         choice(
           field("identifier", $._identifier),
@@ -99,18 +100,18 @@ module.exports = grammar({
 
     _label: ($) => seq(choice(":", "::"), $.symbol),
 
-    record: ($) => seq("{", commaSep($.property), "}"),
+    record: ($) => seq("{", commaSep($.record_property), "}"),
 
-    property: ($) =>
+    record_property: ($) =>
       seq(
         field("key", $._identifier),
         choice(":", "::"),
         field("value", $._value),
       ),
 
-    map: ($) => seq("{", commaSep($.mapping), "}"),
+    map: ($) => seq("{", commaSep($.map_entry), "}"),
 
-    mapping: ($) =>
+    map_entry: ($) =>
       seq(field("key", $._identifier), ":", field("value", $._scalar_value)),
 
     symbol: ($) => token(/[a-zA-Z_][0-9a-zA-Z_.\-@]*/),
@@ -230,7 +231,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -242,7 +243,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -254,7 +255,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -270,7 +271,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -282,7 +283,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -294,7 +295,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -310,7 +311,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -322,7 +323,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -334,7 +335,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -350,7 +351,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -362,7 +363,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),
@@ -374,7 +375,7 @@ module.exports = grammar({
             seq(
               "[",
               field("annotations", optional($.annotations)),
-              field("attributes", optional($._attributes)),
+              field("subject", optional($._subject)),
               "]",
             ),
           ),

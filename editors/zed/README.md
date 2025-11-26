@@ -80,7 +80,7 @@ Once installed, the extension automatically provides syntax highlighting for any
 
 The extension provides highlighting for:
 
-- **Subjects**: `[...]` and `[:type ...]` brackets
+- **Brackets**: `[...]` and `[:type ...]` bracket notation (containing subjects)
 - **Nodes**: `(...)` parentheses
 - **Relationships**: `->`, `--`, `<-`, `<-->`, etc.
 - **Strings**: Single, double, and backtick quoted strings

@@ -6,7 +6,7 @@ Array of numbers in a property
 
 ---
 
-(gram (record (property
+(gram (record (record_property
     (symbol)
     (array (integer) (integer) (integer))
 )))

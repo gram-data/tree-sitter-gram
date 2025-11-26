@@ -7,16 +7,16 @@ Relationship annotation: undirected, annotations only
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (undirected_arrow
         annotations: (annotations
           (annotation
             key: (symbol)
             value: (string_literal
               content: (string_content)))))
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Relationship annotation: undirected, two annotations
@@ -27,9 +27,9 @@ Relationship annotation: undirected, two annotations
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (undirected_arrow
         annotations: (annotations
           (annotation
@@ -39,7 +39,7 @@ Relationship annotation: undirected, two annotations
             key: (symbol)
             value: (string_literal
               content: (string_content)))))
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Relationship annotation: undirected with identifier
@@ -50,9 +50,9 @@ Relationship annotation: undirected with identifier
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (undirected_arrow
         annotations: (annotations
           (annotation
@@ -60,7 +60,7 @@ Relationship annotation: undirected with identifier
             value: (string_literal
               content: (string_content))))
         identifier: (symbol))
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Relationship annotation: undirected with labels
@@ -71,9 +71,9 @@ Relationship annotation: undirected with labels
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (undirected_arrow
         annotations: (annotations
           (annotation
@@ -83,7 +83,7 @@ Relationship annotation: undirected with labels
         labels: (labels
           (symbol)
           (symbol)))
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Relationship annotation: undirected with identifier, labels, and record
@@ -94,9 +94,9 @@ Relationship annotation: undirected with identifier, labels, and record
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (undirected_arrow
         annotations: (annotations
           (annotation
@@ -107,11 +107,11 @@ Relationship annotation: undirected with identifier, labels, and record
         labels: (labels
           (symbol))
         record: (record
-          (property
+          (record_property
             key: (symbol)
             value: (string_literal
               content: (string_content)))))
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Relationship annotation: right arrow, annotations only
@@ -122,16 +122,16 @@ Relationship annotation: right arrow, annotations only
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow
         annotations: (annotations
           (annotation
             key: (symbol)
             value: (string_literal
               content: (string_content)))))
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Relationship annotation: left arrow, annotations only
@@ -142,16 +142,16 @@ Relationship annotation: left arrow, annotations only
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (left_arrow
         annotations: (annotations
           (annotation
             key: (symbol)
             value: (string_literal
               content: (string_content)))))
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Relationship annotation: bidirectional arrow, annotations only
@@ -162,16 +162,16 @@ Relationship annotation: bidirectional arrow, annotations only
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (bidirectional_arrow
         annotations: (annotations
           (annotation
             key: (symbol)
             value: (string_literal
               content: (string_content)))))
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Relationship annotation: undirected, annotation after identifier is not allowed
@@ -183,10 +183,10 @@ Relationship annotation: undirected, annotation after identifier is not allowed
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (undirected_arrow
         identifier: (symbol)
         (ERROR))
-      right: (node))))
+      right: (node_pattern))))

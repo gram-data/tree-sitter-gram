@@ -15,22 +15,22 @@ Map values are non-nested maps, similar in syntax to records but only accepting 
 
 (gram
   root: (record
-    (property
+    (record_property
       key: (symbol)
       value: (map
-        (mapping
+        (map_entry
           key: (symbol)
           value: (string_literal
             content: (string_content)))
-        (mapping
+        (map_entry
           key: (symbol)
           value: (string_literal
             content: (string_content)))
-        (mapping
+        (map_entry
           key: (symbol)
           value: (string_literal
             content: (string_content)))
-        (mapping
+        (map_entry
           key: (symbol)
           value: (string_literal
             content: (string_content)))))))
@@ -70,28 +70,28 @@ Map values may appear in node properties
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (symbol)
       labels: (labels
         (symbol))
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (map
-            (mapping
+            (map_entry
               key: (symbol)
               value: (string_literal
                 content: (string_content)))
-            (mapping
+            (map_entry
               key: (symbol)
               value: (string_literal
                 content: (string_content)))
-            (mapping
+            (map_entry
               key: (symbol)
               value: (string_literal
                 content: (string_content)))
-            (mapping
+            (map_entry
               key: (symbol)
               value: (string_literal
                 content: (string_content)))))))))
