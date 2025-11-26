@@ -1,5 +1,6 @@
 ==================
 Relationship annotation: undirected, annotations only
+:error
 ==================
 
 ()-[ @desc("edge") ]-()
@@ -11,15 +12,12 @@ Relationship annotation: undirected, annotations only
     elements: (relationship_pattern
       left: (node_pattern)
       kind: (undirected_arrow
-        annotations: (annotations
-          (annotation
-            key: (symbol)
-            value: (string_literal
-              content: (string_content)))))
+        (ERROR)))
       right: (node_pattern))))
 
 ==================
 Relationship annotation: undirected, two annotations
+:error
 ==================
 
 ()-[ @a(1) @b("two") ]-()
@@ -31,18 +29,12 @@ Relationship annotation: undirected, two annotations
     elements: (relationship_pattern
       left: (node_pattern)
       kind: (undirected_arrow
-        annotations: (annotations
-          (annotation
-            key: (symbol)
-            value: (integer))
-          (annotation
-            key: (symbol)
-            value: (string_literal
-              content: (string_content)))))
+        (ERROR)))
       right: (node_pattern))))
 
 ==================
 Relationship annotation: undirected with identifier
+:error
 ==================
 
 ()-[ @meta("m") r ]-()
@@ -54,16 +46,12 @@ Relationship annotation: undirected with identifier
     elements: (relationship_pattern
       left: (node_pattern)
       kind: (undirected_arrow
-        annotations: (annotations
-          (annotation
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))
-        identifier: (symbol))
+        (ERROR)))
       right: (node_pattern))))
 
 ==================
 Relationship annotation: undirected with labels
+:error
 ==================
 
 ()-[ @meta("m") :A:B ]-()
@@ -75,18 +63,12 @@ Relationship annotation: undirected with labels
     elements: (relationship_pattern
       left: (node_pattern)
       kind: (undirected_arrow
-        annotations: (annotations
-          (annotation
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))
-        labels: (labels
-          (symbol)
-          (symbol)))
+        (ERROR)))
       right: (node_pattern))))
 
 ==================
 Relationship annotation: undirected with identifier, labels, and record
+:error
 ==================
 
 ()-[ @meta("m") r:A { k : "v" } ]-()
@@ -98,23 +80,12 @@ Relationship annotation: undirected with identifier, labels, and record
     elements: (relationship_pattern
       left: (node_pattern)
       kind: (undirected_arrow
-        annotations: (annotations
-          (annotation
-            key: (symbol)
-            value: (string_literal
-              content: (string_content))))
-        identifier: (symbol)
-        labels: (labels
-          (symbol))
-        record: (record
-          (record_property
-            key: (symbol)
-            value: (string_literal
-              content: (string_content)))))
+        (ERROR)))
       right: (node_pattern))))
 
 ==================
 Relationship annotation: right arrow, annotations only
+:error
 ==================
 
 ()-[ @x("y") ]->()
@@ -126,15 +97,12 @@ Relationship annotation: right arrow, annotations only
     elements: (relationship_pattern
       left: (node_pattern)
       kind: (right_arrow
-        annotations: (annotations
-          (annotation
-            key: (symbol)
-            value: (string_literal
-              content: (string_content)))))
+        (ERROR)))
       right: (node_pattern))))
 
 ==================
 Relationship annotation: left arrow, annotations only
+:error
 ==================
 
 ()<-[ @x("y") ]-()
@@ -146,15 +114,12 @@ Relationship annotation: left arrow, annotations only
     elements: (relationship_pattern
       left: (node_pattern)
       kind: (left_arrow
-        annotations: (annotations
-          (annotation
-            key: (symbol)
-            value: (string_literal
-              content: (string_content)))))
+        (ERROR)))
       right: (node_pattern))))
 
 ==================
 Relationship annotation: bidirectional arrow, annotations only
+:error
 ==================
 
 ()<-[ @x("y") ]->()
@@ -166,11 +131,7 @@ Relationship annotation: bidirectional arrow, annotations only
     elements: (relationship_pattern
       left: (node_pattern)
       kind: (bidirectional_arrow
-        annotations: (annotations
-          (annotation
-            key: (symbol)
-            value: (string_literal
-              content: (string_content)))))
+        (ERROR)))
       right: (node_pattern))))
 
 ==================

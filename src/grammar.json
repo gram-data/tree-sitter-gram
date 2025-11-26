@@ -1221,22 +1221,6 @@
                     },
                     {
                       "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "type": "FIELD",
                       "name": "subject",
                       "content": {
                         "type": "CHOICE",
@@ -1287,22 +1271,6 @@
                     },
                     {
                       "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "type": "FIELD",
                       "name": "subject",
                       "content": {
                         "type": "CHOICE",
@@ -1350,22 +1318,6 @@
                     {
                       "type": "STRING",
                       "value": "["
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
                     },
                     {
                       "type": "FIELD",
@@ -1424,22 +1376,6 @@
                     },
                     {
                       "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "type": "FIELD",
                       "name": "subject",
                       "content": {
                         "type": "CHOICE",
@@ -1490,22 +1426,6 @@
                     },
                     {
                       "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "type": "FIELD",
                       "name": "subject",
                       "content": {
                         "type": "CHOICE",
@@ -1553,22 +1473,6 @@
                     {
                       "type": "STRING",
                       "value": "["
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
                     },
                     {
                       "type": "FIELD",
@@ -1627,22 +1531,6 @@
                     },
                     {
                       "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "type": "FIELD",
                       "name": "subject",
                       "content": {
                         "type": "CHOICE",
@@ -1693,22 +1581,6 @@
                     },
                     {
                       "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "type": "FIELD",
                       "name": "subject",
                       "content": {
                         "type": "CHOICE",
@@ -1756,22 +1628,6 @@
                     {
                       "type": "STRING",
                       "value": "["
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
                     },
                     {
                       "type": "FIELD",
@@ -1830,22 +1686,6 @@
                     },
                     {
                       "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "type": "FIELD",
                       "name": "subject",
                       "content": {
                         "type": "CHOICE",
@@ -1896,22 +1736,6 @@
                     },
                     {
                       "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "type": "FIELD",
                       "name": "subject",
                       "content": {
                         "type": "CHOICE",
@@ -1959,22 +1783,6 @@
                     {
                       "type": "STRING",
                       "value": "["
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "annotations",
-                      "content": {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "annotations"
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
-                      }
                     },
                     {
                       "type": "FIELD",

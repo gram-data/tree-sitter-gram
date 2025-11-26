@@ -230,7 +230,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -242,7 +241,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -254,7 +252,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -270,7 +267,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -282,7 +278,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -294,7 +289,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -310,7 +304,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -322,7 +315,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -334,7 +326,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -350,7 +341,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -362,7 +352,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),
@@ -374,7 +363,6 @@ module.exports = grammar({
           optional(
             seq(
               "[",
-              field("annotations", optional($.annotations)),
               field("subject", optional($._subject)),
               "]",
             ),

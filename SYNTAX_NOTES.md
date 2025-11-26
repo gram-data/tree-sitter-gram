@@ -141,19 +141,21 @@ Where:
 - `<=` followed by `=>`
 - `<~` followed by `~>`
 
-### Arrow Annotations and Subjects
+### Arrow Subjects
 
-Arrows can optionally include annotations and a subject in bracket notation between the arrow parts:
-- `-[annotation subject]->` for right arrows
-- `<-[annotation subject]-` for left arrows
-- `-[annotation subject]-` for undirected arrows
-- `<-[annotation subject]->` for bidirectional arrows
+Arrows can optionally include a subject in bracket notation between the arrow parts:
+- `-[subject]->` for right arrows
+- `<-[subject]-` for left arrows
+- `-[subject]-` for undirected arrows
+- `<-[subject]->` for bidirectional arrows
+
+**Note**: Annotations cannot be placed inline within arrow brackets. Annotations must be applied at the `annotated_pattern` level (top-level).
 
 Examples:
 ```
 ()-->()                               // Simple right arrow relationship
 ()-[KNOWS]->()                        // Relationship with subject
-()-[@weight(5) KNOWS]->()             // Relationship with annotation and subject
+()-[r:KNOWS {weight: 5}]->()         // Relationship with identifier, labels, and record
 ()<-->()                              // Bidirectional relationship
 ()=~=()                               // Undirected relationship with equals
 ```
@@ -269,12 +271,12 @@ Where:
 - `key` is a `symbol`
 - `value` is any `_value` type (see Values section)
 
-Annotations can be applied to `annotated_pattern` elements (top-level patterns) and to relationship arrows. They cannot be applied inside `node_pattern` parentheses.
+Annotations can be applied to `annotated_pattern` elements (top-level patterns) only. They cannot be applied inside `node_pattern` parentheses or inline within relationship arrow brackets.
 
 Examples:
 ```
 @description("A node") ()             // Annotation on node pattern
-@weight(5) ()-->()                    // Annotation on relationship arrow
+@weight(5) ()-->()                    // Annotation on relationship pattern
 @title("Graph") @version(1) ()        // Multiple annotations
 ```
 
