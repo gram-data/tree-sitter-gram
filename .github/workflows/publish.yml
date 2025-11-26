@@ -32,18 +32,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - name: Extract version from tree-sitter-gram
+      - name: Extract version from workspace
         id: version
         run: |
           VERSION=$(grep '^version = ' Cargo.toml | sed 's/version = "\(.*\)"/\1/')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Publishing tree-sitter-gram version: $VERSION"
+          echo "Publishing packages with version: $VERSION"
       - name: Publish tree-sitter-gram
         run: cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
-      - name: Update gram-lint dependency
+      - name: Update gram-lint dependency for publishing
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          sed -i "s|tree-sitter-gram = { version = \"[^\"]*\", path = \"../..\" }|tree-sitter-gram = \"$VERSION\"|" tools/gram-lint/Cargo.toml
-          echo "Updated gram-lint to depend on tree-sitter-gram = \"$VERSION\""
+          # Remove path dependency and use published version
+          sed -i "s|tree-sitter-gram = { path = \"../..\" }|tree-sitter-gram = \"$VERSION\"|" tools/gram-lint/Cargo.toml
+          echo "Updated gram-lint to depend on published tree-sitter-gram = \"$VERSION\""
       - name: Publish gram-lint
         run: cargo publish --package gram-lint --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
+      - name: Restore gram-lint dependency to workspace
+        run: |
+          # Restore path dependency after publishing
+          VERSION="${{ steps.version.outputs.version }}"
+          sed -i "s|tree-sitter-gram = \"$VERSION\"|tree-sitter-gram = { path = \"../..\" }|" tools/gram-lint/Cargo.toml
+          echo "Restored gram-lint dependency to workspace path"

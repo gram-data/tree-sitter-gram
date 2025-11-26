@@ -1,16 +1,16 @@
 [package]
 name = "gram-lint"
-version = "0.1.0"
-edition = "2021"
+version.workspace = true
+edition.workspace = true
 description = "A simple linter for gram notation files"
-license = "MIT"
-repository = "https://github.com/gram-data/tree-sitter-gram"
+license.workspace = true
+repository.workspace = true
 publish = true
 
 [dependencies]
 clap = { version = "4.5", features = ["derive"] }
 tree-sitter = "0.25"
-tree-sitter-gram = { version = "0.2.1", path = "../.." }
+tree-sitter-gram = { path = "../.." }
 
 [[bin]]
 name = "gram-lint"
