@@ -1,6 +1,6 @@
 # Feature Specification: Refactor Terminology
 
-**Feature Branch**: `001-refactor-terminology`  
+**Feature Branch**: `002-refactor-terminology`  
 **Created**: 2025-01-27  
 **Status**: Draft  
 **Input**: User description: "Revise terminology for some syntactic element: \"subject\" should be renamed to \"bracket\" to clarify that it is the generic notation for patterns; \"attributes\" should then be renamed to \"subject\" because subjects are the content or primary data for a pattern."
