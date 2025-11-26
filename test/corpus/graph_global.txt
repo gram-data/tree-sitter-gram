@@ -8,11 +8,11 @@ Graph: top-level record
 
 (gram
   root: (record
-    (property
+    (record_property
       key: (symbol)
       value: (string_literal
         content: (string_content)))
-    (property
+    (record_property
       key: (symbol)
       value: (tagged_string
         tag: (symbol)
@@ -30,17 +30,17 @@ Graph: top-level record and a node
 
 (gram
   root: (record
-    (property
+    (record_property
       key: (symbol)
       value: (string_literal
         content: (string_content)))
-    (property
+    (record_property
       key: (symbol)
       value: (tagged_string
         tag: (symbol)
         content: (string_content))))
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (symbol))))
 
 ==================
@@ -55,21 +55,21 @@ Graph: top-level record and a path
 
 (gram
   root: (record
-    (property
+    (record_property
       key: (symbol)
       value: (string_literal
         content: (string_content)))
-    (property
+    (record_property
       key: (symbol)
       value: (tagged_string
         tag: (symbol)
         content: (string_content))))
-  (pattern
-    elements: (relationship
-      left: (node
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow)
-      right: (node
+      right: (node_pattern
         identifier: (symbol)))))
 
 ==================
@@ -86,27 +86,27 @@ Graph: top-level record, a path and a path
 
 (gram
   root: (record
-    (property
+    (record_property
       key: (symbol)
       value: (string_literal
         content: (string_content)))
-    (property
+    (record_property
       key: (symbol)
       value: (tagged_string
         tag: (symbol)
         content: (string_content))))
-  (pattern
-    elements: (relationship
-      left: (node
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow)
-      right: (node
+      right: (node_pattern
         identifier: (symbol))))
-  (pattern
-    elements: (subject
+  (annotated_pattern
+    elements: (subject_pattern
       identifier: (symbol)
-      pattern: (sub_pattern
-        (reference
+      elements: (subject_pattern_elements
+        (pattern_reference
           identifier: (symbol))
-        (reference
+        (pattern_reference
           identifier: (symbol))))))

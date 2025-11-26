@@ -1,5 +1,43 @@
 [
   {
+    "type": "annotated_pattern",
+    "named": true,
+    "fields": {
+      "annotations": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "annotations",
+            "named": true
+          }
+        ]
+      },
+      "elements": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "node_pattern",
+            "named": true
+          },
+          {
+            "type": "relationship_pattern",
+            "named": true
+          },
+          {
+            "type": "subject_pattern",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "annotation",
     "named": true,
     "fields": {
@@ -149,32 +187,6 @@
           }
         ]
       },
-      "attributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "labels",
-            "named": true
-          },
-          {
-            "type": "record",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          }
-        ]
-      },
       "identifier": {
         "multiple": false,
         "required": false,
@@ -212,6 +224,32 @@
             "named": true
           }
         ]
+      },
+      "subject": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "labels",
+            "named": true
+          },
+          {
+            "type": "record",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
       }
     }
   },
@@ -241,7 +279,7 @@
       "required": false,
       "types": [
         {
-          "type": "pattern",
+          "type": "annotated_pattern",
           "named": true
         }
       ]
@@ -276,32 +314,6 @@
           }
         ]
       },
-      "attributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "labels",
-            "named": true
-          },
-          {
-            "type": "record",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          }
-        ]
-      },
       "identifier": {
         "multiple": false,
         "required": false,
@@ -339,6 +351,32 @@
             "named": true
           }
         ]
+      },
+      "subject": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "labels",
+            "named": true
+          },
+          {
+            "type": "record",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
       }
     }
   },
@@ -351,14 +389,14 @@
       "required": false,
       "types": [
         {
-          "type": "mapping",
+          "type": "map_entry",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "mapping",
+    "type": "map_entry",
     "named": true,
     "fields": {
       "key": {
@@ -428,45 +466,9 @@
     }
   },
   {
-    "type": "node",
+    "type": "node_pattern",
     "named": true,
     "fields": {
-      "annotations": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "annotations",
-            "named": true
-          }
-        ]
-      },
-      "attributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "labels",
-            "named": true
-          },
-          {
-            "type": "record",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          }
-        ]
-      },
       "identifier": {
         "multiple": false,
         "required": false,
@@ -504,41 +506,111 @@
             "named": true
           }
         ]
+      },
+      "subject": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "labels",
+            "named": true
+          },
+          {
+            "type": "record",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
       }
     }
   },
   {
-    "type": "pattern",
+    "type": "pattern_reference",
     "named": true,
     "fields": {
-      "annotations": {
+      "identifier": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "range",
+    "named": true,
+    "fields": {
+      "lower": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "annotations",
+            "type": "decimal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "octal",
             "named": true
           }
         ]
       },
-      "elements": {
-        "multiple": true,
-        "required": true,
+      "upper": {
+        "multiple": false,
+        "required": false,
         "types": [
           {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "node",
+            "type": "decimal",
             "named": true
           },
           {
-            "type": "relationship",
+            "type": "hexadecimal",
             "named": true
           },
           {
-            "type": "subject",
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "measurement",
+            "named": true
+          },
+          {
+            "type": "octal",
             "named": true
           }
         ]
@@ -546,7 +618,22 @@
     }
   },
   {
-    "type": "property",
+    "type": "record",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "record_property",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "record_property",
     "named": true,
     "fields": {
       "key": {
@@ -624,104 +711,7 @@
     }
   },
   {
-    "type": "range",
-    "named": true,
-    "fields": {
-      "lower": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          }
-        ]
-      },
-      "upper": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "decimal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "measurement",
-            "named": true
-          },
-          {
-            "type": "octal",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "record",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "property",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "reference",
-    "named": true,
-    "fields": {
-      "identifier": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "relationship",
+    "type": "relationship_pattern",
     "named": true,
     "fields": {
       "kind": {
@@ -751,7 +741,7 @@
         "required": true,
         "types": [
           {
-            "type": "node",
+            "type": "node_pattern",
             "named": true
           }
         ]
@@ -761,11 +751,11 @@
         "required": true,
         "types": [
           {
-            "type": "node",
+            "type": "node_pattern",
             "named": true
           },
           {
-            "type": "relationship",
+            "type": "relationship_pattern",
             "named": true
           }
         ]
@@ -782,32 +772,6 @@
         "types": [
           {
             "type": "annotations",
-            "named": true
-          }
-        ]
-      },
-      "attributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "labels",
-            "named": true
-          },
-          {
-            "type": "record",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "symbol",
             "named": true
           }
         ]
@@ -846,6 +810,32 @@
         "types": [
           {
             "type": "record",
+            "named": true
+          }
+        ]
+      },
+      "subject": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "labels",
+            "named": true
+          },
+          {
+            "type": "record",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
             "named": true
           }
         ]
@@ -869,59 +859,20 @@
     }
   },
   {
-    "type": "sub_pattern",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "node",
-          "named": true
-        },
-        {
-          "type": "reference",
-          "named": true
-        },
-        {
-          "type": "relationship",
-          "named": true
-        },
-        {
-          "type": "subject",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "subject",
+    "type": "subject_pattern",
     "named": true,
     "fields": {
-      "attributes": {
+      "elements": {
         "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "integer",
+            "type": "subject_pattern_elements",
             "named": true
           },
           {
-            "type": "labels",
-            "named": true
-          },
-          {
-            "type": "record",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
+            "type": "|",
+            "named": false
           }
         ]
       },
@@ -953,20 +904,6 @@
           }
         ]
       },
-      "pattern": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "sub_pattern",
-            "named": true
-          },
-          {
-            "type": "|",
-            "named": false
-          }
-        ]
-      },
       "record": {
         "multiple": false,
         "required": false,
@@ -976,7 +913,60 @@
             "named": true
           }
         ]
+      },
+      "subject": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "labels",
+            "named": true
+          },
+          {
+            "type": "record",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
       }
+    }
+  },
+  {
+    "type": "subject_pattern_elements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "node_pattern",
+          "named": true
+        },
+        {
+          "type": "pattern_reference",
+          "named": true
+        },
+        {
+          "type": "relationship_pattern",
+          "named": true
+        },
+        {
+          "type": "subject_pattern",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1019,32 +1009,6 @@
           }
         ]
       },
-      "attributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "labels",
-            "named": true
-          },
-          {
-            "type": "record",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "symbol",
-            "named": true
-          }
-        ]
-      },
       "identifier": {
         "multiple": false,
         "required": false,
@@ -1079,6 +1043,32 @@
         "types": [
           {
             "type": "record",
+            "named": true
+          }
+        ]
+      },
+      "subject": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "labels",
+            "named": true
+          },
+          {
+            "type": "record",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "symbol",
             "named": true
           }
         ]

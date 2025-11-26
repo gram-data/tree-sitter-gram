@@ -7,10 +7,10 @@ Numbers: integers
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (integer))))))
 
@@ -23,10 +23,10 @@ Numbers: decimal
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (decimal))))))
 
@@ -39,10 +39,10 @@ Number: hexadecimal
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (hexadecimal))))))
 
@@ -55,10 +55,10 @@ Number: octal with an '0'
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (octal))))))
 
@@ -71,10 +71,10 @@ Number: measurements are numbers with some letters as a suffix
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (measurement))))))
 
@@ -87,9 +87,9 @@ Number: boolean true
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (boolean_literal))))))

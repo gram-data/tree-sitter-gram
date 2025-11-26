@@ -8,13 +8,13 @@ Annotate a single node with a named string value
 ---
 
 (gram
-  (pattern
+  (annotated_pattern
     annotations: (annotations
       (annotation
         key: (symbol)
         value: (string_literal
           content: (string_content))))
-    elements: (node)))
+    elements: (node_pattern)))
 
 ==================
 Annotate a single node twice
@@ -27,7 +27,7 @@ Annotate a single node twice
 ---
 
 (gram
-  (pattern
+  (annotated_pattern
     annotations: (annotations
       (annotation
         key: (symbol)
@@ -36,7 +36,7 @@ Annotate a single node twice
       (annotation
         key: (symbol)
         value: (integer)))
-    elements: (node)))
+    elements: (node_pattern)))
 
 ==================
 Annotate a relationship
@@ -48,16 +48,16 @@ Annotate a relationship
 ---
 
 (gram
-  (pattern
+  (annotated_pattern
     annotations: (annotations
       (annotation
         key: (symbol)
         value: (string_literal
           content: (string_content))))
-    elements: (relationship
-      left: (node)
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow)
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Annotate a node twice, stacking the annotations
@@ -70,7 +70,7 @@ Annotate a node twice, stacking the annotations
 ---
 
 (gram
-  (pattern
+  (annotated_pattern
     annotations: (annotations
       (annotation
         key: (symbol)
@@ -80,7 +80,7 @@ Annotate a node twice, stacking the annotations
         key: (symbol)
         value: (string_literal
           content: (string_content))))
-    elements: (node)))
+    elements: (node_pattern)))
 
 ==================
 Annotate an empty subject
@@ -92,13 +92,13 @@ Annotate an empty subject
 ---
 
 (gram
-  (pattern
+  (annotated_pattern
     annotations: (annotations
       (annotation
         key: (symbol)
         value: (string_literal
           content: (string_content))))
-    elements: (subject)))
+    elements: (subject_pattern)))
 
 ==================
 Annotate an in-line subject member is not allowed
@@ -110,15 +110,15 @@ Annotate an in-line subject member is not allowed
 ---
 
 (gram
-  (pattern
-    (pattern_element
-      element: (subject
+  (annotated_pattern
+    (annotated_pattern_element
+      element: (subject_pattern
         identifier: (symbol)
-        pattern: (pattern
-          (pattern_element
+        elements: (annotated_pattern
+          (annotated_pattern_element
             annotations: (annotations
               (annotation
                 key: (symbol)
                 value: (string_literal
                   content: (string_content))))
-            element: (node)))))))
+            element: (node_pattern)))))))

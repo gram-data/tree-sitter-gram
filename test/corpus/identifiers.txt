@@ -18,8 +18,8 @@ Identifier can use '@' after first character
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (symbol))))
 
 ==================
@@ -32,11 +32,11 @@ Identifier using snakecase '_' and mixed case
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (symbol)))
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (symbol))))
 
 ==================
@@ -48,8 +48,8 @@ Identifier using kebabcase '-' and mixed case
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (symbol))))
 
 ==================
@@ -61,8 +61,8 @@ Identifier using numbers
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (integer))))
 
 ==================
@@ -75,8 +75,8 @@ Identifier using numbers with units are not allowed
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (measurement))))
 
 ==================
@@ -88,8 +88,8 @@ Identifier using backticks
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (string_literal
         content: (string_content)))))
 
@@ -102,8 +102,8 @@ Identifier using backticks with escaped backtick
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (string_literal
         content: (string_content)))))
 
@@ -116,8 +116,8 @@ Identifier using double-quotes
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (string_literal
         content: (string_content)))))
 
@@ -130,7 +130,7 @@ Identifier using double-quotes with escaped double-quote
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       identifier: (string_literal
         content: (string_content)))))

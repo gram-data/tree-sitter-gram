@@ -30,13 +30,13 @@ const match = (cst, onMatchGram, onMatchPattern, onMatchNode, onMatchRelationshi
   switch (cst.type) {
     case "gram":
       return onMatchGram(cst);
-    case "pattern":
+    case "annotated_pattern":
       return onMatchPattern(cst);
     case "path":
       return onMatchPath(cst);
-    case "node":
+    case "node_pattern":
       return onMatchNode(cst);
-    case "relationship":
+    case "relationship_pattern":
       return onMatchRelationship(cst);
     case "single_right":
     case "double_right":

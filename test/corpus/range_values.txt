@@ -7,10 +7,10 @@ Range: 1 to 10
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (range
             lower: (integer)
@@ -25,10 +25,10 @@ Range: 1 to infinity!
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (range
             lower: (integer)))))))
@@ -42,10 +42,10 @@ Range: up to 100
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (range
             upper: (integer)))))))

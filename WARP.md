@@ -7,17 +7,17 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 This is a Tree-sitter parser for the Gram notation language. Gram is a subject-based notation for structured data that extends JSON-like structures with subjects, relationships, and graph patterns.
 
 Key concepts:
-- **Subjects**: Explicitly typed objects using `[attributes | patterns]` syntax
-- **Nodes**: Graph nodes using `(attributes)` syntax  
+- **Subjects**: Explicitly typed objects using `[subject | patterns]` syntax (bracket notation)
+- **Nodes**: Graph nodes using `(subject)` syntax  
 - **Relationships**: Directional connections between nodes using arrows (`-->`, `<--`, `==`, etc.)
-- **Patterns**: Comma-separated sequences of subjects, nodes, and relationships
+- **Patterns**: Comma-separated sequences of brackets (subjects), nodes, and relationships
 
 ## Architecture
 
 ### Core Grammar Structure (`grammar.js`)
 The grammar is organized hierarchically:
-- `gram` → `pattern` → `pattern_element` → (`subject` | `node` | `relationship`)
-- `_attributes` can contain identifiers, labels (`:Label`), and records (`{key: value}`)
+- `gram` → `pattern` → `pattern_element` → (`bracket` | `node` | `relationship`)
+- Brackets contain `subject` (identifiers, labels (`:Label`), and records (`{key: value}`))
 - Multiple relationship types with different arrow styles (single `-`, double `=`, squiggle `~`)
 
 ### Multi-Language Support

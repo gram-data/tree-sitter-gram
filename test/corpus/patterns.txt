@@ -7,8 +7,8 @@ Pattern: Single member subject
 ---
 
 (gram
-  (pattern
-    elements: (subject)))
+  (annotated_pattern
+    elements: (subject_pattern)))
 
 ==================
 Pattern: single member node
@@ -19,8 +19,8 @@ Pattern: single member node
 ---
 
 (gram
-  (pattern
-    elements: (node)))
+  (annotated_pattern
+    elements: (node_pattern)))
 
 ==================
 Pattern: Two node members
@@ -31,9 +31,9 @@ Pattern: Two node members
 ---
 
 (gram
-  (pattern
-    elements: (node)
-    elements: (node)))
+  (annotated_pattern
+    elements: (node_pattern)
+    elements: (node_pattern)))
 
 ==================
 Pattern: one relationship
@@ -44,11 +44,11 @@ Pattern: one relationship
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow)
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Pattern: 2 single-hop relationships
@@ -59,15 +59,15 @@ Pattern: 2 single-hop relationships
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow)
-      right: (node))
-    elements: (relationship
-      left: (node)
+      right: (node_pattern))
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow)
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Pattern: two-hop path
@@ -78,14 +78,14 @@ Pattern: two-hop path
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow)
-      right: (relationship
-        left: (node)
+      right: (relationship_pattern
+        left: (node_pattern)
         kind: (right_arrow)
-        right: (node)))))
+        right: (node_pattern)))))
 
 ==================
 Pattern: 2 annotated nodes is not allowed. annotation applies to the complete pattern, not individual elements within the pattern

@@ -5,7 +5,7 @@
 - `src/` holds the generated C parser; do not edit by hand.
 - `bindings/` hosts language adapters (`node`, `rust`, `python`, `go`, `swift`, `c`) referenced by their package manifests.
 - `test/corpus/` stores fixture-based grammar tests; keep additions minimal and descriptive.
-- `examples/` captures subject notation patterns; update it when syntax changes.
+- `examples/` captures gram notation patterns; update it when syntax changes.
 - `dist/` and `prebuilds/` carry published artifacts and should only change during releases.
 
 ## Build, Test, and Development Commands
@@ -18,7 +18,7 @@
 
 ## Coding Style & Naming Conventions
 - Follow `.editorconfig`: 2-space JS/JSON/TOML, 4-space C/Rust/Python/Swift, tabs for Go and Makefiles.
-- Grammar rule names stay lowerCamelCase and align with Gram terminology (`subject`, `relationship`, etc.).
+- Grammar rule names stay lowerCamelCase and align with Gram terminology (`bracket`, `subject`, `relationship`, etc.).
 - Name corpus files descriptively with underscores (`test/corpus/number_values.txt`) and keep UTF-8 LF endings.
 - Run `npx eslint bindings/node` before submitting Node binding changes.
 

@@ -57,8 +57,8 @@ Popular editors we'd love to see integrations for:
 
 All editor integrations should support these Gram language features:
 
-- **Subjects**: `[attributes]` and `[:type attributes]`
-- **Nodes**: `(attributes)`
+- **Subjects**: `[subject]` and `[:type subject]`
+- **Nodes**: `(subject)`
 - **Relationships**: `->`, `--`, `<-`, `<--`, `<->`, `<-->`
 - **Data types**: strings, numbers, booleans, null, arrays, objects
 - **Annotations**: `@key(value)`

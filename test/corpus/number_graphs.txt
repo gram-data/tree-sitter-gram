@@ -7,12 +7,12 @@ Number graph: 1, 2 buckle your shoe
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern
         identifier: (integer))
       kind: (right_arrow)
-      right: (node
+      right: (node_pattern
         identifier: (integer)))))
 
 ==================
@@ -24,12 +24,12 @@ Number graph: 1 +1 = 2
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern
         identifier: (integer))
       kind: (right_arrow
         identifier: (string_literal
           content: (string_content)))
-      right: (node
+      right: (node_pattern
         identifier: (integer)))))

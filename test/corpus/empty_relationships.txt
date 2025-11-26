@@ -7,11 +7,11 @@ Empty relationships: Single relationship pattern
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow)
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Empty relationships: Two relationship patterns
@@ -23,16 +23,16 @@ Empty relationships: Two relationship patterns
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow)
-      right: (node)))
-  (pattern
-    elements: (relationship
-      left: (node)
+      right: (node_pattern)))
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (left_arrow)
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Empty relationships: Pair of relationships in a single pattern
@@ -43,15 +43,15 @@ Empty relationships: Pair of relationships in a single pattern
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow)
-      right: (node))
-    elements: (relationship
-      left: (node)
+      right: (node_pattern))
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (left_arrow)
-      right: (node))))
+      right: (node_pattern))))
 
 ==================
 Empty relationships: Pattern with a relationship and isolated node
@@ -62,12 +62,12 @@ Empty relationships: Pattern with a relationship and isolated node
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow)
-      right: (node))
-    elements: (node)))
+      right: (node_pattern))
+    elements: (node_pattern)))
 
 ==================
 Empty relationships: Three node path
@@ -78,11 +78,11 @@ Empty relationships: Three node path
 ---
 
 (gram
-  (pattern
-    elements: (relationship
-      left: (node)
+  (annotated_pattern
+    elements: (relationship_pattern
+      left: (node_pattern)
       kind: (right_arrow)
-      right: (relationship
-        left: (node)
+      right: (relationship_pattern
+        left: (node_pattern)
         kind: (right_arrow)
-        right: (node)))))
+        right: (node_pattern)))))

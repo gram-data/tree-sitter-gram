@@ -7,13 +7,13 @@ Value pair: define values
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (integer))
-        (property
+        (record_property
           key: (symbol)
           value: (integer))))))
 
@@ -26,16 +26,16 @@ Value pair: declare values
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (symbol)
           value: (integer))
-        (property
+        (record_property
           key: (symbol)
           value: (integer))
-        (property
+        (record_property
           key: (symbol)
           value: (symbol))))))
 
@@ -48,10 +48,10 @@ Value pair: key names which start with '@' must be quoted
 ---
 
 (gram
-  (pattern
-    elements: (node
+  (annotated_pattern
+    elements: (node_pattern
       record: (record
-        (property
+        (record_property
           key: (string_literal
             content: (string_content))
           value: (string_literal
