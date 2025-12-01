@@ -3,34 +3,61 @@
 A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar 
 for [gram](https://gram-data.github.io) notation.
 
-Gram is a subject-based notation for structured data.
+## About Gram
 
-If this is an object:
-```
-{
-  "name":"Andreas",
-  "roles":["author"]
-}
+Gram is a subject-based notation for structured data. It uses **annotated patterns** 
+as its canonical form, with familiar graph path-like syntax as convenient syntactic sugar.
+
+### Annotated Patterns
+
+An `annotated_pattern` is the generic pattern notation shaped like `[ subject | elements ]`. 
+This bracket notation (`subject_pattern`) explicitly shows structure:
+- `subject` - optional identifier, labels, and/or record (before `|`)
+- `elements` - comma-separated nested patterns (after `|`)
+
+```gram
+// A team pattern with members as elements
+[devrel:Team {name: "Developer Relations"} | abk, adam, alex]
+
+// A simple atomic subject
+[:Person {name: "Andreas", roles: ["author"]}]
 ```
 
-Implicitly the object is a person. To become a subject, the implicit
-information can be explicit.
+### Path-Like Syntax (Syntactic Sugar)
 
-As a subject:
-```
-(:Person {
-  name: "Andreas",
-  roles: ["author"]
-})
+For graph-like data, gram provides syntactic sugar using parentheses for `node_pattern` 
+and arrows for `relationship_pattern`. These are equivalent representations of subjects:
+
+| Subject Pattern (Generic) | Node Pattern (Graph Sugar) |
+|---------------------------|----------------------------|
+| `[]` | `()` |
+| `[a]` | `(a)` |
+| `[a:Person]` | `(a:Person)` |
+| `[a:Person {name: "A"}]` | `(a:Person {name: "A"})` |
+
+Relationship patterns connect nodes with arrows. These can be members of a `subject_pattern`:
+
+```gram
+// Using node_pattern and relationship_pattern syntax (graph sugar)
+(a:Person)-[:KNOWS]->(b:Person)
+
+// Using subject_pattern to group related path patterns
+[social:Graph | 
+  (a:Person {name: "Alice"}),
+  (b:Person {name: "Bob"}),
+  (a)-[:KNOWS]->(b)
+]
 ```
 
-Gram files support comments using `//` syntax for line-based and end-of-line comments:
-```
+### Comments
+
+Gram files support comments using `//` syntax:
+```gram
 // This is a line comment
 (hello)-->(world)  // End-of-line comment
 ```
 
-Learn more about `gram` at the [gram-data github org](https://github.com/gram-data) notation.
+Learn more about `gram` at the [gram-data github org](https://github.com/gram-data).
 
 ## Editor Support
 
