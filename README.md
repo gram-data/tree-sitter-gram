@@ -5,43 +5,58 @@ for [gram](https://gram-data.github.io) notation.
 
 ## About Gram
 
-Gram is a subject-based notation for structured data. It uses **annotated patterns** 
-as its canonical form, with familiar graph path-like syntax as convenient syntactic sugar.
+Gram is a subject-based notation for structured data.
 
-### Annotated Patterns
+### Patterns and Subjects
 
-An `annotated_pattern` is the generic pattern notation shaped like `[ subject | elements ]`. 
-This bracket notation (`subject_pattern`) explicitly shows structure:
-- `subject` - optional identifier, labels, and/or record (before `|`)
+A **pattern** is a generic data structure with a value and nested elements:
+
+```ts
+interface Pattern<V> {
+  value: V;
+  elements: Pattern<V>[];
+}
+```
+
+A **subject pattern** is `Pattern<Subject>` — a pattern where values are subjects.
+A subject combines an optional identifier, labels, and/or a record of properties.
+
+### Syntactic Forms
+
+Gram provides two syntactic forms for writing subject patterns:
+
+#### Bracket Notation (`subject_pattern`)
+
+The bracket notation `[ subject | elements ]` explicitly shows the pattern structure:
+- `subject` - optional identifier, labels, and/or properties (before `|`)
 - `elements` - comma-separated nested patterns (after `|`)
 
 ```gram
 // A team pattern with members as elements
 [devrel:Team {name: "Developer Relations"} | abk, adam, alex]
 
-// A simple atomic subject
+// A simple atomic subject (no elements)
 [:Person {name: "Andreas", roles: ["author"]}]
 ```
 
-### Path-Like Syntax (Syntactic Sugar)
+#### Path Notation (`node_pattern` and `relationship_pattern`)
 
-For graph-like data, gram provides syntactic sugar using parentheses for `node_pattern` 
-and arrows for `relationship_pattern`. These are equivalent representations of subjects:
+For graph-like data, gram provides familiar path syntax as syntactic sugar:
 
-| Subject Pattern (Generic) | Node Pattern (Graph Sugar) |
-|---------------------------|----------------------------|
+| Bracket Notation | Path Notation |
+|------------------|---------------|
 | `[]` | `()` |
 | `[a]` | `(a)` |
 | `[a:Person]` | `(a:Person)` |
 | `[a:Person {name: "A"}]` | `(a:Person {name: "A"})` |
 
-Relationship patterns connect nodes with arrows. These can be members of a `subject_pattern`:
+Relationship patterns connect nodes with arrows:
 
 ```gram
-// Using node_pattern and relationship_pattern syntax (graph sugar)
+// Path notation for graph relationships
 (a:Person)-[:KNOWS]->(b:Person)
 
-// Using subject_pattern to group related path patterns
+// Bracket notation can group related path patterns
 [social:Graph | 
   (a:Person {name: "Alice"}),
   (b:Person {name: "Bob"}),
