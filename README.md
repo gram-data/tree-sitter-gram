@@ -3,34 +3,87 @@
 A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar 
 for [gram](https://gram-data.github.io) notation.
 
+## About Gram
+
 Gram is a subject-based notation for structured data.
 
-If this is an object:
-```
-{
-  "name":"Andreas",
-  "roles":["author"]
+### Patterns and Subjects
+
+A **pattern** is a generic data structure with a value and nested elements:
+
+```ts
+interface Pattern<V> {
+  value: V;
+  elements: Pattern<V>[];
 }
 ```
 
-Implicitly the object is a person. To become a subject, the implicit
-information can be explicit.
+Gram patterns are always `Pattern<Subject>` — patterns where values are **subjects**.
+A **subject** is content combining an optional identifier, labels, and/or a record of properties.
 
-As a subject:
+### Annotated Patterns
+
+The generic syntactic element in gram is `annotated_pattern`:
+
 ```
-(:Person {
-  name: "Andreas",
-  roles: ["author"]
-})
+annotated_pattern = [ annotations | pattern_elements ]
 ```
 
-Gram files support comments using `//` syntax for line-based and end-of-line comments:
+An `annotated_pattern` may have optional `@key(value)` annotations followed by 
+comma-separated pattern elements.
+
+### Pattern Elements
+
+Within an `annotated_pattern`, there are three syntactic forms for pattern elements:
+
+#### Bracket Notation
+
+The bracket notation uses `[ subject | elements ]` to explicitly show pattern structure:
+
+```gram
+// A team with members as elements
+[devrel:Team {name: "Developer Relations"} | abk, adam, alex]
+
+// A simple atomic pattern (no elements)
+[:Person {name: "Andreas", roles: ["author"]}]
 ```
+
+#### Node Notation (Syntactic Sugar)
+
+Parentheses `( subject )` provide familiar graph node syntax:
+
+```gram
+()                           // Empty node
+(a)                          // Node with identifier
+(a:Person)                   // Node with identifier and label
+(a:Person {name: "Alice"})   // Node with identifier, label, and properties
+```
+
+#### Relationship Notation (Syntactic Sugar)
+
+Arrows connect nodes to express graph relationships:
+
+```gram
+// Path notation for graph relationships
+(a:Person)-[:KNOWS]->(b:Person)
+
+// Bracket notation can contain path patterns
+[social:Graph | 
+  (a:Person {name: "Alice"}),
+  (b:Person {name: "Bob"}),
+  (a)-[:KNOWS]->(b)
+]
+```
+
+### Comments
+
+Gram files support comments using `//` syntax:
+```gram
 // This is a line comment
 (hello)-->(world)  // End-of-line comment
 ```
 
-Learn more about `gram` at the [gram-data github org](https://github.com/gram-data) notation.
+Learn more about `gram` at the [gram-data github org](https://github.com/gram-data).
 
 ## Editor Support
 
