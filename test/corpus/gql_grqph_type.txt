@@ -20,9 +20,8 @@ GQL Relationship Type Definition
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
+(gram_pattern
+  (relationship_pattern
       left: (node_pattern
         labels: (labels
           (symbol)))
@@ -35,4 +34,4 @@ GQL Relationship Type Definition
             value: (symbol))))
       right: (node_pattern
         labels: (labels
-          (symbol))))))
+          (symbol)))))

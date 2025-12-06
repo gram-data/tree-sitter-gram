@@ -6,7 +6,7 @@ Graph: top-level record
 
 ---
 
-(gram
+(gram_pattern
   root: (record
     (record_property
       key: (symbol)
@@ -28,7 +28,7 @@ Graph: top-level record and a node
 
 ---
 
-(gram
+(gram_pattern
   root: (record
     (record_property
       key: (symbol)
@@ -39,9 +39,8 @@ Graph: top-level record and a node
       value: (tagged_string
         tag: (symbol)
         content: (string_content))))
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol))))
+  (node_pattern
+      identifier: (symbol)))
 
 ==================
 Graph: top-level record and a path
@@ -53,7 +52,7 @@ Graph: top-level record and a path
 
 ---
 
-(gram
+(gram_pattern
   root: (record
     (record_property
       key: (symbol)
@@ -64,13 +63,12 @@ Graph: top-level record and a path
       value: (tagged_string
         tag: (symbol)
         content: (string_content))))
-  (annotated_pattern
-    elements: (relationship_pattern
+  (relationship_pattern
       left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow)
       right: (node_pattern
-        identifier: (symbol)))))
+        identifier: (symbol))))
 
 ==================
 Graph: top-level record, a path and a path
@@ -84,7 +82,7 @@ Graph: top-level record, a path and a path
 
 ---
 
-(gram
+(gram_pattern
   root: (record
     (record_property
       key: (symbol)
@@ -95,18 +93,17 @@ Graph: top-level record, a path and a path
       value: (tagged_string
         tag: (symbol)
         content: (string_content))))
-  (annotated_pattern
-    elements: (relationship_pattern
+  (relationship_pattern
       left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow)
       right: (node_pattern
-        identifier: (symbol))))
-  (annotated_pattern
-    elements: (subject_pattern
+        identifier: (symbol)))
+  (subject_pattern
       identifier: (symbol)
       elements: (subject_pattern_elements
         (pattern_reference
           identifier: (symbol))
         (pattern_reference
-          identifier: (symbol))))))
+          identifier: (symbol))))
+)

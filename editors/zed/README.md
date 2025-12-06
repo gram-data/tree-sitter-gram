@@ -5,7 +5,7 @@ A [Zed](https://zed.dev) extension providing syntax highlighting and language su
 ## Features
 
 - **Syntax Highlighting**: Full syntax highlighting for all Gram constructs including subjects, nodes, relationships, and data types
-- **Bracket Matching**: Automatic matching for `()`, `[]`, and `{}`
+- **Subject Pattern Matching**: Automatic matching for `()`, `[]`, and `{}`
 - **File Type Detection**: Automatic recognition of `.gram` files
 - **Smart Indentation**: Proper indentation handling for nested structures
 
@@ -53,7 +53,7 @@ Once installed, the extension automatically provides syntax highlighting for any
 })
 
 // Relationships between nodes
-(alice:Person {name: "Alice"})->(bob:Person {name: "Bob"})
+(alice:Person {name: "Alice"})-->(bob:Person {name: "Bob"})
 
 // Complex subject with annotations
 @type("Employee")
@@ -80,7 +80,7 @@ Once installed, the extension automatically provides syntax highlighting for any
 
 The extension provides highlighting for:
 
-- **Brackets**: `[...]` and `[:type ...]` bracket notation (containing subjects)
+- **Subject Patterns**: `[...]` and `[:type ...]` subject pattern notation (containing subjects)
 - **Nodes**: `(...)` parentheses
 - **Relationships**: `->`, `--`, `<-`, `<-->`, etc.
 - **Strings**: Single, double, and backtick quoted strings

@@ -6,9 +6,9 @@ Pattern: Single member subject
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (subject_pattern)))
+(gram_pattern
+  (subject_pattern)
+)
 
 ==================
 Pattern: single member node
@@ -18,22 +18,18 @@ Pattern: single member node
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern)))
+(gram_pattern
+  (node_pattern))
 
 ==================
-Pattern: Two node members
+Pattern: Two node sequence cannot appear at top-level. Must be contained in a subject pattern
+:error
 ==================
 
 (),()
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern)
-    elements: (node_pattern)))
 
 ==================
 Pattern: one relationship
@@ -43,52 +39,41 @@ Pattern: one relationship
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
-      left: (node_pattern)
-      kind: (right_arrow)
-      right: (node_pattern))))
+(gram_pattern
+  (relationship_pattern
+    left: (node_pattern)
+    kind: (right_arrow)
+    right: (node_pattern)))
 
 ==================
-Pattern: 2 single-hop relationships
+Pattern: 2 single-hop relationships cannot be at top-level. Must be contained in subject pattern.
+:error
 ==================
 
 ()-->(), ()-->()
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
-      left: (node_pattern)
-      kind: (right_arrow)
-      right: (node_pattern))
-    elements: (relationship_pattern
-      left: (node_pattern)
-      kind: (right_arrow)
-      right: (node_pattern))))
 
 ==================
-Pattern: two-hop path
+Pattern: two-hop path is parsed like a chain of relationships, which is a path
 ==================
 
 ()-->()-->()
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
+(gram_pattern
+  (relationship_pattern
+    left: (node_pattern)
+    kind: (right_arrow)
+    right: (relationship_pattern
       left: (node_pattern)
       kind: (right_arrow)
-      right: (relationship_pattern
-        left: (node_pattern)
-        kind: (right_arrow)
-        right: (node_pattern)))))
+      right: (node_pattern))))
 
 ==================
-Pattern: 2 annotated nodes is not allowed. annotation applies to the complete pattern, not individual elements within the pattern
+Pattern: 2 annotated nodes is not allowed. Sequences cannot appear as top-level elements
 :error
 ==================
 

@@ -7,11 +7,10 @@ Line comment standalone
 
 ---
 
-(gram
+(gram_pattern
   (comment)
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol))))
+  (node_pattern
+      identifier: (symbol)))
 
 ==================
 Multiple line comments
@@ -24,13 +23,13 @@ Multiple line comments
 
 ---
 
-(gram
+(gram_pattern
   (comment)
   (comment)
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol)))
-  (comment))
+  (node_pattern
+    identifier: (symbol))
+  (comment)
+)
 
 ==================
 Line comment with special characters
@@ -41,11 +40,10 @@ Line comment with special characters
 
 ---
 
-(gram
+(gram_pattern
   (comment)
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol))))
+  (node_pattern
+    identifier: (symbol)))
 
 ==================
 Line comment at file start
@@ -56,15 +54,14 @@ Line comment at file start
 
 ---
 
-(gram
+(gram_pattern
   (comment)
-  (annotated_pattern
-    elements: (relationship_pattern
-      left: (node_pattern
-        identifier: (symbol))
-      kind: (right_arrow)
-      right: (node_pattern
-        identifier: (symbol)))))
+  (relationship_pattern
+    left: (node_pattern
+      identifier: (symbol))
+    kind: (right_arrow)
+    right: (node_pattern
+      identifier: (symbol))))
 
 ==================
 Line comment at file end
@@ -75,15 +72,14 @@ Line comment at file end
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
-      left: (node_pattern
-        identifier: (symbol))
-      kind: (right_arrow)
-      right: (node_pattern
-        identifier: (symbol))))
-  (comment))
+(gram_pattern
+  (relationship_pattern
+    left: (node_pattern
+      identifier: (symbol))
+    kind: (right_arrow)
+    right: (node_pattern
+      identifier: (symbol)))
+(comment))
 
 ==================
 Empty line comment
@@ -94,11 +90,10 @@ Empty line comment
 
 ---
 
-(gram
+(gram_pattern
   (comment)
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol))))
+  (node_pattern
+      identifier: (symbol)))
 
 ==================
 Comment markers in string literals preserved
@@ -108,15 +103,14 @@ Comment markers in string literals preserved
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol)
-      record: (record
-        (record_property
-          key: (symbol)
-          value: (string_literal
-            content: (string_content)))))))
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (string_literal
+          content: (string_content))))))
 
 ==================
 Comment before top-level node
@@ -127,11 +121,10 @@ Comment before top-level node
 
 ---
 
-(gram
+(gram_pattern
   (comment)
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol))))
+  (node_pattern
+      identifier: (symbol)))
 
 ==================
 Comment before top-level relationship
@@ -142,15 +135,14 @@ Comment before top-level relationship
 
 ---
 
-(gram
+(gram_pattern
   (comment)
-  (annotated_pattern
-    elements: (relationship_pattern
+  (relationship_pattern
       left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow)
       right: (node_pattern
-        identifier: (symbol)))))
+        identifier: (symbol))))
 
 ==================
 Comment before top-level pattern
@@ -161,16 +153,15 @@ Comment before top-level pattern
 
 ---
 
-(gram
+(gram_pattern
   (comment)
-  (annotated_pattern
-    elements: (subject_pattern
+  (subject_pattern
       identifier: (symbol)
       record: (record
         (record_property
           key: (symbol)
           value: (string_literal
-            content: (string_content)))))))
+            content: (string_content))))))
 
 ==================
 Comment before graph-level record
@@ -182,7 +173,7 @@ Comment before graph-level record
 
 ---
 
-(gram
+(gram_pattern
   (comment)
   root: (record
     (record_property
@@ -192,9 +183,8 @@ Comment before graph-level record
     (record_property
       key: (symbol)
       value: (decimal)))
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol))))
+  (node_pattern
+      identifier: (symbol)))
 
 ==================
 End-of-line comment after node
@@ -204,11 +194,11 @@ End-of-line comment after node
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol)))
-  (comment))
+(gram_pattern
+  (node_pattern
+      identifier: (symbol))
+  (comment)
+)
 
 ==================
 End-of-line comment after relationship
@@ -218,15 +208,15 @@ End-of-line comment after relationship
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
+(gram_pattern
+  (relationship_pattern
       left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow)
       right: (node_pattern
-        identifier: (symbol))))
-  (comment))
+        identifier: (symbol)))
+  (comment)
+)
 
 ==================
 End-of-line comment after subject
@@ -236,32 +226,33 @@ End-of-line comment after subject
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (subject_pattern
+(gram_pattern
+  (subject_pattern
       identifier: (symbol)
       record: (record
         (record_property
           key: (symbol)
           value: (string_literal
-            content: (string_content))))))
-  (comment))
+            content: (string_content)))))
+  (comment)
+)
 
 ==================
 End-of-line comment after pattern element
+:error
 ==================
 
 (hello), (world)  // End-of-line comment after pattern elements
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       identifier: (symbol))
     elements: (node_pattern
-      identifier: (symbol)))
-  (comment))
+      identifier: (symbol))
+  (comment)
+)
 
 ==================
 Multiple end-of-line comments
@@ -272,15 +263,14 @@ Multiple end-of-line comments
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol)))
+(gram_pattern
+  (node_pattern
+      identifier: (symbol))
   (comment)
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol)))
-  (comment))
+  (node_pattern
+      identifier: (symbol))
+  (comment)
+)
 
 ==================
 End-of-line comment with special characters
@@ -290,14 +280,15 @@ End-of-line comment with special characters
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol)))
-  (comment))
+(gram_pattern
+  (node_pattern
+      identifier: (symbol))
+  (comment)
+)
 
 ==================
-Comment between pattern elements after comma
+Comment between pattern elements after comma. No top-level sequences allowed
+:error
 ==================
 
 (hello),  // Comment after comma
@@ -305,13 +296,6 @@ Comment between pattern elements after comma
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol))
-    (comment)
-    elements: (node_pattern
-      identifier: (symbol))))
 
 ==================
 In-line comment between adjacent tokens (subject_patterns)
@@ -322,7 +306,7 @@ In-line comment between adjacent tokens (subject_patterns)
 
 ---
 
-(gram
+(gram_pattern
   (ERROR)
   (comment))
 
@@ -335,7 +319,7 @@ In-line comment between adjacent tokens (braces)
 
 ---
 
-(gram
+(gram_pattern
   (ERROR)
   (comment))
 
@@ -348,7 +332,7 @@ In-line comment between adjacent tokens (parentheses)
 
 ---
 
-(gram
+(gram_pattern
   (ERROR)
   (comment))
 

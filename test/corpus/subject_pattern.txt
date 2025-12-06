@@ -6,7 +6,8 @@ Subject Pattern: empty
 
 ---
 
-(gram_pattern (subject_pattern))
+(gram_pattern
+  (subject_pattern))
 
 ==================
 Subject Pattern: named
@@ -16,7 +17,8 @@ Subject Pattern: named
 
 ---
 
-(gram_pattern (subject_pattern
+(gram_pattern
+  (subject_pattern
       identifier: (symbol)))
 
 ==================
@@ -53,7 +55,7 @@ Subject Pattern: named, labeled with a record
             content: (string_content))))))
 
 ==================
-Subject Pattern: complete bracket with annotation, subject, and a qualified association
+Subject Pattern: complete subject pattern with annotation, subject, and a qualified association
 ==================
 
 @description("Inspiring, collaborating, and educating a developer community")

@@ -6,13 +6,12 @@ Numbers: integers
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       record: (record
         (record_property
           key: (symbol)
-          value: (integer))))))
+          value: (integer)))))
 
 ==================
 Numbers: decimal
@@ -22,13 +21,12 @@ Numbers: decimal
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      record: (record
-        (record_property
-          key: (symbol)
-          value: (decimal))))))
+(gram_pattern
+  (node_pattern
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (decimal)))))
 
 ==================
 Number: hexadecimal
@@ -38,13 +36,12 @@ Number: hexadecimal
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       record: (record
         (record_property
           key: (symbol)
-          value: (hexadecimal))))))
+          value: (hexadecimal)))))
 
 ==================
 Number: octal with an '0'
@@ -54,13 +51,12 @@ Number: octal with an '0'
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       record: (record
         (record_property
           key: (symbol)
-          value: (octal))))))
+          value: (octal)))))
 
 ==================
 Number: measurements are numbers with some letters as a suffix
@@ -70,13 +66,12 @@ Number: measurements are numbers with some letters as a suffix
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       record: (record
         (record_property
           key: (symbol)
-          value: (measurement))))))
+          value: (measurement)))))
 
 ==================
 Number: boolean true
@@ -86,10 +81,9 @@ Number: boolean true
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       record: (record
         (record_property
           key: (symbol)
-          value: (boolean_literal))))))
+          value: (boolean_literal)))))

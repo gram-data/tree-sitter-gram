@@ -28,7 +28,7 @@ const reduce = (cst, f, acc) => {
 
 const match = (cst, onMatchGram, onMatchPattern, onMatchNode, onMatchRelationship, onMatchRelationshipValue, otherwise) => {
   switch (cst.type) {
-    case "gram":
+    case "gram_pattern":
       return onMatchGram(cst);
     case "annotated_pattern":
       return onMatchPattern(cst);

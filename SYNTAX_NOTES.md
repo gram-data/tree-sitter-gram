@@ -25,7 +25,7 @@ interface Pattern<V> {
 
 A gram pattern is always of type: `Pattern<Subject>`.
 
-## `gram` -- special pattern syntax for the top-level file context
+## `gram_pattern` -- special pattern syntax for the top-level file context
 
 The outermost pattern has no delimiters; it is the entire contents of the file. 
 The value is provided by an optional curly-braced property record, and the
@@ -64,9 +64,9 @@ Examples:
 
 **Note**: Annotations apply to the entire pattern, not individual elements within it. Multiple annotations can be stacked.
 
-## `subject_pattern` -- bracket notation pattern
+## `subject_pattern` -- subject pattern notation pattern
 
-A subject pattern uses bracket notation `[ subject | subject_pattern_elements ]` to represent a pattern with an optional subject value and a sequence of elements.
+A subject pattern uses subject pattern notation `[ subject | subject_pattern_elements ]` to represent a pattern with an optional subject value and a sequence of elements.
 
 Syntax: `[ subject | subject_pattern_elements ]`
 
@@ -143,7 +143,7 @@ Where:
 
 ### Arrow Subjects
 
-Arrows can optionally include a subject in bracket notation between the arrow parts:
+Arrows can optionally include a subject in subject pattern notation between the arrow parts:
 - `-[subject]->` for right arrows
 - `<-[subject]-` for left arrows
 - `-[subject]-` for undirected arrows
@@ -402,21 +402,21 @@ Comments are ignored by the parser and can appear anywhere whitespace is allowed
 The complete hierarchy of pattern elements:
 
 ```
-gram
-└── annotated_pattern (top-level, whitespace-separated)
-    ├── annotations (optional, @key(value))
-    └── elements (comma-separated)
-        ├── subject_pattern
-        │   ├── subject (optional, before |)
-        │   └── elements (optional, after |)
-        │       ├── subject_pattern (nested)
-        │       ├── path_pattern
-        │       └── pattern_reference
-        └── path_pattern
-            ├── node_pattern
-            │   └── subject (optional)
-            └── relationship_pattern
-                ├── left: node_pattern
-                ├── kind: arrow (with optional annotations/subject)
-                └── right: path_pattern
+gram_pattern
+└── top_level_pattern (whitespace-separated)
+    ├── annotated_pattern
+    │   ├── annotations
+    │   └── element (single: subject_pattern or path_pattern)
+    ├── subject_pattern
+    │   ├── subject (optional, before |)
+    │   └── elements (optional, comma-separated, after |)
+    │       ├── subject_pattern (nested)
+    │       ├── path_pattern
+    │       └── pattern_reference
+    ├── node_pattern
+    │   └── subject (optional)
+    └── relationship_pattern
+        ├── left: node_pattern
+        ├── kind: arrow
+        └── right: path_pattern
 ```

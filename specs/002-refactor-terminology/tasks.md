@@ -58,7 +58,7 @@
 
 ### Implementation for User Story 2
 
-- [x] T010 [P] [US2] Update README.md: replace "subject" (bracket notation) with "bracket" and "attributes" (content) with "subject"
+- [x] T010 [P] [US2] Update README.md: replace "subject" (subject pattern notation) with "bracket" and "attributes" (content) with "subject"
 - [x] T011 [P] [US2] Update WARP.md: replace terminology references in `README.md`
 - [x] T012 [P] [US2] Update AGENTS.md: replace terminology references in `AGENTS.md`
 - [x] T013 [P] [US2] Update editor documentation: replace terminology in `editors/zed/README.md`

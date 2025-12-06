@@ -7,16 +7,17 @@ module.exports = grammar({
   ],
 
   rules: {
-    // top-level rule, forming an outer pattern shaped like `[ record | sequence-of-top-level-elements ]`
-    gram: ($) => seq(field("root", optional($.record)), repeat($.annotated_pattern)),
+    gram_pattern: ($) => seq(field("root", optional($.record)), repeat($._top_level_pattern)),
 
-    // top-level elements are annotated patterns shaped like `[annotation-record | pattern-elements]`
+    _top_level_pattern: ($) => choice($.annotated_pattern, $.subject_pattern,$.node_pattern, $.relationship_pattern),
+
     annotated_pattern: ($) =>
       seq(
-        field("annotations", optional($.annotations)),
-        field("elements", commaSep1($._annotated_pattern_element)),
+        // field("annotations", optional($.annotations)),
+        field("annotations", $.annotations),
+        field("elements", choice($.subject_pattern, $._path_pattern)),
       ),
-    _annotated_pattern_element: ($) => choice($.subject_pattern, $._path_pattern),
+    // _annotated_pattern_element: ($) => choice($.subject_pattern, $._path_pattern),
 
     subject_pattern: ($) =>
       seq(

@@ -17,10 +17,9 @@ Identifier can use '@' after first character
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol))))
+(gram_pattern
+  (node_pattern
+      identifier: (symbol)))
 
 ==================
 Identifier using snakecase '_' and mixed case
@@ -31,13 +30,12 @@ Identifier using snakecase '_' and mixed case
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol)))
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol))))
+(gram_pattern
+  (node_pattern
+      identifier: (symbol))
+  (node_pattern
+      identifier: (symbol))
+)
 
 ==================
 Identifier using kebabcase '-' and mixed case
@@ -47,10 +45,9 @@ Identifier using kebabcase '-' and mixed case
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol))))
+(gram_pattern
+  (node_pattern
+      identifier: (symbol)))
 
 ==================
 Identifier using numbers
@@ -60,10 +57,9 @@ Identifier using numbers
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (integer))))
+(gram_pattern
+  (node_pattern
+      identifier: (integer)))
 
 ==================
 Identifier using numbers with units are not allowed
@@ -74,11 +70,6 @@ Identifier using numbers with units are not allowed
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (measurement))))
-
 ==================
 Identifier using backticks
 ==================
@@ -87,11 +78,10 @@ Identifier using backticks
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       identifier: (string_literal
-        content: (string_content)))))
+        content: (string_content))))
 
 ==================
 Identifier using backticks with escaped backtick
@@ -101,11 +91,10 @@ Identifier using backticks with escaped backtick
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       identifier: (string_literal
-        content: (string_content)))))
+        content: (string_content))))
 
 ==================
 Identifier using double-quotes
@@ -115,11 +104,10 @@ Identifier using double-quotes
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       identifier: (string_literal
-        content: (string_content)))))
+        content: (string_content))))
 
 ==================
 Identifier using double-quotes with escaped double-quote
@@ -129,8 +117,7 @@ Identifier using double-quotes with escaped double-quote
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       identifier: (string_literal
-        content: (string_content)))))
+        content: (string_content))))

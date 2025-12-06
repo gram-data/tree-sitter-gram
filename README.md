@@ -5,7 +5,7 @@ for [gram](https://gram-data.github.io) notation.
 
 ## About Gram
 
-Gram is a subject-based notation for structured data.
+Gram is a pattern-based notation for structured data.
 
 ### Patterns and Subjects
 
@@ -21,24 +21,30 @@ interface Pattern<V> {
 Gram patterns are always `Pattern<Subject>` — patterns where values are **subjects**.
 A **subject** is content combining an optional identifier, labels, and/or a record of properties.
 
-### Annotated Patterns
-
-The generic syntactic element in gram is `annotated_pattern`:
-
-```
-annotated_pattern = [ annotations | pattern_elements ]
-```
-
-An `annotated_pattern` may have optional `@key(value)` annotations followed by 
-comma-separated pattern elements.
-
 ### Pattern Elements
 
-Within an `annotated_pattern`, there are three syntactic forms for pattern elements:
+The `gram_pattern` (top-level structure) consists of a sequence of patterns. Syntactically, `subject_pattern`, `node_pattern`, `relationship_pattern`, and `annotated_pattern` are peers.
 
-#### Bracket Notation
+They correlate to the underlying data structure based on the number of elements:
 
-The bracket notation uses `[ subject | elements ]` to explicitly show pattern structure:
+- **Node Pattern** `()`: A pattern with **0 elements**.
+- **Annotated Pattern** `@a (b)`: A pattern with **1 element**.
+- **Relationship Pattern** `(a)-->(b)`: A pattern with **2 elements**.
+- **Subject Pattern** `[ s | ... ]`: A pattern with an **arbitrary number of elements**.
+
+#### Path Flattening
+
+A path is a flattened tree of relationships. For example:
+
+```gram
+(a)-[r1]->(b)-[r2]->(c) 
+// is equivalent to:
+[ | [r1 | (a), (b)], [r2 | (b),(c)] ]
+```
+
+#### Subject Pattern Notation
+
+The subject pattern notation uses `[ subject | elements ]` to explicitly show pattern structure:
 
 ```gram
 // A team with members as elements
@@ -67,7 +73,7 @@ Arrows connect nodes to express graph relationships:
 // Path notation for graph relationships
 (a:Person)-[:KNOWS]->(b:Person)
 
-// Bracket notation can contain path patterns
+// Subject Pattern notation can contain path patterns
 [social:Graph | 
   (a:Person {name: "Alice"}),
   (b:Person {name: "Bob"}),

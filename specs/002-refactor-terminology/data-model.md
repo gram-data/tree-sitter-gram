@@ -52,7 +52,7 @@ After:
 ## Validation Rules
 
 No new validation rules needed. Existing validation remains:
-- Bracket syntax: `[content | pattern]`
+- Subject Pattern syntax: `[content | pattern]`
 - Subject content: identifier, labels, record (unchanged)
 - Pattern syntax: comma-separated elements (unchanged)
 

@@ -1,0 +1,24 @@
+---
+description: When writing or editing gram examples, use `tree-sitter parse` to verify syntax.
+globs: ["*.md", "examples/**/*.gram", "test/**/*.gram", "*.txt"]
+---
+
+# Gram Syntax Verification
+
+When writing or editing code examples in `gram` notation (in markdown files, corpus tests, or example files), you must verify the syntax is valid.
+
+## Validation Step
+
+Use the `tree-sitter` CLI to parse a temporary file containing your example code.
+
+1.  Write the code to a temporary file (e.g., `temp.gram`).
+2.  Run `npx tree-sitter parse temp.gram`.
+3.  Check the output for `(ERROR ...)` nodes.
+4.  If errors exist, correct the syntax and repeat.
+5.  Delete the temporary file.
+
+## Common Syntax Traps
+
+-   **Arrows**: Arrows must have at least two dashes: `-->`, `<--`, `--`, etc. Single dash arrows `->` are **invalid**.
+-   **Annotations**: Annotations `@key(value)` can only appear at the top level (on `annotated_pattern`), not inside node parentheses `(@meta a)`.
+-   **Labels**: Labels use `:` or `::`.

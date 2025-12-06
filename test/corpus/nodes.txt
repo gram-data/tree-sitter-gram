@@ -6,9 +6,9 @@ Node empty
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern)))
+(gram_pattern
+  (node_pattern)
+)
 
 ==================
 Node with empty record
@@ -18,10 +18,10 @@ Node with empty record
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      record: (record))))
+(gram_pattern
+  (node_pattern
+      record: (record))
+)
 
 ==================
 Node with record
@@ -31,14 +31,16 @@ Node with record
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      record: (record
-        (record_property
-          key: (symbol)
-          value: (string_literal
-            content: (string_content)))))))
+(gram_pattern
+  (node_pattern
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (string_literal
+          content: (string_content)))
+        )
+  )
+)
 
 ==================
 Node identified and with a record
@@ -48,15 +50,17 @@ Node identified and with a record
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol)
-      record: (record
-        (record_property
-          key: (symbol)
-          value: (string_literal
-            content: (string_content)))))))
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (string_literal content: (string_content))
+      )
+    )
+  )
+)
 
 ==================
 Node identified, labeled and with a record
@@ -66,14 +70,13 @@ Node identified, labeled and with a record
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
-      identifier: (symbol)
-      labels: (labels
-        (symbol))
-      record: (record
-        (record_property
-          key: (symbol)
-          value: (string_literal
-            content: (string_content)))))))
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    labels: (labels
+      (symbol))
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (string_literal
+          content: (string_content))))))

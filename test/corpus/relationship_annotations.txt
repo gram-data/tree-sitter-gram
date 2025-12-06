@@ -7,7 +7,7 @@ Relationship annotation: undirected, annotations only
 
 ---
 
-(gram
+(gram_pattern
   (annotated_pattern
     elements: (relationship_pattern
       left: (node_pattern)
@@ -24,7 +24,7 @@ Relationship annotation: undirected, two annotations
 
 ---
 
-(gram
+(gram_pattern
   (annotated_pattern
     elements: (relationship_pattern
       left: (node_pattern)
@@ -41,7 +41,7 @@ Relationship annotation: undirected with identifier
 
 ---
 
-(gram
+(gram_pattern
   (annotated_pattern
     elements: (relationship_pattern
       left: (node_pattern)
@@ -58,7 +58,7 @@ Relationship annotation: undirected with labels
 
 ---
 
-(gram
+(gram_pattern
   (annotated_pattern
     elements: (relationship_pattern
       left: (node_pattern)
@@ -75,7 +75,7 @@ Relationship annotation: undirected with identifier, labels, and record
 
 ---
 
-(gram
+(gram_pattern
   (annotated_pattern
     elements: (relationship_pattern
       left: (node_pattern)
@@ -92,7 +92,7 @@ Relationship annotation: right arrow, annotations only
 
 ---
 
-(gram
+(gram_pattern
   (annotated_pattern
     elements: (relationship_pattern
       left: (node_pattern)
@@ -109,7 +109,7 @@ Relationship annotation: left arrow, annotations only
 
 ---
 
-(gram
+(gram_pattern
   (annotated_pattern
     elements: (relationship_pattern
       left: (node_pattern)
@@ -126,7 +126,7 @@ Relationship annotation: bidirectional arrow, annotations only
 
 ---
 
-(gram
+(gram_pattern
   (annotated_pattern
     elements: (relationship_pattern
       left: (node_pattern)
@@ -143,7 +143,7 @@ Relationship annotation: undirected, annotation after identifier is not allowed
 
 ---
 
-(gram
+(gram_pattern
   (annotated_pattern
     elements: (relationship_pattern
       left: (node_pattern)

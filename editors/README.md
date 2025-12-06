@@ -25,7 +25,7 @@ The Zed integration provides full syntax highlighting and language support for G
 
 **Features:**
 - Syntax highlighting for all Gram constructs
-- Bracket matching for `()`, `[]`, and `{}`
+- Subject Pattern matching for `()`, `[]`, and `{}`
 - Automatic file type detection for `.gram` files
 - Proper indentation handling
 

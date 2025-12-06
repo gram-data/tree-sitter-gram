@@ -23,7 +23,7 @@
     "::"
 ] @operator
 
-; Brackets and delimiters
+; Subject Patterns and delimiters
 [
     "["
     "]"
@@ -49,7 +49,7 @@
 ; Annotation keys
 (annotation key: (symbol) @attribute)
 
-; Bracket notation (special highlighting)
+; Subject Pattern notation (special highlighting)
 (subject_pattern) @type
 
 ; Node with labels

@@ -9,7 +9,7 @@
 
 ### User Story 1 - Grammar Rules Updated (Priority: P1)
 
-Developers and users of the grammar need consistent terminology that accurately reflects the semantic meaning of syntax elements. The current term "subject" refers to the bracket notation `[...]` which is the generic container for patterns, while "attributes" refers to the actual content/data within those brackets. This terminology is confusing because "subject" should logically refer to the content (data), not the container.
+Developers and users of the grammar need consistent terminology that accurately reflects the semantic meaning of syntax elements. The current term "subject" refers to the subject pattern notation `[...]` which is the generic container for patterns, while "attributes" refers to the actual content/data within those brackets. This terminology is confusing because "subject" should logically refer to the content (data), not the container.
 
 **Why this priority**: This is foundational terminology that affects all documentation, examples, and user understanding. Getting the terminology right is critical for clarity and adoption.
 
@@ -25,7 +25,7 @@ Developers and users of the grammar need consistent terminology that accurately 
 
 ### User Story 2 - Documentation and Examples Updated (Priority: P2)
 
-Users reading documentation and examples need to see consistent terminology that matches the grammar implementation. All references to "subject" (meaning the bracket notation) and "attributes" (meaning the content) must be updated throughout documentation.
+Users reading documentation and examples need to see consistent terminology that matches the grammar implementation. All references to "subject" (meaning the subject pattern notation) and "attributes" (meaning the content) must be updated throughout documentation.
 
 **Why this priority**: Documentation is the primary way users learn the grammar. Inconsistent terminology between code and docs creates confusion.
 
@@ -33,7 +33,7 @@ Users reading documentation and examples need to see consistent terminology that
 
 **Acceptance Scenarios**:
 
-1. **Given** README.md and other documentation files, **When** terminology is updated, **Then** all references to "subject" (bracket notation) are changed to "bracket" and "attributes" (content) are changed to "subject"
+1. **Given** README.md and other documentation files, **When** terminology is updated, **Then** all references to "subject" (subject pattern notation) are changed to "bracket" and "attributes" (content) are changed to "subject"
 2. **Given** example gram files, **When** they are reviewed, **Then** any comments or documentation within examples use the new terminology
 3. **Given** editor integration documentation (Zed, etc.), **When** terminology is updated, **Then** syntax highlighting and language server documentation reflects new terms
 
@@ -98,7 +98,7 @@ Generated parser code and language bindings may expose node type names and field
 
 ### Key Entities
 
-- **Bracket**: The syntax element `[...]` that serves as the generic container for patterns. Previously called "subject".
+- **Subject Pattern**: The syntax element `[...]` that serves as the generic container for patterns. Previously called "subject".
 - **Subject**: The content or primary data within a bracket. Can include identifier, labels, and record. Previously called "attributes".
 - **Grammar Rule**: A named production rule in the grammar definition that defines valid syntax.
 - **Node Type**: The type name assigned to parsed syntax elements in the AST.

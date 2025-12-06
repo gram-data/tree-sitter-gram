@@ -6,12 +6,11 @@ Empty relationships: Single relationship pattern
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
-      left: (node_pattern)
-      kind: (right_arrow)
-      right: (node_pattern))))
+(gram_pattern
+  (relationship_pattern
+    left: (node_pattern)
+    kind: (right_arrow)
+    right: (node_pattern)))
 
 ==================
 Empty relationships: Two relationship patterns
@@ -22,52 +21,37 @@ Empty relationships: Two relationship patterns
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
-      left: (node_pattern)
-      kind: (right_arrow)
-      right: (node_pattern)))
-  (annotated_pattern
-    elements: (relationship_pattern
+(gram_pattern
+  (relationship_pattern
+    left: (node_pattern)
+    kind: (right_arrow)
+    right: (node_pattern))
+  (relationship_pattern
       left: (node_pattern)
       kind: (left_arrow)
-      right: (node_pattern))))
+      right: (node_pattern))
+)
 
 ==================
-Empty relationships: Pair of relationships in a single pattern
+Empty relationships: Pair of relationships in a comma sequence not allowed at top-level
+:error 
 ==================
 
 ()-->(), ()<--()
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
-      left: (node_pattern)
-      kind: (right_arrow)
-      right: (node_pattern))
-    elements: (relationship_pattern
-      left: (node_pattern)
-      kind: (left_arrow)
-      right: (node_pattern))))
+:error
 
 ==================
 Empty relationships: Pattern with a relationship and isolated node
+:error
 ==================
 
 ()-->(), ()
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
-      left: (node_pattern)
-      kind: (right_arrow)
-      right: (node_pattern))
-    elements: (node_pattern)))
 
 ==================
 Empty relationships: Three node path
@@ -77,12 +61,11 @@ Empty relationships: Three node path
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
+(gram_pattern
+  (relationship_pattern
+    left: (node_pattern)
+    kind: (right_arrow)
+    right: (relationship_pattern
       left: (node_pattern)
       kind: (right_arrow)
-      right: (relationship_pattern
-        left: (node_pattern)
-        kind: (right_arrow)
-        right: (node_pattern)))))
+      right: (node_pattern))))

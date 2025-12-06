@@ -6,9 +6,8 @@ Labeled nodes: No label
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern)))
+(gram_pattern
+  (node_pattern))
 
 ==================
 Labeled nodes: Single label
@@ -18,11 +17,10 @@ Labeled nodes: Single label
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       labels: (labels
-        (symbol)))))
+        (symbol))))
 
 ==================
 Labeled nodes: Two labels
@@ -32,12 +30,11 @@ Labeled nodes: Two labels
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       labels: (labels
         (symbol)
-        (symbol)))))
+        (symbol))))
 
 ==================
 Labeled nodes: Identity followed by labels
@@ -47,10 +44,9 @@ Labeled nodes: Identity followed by labels
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       identifier: (integer)
       labels: (labels
         (symbol)
-        (symbol)))))
+        (symbol))))

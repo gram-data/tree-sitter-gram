@@ -6,9 +6,8 @@ Empty nodes: Single empty node pattern
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern)))
+(gram_pattern
+  (node_pattern))
 
 ==================
 Empty nodes: Two empty node patterns
@@ -19,21 +18,17 @@ Empty nodes: Two empty node patterns
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern))
-  (annotated_pattern
-    elements: (node_pattern)))
+(gram_pattern
+  (node_pattern)
+  (node_pattern)
+)
 
 ==================
-Empty nodes: Pair of empty nodes in a single pattern
+Empty nodes: Pair of empty nodes in a single pattern. No top-level sequences
+:error
 ==================
 
 (), ()
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern)
-    elements: (node_pattern)))

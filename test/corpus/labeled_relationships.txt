@@ -6,14 +6,13 @@ Labeled relationship: Single label
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
-      left: (node_pattern)
-      kind: (undirected_arrow
-        labels: (labels
-          (symbol)))
-      right: (node_pattern))))
+(gram_pattern
+  (relationship_pattern
+    left: (node_pattern)
+    kind: (undirected_arrow
+      labels: (labels
+        (symbol)))
+    right: (node_pattern)))
 
 ==================
 Labeled relationship: Two labels
@@ -23,15 +22,14 @@ Labeled relationship: Two labels
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
+(gram_pattern
+  (relationship_pattern
       left: (node_pattern)
       kind: (undirected_arrow
         labels: (labels
           (symbol)
           (symbol)))
-      right: (node_pattern))))
+      right: (node_pattern)))
 
 ==================
 Labeled relationship: Two labels with an identity
@@ -41,13 +39,12 @@ Labeled relationship: Two labels with an identity
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (relationship_pattern
+(gram_pattern
+  (relationship_pattern
       left: (node_pattern)
       kind: (undirected_arrow
         identifier: (symbol)
         labels: (labels
           (symbol)
           (symbol)))
-      right: (node_pattern))))
+      right: (node_pattern)))

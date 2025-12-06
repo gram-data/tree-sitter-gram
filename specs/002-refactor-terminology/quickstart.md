@@ -73,7 +73,7 @@ This automatically updates:
 **Files**: `README.md`, `WARP.md`, `AGENTS.md`, `editors/zed/README.md`
 
 Search and replace:
-- "subject" (when referring to bracket notation) → "bracket"
+- "subject" (when referring to subject pattern notation) → "bracket"
 - "attributes" (when referring to content) → "subject"
 
 ### 5. Update Query Files

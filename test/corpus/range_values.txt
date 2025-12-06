@@ -6,15 +6,14 @@ Range: 1 to 10
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       record: (record
         (record_property
           key: (symbol)
           value: (range
             lower: (integer)
-            upper: (integer)))))))
+            upper: (integer))))))
 
 ==================
 Range: 1 to infinity!
@@ -24,14 +23,13 @@ Range: 1 to infinity!
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       record: (record
         (record_property
           key: (symbol)
           value: (range
-            lower: (integer)))))))
+            lower: (integer))))))
 
 ==================
 Range: up to 100
@@ -41,11 +39,10 @@ Range: up to 100
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       record: (record
         (record_property
           key: (symbol)
           value: (range
-            upper: (integer)))))))
+            upper: (integer))))))

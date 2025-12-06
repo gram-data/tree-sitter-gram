@@ -13,7 +13,7 @@ Map values are non-nested maps, similar in syntax to records but only accepting 
 
 ---
 
-(gram
+(gram_pattern
   root: (record
     (record_property
       key: (symbol)
@@ -69,9 +69,8 @@ Map values may appear in node properties
 
 ---
 
-(gram
-  (annotated_pattern
-    elements: (node_pattern
+(gram_pattern
+  (node_pattern
       identifier: (symbol)
       labels: (labels
         (symbol))
@@ -94,7 +93,7 @@ Map values may appear in node properties
             (map_entry
               key: (symbol)
               value: (string_literal
-                content: (string_content)))))))))
+                content: (string_content))))))))
 
 ==================
 Map values may not appear within an array
