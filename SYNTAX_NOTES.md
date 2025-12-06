@@ -46,13 +46,13 @@ Example:
 
 ## `annotated_pattern` -- a top-level pattern element
 
-An annotated pattern is the primary building block at the top level of a gram file. It consists of optional annotations followed by a comma-separated sequence of pattern elements.
+An annotated pattern is the primary building block at the top level of a gram file. It consists of required annotations (one or more) followed by a single pattern element.
 
-Pattern: `annotated_pattern = [ annotations | pattern_sequence ]`
+Pattern: `annotated_pattern = [ annotations | pattern_element ]`
 
 Where:
-- `annotations` is zero or more `@key(value)` annotations
-- `pattern_sequence` is a comma-separated sequence of pattern elements (`subject_pattern` or `path_pattern`)
+- `annotations` is one or more `@key(value)` annotations
+- `pattern_element` is a single pattern element (`subject_pattern` or `path_pattern`)
 
 Examples:
 ```

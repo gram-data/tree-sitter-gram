@@ -13,11 +13,9 @@ module.exports = grammar({
 
     annotated_pattern: ($) =>
       seq(
-        // field("annotations", optional($.annotations)),
         field("annotations", $.annotations),
         field("elements", choice($.subject_pattern, $._path_pattern)),
       ),
-    // _annotated_pattern_element: ($) => choice($.subject_pattern, $._path_pattern),
 
     subject_pattern: ($) =>
       seq(
