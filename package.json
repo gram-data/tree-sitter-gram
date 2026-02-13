@@ -12,6 +12,7 @@
   "scripts": {
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
+    "build": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
     "test": "node --test bindings/node/*_test.js",
     "zed:dev": "ZED_REPO_MODE=dev bash scripts/prepare-zed-extension.sh",

@@ -1,12 +1,13 @@
 use clap::Parser;
 use std::io::{self, Read};
 use std::path::PathBuf;
-use tree_sitter::Parser as TreeSitterParser;
+use tree_sitter::{Node, Parser as TreeSitterParser};
 
 /// A simple linter for gram notation files
 #[derive(Parser, Debug)]
 #[command(name = "gram-lint")]
 #[command(about = "Lint gram notation files for parse errors")]
+#[command(version = env!("CARGO_PKG_VERSION"))]
 struct Args {
     /// Output the s-expression parse tree
     #[arg(short = 't', long = "tree")]
@@ -19,6 +20,66 @@ struct Args {
     /// Gram files to lint (use "-" or omit to read from stdin)
     #[arg(num_args = 0..)]
     files: Vec<PathBuf>,
+}
+
+fn report_errors(node: Node, source: &str, display_name: &str) -> bool {
+    let mut found_errors = false;
+
+    if node.is_error() {
+        let start = node.start_position();
+        let end = node.end_position();
+        let text = node
+            .utf8_text(source.as_bytes())
+            .unwrap_or("<invalid utf8>");
+
+        eprintln!(
+            "{}:{}:{}: error: unexpected token(s)",
+            display_name,
+            start.row + 1,
+            start.column + 1
+        );
+
+        // Show the line with the error
+        if let Some(line) = source.lines().nth(start.row) {
+            eprintln!("  | {}", line);
+            eprintln!(
+                "  | {}^{}",
+                " ".repeat(start.column),
+                "~".repeat((end.column - start.column).saturating_sub(1))
+            );
+        }
+
+        eprintln!("  = unexpected: {:?}", text);
+        found_errors = true;
+    } else if node.is_missing() {
+        let start = node.start_position();
+
+        eprintln!(
+            "{}:{}:{}: error: expected {}",
+            display_name,
+            start.row + 1,
+            start.column + 1,
+            node.kind()
+        );
+
+        // Show the line where the missing token was expected
+        if let Some(line) = source.lines().nth(start.row) {
+            eprintln!("  | {}", line);
+            eprintln!("  | {}^", " ".repeat(start.column));
+        }
+
+        found_errors = true;
+    }
+
+    // Recurse through children
+    let mut cursor = node.walk();
+    for child in node.children(&mut cursor) {
+        if report_errors(child, source, display_name) {
+            found_errors = true;
+        }
+    }
+
+    found_errors
 }
 
 fn main() {
@@ -54,8 +115,9 @@ fn main() {
             }
 
             if root_node.has_error() {
-                eprintln!("{}: parse error", display_name);
-                has_errors = true;
+                if report_errors(root_node, expression, &display_name) {
+                    has_errors = true;
+                }
             }
         }
     } else {
@@ -98,8 +160,9 @@ fn main() {
             }
 
             if root_node.has_error() {
-                eprintln!("{}: parse error", display_name);
-                has_errors = true;
+                if report_errors(root_node, &source_code, &display_name) {
+                    has_errors = true;
+                }
             }
         }
     }
@@ -108,4 +171,3 @@ fn main() {
         std::process::exit(1);
     }
 }
-
