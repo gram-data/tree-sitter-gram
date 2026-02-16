@@ -5,6 +5,8 @@ Auto-generated from all feature plans. Last updated: 2025-11-10
 ## Active Technologies
 - JavaScript (Node.js) for grammar definition, generated C code for parser + ree-sitter (CLI and runtime), tree-sitter CLI for code generation (001-refactor-terminology)
 - N/A (parser generation, no data storage) (001-refactor-terminology)
+- JavaScript (Node.js), tree-sitter grammar DSL + ree-sitter-cli (project version), tree-sitter (bindings) (003-extended-annotation)
+- N/A (parser grammar definition) (003-extended-annotation)
 
 - JavaScript (Node.js), tree-sitter grammar DSL + ree-sitter-cli ^0.25.10, tree-sitter ^0.25.0 (001-line-comments)
 
@@ -24,6 +26,7 @@ npm test && npm run lint
 JavaScript (Node.js), tree-sitter grammar DSL: Follow standard conventions
 
 ## Recent Changes
+- 003-extended-annotation: Added JavaScript (Node.js), tree-sitter grammar DSL + ree-sitter-cli (project version), tree-sitter (bindings)
 - 001-refactor-terminology: Added JavaScript (Node.js) for grammar definition, generated C code for parser + ree-sitter (CLI and runtime), tree-sitter CLI for code generation
 
 - 001-line-comments: Added JavaScript (Node.js), tree-sitter grammar DSL + ree-sitter-cli ^0.25.10, tree-sitter ^0.25.0
