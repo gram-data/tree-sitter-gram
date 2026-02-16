@@ -29,9 +29,9 @@ Extend the Gram grammar so that annotations support identifiers and labels in ad
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
 **Grammar Expressiveness and Clarity (Principle I)**:
-- [x] Grammar rules use descriptive names aligned with Gram terminology (annotation, identified_annotation, property_annotation, annotation_header)
-- [x] Rule structure is organized hierarchically (annotations → annotation → introducer + header + body)
-- [x] Complex rules are decomposed into named helper functions (e.g. commaSep1; annotation header as optional identifier + optional labels)
+- [x] Grammar rules use descriptive names aligned with Gram terminology (identified_annotation, property_annotation; identifier and labels as direct fields)
+- [x] Rule structure is organized hierarchically (annotations → identified_annotation or property_annotation; introducer + identifier/labels or key+value; body at annotated_pattern.elements)
+- [x] Complex rules are decomposed into named helper functions (e.g. commaSep1; identified_annotation has optional identifier and optional labels as direct fields via choice)
 - [x] Field annotations used for important AST components (annotations, key, value, identifier, labels, elements)
 - [x] Precedence and associativity explicitly declared where needed (e.g. _value)
 

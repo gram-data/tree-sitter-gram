@@ -33,7 +33,7 @@
 **Rationale**:
 - Spec and proposal require "same order/convention used in subject position elsewhere" (FR-006, spec Assumptions).
 - Grammar already has `_subject` with identifier, labels, record in various combinations. For `@@` header, identifier and/or labels only keeps annotations simple; record in header can be deferred.
-- Reusing `identifier` and `labels` rules (and `_label`) ensures consistency; the header can be a new rule `annotation_header: optional(identifier), optional(labels)` with ordering enforced, or a choice of (identifier only, labels only, identifier + labels) to avoid "both optional but at least one" ambiguity.
+- Reusing `identifier` and `labels` rules (and `_label`) ensures consistency. **Implementation note**: The AST is flattened: **identified_annotation** has **identifier** and **labels** as direct fields (no separate annotation_header node), expressed as a choice of (identifier only, labels only, identifier + labels) to avoid "both optional but at least one" ambiguity.
 
 **Alternatives considered**:
 - New dedicated header rules that duplicate identifier/labels structure: Rejected to avoid drift from subject syntax.

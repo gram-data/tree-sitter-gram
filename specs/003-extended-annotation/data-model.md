@@ -15,7 +15,7 @@ Annotations **stack** on a single body but are constrained: **at most one** opti
 
 - **annotations** (grammar): Either (1) one optional `identified_annotation` followed by zero or more `property_annotation`, or (2) one or more `property_annotation` only. At least one annotation is required. So: `choice(seq(optional($.identified_annotation), repeat($.property_annotation)), repeat1($.property_annotation))` — but the first alternative must allow “identified only” (zero property), so use: `choice(seq($.identified_annotation, repeat($.property_annotation)), repeat1($.property_annotation))` (when identified is present it comes first; when absent, one or more property).
 - **property_annotation** — introducer `@`, then key (symbol) and value (value expression) in parentheses.
-- **identified_annotation** — introducer `@@`, then header (identifier and/or labels). It does **not** include the body; the body is the single element after the whole annotation stack (see annotated_pattern).
+- **identified_annotation** — introducer `@@`, with optional **identifier** and/or **labels** as direct fields. It does **not** include the body; the body is the single element after the whole annotation stack (see annotated_pattern).
 
 ### Property-style annotation (single `@`)
 
@@ -30,21 +30,13 @@ Annotations **stack** on a single body but are constrained: **at most one** opti
 
 ### Identified/labeled annotation (double `@@`)
 
-| Field      | Type / Rule     | Description |
-|------------|-----------------|-------------|
-| introducer | literal `@@`    | Distinguishes from property-style. |
-| header     | annotation_header | Optional identifier, optional labels (at least one required). |
+| Field       | Type / Rule     | Description |
+|-------------|-----------------|-------------|
+| introducer  | literal `@@`    | Distinguishes from property-style. |
+| identifier  | optional(_identifier) | Wrapper name (direct field on identified_annotation). |
+| labels      | optional(labels)     | Same as subject position (`:L`, `::L`); direct field on identified_annotation. |
 
-The **body** is not part of this rule: it is the single `elements` field of the parent `annotated_pattern` (the node, relationship, or path that follows the whole annotation stack). At most one `identified_annotation` may appear in the stack; it must be the first annotation if present.
-
-**annotation_header** (for `@@` only):
-
-| Component   | Rule / Field   | Description |
-|-------------|----------------|-------------|
-| identifier  | optional(_identifier) | Wrapper name. |
-| labels      | optional(labels)     | Same as subject position (`:L`, `::L`). |
-
-Order: identifier (if present) then labels (if present). At least one must be present. No record in header.
+The grammar expresses the header as a choice: (1) identifier only, (2) labels only, (3) identifier then labels. At least one of identifier or labels must be present. The **body** is not part of this rule: it is the single `elements` field of the parent `annotated_pattern` (the node, relationship, or path that follows the whole annotation stack). At most one `identified_annotation` may appear in the stack; it must be the first annotation if present.
 
 ### Existing rules reused
 
@@ -68,9 +60,8 @@ N/A — annotations are syntactic; no state machine.
 
 - **annotated_pattern** → annotations (stack: optional one identified_annotation, then zero or more property_annotation) + elements (subject_pattern or _path_pattern = the body).
 - **annotations** → choice( seq(identified_annotation, repeat(property_annotation)), repeat1(property_annotation) ). So: at most one `@@`, then zero or more `@`; at least one annotation total.
-- **identified_annotation** → header (annotation_header) only; body is annotated_pattern.elements.
+- **identified_annotation** → optional identifier, optional labels (direct fields); body is annotated_pattern.elements. Identifier in `@@` is a naming identifier (short name, GUID, pseudo-sequence); property-like terms (e.g. verified, name) use property_annotation: `@verified(true)`, not `@@verified`.
 - **property_annotation** → key + value (no body; body is annotated_pattern.elements).
-- **annotation_header** → optional identifier, optional labels (same rules as _subject for those parts). Identifier in `@@` is a naming identifier (short name, GUID, pseudo-sequence); property-like terms (e.g. verified, name) use property_annotation: `@verified(true)`, not `@@verified`.
 
 ## Backward Compatibility
 

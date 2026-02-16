@@ -24,9 +24,9 @@
 
 **Purpose**: Verify environment and branch so grammar work can proceed
 
-- [ ] T001 Verify current branch is `003-extended-annotation` and repository root contains `grammar.js`
-- [ ] T002 Verify Tree-sitter CLI and Node.js: run `npx tree-sitter --version` and `node --version` from repository root
-- [ ] T003 [P] Verify existing corpus passes: run `npx tree-sitter test` from repository root (baseline before changes)
+- [X] T001 Verify current branch is `003-extended-annotation` and repository root contains `grammar.js`
+- [X] T002 Verify Tree-sitter CLI and Node.js: run `npx tree-sitter --version` and `node --version` from repository root
+- [X] T003 [P] Verify existing corpus passes: run `npx tree-sitter test` from repository root (baseline before changes)
 
 ---
 
@@ -36,12 +36,12 @@
 
 **⚠️ CRITICAL**: No user story corpus validation can succeed until this phase is complete.
 
-- [ ] T004 In `grammar.js` set `annotations` to enforce stacking: `choice(seq($.identified_annotation, repeat($.property_annotation)), repeat1($.property_annotation))` so at most one `@@` (first) and zero or more `@`; at least one annotation total
-- [ ] T005 In `grammar.js` add `property_annotation` rule: `seq("@", field("key", $.symbol), "(", field("value", $._value), ")")`
-- [ ] T006 In `grammar.js` add `identified_annotation` rule: `seq("@@", field("header", $.annotation_header))` only (no parentheses, no body; body is the parent `annotated_pattern.elements` that follows the whole stack)
-- [ ] T007 In `grammar.js` add `annotation_header` rule as a choice of: (1) identifier only, (2) labels only, (3) identifier then labels; reuse `_identifier` and `labels`; use descriptive field names so AST is clear
-- [ ] T008 Run `npx tree-sitter generate` from repository root to regenerate `src/parser.c` and `src/node-types.json`
-- [ ] T009 Create `test/corpus/extended_annotations.txt` with corpus file header and delimiter structure (e.g. first `====================` block) so subsequent story phases can add cases
+- [X] T004 In `grammar.js` set `annotations` to enforce stacking: `choice(seq($.identified_annotation, repeat($.property_annotation)), repeat1($.property_annotation))` so at most one `@@` (first) and zero or more `@`; at least one annotation total
+- [X] T005 In `grammar.js` add `property_annotation` rule: `seq("@", field("key", $.symbol), "(", field("value", $._value), ")")`
+- [X] T006 In `grammar.js` add `identified_annotation` rule: `@@` plus a choice of (1) identifier only, (2) labels only, (3) identifier then labels — no parentheses, no body; body is the parent `annotated_pattern.elements` that follows the whole stack
+- [X] T007 In `grammar.js` give `identified_annotation` **identifier** and **labels** as direct fields (no separate annotation_header node); reuse `_identifier` and `labels`; at least one of identifier or labels required via choice
+- [X] T008 Run `npx tree-sitter generate` from repository root to regenerate `src/parser.c` and `src/node-types.json`
+- [X] T009 Create `test/corpus/extended_annotations.txt` with corpus file header and delimiter structure (e.g. first `====================` block) so subsequent story phases can add cases
 
 **Checkpoint**: Parser accepts `@@` and `@` and produces distinct annotation nodes; corpus file exists. User story phases add and validate specific forms.
 
@@ -51,13 +51,13 @@
 
 **Goal**: Authors can write `@@p (a)` and `@@r1 (a)-[r]->(b)` (identifier as short name / pseudo-id); the annotation header is recognized as identifier only and the body as the annotated element. Property-like terms (e.g. verified) use `@verified(true)`, not `@@verified`.
 
-**Independent Test**: Parse a document containing `@@p (a)` and `@@r1 (a)-[r]->(b)`; confirm AST has identified_annotation nodes with header containing identifier and body containing node or path.
+**Independent Test**: Parse a document containing `@@p (a)` and `@@r1 (a)-[r]->(b)`; confirm AST has identified_annotation nodes with identifier field and body (annotated_pattern.elements) containing node or path.
 
 ### Corpus tests for User Story 1
 
-- [ ] T010 [P] [US1] Add positive corpus case for `@@p (a)` (identifier-only) with expected tree in `test/corpus/extended_annotations.txt`
-- [ ] T011 [P] [US1] Add positive corpus case for `@@r1 (a)-[r]->(b)` (identifier-only wrapping relationship; use short name / pseudo-id like r1, not property-like terms) with expected tree in `test/corpus/extended_annotations.txt`
-- [ ] T012 [US1] Run `npx tree-sitter test -f extended_annotations` from repository root and fix grammar or expected trees until US1 cases pass
+- [X] T010 [P] [US1] Add positive corpus case for `@@p (a)` (identifier-only) with expected tree in `test/corpus/extended_annotations.txt`
+- [X] T011 [P] [US1] Add positive corpus case for `@@r1 (a)-[r]->(b)` (identifier-only wrapping relationship; use short name / pseudo-id like r1, not property-like terms) with expected tree in `test/corpus/extended_annotations.txt`
+- [X] T012 [US1] Run `npx tree-sitter test -f extended_annotations` from repository root and fix grammar or expected trees until US1 cases pass
 
 **Checkpoint**: User Story 1 is fully testable; identifier-only `@@` form parses and corpus passes.
 
@@ -67,13 +67,13 @@
 
 **Goal**: Authors can write `@@:L (a)` and `@@::Label (a)`; the annotation header is recognized as labels only (no identifier).
 
-**Independent Test**: Parse documents containing `@@:L (a)` and `@@::Label (a)`; confirm AST has identified_annotation with header containing labels only.
+**Independent Test**: Parse documents containing `@@:L (a)` and `@@::Label (a)`; confirm AST has identified_annotation with labels field (no identifier).
 
 ### Corpus tests for User Story 2
 
-- [ ] T013 [P] [US2] Add positive corpus case for `@@:L (a)` (labels-only) with expected tree in `test/corpus/extended_annotations.txt`
-- [ ] T014 [P] [US2] Add positive corpus case for `@@::Label (a)` or multiple labels if supported with expected tree in `test/corpus/extended_annotations.txt`
-- [ ] T015 [US2] Run `npx tree-sitter test -f extended_annotations` from repository root and fix grammar or expected trees until US2 cases pass
+- [X] T013 [P] [US2] Add positive corpus case for `@@:L (a)` (labels-only) with expected tree in `test/corpus/extended_annotations.txt`
+- [X] T014 [P] [US2] Add positive corpus case for `@@::Label (a)` or multiple labels if supported with expected tree in `test/corpus/extended_annotations.txt`
+- [X] T015 [US2] Run `npx tree-sitter test -f extended_annotations` from repository root and fix grammar or expected trees until US2 cases pass
 
 **Checkpoint**: User Stories 1 and 2 are independently testable; labels-only `@@` form parses and corpus passes.
 
@@ -83,12 +83,12 @@
 
 **Goal**: Authors can write `@@p:L (a)`; the annotation header is recognized as both identifier and labels in subject order.
 
-**Independent Test**: Parse a document containing `@@p:L (a)`; confirm AST has identified_annotation with header containing both identifier and labels.
+**Independent Test**: Parse a document containing `@@p:L (a)`; confirm AST has identified_annotation with both identifier and labels fields.
 
 ### Corpus tests for User Story 3
 
-- [ ] T016 [P] [US3] Add positive corpus case for `@@p:L (a)` (identifier and labels) with expected tree in `test/corpus/extended_annotations.txt`
-- [ ] T017 [US3] Run `npx tree-sitter test -f extended_annotations` from repository root and fix grammar or expected trees until US3 cases pass
+- [X] T016 [P] [US3] Add positive corpus case for `@@p:L (a)` (identifier and labels) with expected tree in `test/corpus/extended_annotations.txt`
+- [X] T017 [US3] Run `npx tree-sitter test -f extended_annotations` from repository root and fix grammar or expected trees until US3 cases pass
 
 **Checkpoint**: User Stories 1–3 are independently testable; identifier+labels `@@` form parses and corpus passes.
 
@@ -102,9 +102,9 @@
 
 ### Corpus tests for User Story 4
 
-- [ ] T018 [P] [US4] Add positive corpus case for `@desc (a)` (property key with symbol value) in `test/corpus/extended_annotations.txt`
-- [ ] T019 [P] [US4] Add positive corpus case for `@desc("historic route") (a)-->(b)` (property key with string value before path) in `test/corpus/extended_annotations.txt`
-- [ ] T020 [US4] Run full `npx tree-sitter test` from repository root and fix any regressions in existing corpus (e.g. `test/corpus/annotation.txt`, `test/corpus/node_annotations.txt`, `test/corpus/relationship_annotations.txt`)
+- [X] T018 [P] [US4] Add positive corpus case for `@desc (a)` (property key with symbol value) in `test/corpus/extended_annotations.txt`
+- [X] T019 [P] [US4] Add positive corpus case for `@desc("historic route") (a)-->(b)` (property key with string value before path) in `test/corpus/extended_annotations.txt`
+- [X] T020 [US4] Run full `npx tree-sitter test` from repository root and fix any regressions in existing corpus (e.g. `test/corpus/annotation.txt`, `test/corpus/node_annotations.txt`, `test/corpus/relationship_annotations.txt`)
 
 **Checkpoint**: All four annotation forms (identifier-only, labels-only, identifier+labels, property-style) are validated; no regressions on existing single-`@` usage.
 
@@ -114,11 +114,11 @@
 
 **Purpose**: Edge cases, examples, bindings, and full suite validation.
 
-- [ ] T021 [P] Add negative or edge-case corpus example for invalid empty header `@@ (a)` in `test/corpus/extended_annotations.txt` (expect parse error or defined invalid structure per spec)
-- [ ] T022 Run `npx tree-sitter test` and `npm test` from repository root; ensure all corpus and binding tests pass
-- [ ] T023 [P] If AST node or field names for annotations changed, update parsing/traversal code in `examples/` to handle `identified_annotation` and `property_annotation` (list paths in examples that reference annotations)
-- [ ] T024 [P] If AST changed, update or add binding tests in `bindings/node/` (or other bindings) that assert annotation node kinds and header/body fields
-- [ ] T025 Validate quickstart steps: follow `specs/003-extended-annotation/quickstart.md` implementation steps and confirm grammar reference matches implemented syntax
+- [X] T021 [P] Add negative or edge-case corpus example for invalid empty header `@@ (a)` in `test/corpus/extended_annotations.txt` (expect parse error or defined invalid structure per spec)
+- [X] T022 Run `npx tree-sitter test` and `npm test` from repository root; ensure all corpus and binding tests pass
+- [X] T023 [P] If AST node or field names for annotations changed, update parsing/traversal code in `examples/` to handle `identified_annotation` and `property_annotation` (list paths in examples that reference annotations)
+- [X] T024 [P] If AST changed, update or add binding tests in `bindings/node/` (or other bindings) that assert annotation node kinds and identifier/labels/body fields
+- [X] T025 Validate quickstart steps: follow `specs/003-extended-annotation/quickstart.md` implementation steps and confirm grammar reference matches implemented syntax
 
 ---
 

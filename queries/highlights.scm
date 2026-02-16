@@ -46,8 +46,10 @@
 (map_entry key: (string_literal) @property)
 (map_entry key: (integer) @property)
 
-; Annotation keys
-(annotation key: (symbol) @attribute)
+; Annotation keys (property-style) and headers (identified/label-style)
+(property_annotation key: (symbol) @attribute)
+(identified_annotation identifier: (_) @attribute)
+(identified_annotation labels: (_) @attribute)
 
 ; Subject Pattern notation (special highlighting)
 (subject_pattern) @type

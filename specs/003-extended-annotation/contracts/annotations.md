@@ -21,14 +21,11 @@ The parser MUST produce different node types (or a discriminable structure) for 
 
 ## Identified/labeled annotation (`@@`)
 
-- **Structure**: `@@` + header (no parentheses; the body is **not** part of this rule).
-- **Header**: At least one of (identifier, labels). Order: identifier then labels (same as subject position).
+- **Structure**: `@@` + header content (no parentheses; the body is **not** part of this rule). Header content is identifier and/or labels (at least one required); order: identifier then labels (same as subject position).
 - **Body**: The body is the single **elements** field of the parent **annotated_pattern** (the node, relationship, or path that follows the entire annotation stack). So for `@@route66:Highway @name("Route 66") (a)-->(b)`, the body `(a)-->(b)` appears once after all annotations.
-- **AST** (logical):
-  - introducer or kind: distinguishable as `@@` form.
-  - header:
-    - identifier: optional (_identifier).
-    - labels: optional (labels rule, same as elsewhere).
+- **AST** (logical): **identified_annotation** node with two direct fields (no separate header node):
+  - identifier: optional (_identifier).
+  - labels: optional (labels rule, same as elsewhere).
   - (Body is sibling: annotated_pattern.elements.)
 
 ## Stacking constraint
@@ -40,7 +37,7 @@ The parser MUST produce different node types (or a discriminable structure) for 
 ## Required behaviors
 
 1. **Disambiguation**: A source span starting with `@@` MUST be parsed as identified_annotation; starting with `@` (and not `@@`) as property_annotation.
-2. **Header recovery**: For `@@`, the structure of the header (identifier only, labels only, or both) MUST be deterministically recoverable from the AST.
+2. **Header recovery**: For `@@`, the structure (identifier only, labels only, or both) MUST be deterministically recoverable from the AST via identified_annotation’s identifier and labels fields.
 3. **Invalid forms**: `@@` with no header, or `@` with no key, MUST be rejected (parse error or invalid node). Two or more `@@` before the body MUST be rejected.
 
 4. **Identifier vs property**: Identifiers in `@@` headers are naming identifiers (short names, GUIDs, pseudo-sequences). Property-like terms (verified, name, description) MUST use property_annotation: `@verified(true)`, `@name("Route 66")` — not `@@verified` or `@@name`.
@@ -57,7 +54,7 @@ Expected logical structure:
 
 - **annotated_pattern**: annotations (stack) + elements (body once).
 - **annotations**: one identified_annotation then two property_annotations.
-  - identified_annotation: header identifier `route66`, labels `Highway` (no body in node; body is shared).
+  - identified_annotation: identifier `route66`, labels `Highway` (direct fields; no body in node; body is shared).
   - property_annotation: key `name`, value `"Route 66"`.
   - property_annotation: key `description`, value `"A famous roadway in the USA"`.
 - **elements** (body): path `(a)-->(b)-->(c)` — the single element that all annotations apply to.

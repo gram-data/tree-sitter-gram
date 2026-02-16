@@ -37,3 +37,8 @@ __pycache__/
 *.wasm
 *.obj
 *.o
+
+# Universal
+*.log
+.env*
+.DS_Store

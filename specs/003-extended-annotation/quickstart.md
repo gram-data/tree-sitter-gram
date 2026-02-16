@@ -16,7 +16,7 @@ This quickstart covers implementing extended annotations (`@@` for identifier/la
 - **Stacking rule**: Annotations stack on a single body. Allow **at most one** optional `identified_annotation` (`@@`) followed by **zero or more** `property_annotation` (`@`). The body is the single **elements** of `annotated_pattern` (appears once after the whole stack). So: `annotations: choice(seq($.identified_annotation, repeat($.property_annotation)), repeat1($.property_annotation))`.
 - **Introducer**: `@@` = identified/labeled (at most one); `@` = property-style (zero or more). Match `@@` before `@` so the parser distinguishes them.
 - **Property-style** (single `@`): Keep current shape: `@` + `field("key", $.symbol)` + `"("` + `field("value", $._value)` + `")"`. Rule name `property_annotation`.
-- **Identified/labeled** (`@@`): Add a rule for `@@` + header **only** (no parentheses; no body in this rule). Header: optional identifier, optional labels (at least one required), same order as subject. Reuse `_identifier` and `labels`. The body is **not** part of `identified_annotation`; it is the `elements` field of the parent `annotated_pattern`.
+- **Identified/labeled** (`@@`): Add a rule **identified_annotation** for `@@` with **identifier** and/or **labels** as direct fields (no separate header node; no parentheses; no body in this rule). Use a choice: identifier only, labels only, or identifier then labels (at least one required). Reuse `_identifier` and `labels`. The body is **not** part of `identified_annotation`; it is the `elements` field of the parent `annotated_pattern`.
 - **annotated_pattern**: Unchanged: `seq(field("annotations", $.annotations), field("elements", choice($.subject_pattern, $._path_pattern)))`. So the body appears once after all annotations.
 
 ### 2. Regenerate parser
@@ -83,7 +83,7 @@ Annotations **stack** on a single body. Order: **at most one** `identified_annot
 
 #### 2.2 Identified/labeled (`@@`)
 
-- **Syntax**: `@@` *header* (no parentheses in this token; the body follows the entire annotation stack.)  
+- **Syntax**: `@@` *header content* (identifier and/or labels; no parentheses in this token; the body follows the entire annotation stack.)  
 - **Meaning**: A wrapper with optional identifier and/or labels; the **body** is the single element that follows all annotations (the node, relationship, or path). Maps to a 1-arity pattern. At most one `@@` per annotated element; it must appear first if present.  
 - **Header**: Optional identifier, optional labels (at least one required). Same order and syntax as subject position (`:`, `::` + symbol). **Identifier semantics**: use **short names**, **GUIDs**, or **pseudo-sequences** (e.g. `p`, `r1`, `seg_ab`). Property-like terms (verified, name, description) belong in `@` form: `@verified(true)`, `@name("Route 66")`, not `@@verified`.  
 - **Body**: The annotated element — defined once after the stack (e.g. `(a)`, `(a)-[r]->(b)`, or a path).  
@@ -169,4 +169,4 @@ Values appear in property-style annotation values, records, maps, and similar co
 - **Arity**: 0 node, 1 wrapper/annotation, 2 relationship, N component.  
 - **Graph**: Nodes `(...)`, relationships with arrows, paths as chains.  
 - **Values**: Symbol, strings, numbers, boolean, range, tagged string, array, map; records in subject.  
-- **Implementation**: Grammar change for `@@` and header, corpus tests, then regenerate and validate.
+- **Implementation**: Grammar change for `@@` (identified_annotation with identifier/labels fields), corpus tests, then regenerate and validate.
