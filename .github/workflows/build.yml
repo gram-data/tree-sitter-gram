@@ -161,10 +161,14 @@ jobs:
           done < <(jq -r '.grammars[].path // "."' tree-sitter.json)
         env:
           TREE_SITTER_ABI_VERSION: 15
-      - name: Build wheels
-        uses: pypa/cibuildwheel@v2.16.2
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          output-dir: dist
+          python-version: "3.11"
+      - name: Build wheels
+        run: |
+          python -m pip install cibuildwheel==2.16.2
+          python -m cibuildwheel --output-dir dist
         env:
           CIBW_ARCHS: native
       - uses: actions/upload-artifact@v4
