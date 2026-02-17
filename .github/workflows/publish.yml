@@ -1,3 +1,4 @@
+# Publish to registries. Runs only on tag push; build is validated in CI before you tag.
 name: Publish packages
 
 on:
@@ -10,68 +11,19 @@ permissions:
   attestations: write
 
 concurrency:
-  group: ${{github.workflow}}-${{github.ref}}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  # Inlined from tree-sitter/workflows package-npm.yml so we can run
-  # "npx tree-sitter generate" (upstream runs "tree-sitter" which is not on PATH
-  # when tree-sitter-cli is only a devDependency). Revert to uses: once fixed upstream.
-  npm_build_wasm:
-    name: Build Wasm binaries
-    runs-on: ubuntu-24.04
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: "22"
-      - run: npm ci --omit=peer --omit=optional
-      - name: Regenerate parser
-        run: npx tree-sitter generate
-        env:
-          TREE_SITTER_ABI_VERSION: 15
-      - run: npx tree-sitter build --wasm .
-      - uses: actions/upload-artifact@v4
-        with:
-          path: "*.wasm"
-          name: prebuilds-wasm
-          retention-days: 2
-
-  npm_build_node:
-    name: Build Node binaries (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - ubuntu-24.04
-          - ubuntu-24.04-arm
-          - macos-15
-          - macos-15-intel
-          - windows-2025
-          - windows-11-arm
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: "22"
-      - run: npm ci --omit=peer --omit=optional
-      - name: Regenerate parser
-        run: npx tree-sitter generate
-        env:
-          TREE_SITTER_ABI_VERSION: 15
-      - run: npx prebuildify -t 20.19.5
-      - uses: actions/upload-artifact@v4
-        with:
-          path: prebuilds/**
-          name: prebuilds-${{ matrix.os }}
-          retention-days: 2
+  build:
+    name: Build Wasm and Node binaries
+    uses: ./.github/workflows/build.yml
+    with:
+      artifact_retention_days: 2
 
   npm:
     name: Publish to npm
-    needs: [npm_build_wasm, npm_build_node]
+    needs: [build]
     runs-on: ubuntu-24.04
     environment:
       name: npm
@@ -94,14 +46,19 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
   pypi:
+    name: Publish to PyPI
+    needs: [build]
     uses: tree-sitter/workflows/.github/workflows/package-pypi.yml@main
     secrets:
-      PYPI_API_TOKEN: ${{secrets.PYPI_API_TOKEN}}
+      PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
     with:
       generate: true
+
   crates:
     name: Publish to crates.io
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -117,14 +74,12 @@ jobs:
       - name: Update gram-lint dependency for publishing
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          # Remove path dependency and use published version
           sed -i "s|tree-sitter-gram = { path = \"../..\" }|tree-sitter-gram = \"$VERSION\"|" tools/gram-lint/Cargo.toml
           echo "Updated gram-lint to depend on published tree-sitter-gram = \"$VERSION\""
       - name: Publish gram-lint
         run: cargo publish --package gram-lint --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
       - name: Restore gram-lint dependency to workspace
         run: |
-          # Restore path dependency after publishing
           VERSION="${{ steps.version.outputs.version }}"
           sed -i "s|tree-sitter-gram = \"$VERSION\"|tree-sitter-gram = { path = \"../..\" }|" tools/gram-lint/Cargo.toml
           echo "Restored gram-lint dependency to workspace path"
