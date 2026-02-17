@@ -29,10 +29,27 @@ module.exports = grammar({
 
     _subject_pattern_element: ($) => choice($.subject_pattern, $._path_pattern, $.pattern_reference),
 
-    annotations: ($) => repeat1($.annotation),
+    annotations: ($) =>
+      choice(
+        seq($.identified_annotation, repeat($.property_annotation)),
+        repeat1($.property_annotation),
+      ),
 
-    annotation: ($) =>
+    property_annotation: ($) =>
       seq("@", field("key", $.symbol), "(", field("value", $._value), ")"),
+
+    identified_annotation: ($) =>
+      seq(
+        "@@",
+        choice(
+          field("identifier", $._identifier),
+          field("labels", $.labels),
+          seq(
+            field("identifier", $._identifier),
+            field("labels", $.labels),
+          ),
+        ),
+      ),
 
     _path_pattern: ($) => choice($.relationship_pattern, $.node_pattern),
 

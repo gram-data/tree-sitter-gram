@@ -64,7 +64,7 @@ Subject Pattern: complete bracket with annotation, subject, and a qualified asso
 (gram_pattern
   (annotated_pattern
     annotations: (annotations
-      (annotation
+      (property_annotation
         key: (symbol)
         value: (string_literal
           content: (string_content))))

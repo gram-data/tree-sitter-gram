@@ -1,0 +1,55 @@
+# CI: test and build on every push/PR so you can verify before tagging.
+# Publish (on tag) uses the same build via .github/workflows/build.yml.
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - grammar.js
+      - src/**
+      - test/**
+      - bindings/**
+      - binding.gyp
+      - package.json
+      - tree-sitter.json
+  pull_request:
+    paths:
+      - grammar.js
+      - src/**
+      - test/**
+      - bindings/**
+      - binding.gyp
+      - package.json
+      - tree-sitter.json
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test parser
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version: "22"
+      - run: npm ci --omit=peer --omit=optional
+      - name: Regenerate parser
+        run: npx tree-sitter generate
+        env:
+          TREE_SITTER_ABI_VERSION: 15
+      - name: Tree-sitter corpus tests
+        run: npx tree-sitter test
+      - name: Node binding tests
+        run: npm test
+
+  build:
+    name: Build Wasm and Node binaries
+    uses: ./.github/workflows/build.yml
+    with:
+      artifact_retention_days: 1

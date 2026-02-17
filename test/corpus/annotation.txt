@@ -10,7 +10,7 @@ Annotate a single node with a named string value
 (gram_pattern
   (annotated_pattern
     annotations: (annotations
-      (annotation
+      (property_annotation
         key: (symbol)
         value: (string_literal
           content: (string_content))))
@@ -29,11 +29,11 @@ Annotate a single node twice
 (gram_pattern
   (annotated_pattern
     annotations: (annotations
-      (annotation
+      (property_annotation
         key: (symbol)
         value: (string_literal
           content: (string_content)))
-      (annotation
+      (property_annotation
         key: (symbol)
         value: (integer)))
     elements: (node_pattern)))
@@ -50,7 +50,7 @@ Annotate a relationship
 (gram_pattern
   (annotated_pattern
     annotations: (annotations
-      (annotation
+      (property_annotation
         key: (symbol)
         value: (string_literal
           content: (string_content))))
@@ -72,11 +72,11 @@ Annotate a node twice, stacking the annotations
 (gram_pattern
   (annotated_pattern
     annotations: (annotations
-      (annotation
+      (property_annotation
         key: (symbol)
         value: (string_literal
           content: (string_content)))
-      (annotation
+      (property_annotation
         key: (symbol)
         value: (string_literal
           content: (string_content))))
@@ -94,7 +94,7 @@ Annotate an empty subject
 (gram_pattern
   (annotated_pattern
     annotations: (annotations
-      (annotation
+      (property_annotation
         key: (symbol)
         value: (string_literal
           content: (string_content))))
@@ -117,7 +117,7 @@ Annotate an in-line subject member is not allowed
         elements: (annotated_pattern
           (annotated_pattern_element
             annotations: (annotations
-              (annotation
+              (property_annotation
                 key: (symbol)
                 value: (string_literal
                   content: (string_content))))

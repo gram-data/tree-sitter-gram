@@ -1,0 +1,148 @@
+====================
+Extended annotations: @@ (identified) and @ (property-style)
+====================
+
+@x(1) ()
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (property_annotation
+        key: (symbol)
+        value: (integer)))
+    elements: (node_pattern)))
+
+====================
+US1: Identifier-only @@p (a)
+====================
+
+@@p (a)
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (identified_annotation
+        identifier: (symbol)))
+    elements: (node_pattern
+      identifier: (symbol))))
+
+====================
+US1: Identifier-only @@r1 (a)-[r]->(b)
+====================
+
+@@r1 (a)-[r]->(b)
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (identified_annotation
+        identifier: (symbol)))
+    elements: (relationship_pattern
+      left: (node_pattern
+        identifier: (symbol))
+      kind: (right_arrow
+        identifier: (symbol))
+      right: (node_pattern
+        identifier: (symbol)))))
+
+====================
+US2: Labels-only @@:L (a)
+====================
+
+@@:L (a)
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (identified_annotation
+        labels: (labels
+          (symbol))))
+    elements: (node_pattern
+      identifier: (symbol))))
+
+====================
+US2: Labels-only @@::Label (a)
+====================
+
+@@::Label (a)
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (identified_annotation
+        labels: (labels
+          (symbol))))
+    elements: (node_pattern
+      identifier: (symbol))))
+
+====================
+US3: Identifier and labels @@p:L (a)
+====================
+
+@@p:L (a)
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (identified_annotation
+        identifier: (symbol)
+        labels: (labels
+          (symbol))))
+    elements: (node_pattern
+      identifier: (symbol))))
+
+====================
+US4: Property-style @desc(a) (a) — key with symbol value
+====================
+
+@desc(a) (a)
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (property_annotation
+        key: (symbol)
+        value: (symbol)))
+    elements: (node_pattern
+      identifier: (symbol))))
+
+====================
+US4: Property-style @desc("historic route") (a)-->(b)
+====================
+
+@desc("historic route") (a)-->(b)
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (property_annotation
+        key: (symbol)
+        value: (string_literal
+          content: (string_content))))
+    elements: (relationship_pattern
+      left: (node_pattern
+        identifier: (symbol))
+      kind: (right_arrow)
+      right: (node_pattern
+        identifier: (symbol)))))
+
+====================
+Edge case: invalid empty header @@ (a)
+:error
+====================
+
+@@ (a)
+---
+
+(gram_pattern
+  (ERROR)
+  (node_pattern
+    identifier: (symbol)))

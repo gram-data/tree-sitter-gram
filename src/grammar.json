@@ -178,13 +178,34 @@
       ]
     },
     "annotations": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SYMBOL",
-        "name": "annotation"
-      }
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identified_annotation"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "property_annotation"
+              }
+            }
+          ]
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "property_annotation"
+          }
+        }
+      ]
     },
-    "annotation": {
+    "property_annotation": {
       "type": "SEQ",
       "members": [
         {
@@ -214,6 +235,57 @@
         {
           "type": "STRING",
           "value": ")"
+        }
+      ]
+    },
+    "identified_annotation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@@"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "identifier",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_identifier"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "labels",
+              "content": {
+                "type": "SYMBOL",
+                "name": "labels"
+              }
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "identifier",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_identifier"
+                  }
+                },
+                {
+                  "type": "FIELD",
+                  "name": "labels",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "labels"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },

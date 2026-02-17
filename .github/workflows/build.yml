@@ -1,0 +1,65 @@
+# Reusable workflow: build Wasm and Node prebuilds.
+# Used by CI (validate build on PR/push) and by publish (produce artifacts for npm).
+name: Build binaries
+
+on:
+  workflow_call:
+    inputs:
+      artifact_retention_days:
+        description: Days to retain uploaded artifacts
+        required: false
+        default: 2
+        type: number
+
+jobs:
+  build_wasm:
+    name: Build Wasm binaries
+    runs-on: ubuntu-24.04
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version: "22"
+      - run: npm ci --omit=peer --omit=optional
+      - name: Regenerate parser
+        run: npx tree-sitter generate
+        env:
+          TREE_SITTER_ABI_VERSION: 15
+      - run: npx tree-sitter build --wasm .
+      - uses: actions/upload-artifact@v4
+        with:
+          path: "*.wasm"
+          name: prebuilds-wasm
+          retention-days: ${{ inputs.artifact_retention_days }}
+
+  build_node:
+    name: Build Node binaries (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
+          - macos-15
+          - macos-15-intel
+          - windows-2025
+          - windows-11-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version: "22"
+      - run: npm ci --omit=peer --omit=optional
+      - name: Regenerate parser
+        run: npx tree-sitter generate
+        env:
+          TREE_SITTER_ABI_VERSION: 15
+      - run: npx prebuildify -t 20.19.5
+      - uses: actions/upload-artifact@v4
+        with:
+          path: prebuilds/**
+          name: prebuilds-${{ matrix.os }}
+          retention-days: ${{ inputs.artifact_retention_days }}
