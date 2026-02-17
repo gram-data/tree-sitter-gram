@@ -162,7 +162,7 @@ jobs:
         env:
           TREE_SITTER_ABI_VERSION: 15
       - name: Build wheels
-        uses: pypa/cibuildwheel@v3
+        uses: pypa/cibuildwheel@v2.16.2
         with:
           output-dir: dist
         env:
