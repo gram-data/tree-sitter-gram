@@ -53,3 +53,5 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       artifact_retention_days: 1
+      build_python: true
+      build_rust: true
