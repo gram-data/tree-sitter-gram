@@ -4582,7 +4582,7 @@ TS_PUBLIC const TSLanguage *tree_sitter_gram(void) {
     .metadata = {
       .major_version = 0,
       .minor_version = 3,
-      .patch_version = 0,
+      .patch_version = 2,
     },
   };
   return &language;

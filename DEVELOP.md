@@ -92,12 +92,12 @@ Build steps live in the reusable **Build** workflow (`.github/workflows/build.ym
 
 ## Releasing to npm, PyPI, and crates.io
 
-1. Bump version everywhere (e.g. global search & replace for the new version):
+1. Bump version everywhere using `tree-sitter version 1.2.3`
    - `package.json` (`version`)
    - `tree-sitter.json` (`metadata.version`)
    - `Cargo.toml` (workspace and crates)
-   - Any other version strings (e.g. `npm run zed:publish` if you use it)
-2. Commit and push (or open a PR and merge).
+   - Bump zed editor: `npm run zed:publish`
+2. Commit and push (or open a PR and merge) to check that build succeeds
 3. Wait for **CI** to pass (test + build) on the branch you will tag.
 4. Tag the release and push tags:
    ```bash
