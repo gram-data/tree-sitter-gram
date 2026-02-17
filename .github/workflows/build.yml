@@ -1,5 +1,5 @@
-# Reusable workflow: build Wasm and Node prebuilds.
-# Used by CI (validate build on PR/push) and by publish (produce artifacts for npm).
+# Reusable workflow: build Wasm, Node prebuilds, and optionally Python sdist/wheels.
+# Used by CI (validate build on PR/push) and by publish (produce artifacts for npm and PyPI).
 name: Build binaries
 
 on:
@@ -10,6 +10,16 @@ on:
         required: false
         default: 2
         type: number
+      build_python:
+        description: Build Python sdist and wheels for PyPI
+        required: false
+        default: false
+        type: boolean
+      build_rust:
+        description: Validate Rust workspace (build and test) before crates publish
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   build_wasm:
@@ -63,3 +73,114 @@ jobs:
           path: prebuilds/**
           name: prebuilds-${{ matrix.os }}
           retention-days: ${{ inputs.artifact_retention_days }}
+
+  build_python_sdist:
+    name: Build Python sdist
+    if: ${{ inputs.build_python }}
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
+      - name: Install dependencies
+        run: |-
+          if jq -e "$JQ_SCRIPT" package.json >/dev/null; then
+            npm i --ignore-scripts --omit peer --omit optional
+          fi
+        env:
+          JQ_SCRIPT: >-
+            .dependencies + .devDependencies |
+            with_entries(select(
+              (.key | startswith("tree-sitter-"))
+              and (.key != "tree-sitter-cli")
+            )) | length > 0
+      - name: Regenerate parser
+        shell: bash
+        run: |
+          while read -r grammar_dir; do
+            grammar_dir="${grammar_dir%$'\r'}"
+            pushd "$grammar_dir"
+            tree-sitter generate
+            popd > /dev/null
+          done < <(jq -r '.grammars[].path // "."' tree-sitter.json)
+        env:
+          TREE_SITTER_ABI_VERSION: 15
+      - name: Install dependencies
+        run: pip install --upgrade pip build setuptools wheel
+      - name: Build sources
+        run: python -mbuild -n -s
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-sources
+          path: dist/*.tar.gz
+          retention-days: ${{ inputs.artifact_retention_days }}
+
+  build_python_wheels:
+    name: Build Python wheels on ${{ matrix.os }}
+    if: ${{ inputs.build_python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - windows-2025
+          - windows-11-arm
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
+          - macos-15
+          - macos-15-intel
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
+      - name: Install dependencies
+        shell: bash
+        run: |-
+          if jq -e "$JQ_SCRIPT" package.json >/dev/null; then
+            npm i --ignore-scripts --omit peer --omit optional
+          fi
+        env:
+          JQ_SCRIPT: >-
+            .dependencies + .devDependencies |
+            with_entries(select(
+              (.key | startswith("tree-sitter-"))
+              and (.key != "tree-sitter-cli")
+            )) | length > 0
+      - name: Regenerate parser
+        shell: bash
+        run: |
+          while read -r grammar_dir; do
+            grammar_dir="${grammar_dir%$'\r'}"
+            pushd "$grammar_dir"
+            tree-sitter generate
+            popd > /dev/null
+          done < <(jq -r '.grammars[].path // "."' tree-sitter.json)
+        env:
+          TREE_SITTER_ABI_VERSION: 15
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v3
+        with:
+          output-dir: dist
+        env:
+          CIBW_ARCHS: native
+      - uses: actions/upload-artifact@v4
+        with:
+          path: dist/*.whl
+          name: dist-wheels-${{ matrix.os }}
+          retention-days: ${{ inputs.artifact_retention_days }}
+
+  build_rust:
+    name: Build and test Rust
+    if: ${{ inputs.build_rust }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build release
+        run: cargo build --release
+      - name: Test
+        run: cargo test
