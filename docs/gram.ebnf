@@ -1,7 +1,7 @@
 (* ============================================================
    Gram Notation — EBNF Grammar
    Derived from: grammar.js (tree-sitter reference implementation)
-   Notation: W3C-style EBNF (not strict! but informative)
+   Notation: W3C-style EBNF (informative, not strict)
    Date: 2026-03-01
 
    Notation key:
@@ -21,12 +21,12 @@
 (* ------------------------------------------------------------
    1. DOCUMENT
    A gram document is an optional header record followed by
-   zero or more top-level patterns.
+   zero or more top-level patterns, then end-of-file.
    The leading record is a document header — metadata about the
    file rather than a graph element. Example: { kind: "schema" }.
    ------------------------------------------------------------ *)
 
-gram_pattern      = [ record ], { top_level_pattern } ;
+gram_pattern      = [ record ], { top_level_pattern }, EOF ;
 
 top_level_pattern = annotated_pattern
                   | subject_pattern
@@ -57,7 +57,7 @@ subject_pattern          = "[", [ subject ], [ "|", subject_pattern_elements ], 
 
 subject_pattern_elements = subject_pattern_element, { ",", subject_pattern_element } ;
 
-subject_pattern_element  = subject_pattern   (* inline definition *)
+subject_pattern_element  = subject_pattern    (* inline definition *)
                          | path_pattern       (* inline path *)
                          | pattern_reference  (* reference by identity *)
                          ;
@@ -84,7 +84,8 @@ relationship_pattern  = node_pattern, relationship_kind, path_pattern ;
    ------------------------------------------------------------ *)
 
 (* Annotations may combine an optional identified annotation
-   (@@) with one or more property annotations (@). *)
+   (@@) with one or more property annotations (@), or may consist
+   only of property annotations. *)
 
 annotations = ( identified_annotation, { property_annotation } )
             | property_annotation, { property_annotation }
@@ -281,7 +282,7 @@ range = numeric_literal, "..",  numeric_literal   (* bounded:       lower..upper
    Four quoting styles, all producing the same string value type.
 
    Escape sequences supported in single, double, and backtick strings:
-     \\  \"  \'  \`  \b  \f  \n  \r  \t
+     \\  \"  \'  \`  \b  \f  \n  \r  \t  \/
 
    Fenced strings (triple-backtick) are multiline; content begins
    after the newline that follows the opening ```. *)
@@ -292,9 +293,9 @@ string_literal       = single_quoted_string
                      | fenced_string
                      ;
 
-single_quoted_string = "'",   /(\\'|[^'\\\n])*/,    "'"   ;
-double_quoted_string = '"',   /(\\"|[^"\\\n])*/,    '"'   ;
-backtick_string      = "`",   /(\\'|[^`\\\n])*/,    "`"   ;
+single_quoted_string = "'",   /(\\['bfnrt/\\]|[^'\\\n])*/,  "'"   ;
+double_quoted_string = '"',   /(\\["bfnrt/\\]|[^"\\\n])*/,  '"'   ;
+backtick_string      = "`",   /(\\[`bfnrt/\\]|[^`\\\n])*/,  "`"   ;
 fenced_string        = "```", "\n", [ /([^`]|`[^`]|``[^`])+/ ], "```" ;
 
 
@@ -308,7 +309,7 @@ fenced_string        = "```", "\n", [ /([^`]|`[^`]|``[^`])+/ ], "```" ;
      <p>Hello</p>
      ``` *)
 
-tagged_string = symbol, "`",   /([^`\\\n])*/,                          "`"
+tagged_string = symbol, "`",   /(\\[`bfnrt/\\]|[^`\\\n])*/,            "`"
               | "```", symbol, "\n", [ /([^`]|`[^`]|``[^`])+/ ], "```"
               ;
 
@@ -316,7 +317,7 @@ tagged_string = symbol, "`",   /([^`\\\n])*/,                          "`"
 (* ------------------------------------------------------------
    10. IDENTIFIERS AND SYMBOLS
 
-   identifier allows symbols, backtick-quoted names, or integers as
+   identifier allows symbols, quoted names, or integers as
    pattern identities, enabling quoted or numeric node IDs.
 
    symbol starts with a letter or underscore; subsequent characters
@@ -326,20 +327,20 @@ tagged_string = symbol, "`",   /([^`\\\n])*/,                          "`"
    anonymous scalar values (e.g. ["hello"] stores "hello" under "_").
    It is a valid symbol but is conventionally reserved. *)
 
-quoted_name  = backtick_string ;
+quoted_name         = backtick_string ;
 
-double_quoted_name = double_quoted_string ;
+double_quoted_name  = double_quoted_string ;
 
-key_name    = symbol | quoted_name | double_quoted_name ;
+key_name            = symbol | quoted_name | double_quoted_name ;
 
-identifier = symbol | quoted_name | integer ;
+identifier          = symbol | quoted_name | integer ;
 
-symbol     = /[a-zA-Z_][0-9a-zA-Z_.\-@]*/ ;
+symbol              = /[a-zA-Z_][0-9a-zA-Z_.\-@]*/ ;
 
 
 (* ------------------------------------------------------------
-   11. WHITESPACE AND COMMENTS
-   Both are ignored everywhere (grammar extras).
+   11. WHITESPACE, COMMENTS, AND EOF
+   Comments and whitespace are ignored everywhere (grammar extras).
    They may appear freely between any two tokens.
    Exception: fenced string bodies begin after the newline
    following the opening ```, where the newline is significant. *)
@@ -347,3 +348,5 @@ symbol     = /[a-zA-Z_][0-9a-zA-Z_.\-@]*/ ;
 comment    = "//", /.*/ ;     (* line comment to end of line *)
 
 whitespace = /\s+/ ;          (* spaces, tabs, newlines — all equivalent *)
+
+EOF        = ? end of input ? ;

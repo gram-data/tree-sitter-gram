@@ -1,0 +1,472 @@
+/* ============================================================
+   Gram Notation — EBNF Grammar
+   Derived from: grammar.js (tree-sitter reference implementation)
+   Converted from: gram.g4 (ANTLR4)
+   Date: 2026-03-01
+
+   Notation:
+     ::=          definition
+     |            alternation
+     ( ... )      grouping
+     x?           optional (zero or one)
+     x*           repetition (zero or more)
+     x+           repetition (one or more)
+     'x'          literal terminal
+     [x-y]        character class
+     #xN          Unicode code point (hex)
+     UPPER_CASE   lexer token (defined after <?TOKENS?>)
+     lower_case   parser rule
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   Document
+
+   A gram document is an optional header record followed by zero
+   or more top-level patterns, terminated by end-of-file.
+
+   The leading record is a document header — metadata about the
+   file, not a graph element. Example: { kind: "schema" }
+   ------------------------------------------------------------ */
+
+gramPattern
+         ::= record? topLevelPattern* EOF
+
+/* A top-level pattern is any of the four primary constructs.
+   annotatedPattern must be listed first since it begins with
+   '@' or '@@' which are not valid starts for the other forms. */
+topLevelPattern
+         ::= annotatedPattern
+           | subjectPattern
+           | nodePattern
+           | relationshipPattern
+
+
+/* ------------------------------------------------------------
+   Annotated Pattern
+
+   One or more annotations wrap a subject or path pattern.
+   All @ annotations and the optional @@ annotation merge into
+   a single wrapper subject:
+     - @@ contributes identity and labels (at most one permitted)
+     - @  forms contribute properties (keys must be unique)
+
+   Result: a pattern with one element (the wrapped pattern) and
+   a subject carrying the merged annotation data.
+   ------------------------------------------------------------ */
+
+annotatedPattern
+         ::= annotations ( subjectPattern | pathPattern )
+
+/* An annotation stack begins with either an identified annotation
+   (@@) or a property annotation (@), followed by zero or more
+   additional property annotations. At most one @@ is permitted,
+   enforced by its position as an alternative to the first @. */
+annotations
+         ::= ( identifiedAnnotation | propertyAnnotation ) propertyAnnotation*
+
+/* @key(value) — contributes one property to the merged wrapper record.
+   The value may be any gram value type including a map {k: v}. */
+propertyAnnotation
+         ::= '@' SYMBOL '(' value ')'
+
+/* @@id:Label — contributes identity and labels to the merged wrapper.
+   May be combined with property annotations which merge into the
+   same wrapper subject. */
+identifiedAnnotation
+         ::= '@@' ( identifier labels? | labels )
+
+
+/* ------------------------------------------------------------
+   Subject Pattern — square-bracket / pattern notation
+
+   '[' always defines a new pattern.
+   A bare identifier inside elements is a reference to a pattern
+   defined elsewhere in the file (forward references are permitted).
+   The '|' separates the subject (identity/labels/properties)
+   from the pattern's elements.
+   ------------------------------------------------------------ */
+
+subjectPattern
+         ::= '[' subject? ( '|' subjectPatternElements )? ']'
+
+subjectPatternElements
+         ::= subjectPatternElement ( ',' subjectPatternElement )*
+
+/* An element may be an inline definition, an inline path, or
+   a bare reference to a previously (or forward-) defined pattern. */
+subjectPatternElement
+         ::= subjectPattern      /* inline definition */
+           | pathPattern         /* inline path */
+           | patternReference    /* reference by identity */
+
+patternReference
+         ::= identifier
+
+
+/* ------------------------------------------------------------
+   Path Pattern — parenthesis / path notation
+
+   Nodes in path notation are always atomic (no inline elements).
+
+   relationshipPattern is right-recursive:
+     (a)-[r1]->(b)-[r2]->(c)
+     parses as: (a)-[r1]->( (b)-[r2]->(c) )
+
+   A path with a single relationship resolves to that relationship.
+   A path with multiple relationships is an anonymous walk — a
+   connected sequence with no identity of its own.
+
+   When lowering to Pattern<V>, each relationship becomes an
+   independent two-element pattern; walk structure is not preserved.
+   ------------------------------------------------------------ */
+
+pathPattern
+         ::= relationshipPattern
+           | nodePattern
+
+nodePattern
+         ::= '(' subject? ')'
+
+relationshipPattern
+         ::= nodePattern relationshipKind pathPattern
+
+
+/* ------------------------------------------------------------
+   Subject
+
+   The value portion of a pattern: identity, labels, properties.
+   All components are individually optional but at least one
+   must be present (the outer subject? handles the fully-absent case).
+   ------------------------------------------------------------ */
+
+/* Condensed form: identifier and labels may appear in either order
+   relative to each other, but both precede the optional record. */
+subject  ::= ( identifier labels? | labels ) record?
+           | record
+
+
+/* ------------------------------------------------------------
+   Labels
+
+   ':' and '::' are semantically equivalent — purely stylistic.
+   By convention '::' suggests schema or ontology intent.
+   Labels are unordered and stored as a set.
+   ------------------------------------------------------------ */
+
+labels   ::= label+
+
+label    ::= labelSeparator ( SYMBOL | quotedName )
+
+labelSeparator
+         ::= ':'
+           | '::'
+
+
+/* ------------------------------------------------------------
+   Record and Map
+
+   The property system has two bounded levels — intentionally
+   deeper than Cypher but shallower than JSON:
+
+     depth 0  scalar          primitives only
+     depth 1  array, map      scalar values only
+     depth 2  record          any value, including array and map
+     structural               promote to node/relationship instead
+
+   record and map share surface syntax { key: value } but are
+   distinguished by context:
+     record  — subject position (node, relationship, or pattern)
+     map     — value position (as a property value inside a record)
+
+   '::' is permitted on record properties but not map entries,
+   providing a visual cue for the distinction.
+   ------------------------------------------------------------ */
+
+record   ::= '{' ( recordProperty ( ',' recordProperty )* )? '}'
+
+/* Record property values may be any value type including map and array. */
+recordProperty
+         ::= keyName labelSeparator value
+
+/* Map entries are limited to scalar values — no nested maps or arrays. */
+map      ::= '{' ( mapEntry ( ',' mapEntry )* )? '}'
+
+mapEntry ::= keyName ':' scalarValue
+
+
+/* ------------------------------------------------------------
+   Relationship Kinds
+
+   All three arrow families (-, =, ~) are semantically equivalent.
+   Choice is stylistic: '-' / '->' for data graphs;
+   '=' / '=>' and '~' / '~>' suggest schema/ontology definitions.
+
+   Directionality encodes element order in Pattern<V>:
+     (a)-[r]->(b)   ->  [r | a, b]   right arrow: left-to-right
+     (a)<-[r]-(b)   ->  [r | b, a]   left arrow: reversed
+     (a)-[r]-(b)    ->  [r | a, b]   undirected: falls through to right
+     (a)<-[r]->(b)  ->  [r | a, b]   bidirectional: falls through to right
+
+   Arrow kind is NOT preserved once lowered to Pattern<V>. Consumers
+   that need to distinguish arrow kinds must retain the AST node.
+   ------------------------------------------------------------ */
+
+relationshipKind
+         ::= undirectedArrow
+           | rightArrow
+           | leftArrow
+           | bidirectionalArrow
+
+/* Undirected: same delimiter on both sides, no arrowhead. */
+undirectedArrow
+         ::= '-' ( '[' subject? ']' )? '-'
+           | '=' ( '[' subject? ']' )? '='
+           | '~' ( '[' subject? ']' )? '~'
+
+/* Right arrow: element order is [left-node, right-node]. */
+rightArrow
+         ::= '-' ( '[' subject? ']' )? '->'
+           | '=' ( '[' subject? ']' )? '=>'
+           | '~' ( '[' subject? ']' )? '~>'
+
+/* Left arrow: element order is [right-node, left-node] (reversed). */
+leftArrow
+         ::= '<-' ( '[' subject? ']' )? '-'
+           | '<=' ( '[' subject? ']' )? '='
+           | '<~' ( '[' subject? ']' )? '~'
+
+/* Bidirectional: falls through to right-facing element order. */
+bidirectionalArrow
+         ::= '<-' ( '[' subject? ']' )? '->'
+           | '<=' ( '[' subject? ']' )? '=>'
+           | '<~' ( '[' subject? ']' )? '~>'
+
+
+/* ------------------------------------------------------------
+   Values
+
+   value      — full set; used in record properties and annotations
+   scalarValue — excludes array and map; used inside array and map
+                 to enforce the two-level depth limit
+   ------------------------------------------------------------ */
+
+value    ::= range
+           | numericLiteral
+           | booleanLiteral
+           | taggedString
+           | SYMBOL
+           | stringLiteral
+           | array
+           | map
+
+scalarValue
+         ::= range
+           | numericLiteral
+           | booleanLiteral
+           | taggedString
+           | SYMBOL
+           | stringLiteral
+
+/* array is non-empty: [] parses as an empty subjectPattern, not an array.
+   { tags: [] } is therefore a parse error. */
+array    ::= '[' scalarValue ( ',' scalarValue )* ']'
+
+
+/* ------------------------------------------------------------
+   Identifiers
+
+   An identifier may be a symbol, string literal, or integer,
+   allowing quoted or numeric node identities:
+     [a]        symbol identifier
+     ["node-1"] string identifier
+     [42]       integer identifier
+
+   The reserved property key '_' stores anonymous scalar values
+   (e.g. ["hello"] stores "hello" under '_'). It is a valid
+   symbol but conventionally reserved.
+   ------------------------------------------------------------ */
+
+identifier
+         ::= SYMBOL
+           | quotedName
+           | INTEGER
+
+/* quotedName — backtick-delimited string used as an identifier
+   or label value. Distinct from string_literal which includes
+   single-quoted, double-quoted, and fenced forms. */
+quotedName
+         ::= BACKTICK_STRING
+
+/* keyName — property key in records and maps.
+   Wider than identifier: also permits double-quoted strings. */
+keyName  ::= SYMBOL
+           | quotedName
+           | DOUBLE_QUOTED_STRING
+
+
+/* ------------------------------------------------------------
+   Boolean and Numeric
+   ------------------------------------------------------------ */
+
+booleanLiteral
+         ::= 'true'
+           | 'false'
+
+numericLiteral
+         ::= INTEGER
+           | DECIMAL
+           | HEXADECIMAL
+           | OCTAL
+           | MEASUREMENT
+
+/* Range — three forms: bounded, lower-bounded, upper-bounded. */
+range    ::= numericLiteral ( '..' numericLiteral | '...' )
+           | '...' numericLiteral
+
+
+/* ------------------------------------------------------------
+   String Literals
+
+   Four quoting styles, all producing the same string value type.
+
+   Escape sequences (single, double, backtick forms):
+     \\  \'  \"  \`  \b  \f  \n  \r  \t  \/
+
+   Fenced strings are multiline; content begins after the newline
+   that follows the opening ```. The #xA below is the newline
+   character (Unicode U+000A).
+   ------------------------------------------------------------ */
+
+stringLiteral
+         ::= SINGLE_QUOTED_STRING
+           | DOUBLE_QUOTED_STRING
+           | BACKTICK_STRING
+           | FENCED_STRING
+
+
+/* ------------------------------------------------------------
+   Tagged String
+
+   Attaches a type tag (a SYMBOL) to a string value.
+   Two forms: inline backtick and fenced multiline.
+
+   Examples:
+     url`https://example.com`
+     date`2024-01-15`
+     ```html
+     <p>Hello</p>
+     ```
+   ------------------------------------------------------------ */
+
+taggedString
+         ::= TAGGED_BACKTICK_STRING
+           | TAGGED_FENCED_STRING
+
+
+/* ------------------------------------------------------------
+   Whitespace and Comments
+
+   Both are ignored by the parser (ws: definition).
+   They may appear freely between any two tokens.
+   Exception: the newline immediately after the opening ``` of a
+   fenced string is significant and is consumed by FENCED_STRING /
+   TAGGED_FENCED_STRING.
+   ------------------------------------------------------------ */
+
+_        ::= COMMENT
+           | WS
+          /* ws: definition */
+
+
+/* ============================================================
+   TOKENS
+   ============================================================ */
+
+<?TOKENS?>
+
+/* Integers: optional leading minus, no leading zeros except bare 0. */
+INTEGER  ::= '-'? ( '0' | [1-9] [0-9]* )
+
+/* Decimals: same prefix as integer with mandatory fractional part. */
+DECIMAL  ::= '-'? ( '0' | [1-9] [0-9]* ) '.' [0-9]+
+
+/* Hexadecimal: 0x prefix, one or more hex digits. */
+HEXADECIMAL
+         ::= '0x' [0-9a-fA-F]+
+
+/* Octal: leading zero followed by one or more octal digits. */
+OCTAL    ::= '0' [0-7]+
+
+/* Measurement: integer prefix immediately followed by alphabetic unit.
+   No space between number and unit. Examples: 5m, 10kg, 2.5s
+   Any alphabetic suffix is accepted; unit validation is left to consumers. */
+MEASUREMENT
+         ::= '-'? ( '0' | [1-9] [0-9]* ) [a-zA-Z]+
+
+/* Escape sequence: backslash followed by one of ' b f n r t / \ */
+ESCAPE         ::= #x5C ( "'" | "b" | "f" | "n" | "r" | "t" | #x2F | #x5C )
+
+/* Safe characters per string type — each excludes its delimiter and backslash.
+   Ranges: #x20-#x26 (printable below quote), #x28-#x5B (above quote to before backslash),
+   #x5D-#xFFFF (above backslash, end excludes #x60 backtick for backtick strings). */
+SQ_SAFE_CHAR   ::= [#x20-#x26#x28-#x5B#x5D-#xFFFF]
+DQ_SAFE_CHAR   ::= [#x20-#x21#x23-#x5B#x5D-#xFFFF]
+BT_SAFE_CHAR   ::= [#x20-#x5B#x5D-#x5F#x61-#xFFFF]
+
+SQ_CONTENT     ::= ( ESCAPE | SQ_SAFE_CHAR )*
+DQ_CONTENT     ::= ( ESCAPE | DQ_SAFE_CHAR )*
+BT_CONTENT     ::= ( ESCAPE | BT_SAFE_CHAR )*
+
+/* Single-quoted string: backslash-escaped char or any non-quote,
+   non-backslash, non-newline character. */
+SINGLE_QUOTED_STRING
+         ::= "'" SQ_CONTENT "'"
+
+/* Double-quoted string: same structure with double-quote delimiter. */
+DOUBLE_QUOTED_STRING
+         ::= '"' DQ_CONTENT '"'
+
+/* Backtick string: same structure with backtick delimiter. */
+BACKTICK_STRING
+         ::= '`' BT_CONTENT '`'
+
+/* Fenced string: triple-backtick delimiters with mandatory newline
+   after opening fence. Content may span multiple lines. */
+FENCED_STRING
+         ::= '```' #xA FENCED_CONTENT? '```'
+
+/* Fenced content: any sequence that does not contain ```.
+   Allows up to two consecutive backticks as long as the third
+   character is not a backtick. */
+FENCED_CONTENT
+         ::= ( ( '`' | '``' )? [^`] )+
+
+/* Tagged backtick string: SYMBOL_FRAG immediately followed by
+   a backtick-delimited string (no space between tag and opening backtick).
+   Must be matched before plain BACKTICK_STRING and SYMBOL. */
+TAGGED_BACKTICK_STRING
+         ::= SYMBOL_FRAG '`' BT_CONTENT '`'
+
+/* Tagged fenced string: triple-backtick opening with SYMBOL_FRAG
+   on the same line as the fence, before the mandatory newline. */
+TAGGED_FENCED_STRING
+         ::= '```' SYMBOL_FRAG #xA FENCED_CONTENT? '```'
+
+/* Symbol: starts with letter or underscore; subsequent characters
+   may include digits, '.', '-' (#x2D), and '@'.
+   Hyphens are legal in symbol names: reading-club is valid. */
+SYMBOL   ::= SYMBOL_FRAG
+
+SYMBOL_FRAG
+         ::= [a-zA-Z_] [0-9a-zA-Z_.@#x2D]*
+
+/* Line comment: '//' to end of line. */
+COMMENT  ::= '//' [^#xd#xa]*
+
+/* Whitespace: spaces, tabs, carriage returns, and newlines.
+   #x9 = tab, #xd = carriage return, #xa = newline. */
+WS       ::= [ #x9#xd#xa]+
+
+/* End of file. */
+EOF      ::= $
