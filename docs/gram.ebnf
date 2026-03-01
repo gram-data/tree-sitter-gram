@@ -1,7 +1,7 @@
 (* ============================================================
    Gram Notation — EBNF Grammar
    Derived from: grammar.js (tree-sitter reference implementation)
-   Notation: W3C-style EBNF
+   Notation: W3C-style EBNF (not strict! but informative)
    Date: 2026-03-01
 
    Notation key:
