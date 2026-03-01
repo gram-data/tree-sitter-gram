@@ -1,0 +1,343 @@
+(* ============================================================
+   Gram Notation — EBNF Grammar
+   Derived from: grammar.js (tree-sitter reference implementation)
+   Notation: W3C-style EBNF
+   Date: 2026-03-01
+
+   Notation key:
+     =          definition
+     ;          end of rule
+     |          alternation
+     ,          concatenation
+     [ ... ]    optional (zero or one)
+     { ... }    repetition (zero or more)
+     ( ... )    grouping
+     "..."      literal terminal
+     /.../      regular expression terminal
+     (*...*)    comment
+   ============================================================ *)
+
+
+(* ------------------------------------------------------------
+   1. DOCUMENT
+   A gram document is an optional header record followed by
+   zero or more top-level patterns.
+   The leading record is a document header — metadata about the
+   file rather than a graph element. Example: { kind: "schema" }.
+   ------------------------------------------------------------ *)
+
+gram_pattern      = [ record ], { top_level_pattern } ;
+
+top_level_pattern = annotated_pattern
+                  | subject_pattern
+                  | node_pattern
+                  | relationship_pattern
+                  ;
+
+
+(* ------------------------------------------------------------
+   2. PATTERNS
+   ------------------------------------------------------------ *)
+
+(* 2.1 Annotated Pattern
+   One or more annotations wrap a subject or path pattern.
+   Produces a Pattern<V> with one element (the wrapped pattern)
+   and a subject carrying the annotation data. *)
+
+annotated_pattern = annotations, ( subject_pattern | path_pattern ) ;
+
+
+(* 2.2 Subject Pattern — square-bracket / pattern notation
+   "[" always defines a new pattern.
+   A bare identifier inside elements is a reference to an
+   existing pattern (defined earlier or via forward reference).
+   The "|" separator divides the subject (value) from its elements. *)
+
+subject_pattern          = "[", [ subject ], [ "|", subject_pattern_elements ], "]" ;
+
+subject_pattern_elements = subject_pattern_element, { ",", subject_pattern_element } ;
+
+subject_pattern_element  = subject_pattern   (* inline definition *)
+                         | path_pattern       (* inline path *)
+                         | pattern_reference  (* reference by identity *)
+                         ;
+
+pattern_reference        = identifier ;
+
+
+(* 2.3 Path Pattern — parenthesis / path notation
+   Nodes are always atomic in path notation (no inline elements).
+   relationship_pattern is right-recursive: (a)-[r1]->(b)-[r2]->(c)
+   parses as (a)-[r1]->( (b)-[r2]->(c) ).
+   When lowering to Pattern<V>, each relationship becomes an
+   independent two-element pattern; walk structure is not preserved. *)
+
+path_pattern          = relationship_pattern | node_pattern ;
+
+node_pattern          = "(", [ subject ], ")" ;
+
+relationship_pattern  = node_pattern, relationship_kind, path_pattern ;
+
+
+(* ------------------------------------------------------------
+   3. ANNOTATIONS
+   ------------------------------------------------------------ *)
+
+(* Annotations may combine an optional identified annotation
+   (@@) with one or more property annotations (@). *)
+
+annotations = ( identified_annotation, { property_annotation } )
+            | property_annotation, { property_annotation }
+            ;
+
+(* @key(value) — attaches a single key/value metadata pair *)
+property_annotation    = "@", symbol, "(", value, ")" ;
+
+(* @@id:Label — gives the annotation wrapper its own identity
+   and/or labels, for schema/ontology contexts where the
+   annotation itself must be a typed, referenceable entity. *)
+identified_annotation  = "@@", ( identifier
+                                | labels
+                                | identifier, labels
+                                ) ;
+
+
+(* ------------------------------------------------------------
+   4. SUBJECT
+   The value portion of a pattern: identity, labels, properties.
+   All three components are individually optional but at least
+   one must be present (the outer [ subject ] handles fully absent). *)
+
+subject = identifier
+        | labels
+        | record
+        | identifier, labels
+        | identifier, record
+        | labels,     record
+        | identifier, labels, record
+        ;
+
+
+(* ------------------------------------------------------------
+   5. LABELS
+   ":" and "::" are semantically equivalent — purely stylistic.
+   By convention "::" suggests schema or ontology intent
+   (e.g. type assertions), but the parser assigns no distinct meaning. *)
+
+labels          = label, { label } ;
+
+label           = label_separator, symbol ;
+
+label_separator = ":" | "::" ;
+
+
+(* ------------------------------------------------------------
+   6. RECORD AND MAP
+   The property system has two bounded levels — intentionally
+   deeper than Cypher but shallower than JSON.
+
+   Depth budget:
+     0  scalar      — primitives only
+     1  array, map  — scalar values only
+     2  record      — any value, including array and map
+     structural     — promote to node/relationship/pattern instead
+
+   record and map share surface syntax { key: value } but are
+   distinguished by context:
+     record  — subject position (attached to node, relationship, pattern)
+     map     — value position (as a property value inside record_property)
+
+   The double-colon separator "::" is permitted on record_property
+   but not map_entry, providing a visual cue for the distinction. *)
+
+record          = "{", [ record_property, { ",", record_property } ], "}" ;
+
+record_property = identifier, label_separator, value ;
+                  (* label_separator allows ":" or "::" *)
+
+map             = "{", [ map_entry, { ",", map_entry } ], "}" ;
+
+map_entry       = identifier, ":", scalar_value ;
+                  (* map entries are always ":" only, values always scalar *)
+
+
+(* ------------------------------------------------------------
+   7. RELATIONSHIP KINDS
+   All three arrow families (-, =, ~) are semantically equivalent.
+   Choice is stylistic: "-"/"->" for data graphs;
+   "="/"=>" and "~"/"~>" suggest schema/ontology definitions.
+
+   Directionality encodes element order in Pattern<V>:
+     (a)-[r]->(b)   →  [r | a, b]   right arrow: left-to-right
+     (a)<-[r]-(b)   →  [r | b, a]   left arrow: reversed
+     (a)-[r]-(b)    →  [r | a, b]   undirected: falls through to right-facing
+     (a)<-[r]->(b)  →  [r | a, b]   bidirectional: falls through to right-facing
+
+   Once lowered to Pattern<V>, arrow kind is not preserved.
+   Semantic distinction between relationship types is best expressed
+   through labels and schema conventions rather than arrow choice. *)
+
+relationship_kind   = undirected_arrow
+                    | right_arrow
+                    | left_arrow
+                    | bidirectional_arrow
+                    ;
+
+undirected_arrow    = "-",  [ "[", [ subject ], "]" ], "-"
+                    | "=",  [ "[", [ subject ], "]" ], "="
+                    | "~",  [ "[", [ subject ], "]" ], "~"
+                    ;
+
+right_arrow         = "-",  [ "[", [ subject ], "]" ], "->"
+                    | "=",  [ "[", [ subject ], "]" ], "=>"
+                    | "~",  [ "[", [ subject ], "]" ], "~>"
+                    ;
+
+left_arrow          = "<-", [ "[", [ subject ], "]" ], "-"
+                    | "<=", [ "[", [ subject ], "]" ], "="
+                    | "<~", [ "[", [ subject ], "]" ], "~"
+                    ;
+
+bidirectional_arrow = "<-", [ "[", [ subject ], "]" ], "->"
+                    | "<=", [ "[", [ subject ], "]" ], "=>"
+                    | "<~", [ "[", [ subject ], "]" ], "~>"
+                    ;
+
+
+(* ------------------------------------------------------------
+   8. VALUES
+   value includes all types; scalar_value excludes array and map.
+   scalar_value is used inside array and map to bound nesting depth. *)
+
+value        = range
+             | numeric_literal
+             | boolean_literal
+             | tagged_string
+             | symbol
+             | string_literal
+             | array
+             | map
+             ;
+
+scalar_value = range
+             | numeric_literal
+             | boolean_literal
+             | tagged_string
+             | symbol
+             | string_literal
+             ;
+
+(* array is a non-empty ordered sequence of scalars.
+   Note: [] is not a valid array literal — it parses as an
+   empty subject_pattern. { tags: [] } is therefore a parse error. *)
+array        = "[", scalar_value, { ",", scalar_value }, "]" ;
+
+
+(* ------------------------------------------------------------
+   9. LITERALS
+   ------------------------------------------------------------ *)
+
+(* 9.1 Boolean *)
+
+boolean_literal = "true" | "false" ;
+
+
+(* 9.2 Numeric *)
+
+numeric_literal = integer
+                | decimal
+                | hexadecimal
+                | octal
+                | measurement
+                ;
+
+integer         = /\-?(0|[1-9]\d*)/ ;
+
+decimal         = /\-?(0|[1-9]\d*)\.\d+/ ;
+
+hexadecimal     = /0x[0-9a-fA-F]+/ ;
+
+octal           = /0[0-7]+/ ;
+
+(* Unit suffix immediately follows digits with no space.
+   Examples: 5m, 10kg, 2.5s
+   Note: the regex is intentionally permissive — any alpha suffix
+   is accepted; unit validation is left to consumers. *)
+measurement     = /\-?(0|[1-9]\d*)([a-zA-Z]+)/ ;
+
+
+(* 9.3 Range
+   Three forms: bounded, lower-bounded, upper-bounded.
+   Range has higher precedence than other numeric forms
+   in ambiguous contexts (right-associative). *)
+
+range = numeric_literal, "..",  numeric_literal   (* bounded:       lower..upper *)
+      | numeric_literal, "..."                    (* lower-bounded: lower...     *)
+      | "...",           numeric_literal          (* upper-bounded: ...upper     *)
+      ;
+
+
+(* 9.4 String Literals
+   Four quoting styles, all producing the same string value type.
+
+   Escape sequences supported in single, double, and backtick strings:
+     \\  \"  \'  \`  \b  \f  \n  \r  \t
+
+   Fenced strings (triple-backtick) are multiline; content begins
+   after the newline that follows the opening ```. *)
+
+string_literal       = single_quoted_string
+                     | double_quoted_string
+                     | backtick_string
+                     | fenced_string
+                     ;
+
+single_quoted_string = "'",   /(\\'|[^'\\\n])*/,    "'"   ;
+double_quoted_string = '"',   /(\\"|[^"\\\n])*/,    '"'   ;
+backtick_string      = "`",   /(\\'|[^`\\\n])*/,    "`"   ;
+fenced_string        = "```", "\n", [ /([^`]|`[^`]|``[^`])+/ ], "```" ;
+
+
+(* 9.5 Tagged String
+   Attaches a type tag (a symbol) to a string value.
+   Two forms: inline backtick and fenced multiline.
+   Examples:
+     url`https://example.com`
+     date`2024-01-15`
+     ```html
+     <p>Hello</p>
+     ``` *)
+
+tagged_string = symbol, "`",   /([^`\\\n])*/,                          "`"
+              | "```", symbol, "\n", [ /([^`]|`[^`]|``[^`])+/ ], "```"
+              ;
+
+
+(* ------------------------------------------------------------
+   10. IDENTIFIERS AND SYMBOLS
+
+   identifier allows symbols, string literals, or integers as
+   pattern identities, enabling quoted or numeric node IDs.
+
+   symbol starts with a letter or underscore; subsequent characters
+   may include digits, ".", "-", and "@".
+
+   The reserved property key "_" is used internally to store
+   anonymous scalar values (e.g. ["hello"] stores "hello" under "_").
+   It is a valid symbol but is conventionally reserved. *)
+
+identifier = symbol | string_literal | integer ;
+
+symbol     = /[a-zA-Z_][0-9a-zA-Z_.\-@]*/ ;
+
+
+(* ------------------------------------------------------------
+   11. WHITESPACE AND COMMENTS
+   Both are ignored everywhere (grammar extras).
+   They may appear freely between any two tokens.
+   Exception: fenced string bodies begin after the newline
+   following the opening ```, where the newline is significant. *)
+
+comment    = "//", /.*/ ;     (* line comment to end of line *)
+
+whitespace = /\s+/ ;          (* spaces, tabs, newlines — all equivalent *)
