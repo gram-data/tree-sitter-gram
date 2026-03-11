@@ -1,0 +1,53 @@
+// Graph schema described in gram notation.
+// Gram is descriptive and informative, not prescriptive and normative.
+// The semantics are up to implementation, often interpreting the
+// explicit syntax along with in-line documentation.
+//
+// This file is an informative example, not part of the project schema.
+//
+// Typographic conventions:
+// - `::` double-colon for label prefixes and property name/value separator
+// - `(::A)` for a labeled node
+// - (::A {k:: ts`string`}) for a labeled node with a property value signature
+// - `==>` fat-arrows for unqualified relationships
+// - `=[::R]=>` fat-arrows for labeled relationships
+// - tagged-literal strings to encapsulate type signatures
+// - "ts" as a tag for strings to indicate TypeScript-style types
+//
+// Property type conventions:
+// - use tagged-literal strings
+// - use tags to denote the internal syntax of the string
+// - for example, `ts` to indicate TypeScript, or `zod` to indicate zod-style, or `sql` to indicate SQL DDL
+// - supplement with textual information in a comment to describe the intent
+
+// Always include a header record indicating the file kind.
+{
+    kind: "schema"  // uses single-colon and plain string literal to indicate this is metadata
+}
+
+// Example node type definition
+(::A                        // Label-set for this type. Here, the single label "A"
+  {                         // Property record signature begins
+    k:: ts`string`,         // A property type definition. The property named "k" has a value type defined as a TypeScript `string`
+    ko:: ts`string?`,       // An optional property, as indicated by TypeScript
+    id:: ts`number`,        // Must be unique. Use comments to further qualify what can't be described in the value type
+    id2:: sql`int NOT NULL UNIQUE` // Or use a language like SQL DDL that is more specific
+  }                         // End of property record signature
+)                           // End of node type definition
+
+// A node type with multiple labels, where all labels must be present but extra labels are allowed
+(::A::B { k2:: ts`string`})
+
+// Example relationship type definition.
+// References start/end node by minimum label-set (other labels can exist, but these are required)
+(::A) =[::DEPENDS_ON        // Label-set for the relationship, anchored on a starting node type identified by its label-set
+    {                       // Property record signature begins
+        m:: ts`number`,     // Property type definition using TypeScript
+    }
+]=> (::B)
+
+// Another relationship using `DEPENDS_ON` but with different endpoints
+(::B) =[::DEPENDS_ON]=> (::C)
+
+// Relationships can also have the same start/end, forming a self-loop
+(::C) =[::DEPENDS_ON]=> (::C)

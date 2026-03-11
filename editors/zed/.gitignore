@@ -1,2 +1,2 @@
-# this is created by scripts/prepare-zed-extension.sh
+# Populated by Zed when loading the extension (grammar clone). Do not commit.
 grammars/

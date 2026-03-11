@@ -314,7 +314,7 @@ Supported escape sequences in single, double, and backtick strings: `\\`, `\'`, 
 
 ### 9.5 Tagged String
 
-A tagged string attaches a type tag (a `symbol`) to a string value, expressed in two forms:
+A tagged string attaches a type tag (a `symbol`) to a string value, expressed in two forms. See [Tagged strings and injections](tagged-strings-and-injections.md) for well-known tags, language injection, and the `::` schema convention.
 
 ```ebnf
 tagged_string = symbol, "`", /([^`\\\n])*/, "`"
