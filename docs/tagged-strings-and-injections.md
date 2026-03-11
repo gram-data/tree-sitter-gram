@@ -67,3 +67,10 @@ Here, `name`, `count`, and `bio` are property names whose **value types** are de
 
 - **Tags:** Arbitrary; no need to enumerate every tag in the grammar. Injection uses the tag symbol; a few well-known tags are mapped in `injections.scm`; the rest use the tag text as the language name or are mapped by the editor.
 - **Schema:** Use `::` for type/schema properties and tagged strings (`ts`, `SQL`, etc.) for the type description. The grammar stays generic; schema support is by convention and downstream tooling.
+
+---
+
+## See also
+
+- [Gram Notation Reference](gram-reference.md) — value types and `Value::TaggedString` in the data model
+- [Gram EBNF](gram-ebnf.md) — formal `tagged_string` syntax (§9.5)

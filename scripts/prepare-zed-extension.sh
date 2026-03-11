@@ -23,6 +23,9 @@ if ! command -v tree-sitter &> /dev/null; then
     exit 1
 fi
 
+# Configure repository mode (dev|pub) — used for sync and for extension.toml
+ZED_REPO_MODE="${ZED_REPO_MODE:-dev}"
+
 # Generate the latest parser
 echo "📦 Regenerating parser..."
 cd "$PROJECT_ROOT"
@@ -43,7 +46,17 @@ if [ ! -d "$QUERIES_SRC" ] || [ ! -f "$QUERIES_SRC/highlights.scm" ]; then
 fi
 
 mkdir -p "$QUERIES_DST"
+rm -f "$QUERIES_DST"/*.scm
 cp "$QUERIES_SRC"/*.scm "$QUERIES_DST"/
+
+# In dev mode, restore symlinks so the repo keeps a single source of truth (queries/)
+if [ "$ZED_REPO_MODE" != "pub" ] && [ "$ZED_REPO_MODE" != "publish" ]; then
+    echo "🔗 Restoring symlinks in languages/gram/ (dev mode)"
+    rm -f "$QUERIES_DST"/*.scm
+    for f in highlights indents locals injections; do
+        ln -sf "../../../../queries/$f.scm" "$QUERIES_DST/$f.scm"
+    done
+fi
 
 
 
@@ -51,8 +64,6 @@ cp "$QUERIES_SRC"/*.scm "$QUERIES_DST"/
 PACKAGE_VERSION=$(node -p "require('$PROJECT_ROOT/package.json').version")
 echo "🔄 Updating extension version to $PACKAGE_VERSION..."
 
-# Configure repository mode (dev|pub)
-ZED_REPO_MODE="${ZED_REPO_MODE:-dev}"
 COMMIT_SHA=$(git -C "$PROJECT_ROOT" rev-parse HEAD)
 
 if [ "$ZED_REPO_MODE" = "pub" ] || [ "$ZED_REPO_MODE" = "publish" ]; then
@@ -87,21 +98,17 @@ required_files=(
     "$ZED_EXTENSION_DIR/extension.toml"
     "$ZED_EXTENSION_DIR/languages/gram/config.toml"
     "$ZED_EXTENSION_DIR/languages/gram/highlights.scm"
+    "$ZED_EXTENSION_DIR/languages/gram/indents.scm"
+    "$ZED_EXTENSION_DIR/languages/gram/locals.scm"
+    "$ZED_EXTENSION_DIR/languages/gram/injections.scm"
 )
 
 for file in "${required_files[@]}"; do
-    if [ ! -f "$file" ]; then
+    if [ ! -e "$file" ]; then
         echo "❌ Error: Missing required file: $file"
         exit 1
     fi
 done
-
-# Explicit check for highlights.scm copied from queries/
-HIGHLIGHTS_FILE="$ZED_EXTENSION_DIR/languages/gram/highlights.scm"
-if [ ! -f "$HIGHLIGHTS_FILE" ]; then
-    echo "❌ Error: Missing required file: $HIGHLIGHTS_FILE"
-    exit 1
-fi
 
 echo "✅ Extension validation passed!"
 

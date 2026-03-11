@@ -505,6 +505,8 @@ arguments.
 | `{k: "v"}` | `Value::Map` | scalars only |
 | `bareword` | `Value::Symbol` | unquoted symbol in value position |
 
+See [Tagged strings and injections](tagged-strings-and-injections.md) for well-known tags, language injection, and the `::` schema convention.
+
 String escape sequences (single, double, backtick forms): `\\`, `\'`, `\"`,
 `` \` ``, `\b`, `\f`, `\n`, `\r`, `\t`.
 
