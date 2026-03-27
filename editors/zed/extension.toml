@@ -8,4 +8,4 @@ description = "Support for Gram notation - composable data patterns"
 # path = "grammars/tree-sitter-gram"
 [grammars.gram]
 repository = "file:///Users/akollegger/Developer/gram-data/tree-sitter-gram"
-rev = "e0870374d5adc6afd3ff937d6968c2123acee33f"
+rev = "a9e52f940500b0766ede0ac976b094158f52c52f"
