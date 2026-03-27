@@ -7,5 +7,5 @@ description = "Support for Gram notation - composable data patterns"
 
 # path = "grammars/tree-sitter-gram"
 [grammars.gram]
-repository = "file:///Users/akollegger/Developer/gram-data/tree-sitter-gram"
-rev = "6aa2e5d18ed2e5374c4da2c80f2cdef5a03da332"
+repository = "https://github.com/gram-data/tree-sitter-gram"
+rev = "869488b6bbea325b4c4153a7a6bee97df7931a58"
