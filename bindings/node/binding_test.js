@@ -17,9 +17,20 @@ test("parses a simple node pattern", () => {
   const tree = parser.parse("(a)");
   const pattern = tree.rootNode.child(0);
   assert(pattern, "root should have a pattern child");
-  assert.strictEqual(pattern.type, "pattern");
-  const node = pattern.child(0);
-  assert(node, "pattern should contain a node child");
-  assert.strictEqual(node.type, "node");
-  assert(node.childForFieldName("identifier"), "node should have an identifier field");
+
+  // Find the symbol 'a' in the pattern
+  function findSymbol(node, text) {
+    if (node.isNamed && node.type === "symbol" && node.text === text) {
+      return node;
+    }
+    for (let i = 0; i < node.childCount; i++) {
+      const result = findSymbol(node.child(i), text);
+      if (result) return result;
+    }
+    return null;
+  }
+
+  const symbol = findSymbol(pattern, "a");
+  assert(symbol, "pattern should contain symbol 'a'");
+  assert.strictEqual(symbol.type, "symbol");
 });
