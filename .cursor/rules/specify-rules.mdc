@@ -9,6 +9,8 @@ Auto-generated from all feature plans. Last updated: 2025-11-10
 - N/A (parser grammar definition) (003-extended-annotation)
 - Tree-sitter query language (scheme-like .scm); grammar.js (JavaScript, Node); parser generated to C via tree-sitter-cli + ree-sitter, tree-sitter-cli (npm); editors consume queries (Zed, Neovim, Helix, Emacs) (001-editor-improvements)
 - N/A (query and doc files only) (001-editor-improvements)
+- JavaScript grammar DSL (`grammar.js`), generated C parser (`src/`), Node.js package tooling + `tree-sitter`, `tree-sitter-cli`, Node.js binding toolchain; Tree-sitter queries for editor suppor (005-tighten-quoted-identifiers)
+- N/A (grammar, parser artifacts, docs, and tests in-repo) (005-tighten-quoted-identifiers)
 
 - JavaScript (Node.js), tree-sitter grammar DSL + ree-sitter-cli ^0.25.10, tree-sitter ^0.25.0 (001-line-comments)
 
@@ -28,9 +30,9 @@ npm test && npm run lint
 JavaScript (Node.js), tree-sitter grammar DSL: Follow standard conventions
 
 ## Recent Changes
+- 005-tighten-quoted-identifiers: Added JavaScript grammar DSL (`grammar.js`), generated C parser (`src/`), Node.js package tooling + `tree-sitter`, `tree-sitter-cli`, Node.js binding toolchain; Tree-sitter queries for editor suppor
 - 001-editor-improvements: Added Tree-sitter query language (scheme-like .scm); grammar.js (JavaScript, Node); parser generated to C via tree-sitter-cli + ree-sitter, tree-sitter-cli (npm); editors consume queries (Zed, Neovim, Helix, Emacs)
 - 003-extended-annotation: Added JavaScript (Node.js), tree-sitter grammar DSL + ree-sitter-cli (project version), tree-sitter (bindings)
-- 001-refactor-terminology: Added JavaScript (Node.js) for grammar definition, generated C code for parser + ree-sitter (CLI and runtime), tree-sitter CLI for code generation
 
 
 <!-- MANUAL ADDITIONS START -->
