@@ -5,9 +5,10 @@
       "camelcase": "Gram",
       "scope": "source.gram",
       "path": ".",
-      "file-types": [
-        "gram"
-      ]
+      "file-types": ["gram"],
+      "highlights": "queries/highlights.scm",
+      "locals": "queries/locals.scm",
+      "injections": "queries/injections.scm"
     }
   ],
   "metadata": {
