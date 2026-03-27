@@ -28,7 +28,7 @@
 
 **Purpose**: Confirm implementation scope and touchpoints before editing grammar behavior
 
-- [ ] T001 Review `specs/005-tighten-quoted-identifiers/plan.md`, `specs/005-tighten-quoted-identifiers/research.md`, and `specs/005-tighten-quoted-identifiers/contracts/quoted-names.md` against `grammar.js`, `queries/highlights.scm`, `queries/locals.scm`, and `docs/gram-ebnf.md`
+- [X] T001 Review `specs/005-tighten-quoted-identifiers/plan.md`, `specs/005-tighten-quoted-identifiers/research.md`, and `specs/005-tighten-quoted-identifiers/contracts/quoted-names.md` against `grammar.js`, `queries/highlights.scm`, `queries/locals.scm`, and `docs/gram-ebnf.md`
 
 ---
 
@@ -38,9 +38,9 @@
 
 **⚠️ CRITICAL**: No user story work should begin until this phase is complete
 
-- [ ] T002 Run baseline validation with `npx tree-sitter test` and `npm test` for `grammar.js`, `src/parser.c`, and current `test/corpus/`
-- [ ] T003 Implement shared quoted-name helper rules and shared name decomposition rules in `grammar.js` for backtick-quoted names, double-quoted key names, and symbol-only property annotation/tag contexts
-- [ ] T004 Run `npx tree-sitter generate` to refresh `src/parser.c`, `src/grammar.json`, and `src/node-types.json` from `grammar.js`
+- [X] T002 Run baseline validation with `npx tree-sitter test` and `npm test` for `grammar.js`, `src/parser.c`, and current `test/corpus/`
+- [X] T003 Implement shared quoted-name helper rules and shared name decomposition rules in `grammar.js` for backtick-quoted names, double-quoted key names, and symbol-only property annotation/tag contexts
+- [X] T004 Run `npx tree-sitter generate` to refresh `src/parser.c`, `src/grammar.json`, and `src/node-types.json` from `grammar.js`
 
 **Checkpoint**: Shared quoted-name foundations are ready; user story work can proceed
 
@@ -56,14 +56,14 @@
 
 > **NOTE**: Update the corpus fixtures first so identifier behavior is specified before final implementation validation.
 
-- [ ] T005 [P] [US1] Update accepted and rejected identifier cases in `test/corpus/identifiers.txt` for bare, backtick-quoted, numeric, double-quoted, single-quoted, and fenced identifier forms
-- [ ] T006 [P] [US1] Update quoted identifier coverage in `test/corpus/text_graphs.txt` and `test/corpus/number_graphs.txt` for identifier positions outside simple node fixtures
+- [X] T005 [P] [US1] Update accepted and rejected identifier cases in `test/corpus/identifiers.txt` for bare, backtick-quoted, numeric, double-quoted, single-quoted, and fenced identifier forms
+- [X] T006 [P] [US1] Update quoted identifier coverage in `test/corpus/text_graphs.txt` and `test/corpus/number_graphs.txt` for identifier positions outside simple node fixtures
 
 ### Implementation for User Story 1
 
-- [ ] T007 [US1] Update `_identifier` and all identifier-bearing grammar paths in `grammar.js` to accept `symbol`, backtick-quoted names, and existing `integer` identifiers only
-- [ ] T008 [US1] Run `npx tree-sitter generate` to refresh `src/parser.c`, `src/grammar.json`, and `src/node-types.json` after the identifier changes in `grammar.js`
-- [ ] T009 [US1] Run focused identifier validation with `npx tree-sitter test` for `test/corpus/identifiers.txt`, `test/corpus/text_graphs.txt`, and `test/corpus/number_graphs.txt`
+- [X] T007 [US1] Update `_identifier` and all identifier-bearing grammar paths in `grammar.js` to accept `symbol`, backtick-quoted names, and existing `integer` identifiers only
+- [X] T008 [US1] Run `npx tree-sitter generate` to refresh `src/parser.c`, `src/grammar.json`, and `src/node-types.json` after the identifier changes in `grammar.js`
+- [X] T009 [US1] Run focused identifier validation with `npx tree-sitter test` for `test/corpus/identifiers.txt`, `test/corpus/text_graphs.txt`, and `test/corpus/number_graphs.txt`
 
 **Checkpoint**: User Story 1 is complete when identifier positions accept only the intended forms and existing numeric identifiers still work.
 
@@ -79,16 +79,16 @@
 
 > **NOTE**: Capture both parsing behavior and label-specific edge cases before final query/doc sync.
 
-- [ ] T010 [P] [US2] Update label acceptance and rejection cases in `test/corpus/labeled_nodes.txt` and `test/corpus/subject_pattern.txt` for bare and backtick-quoted labels versus unsupported quoted forms
-- [ ] T011 [P] [US2] Update label coverage in `test/corpus/labeled_relationships.txt` and `test/corpus/extended_annotations.txt` for quoted labels in relationship and `@@identifier:Label` positions
+- [X] T010 [P] [US2] Update label acceptance and rejection cases in `test/corpus/labeled_nodes.txt` and `test/corpus/subject_pattern.txt` for bare and backtick-quoted labels versus unsupported quoted forms
+- [X] T011 [P] [US2] Update label coverage in `test/corpus/labeled_relationships.txt` and `test/corpus/extended_annotations.txt` for quoted labels in relationship and `@@identifier:Label` positions
 
 ### Implementation for User Story 2
 
-- [ ] T012 [US2] Update `_label` and all label-bearing grammar paths in `grammar.js` to accept `symbol` or backtick-quoted names as a single label token
-- [ ] T013 [P] [US2] Update quoted-label captures in `queries/highlights.scm` so label highlighting no longer assumes `labels` always contain only `symbol`
-- [ ] T014 [P] [US2] Update quoted-label definition/reference captures in `queries/locals.scm` so local-definition behavior follows the new label node shapes
-- [ ] T015 [US2] Run `npx tree-sitter generate` to refresh `src/parser.c`, `src/grammar.json`, and `src/node-types.json` after the label changes in `grammar.js`
-- [ ] T016 [US2] Run focused label validation with `npx tree-sitter test` for `test/corpus/labeled_nodes.txt`, `test/corpus/labeled_relationships.txt`, `test/corpus/subject_pattern.txt`, and `test/corpus/extended_annotations.txt`
+- [X] T012 [US2] Update `_label` and all label-bearing grammar paths in `grammar.js` to accept `symbol` or backtick-quoted names as a single label token
+- [X] T013 [P] [US2] Update quoted-label captures in `queries/highlights.scm` so label highlighting no longer assumes `labels` always contain only `symbol`
+- [X] T014 [P] [US2] Update quoted-label definition/reference captures in `queries/locals.scm` so local-definition behavior follows the new label node shapes
+- [X] T015 [US2] Run `npx tree-sitter generate` to refresh `src/parser.c`, `src/grammar.json`, and `src/node-types.json` after the label changes in `grammar.js`
+- [X] T016 [US2] Run focused label validation with `npx tree-sitter test` for `test/corpus/labeled_nodes.txt`, `test/corpus/labeled_relationships.txt`, `test/corpus/subject_pattern.txt`, and `test/corpus/extended_annotations.txt`
 
 **Checkpoint**: User Story 2 is complete when a quoted label remains one label everywhere labels are allowed and query captures still classify labels correctly.
 
@@ -104,15 +104,15 @@
 
 > **NOTE**: Keep coverage focused on key positions so value-string behavior stays separate and unchanged.
 
-- [ ] T017 [P] [US3] Update key acceptance and rejection cases in `test/corpus/value_pair.txt` and `test/corpus/map_values.txt` for bare, backtick-quoted, double-quoted, single-quoted, fenced, and integer keys
-- [ ] T018 [P] [US3] Update record-key coverage in `test/corpus/records.txt` and `test/corpus/subject_pattern.txt` for quoted keys used in subject-attached records
+- [X] T017 [P] [US3] Update key acceptance and rejection cases in `test/corpus/value_pair.txt` and `test/corpus/map_values.txt` for bare, backtick-quoted, double-quoted, single-quoted, fenced, and integer keys
+- [X] T018 [P] [US3] Update record-key coverage in `test/corpus/records.txt` and `test/corpus/subject_pattern.txt` for quoted keys used in subject-attached records
 
 ### Implementation for User Story 3
 
-- [ ] T019 [US3] Add a key-specific name rule in `grammar.js` and wire `record_property` plus `map_entry` to accept bare, backtick-quoted, and double-quoted keys while leaving `property_annotation.key` unchanged
-- [ ] T020 [P] [US3] Update key captures in `queries/highlights.scm` so record and map keys recognize bare, backtick-quoted, and double-quoted key nodes and no longer assume integer keys remain valid
-- [ ] T021 [US3] Run `npx tree-sitter generate` to refresh `src/parser.c`, `src/grammar.json`, and `src/node-types.json` after the key changes in `grammar.js`
-- [ ] T022 [US3] Run focused key validation with `npx tree-sitter test` for `test/corpus/value_pair.txt`, `test/corpus/map_values.txt`, `test/corpus/records.txt`, and `test/corpus/subject_pattern.txt`
+- [X] T019 [US3] Add a key-specific name rule in `grammar.js` and wire `record_property` plus `map_entry` to accept bare, backtick-quoted, and double-quoted keys while leaving `property_annotation.key` unchanged
+- [X] T020 [P] [US3] Update key captures in `queries/highlights.scm` so record and map keys recognize bare, backtick-quoted, and double-quoted key nodes and no longer assume integer keys remain valid
+- [X] T021 [US3] Run `npx tree-sitter generate` to refresh `src/parser.c`, `src/grammar.json`, and `src/node-types.json` after the key changes in `grammar.js`
+- [X] T022 [US3] Run focused key validation with `npx tree-sitter test` for `test/corpus/value_pair.txt`, `test/corpus/map_values.txt`, `test/corpus/records.txt`, and `test/corpus/subject_pattern.txt`
 
 **Checkpoint**: User Story 3 is complete when key positions stay JSON-friendly and Cypher-friendly without accepting unrelated quoted or numeric key forms.
 
@@ -122,10 +122,10 @@
 
 **Purpose**: Sync docs, editor copies, and final validation across all stories
 
-- [ ] T023 [P] Update `docs/gram-reference.md`, `docs/gram-ebnf.md`, and `docs/gram.ebnf` to document the implemented identifier, label, key, and annotation-sugar semantics
-- [ ] T024 [P] Run `scripts/prepare-zed-extension.sh` to sync `queries/highlights.scm`, `queries/locals.scm`, and `queries/injections.scm` into `editors/zed/languages/gram/`
-- [ ] T025 Validate the implementation examples in `specs/005-tighten-quoted-identifiers/quickstart.md` against the updated `grammar.js` and refresh that file only if the final behavior differs from the planned examples
-- [ ] T026 Run final validation with `npx tree-sitter generate`, `npx tree-sitter test`, and `npm test` for `grammar.js`, `src/parser.c`, `src/grammar.json`, `src/node-types.json`, and updated `test/corpus/`
+- [X] T023 [P] Update `docs/gram-reference.md`, `docs/gram-ebnf.md`, and `docs/gram.ebnf` to document the implemented identifier, label, key, and annotation-sugar semantics
+- [X] T024 [P] Run `scripts/prepare-zed-extension.sh` to sync `queries/highlights.scm`, `queries/locals.scm`, and `queries/injections.scm` into `editors/zed/languages/gram/`
+- [X] T025 Validate the implementation examples in `specs/005-tighten-quoted-identifiers/quickstart.md` against the updated `grammar.js` and refresh that file only if the final behavior differs from the planned examples
+- [X] T026 Run final validation with `npx tree-sitter generate`, `npx tree-sitter test`, and `npm test` for `grammar.js`, `src/parser.c`, `src/grammar.json`, `src/node-types.json`, and updated `test/corpus/`
 
 ---
 

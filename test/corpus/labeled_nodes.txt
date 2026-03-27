@@ -23,6 +23,20 @@ Labeled nodes: Single label
         (symbol))))
 
 ==================
+Labeled nodes: Backtick label
+==================
+
+(:`Role Label`)
+
+---
+
+(gram_pattern
+  (node_pattern
+      labels: (labels
+        (quoted_name
+          content: (string_content)))))
+
+==================
 Labeled nodes: Two labels
 ==================
 

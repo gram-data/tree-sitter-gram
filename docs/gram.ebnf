@@ -93,9 +93,9 @@ annotations = ( identified_annotation, { property_annotation } )
 (* @key(value) — attaches a single key/value metadata pair *)
 property_annotation    = "@", symbol, "(", value, ")" ;
 
-(* @@id:Label — gives the annotation wrapper its own identity
-   and/or labels, for schema/ontology contexts where the
-   annotation itself must be a typed, referenceable entity. *)
+(* @@id:Label — syntactic sugar for the wrapper subject's
+   identity and/or labels, for schema/ontology contexts where the
+   wrapped pattern itself must be typed or referenceable. *)
 identified_annotation  = "@@", ( identifier
                                 | labels
                                 | identifier, labels
@@ -126,7 +126,7 @@ subject = identifier
 
 labels          = label, { label } ;
 
-label           = label_separator, symbol ;
+label           = label_separator, ( symbol | quoted_name ) ;
 
 label_separator = ":" | "::" ;
 
@@ -152,12 +152,12 @@ label_separator = ":" | "::" ;
 
 record          = "{", [ record_property, { ",", record_property } ], "}" ;
 
-record_property = identifier, label_separator, value ;
+record_property = key_name, label_separator, value ;
                   (* label_separator allows ":" or "::" *)
 
 map             = "{", [ map_entry, { ",", map_entry } ], "}" ;
 
-map_entry       = identifier, ":", scalar_value ;
+map_entry       = key_name, ":", scalar_value ;
                   (* map entries are always ":" only, values always scalar *)
 
 
@@ -316,7 +316,7 @@ tagged_string = symbol, "`",   /([^`\\\n])*/,                          "`"
 (* ------------------------------------------------------------
    10. IDENTIFIERS AND SYMBOLS
 
-   identifier allows symbols, string literals, or integers as
+   identifier allows symbols, backtick-quoted names, or integers as
    pattern identities, enabling quoted or numeric node IDs.
 
    symbol starts with a letter or underscore; subsequent characters
@@ -326,7 +326,13 @@ tagged_string = symbol, "`",   /([^`\\\n])*/,                          "`"
    anonymous scalar values (e.g. ["hello"] stores "hello" under "_").
    It is a valid symbol but is conventionally reserved. *)
 
-identifier = symbol | string_literal | integer ;
+quoted_name  = backtick_string ;
+
+double_quoted_name = double_quoted_string ;
+
+key_name    = symbol | quoted_name | double_quoted_name ;
+
+identifier = symbol | quoted_name | integer ;
 
 symbol     = /[a-zA-Z_][0-9a-zA-Z_.\-@]*/ ;
 

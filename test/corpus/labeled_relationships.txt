@@ -15,6 +15,23 @@ Labeled relationship: Single label
     right: (node_pattern)))
 
 ==================
+Labeled relationship: Backtick label
+==================
+
+()-[:`Edge Type`]-()
+
+---
+
+(gram_pattern
+  (relationship_pattern
+    left: (node_pattern)
+    kind: (undirected_arrow
+      labels: (labels
+        (quoted_name
+          content: (string_content))))
+    right: (node_pattern)))
+
+==================
 Labeled relationship: Two labels
 ==================
 
