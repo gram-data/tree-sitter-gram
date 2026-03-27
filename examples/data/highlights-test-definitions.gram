@@ -1,0 +1,37 @@
+// Test definition-like identifier highlighting in various pattern types
+
+// Subject pattern with symbol identifier (definition - @type)
+[person:Person]
+
+// Subject pattern with quoted identifier (definition - @type)
+[`patient-1`:Patient]
+
+// Subject pattern with labels (definition - @type)
+[alice:User:Admin]
+
+// Subject pattern with quoted label (definition - @type)
+[bob:`User Type`]
+
+// Node pattern with identifier (definition - @type)
+(user:Actor)
+
+// Node pattern with quoted identifier (definition - @type)
+(`system-user`:System)
+
+// Node pattern with labels (definition - @type)
+(source:Source:DataStore)
+
+// Relationship pattern with node definitions
+(person:Person)--[rel:Relationship]->(organization:Organization)
+
+// Relationship with quoted identifiers
+(`alice-1`:Person)--[`knows`:`Friend`]-->(`bob-2`:Person)
+
+// Relationship with labels in arrow
+(a)--[:`Label-in-arrow`]-->(b)
+
+// Annotation with quoted identifier
+@@`wrapped-id`:Type (target)
+
+// Annotation with quoted label
+@@p:`My Label` (target)

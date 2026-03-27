@@ -3,7 +3,7 @@
 **Feature Branch**: `005-tighten-quoted-identifiers`  
 **Created**: 2026-03-27  
 **Status**: Draft  
-**Input**: User description: "Improve rules for quoted identifiers, labels, and keys as described above, preserving JSON and Cypher friendlieness, while tightening some of the rules."
+**Input**: User description: "Improve rules for quoted identifiers, labels, and keys as described above, preserving JSON and Cypher friendliness, while tightening some of the rules."
 
 ## User Scenarios & Testing *(mandatory)*
 

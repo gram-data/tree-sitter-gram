@@ -1,0 +1,25 @@
+// Test key highlighting in records and maps
+
+// Record with symbol keys
+{name: "Alice", age: 30}
+
+// Record with backtick-quoted keys
+{`first-name`: "Alice", `last-name`: "Smith"}
+
+// Record with double-quoted keys (JSON-style)
+{"firstName": "Alice", "lastName": "Smith"}
+
+// Node with record containing quoted keys
+(person {`full-name`: "Alice Smith", `birth-year`: 1990})
+
+// Subject pattern with record containing various key types
+[id:Type {name: "Test", `quoted-key`: "value", "double-quoted": "value"}]
+
+// Map values with quoted keys
+{`status`: active, `count`: 5}
+
+// Reference patterns (not highlighted as definitions, but should reference correctly)
+(personRef)
+
+// Mixed quoting styles in same record
+{symbol_key: 1, `backtick-key`: 2, "json-key": 3}

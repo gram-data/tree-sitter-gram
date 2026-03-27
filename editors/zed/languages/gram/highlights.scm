@@ -36,6 +36,34 @@
 (identified_annotation labels: (labels (symbol) @type))
 (identified_annotation labels: (labels (quoted_name) @type))
 
+; Subject, node, and relationship pattern definitions (FR-001): @type
+; subject/node subject is _subject (use wildcard _ as it may be hidden in some runtimes)
+(subject_pattern subject: (_ identifier: (_) @type))
+(subject_pattern subject: (_ labels: (labels (symbol) @type)))
+(subject_pattern subject: (_ labels: (labels (quoted_name) @type)))
+(node_pattern subject: (_ identifier: (_) @type))
+(node_pattern subject: (_ labels: (labels (symbol) @type)))
+(node_pattern subject: (_ labels: (labels (quoted_name) @type)))
+(relationship_pattern left: (node_pattern subject: (_ identifier: (_) @type)))
+(relationship_pattern left: (node_pattern subject: (_ labels: (labels (symbol) @type))))
+(relationship_pattern left: (node_pattern subject: (_ labels: (labels (quoted_name) @type))))
+(relationship_pattern right: (node_pattern subject: (_ identifier: (_) @type)))
+(relationship_pattern right: (node_pattern subject: (_ labels: (labels (symbol) @type))))
+(relationship_pattern right: (node_pattern subject: (_ labels: (labels (quoted_name) @type))))
+; Arrow kind: subject is inside optional brackets on the arrow
+(relationship_pattern kind: (right_arrow subject: (_ identifier: (_) @type)))
+(relationship_pattern kind: (right_arrow subject: (_ labels: (labels (symbol) @type))))
+(relationship_pattern kind: (right_arrow subject: (_ labels: (labels (quoted_name) @type))))
+(relationship_pattern kind: (left_arrow subject: (_ identifier: (_) @type)))
+(relationship_pattern kind: (left_arrow subject: (_ labels: (labels (symbol) @type))))
+(relationship_pattern kind: (left_arrow subject: (_ labels: (labels (quoted_name) @type))))
+(relationship_pattern kind: (undirected_arrow subject: (_ identifier: (_) @type)))
+(relationship_pattern kind: (undirected_arrow subject: (_ labels: (labels (symbol) @type))))
+(relationship_pattern kind: (undirected_arrow subject: (_ labels: (labels (quoted_name) @type))))
+(relationship_pattern kind: (bidirectional_arrow subject: (_ identifier: (_) @type)))
+(relationship_pattern kind: (bidirectional_arrow subject: (_ labels: (labels (symbol) @type))))
+(relationship_pattern kind: (bidirectional_arrow subject: (_ labels: (labels (quoted_name) @type))))
+
 ; Keywords and operators
 [
     "@"
