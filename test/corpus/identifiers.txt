@@ -80,7 +80,7 @@ Identifier using backticks
 
 (gram_pattern
   (node_pattern
-      identifier: (string_literal
+      identifier: (quoted_name
         content: (string_content))))
 
 ==================
@@ -93,31 +93,7 @@ Identifier using backticks with escaped backtick
 
 (gram_pattern
   (node_pattern
-      identifier: (string_literal
+      identifier: (quoted_name
         content: (string_content))))
 
-==================
-Identifier using double-quotes
-==================
 
-("Hello World!")
-
----
-
-(gram_pattern
-  (node_pattern
-      identifier: (string_literal
-        content: (string_content))))
-
-==================
-Identifier using double-quotes with escaped double-quote
-==================
-
-("escape \" the double-quote")
-
----
-
-(gram_pattern
-  (node_pattern
-      identifier: (string_literal
-        content: (string_content))))

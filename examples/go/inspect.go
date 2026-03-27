@@ -1,29 +1,39 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
-	sitter "github.com/smacker/go-tree-sitter"
-	"github.com/smacker/go-tree-sitter/javascript"
-	"github.com/gram-data/tree-sitter-gram/tree_sitter_gram"
-
+	tree_sitter "github.com/tree-sitter/go-tree-sitter"
+	tree_sitter_gram "github.com/tree-sitter/tree-sitter-gram/bindings/go"
 )
 
 func main() {
-	
-	parser := sitter.NewParser()
-	parser.SetLanguage(javascript.GetLanguage())
-	
-	sourceCode := []byte("let a = 1")
-	tree, _ := parser.ParseCtx(context.Background(), nil, sourceCode)
-	
-	n := tree.RootNode()
-	
-	fmt.Println(n) // (program (lexical_declaration (variable_declarator (identifier) (number))))
-	
-	child := n.NamedChild(0)
-	fmt.Println(child.Type()) // lexical_declaration
-	fmt.Println(child.StartByte()) // 0
-	fmt.Println(child.EndByte()) // 9
+	parser := tree_sitter.NewParser()
+	parser.SetLanguage(tree_sitter.NewLanguage(tree_sitter_gram.Language()))
+
+	sourceCode := []byte(`(hello:Greeting {text: "hi"})-[:TO]->(world:Place)`)
+	tree := parser.Parse(sourceCode, nil)
+
+	fmt.Println("Parse tree:")
+	fmt.Println(tree.RootNode().ToSexp())
+
+	nodes := 0
+	relationships := 0
+	var walk func(*tree_sitter.Node)
+	walk = func(node *tree_sitter.Node) {
+		switch node.Kind() {
+		case "node_pattern":
+			nodes++
+			fmt.Printf("  node: %s\n", node.Utf8Text(sourceCode))
+		case "relationship_pattern":
+			relationships++
+			fmt.Printf("  relationship: %s\n", node.Utf8Text(sourceCode))
+		}
+		for i := uint(0); i < node.ChildCount(); i++ {
+			walk(node.Child(i))
+		}
+	}
+	walk(tree.RootNode())
+
+	fmt.Printf("\nSummary: %d nodes, %d relationships\n", nodes, relationships)
 }

@@ -377,7 +377,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "string_literal"
+          "name": "quoted_name"
         },
         {
           "type": "SYMBOL",
@@ -679,8 +679,17 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "symbol"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "symbol"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "quoted_name"
+            }
+          ]
         }
       ]
     },
@@ -738,7 +747,7 @@
           "name": "key",
           "content": {
             "type": "SYMBOL",
-            "name": "_identifier"
+            "name": "_key_name"
           }
         },
         {
@@ -818,7 +827,7 @@
           "name": "key",
           "content": {
             "type": "SYMBOL",
-            "name": "_identifier"
+            "name": "_key_name"
           }
         },
         {
@@ -978,6 +987,75 @@
         "type": "PATTERN",
         "value": "-?(0|[1-9]\\d*)([a-zA-Z]+)"
       }
+    },
+    "quoted_name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "`"
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_backticked_text"
+            },
+            "named": true,
+            "value": "string_content"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "`"
+        }
+      ]
+    },
+    "double_quoted_name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\""
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_double_quoted_text"
+            },
+            "named": true,
+            "value": "string_content"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "\""
+        }
+      ]
+    },
+    "_key_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "symbol"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "quoted_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "double_quoted_name"
+        }
+      ]
     },
     "string_literal": {
       "type": "CHOICE",

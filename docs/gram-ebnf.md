@@ -90,7 +90,7 @@ annotations = ( identified_annotation, { property_annotation } )
 (* @key(value) — attaches a single key/value metadata pair *)
 property_annotation = "@", symbol, "(", value, ")" ;
 
-(* @@id:Label — gives the annotation wrapper its own identity and labels *)
+(* @@id:Label — syntactic sugar for the wrapper subject's identity and labels *)
 identified_annotation = "@@", ( identifier
                                | labels
                                | identifier, labels
@@ -125,7 +125,7 @@ All components are optional individually, but at least one must be present (the 
 ```ebnf
 labels = label, { label } ;
 
-label = label_separator, symbol ;
+label = label_separator, ( symbol | quoted_name ) ;
 
 label_separator = ":" | "::" ;
 ```
@@ -142,12 +142,12 @@ The property system has two bounded levels, intentionally shallower than JSON bu
 (* Appears in subject position — values may be any value including map *)
 record = "{", [ record_property, { ",", record_property } ], "}" ;
 
-record_property = identifier, label_separator, value ;
+record_property = key_name, label_separator, value ;
 
 (* Appears in value position — values must be scalar *)
 map = "{", [ map_entry, { ",", map_entry } ], "}" ;
 
-map_entry = identifier, ":", scalar_value ;
+map_entry = key_name, ":", scalar_value ;
 ```
 
 **Depth budget:**
@@ -339,14 +339,21 @@ date`2024-01-15`
 ## 10. Identifiers and Symbols
 
 ```ebnf
-identifier = symbol | string_literal | integer ;
+quoted_name = backtick_string ;
+
+double_quoted_name = double_quoted_string ;
+
+key_name = symbol | quoted_name | double_quoted_name ;
+
+identifier = symbol | quoted_name | integer ;
 
 symbol = /[a-zA-Z_][0-9a-zA-Z_.\-@]*/ ;
 ```
 
 **Notes:**
 - Symbols start with a letter or underscore; subsequent characters may include digits, `.`, `-`, and `@`.
-- `string_literal` and `integer` are valid identifiers, allowing quoted or numeric node identities.
+- `quoted_name` and `integer` are valid identifiers, allowing backtick-quoted or numeric node identities.
+- Record and map keys may be `symbol`, `quoted_name`, or `double_quoted_name`.
 - The reserved property key `_` is used internally to store anonymous scalar values (e.g. `["hello"]` stores `"hello"` under `_`). It is a valid symbol and may appear in user-written records, but consuming code should treat it as conventionally reserved.
 
 ---

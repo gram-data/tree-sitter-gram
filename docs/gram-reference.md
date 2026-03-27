@@ -94,8 +94,9 @@ Pattern {
 [a::Type]              // double-colon — stylistically suggests schema/ontology intent
 ```
 
-Labels use colon-prefix syntax and are unordered (stored as a set). `:` and `::` are
-**semantically equivalent** — the choice is purely stylistic (see §7).
+Labels use colon-prefix syntax and are unordered (stored as a set). A label may be a bare
+symbol or a backtick-quoted name. `:` and `::` are **semantically equivalent** — the choice
+is purely stylistic (see §7).
 
 ```rust
 Subject { identity: Symbol::from("a"), labels: {"Person"}, ... }
@@ -287,8 +288,8 @@ Annotations wrap a pattern with metadata. The result is a `Pattern<Subject>` wit
 
 ### 5.1 Property Annotation
 
-`@key(value)` attaches a single key/value metadata pair. Multiple property annotations may
-be chained; each becomes a property on the wrapper subject.
+`@key(value)` attaches a single key/value metadata pair. The key remains a bare symbol.
+Multiple property annotations may be chained; each becomes a property on the wrapper subject.
 
 ```gram
 @timestamp(2024-01-15) (alice:Person)
@@ -310,8 +311,8 @@ The annotation value may be any `value` expression (see §9).
 
 ### 5.2 Identified Annotation
 
-`@@` gives the annotation wrapper its own identity and/or labels, for contexts where the
-annotation itself must be a typed, referenceable entity.
+`@@` gives the annotation wrapper its own identity and/or labels, as syntactic sugar for the
+wrapper subject when the wrapped pattern itself must be typed or referenceable.
 
 ```gram
 @@provenance:Source (alice:Person)
@@ -341,8 +342,9 @@ is bounded by type, not convention:
 | structural | node, relationship, pattern | promote instead of nesting deeper |
 
 **`record`** — appears in subject position, attached to a node, relationship, or pattern.
-Property values may be any `value` including `map` and `array`. The key separator may be
-`:` or `::`.
+Property values may be any `value` including `map` and `array`. Record and map keys may be
+bare symbols, backtick-quoted names, or double-quoted names. The key separator may be `:`
+or `::`.
 
 ```gram
 (a:Person {name: "Alice", scores: [10, 20, 30], address: {city: "Portland"}})
@@ -466,12 +468,12 @@ top-level patterns has not been declared. Two options exist:
 
 ### 9.1 Identifiers
 
-An identifier may be a symbol, a string literal, or an integer — allowing quoted or numeric
-node identities:
+An identifier may be a symbol, a backtick-quoted name, or an integer — allowing quoted or
+numeric node identities:
 
 ```gram
 [a]          // symbol identifier
-["node-1"]   // string identifier
+[`node-1`]   // backtick-quoted identifier
 [42]         // integer identifier
 ```
 

@@ -8,30 +8,29 @@ test("can load grammar", () => {
   assert.doesNotThrow(() => parser.setLanguage(require(".")));
 });
 
-test("annotation node kinds: identified_annotation and property_annotation", () => {
+test("parses a simple node pattern", () => {
   const Parser = require("tree-sitter");
   const GramLang = require(".");
   const parser = new Parser();
   parser.setLanguage(GramLang);
 
-  const annotated = (root) => root.child(0) ?? null;
+  const tree = parser.parse("(a)");
+  const pattern = tree.rootNode.child(0);
+  assert(pattern, "root should have a pattern child");
 
-  const withIdentified = parser.parse("@@p (a)");
-  const ap1 = annotated(withIdentified.rootNode);
-  assert(ap1?.type === "annotated_pattern", "root should have annotated_pattern child");
-  const annotations1 = ap1.childForFieldName("annotations");
-  assert(annotations1, "annotations node should exist");
-  const first1 = annotations1.child(0);
-  assert.strictEqual(first1?.type, "identified_annotation", "@@ form should be identified_annotation");
-  assert(first1?.childForFieldName("identifier"), "identified_annotation should have identifier field");
+  // Find the symbol 'a' in the pattern
+  function findSymbol(node, text) {
+    if (node.isNamed && node.type === "symbol" && node.text === text) {
+      return node;
+    }
+    for (let i = 0; i < node.childCount; i++) {
+      const result = findSymbol(node.child(i), text);
+      if (result) return result;
+    }
+    return null;
+  }
 
-  const withProperty = parser.parse("@x(1) ()");
-  const ap2 = annotated(withProperty.rootNode);
-  assert(ap2?.type === "annotated_pattern", "root should have annotated_pattern child");
-  const annotations2 = ap2.childForFieldName("annotations");
-  assert(annotations2, "annotations node should exist");
-  const first2 = annotations2.child(0);
-  assert.strictEqual(first2?.type, "property_annotation", "@ form should be property_annotation");
-  assert(first2?.childForFieldName("key"), "property_annotation should have key field");
-  assert(first2?.childForFieldName("value"), "property_annotation should have value field");
+  const symbol = findSymbol(pattern, "a");
+  assert(symbol, "pattern should contain symbol 'a'");
+  assert.strictEqual(symbol.type, "symbol");
 });

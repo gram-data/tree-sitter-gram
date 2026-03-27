@@ -27,7 +27,7 @@ Number graph: 1 +1 = 2
       left: (node_pattern
         identifier: (integer))
       kind: (right_arrow
-        identifier: (string_literal
+        identifier: (quoted_name
           content: (string_content)))
       right: (node_pattern
         identifier: (integer))))

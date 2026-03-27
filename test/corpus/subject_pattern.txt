@@ -55,6 +55,27 @@ Subject Pattern: named, labeled with a record
             content: (string_content))))))
 
 ==================
+Subject Pattern: quoted label and quoted key
+==================
+
+[ a:`Team Label` { "display title" : "Generic Subject" } ]
+
+---
+
+(gram_pattern
+  (subject_pattern
+      identifier: (symbol)
+      labels: (labels
+        (quoted_name
+          content: (string_content)))
+      record: (record
+        (record_property
+          key: (double_quoted_name
+            content: (string_content))
+          value: (string_literal
+            content: (string_content))))))
+
+==================
 Subject Pattern: complete subject pattern with annotation, subject, and a qualified association
 ==================
 

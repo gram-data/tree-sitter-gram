@@ -69,7 +69,7 @@ module.exports = grammar({
 
     pattern_reference: ($) => field("identifier", $._identifier),
 
-    _identifier: ($) => choice($.symbol, $.string_literal, $.integer),
+    _identifier: ($) => choice($.symbol, $.quoted_name, $.integer),
 
     _subject: ($) =>
       choice(
@@ -114,13 +114,13 @@ module.exports = grammar({
 
     labels: ($) => repeat1($._label),
 
-    _label: ($) => seq(choice(":", "::"), $.symbol),
+    _label: ($) => seq(choice(":", "::"), choice($.symbol, $.quoted_name)),
 
     record: ($) => seq("{", commaSep($.record_property), "}"),
 
     record_property: ($) =>
       seq(
-        field("key", $._identifier),
+        field("key", $._key_name),
         choice(":", "::"),
         field("value", $._value),
       ),
@@ -128,7 +128,7 @@ module.exports = grammar({
     map: ($) => seq("{", commaSep($.map_entry), "}"),
 
     map_entry: ($) =>
-      seq(field("key", $._identifier), ":", field("value", $._scalar_value)),
+      seq(field("key", $._key_name), ":", field("value", $._scalar_value)),
 
     symbol: ($) => token(/[a-zA-Z_][0-9a-zA-Z_.\-@]*/),
 
@@ -173,6 +173,15 @@ module.exports = grammar({
       const measurement = /-?(0|[1-9]\d*)([a-zA-Z]+)/;
       return token(measurement);
     },
+
+    quoted_name: ($) =>
+      delimit_string(alias($._backticked_text, $.string_content), "`"),
+
+    double_quoted_name: ($) =>
+      delimit_string(alias($._double_quoted_text, $.string_content), '"'),
+
+    _key_name: ($) =>
+      choice($.symbol, $.quoted_name, $.double_quoted_name),
 
     string_literal: ($) =>
       choice(

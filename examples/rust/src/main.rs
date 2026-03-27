@@ -1,6 +1,7 @@
 use clap::Parser as CliParser;
+use tree_sitter::{Node, Parser};
 
-/// Inspect all files given as arguments 
+/// Inspect all .gram files given as arguments
 #[derive(CliParser, Debug)]
 struct Args {
     /// Files to inspect
@@ -8,26 +9,48 @@ struct Args {
     files: Vec<std::path::PathBuf>,
 }
 
-use tree_sitter::{Parser, Language};
-
 fn main() {
+    let args = Args::parse();
 
-  let args = Args::parse();
+    let mut parser = Parser::new();
+    parser
+        .set_language(&tree_sitter_gram::LANGUAGE.into())
+        .expect("Error loading Gram grammar");
 
-  println!("Args: {:?}", args);
+    for file in &args.files {
+        println!("{}", "=".repeat(40));
+        println!("Inspecting file: {:?}", file);
+        let source_code = std::fs::read_to_string(file).expect("Error reading file");
+        let tree = parser.parse(&source_code, None).unwrap();
+        let root = tree.root_node();
 
-  let mut parser = Parser::new();
+        println!("Parse tree:");
+        println!("{}", root.to_sexp());
 
-  parser.set_language(&tree_sitter_gram::language()).expect("Error loading Gram grammar");
+        let mut nodes = 0u32;
+        let mut relationships = 0u32;
+        walk(root, &source_code, &mut nodes, &mut relationships);
 
-  for file in args.files {
-    println!("{}", "=".repeat(40));
-    println!("Inspecting file: {:?}", file);
-    let source_code = std::fs::read_to_string(file).expect("Error reading file");
-    let tree = parser.parse(&source_code, None).unwrap();
-    let root_node = tree.root_node();
+        println!(
+            "\nSummary: {} nodes, {} relationships",
+            nodes, relationships
+        );
+    }
+}
 
-    println!("{}", root_node);
-    println!("");
-  }
+fn walk(node: Node, source: &str, nodes: &mut u32, relationships: &mut u32) {
+    match node.kind() {
+        "node_pattern" => {
+            *nodes += 1;
+            println!("  node: {}", &source[node.byte_range()]);
+        }
+        "relationship_pattern" => {
+            *relationships += 1;
+            println!("  relationship: {}", &source[node.byte_range()]);
+        }
+        _ => {}
+    }
+    for i in 0..node.child_count() {
+        walk(node.child(i).unwrap(), source, nodes, relationships);
+    }
 }

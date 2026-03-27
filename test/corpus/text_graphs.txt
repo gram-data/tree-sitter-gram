@@ -66,8 +66,8 @@ Hello "dear world" "over there"
       left: (node_pattern
         identifier: (symbol))
       kind: (right_arrow
-        identifier: (string_literal
+        identifier: (quoted_name
           content: (string_content)))
       right: (node_pattern
-        identifier: (string_literal
+        identifier: (quoted_name
           content: (string_content)))))

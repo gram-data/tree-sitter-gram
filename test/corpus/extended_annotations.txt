@@ -29,6 +29,22 @@ US1: Identifier-only @@p (a)
       identifier: (symbol))))
 
 ====================
+US1: Identifier-only with quoted identifier @@`wrapped id` (a)
+====================
+
+@@`wrapped id` (a)
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (identified_annotation
+        identifier: (quoted_name
+          content: (string_content))))
+    elements: (node_pattern
+      identifier: (symbol))))
+
+====================
 US1: Identifier-only @@r1 (a)-[r]->(b)
 ====================
 
@@ -65,6 +81,23 @@ US2: Labels-only @@:L (a)
       identifier: (symbol))))
 
 ====================
+US2: Labels-only with quoted label @@:`Label Type` (a)
+====================
+
+@@:`Label Type` (a)
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (identified_annotation
+        labels: (labels
+          (quoted_name
+            content: (string_content)))))
+    elements: (node_pattern
+      identifier: (symbol))))
+
+====================
 US2: Labels-only @@::Label (a)
 ====================
 
@@ -94,6 +127,25 @@ US3: Identifier and labels @@p:L (a)
         identifier: (symbol)
         labels: (labels
           (symbol))))
+    elements: (node_pattern
+      identifier: (symbol))))
+
+====================
+US3: Identifier and quoted labels @@`wrap id`:`Label Type` (a)
+====================
+
+@@`wrap id`:`Label Type` (a)
+---
+
+(gram_pattern
+  (annotated_pattern
+    annotations: (annotations
+      (identified_annotation
+        identifier: (quoted_name
+          content: (string_content))
+        labels: (labels
+          (quoted_name
+            content: (string_content)))))
     elements: (node_pattern
       identifier: (symbol))))
 

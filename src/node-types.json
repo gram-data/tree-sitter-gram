@@ -116,7 +116,7 @@
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "quoted_name",
             "named": true
           },
           {
@@ -158,11 +158,11 @@
             "named": true
           },
           {
-            "type": "record",
+            "type": "quoted_name",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "record",
             "named": true
           },
           {
@@ -177,6 +177,22 @@
     "type": "boolean_literal",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "double_quoted_name",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_content",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "gram_pattern",
@@ -230,7 +246,7 @@
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "quoted_name",
             "named": true
           },
           {
@@ -260,6 +276,10 @@
       "required": true,
       "types": [
         {
+          "type": "quoted_name",
+          "named": true
+        },
+        {
           "type": "symbol",
           "named": true
         }
@@ -279,7 +299,7 @@
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "quoted_name",
             "named": true
           },
           {
@@ -321,11 +341,11 @@
             "named": true
           },
           {
-            "type": "record",
+            "type": "quoted_name",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "record",
             "named": true
           },
           {
@@ -360,11 +380,11 @@
         "required": true,
         "types": [
           {
-            "type": "integer",
+            "type": "double_quoted_name",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "quoted_name",
             "named": true
           },
           {
@@ -434,7 +454,7 @@
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "quoted_name",
             "named": true
           },
           {
@@ -476,11 +496,11 @@
             "named": true
           },
           {
-            "type": "record",
+            "type": "quoted_name",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "record",
             "named": true
           },
           {
@@ -504,7 +524,7 @@
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "quoted_name",
             "named": true
           },
           {
@@ -579,6 +599,22 @@
           },
           {
             "type": "tagged_string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "quoted_name",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_content",
             "named": true
           }
         ]
@@ -667,11 +703,11 @@
         "required": true,
         "types": [
           {
-            "type": "integer",
+            "type": "double_quoted_name",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "quoted_name",
             "named": true
           },
           {
@@ -801,7 +837,7 @@
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "quoted_name",
             "named": true
           },
           {
@@ -843,11 +879,11 @@
             "named": true
           },
           {
-            "type": "record",
+            "type": "quoted_name",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "record",
             "named": true
           },
           {
@@ -901,7 +937,7 @@
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "quoted_name",
             "named": true
           },
           {
@@ -943,11 +979,11 @@
             "named": true
           },
           {
-            "type": "record",
+            "type": "quoted_name",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "record",
             "named": true
           },
           {
@@ -1024,7 +1060,7 @@
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "quoted_name",
             "named": true
           },
           {
@@ -1066,11 +1102,11 @@
             "named": true
           },
           {
-            "type": "record",
+            "type": "quoted_name",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "record",
             "named": true
           },
           {

@@ -2,15 +2,15 @@
   "name": "tree-sitter-gram-nodejs-example",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "inspect.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node inspect.js",
     "postinstall": "npm link tree-sitter-gram"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "tree-sitter": "^0.21.1"
+    "tree-sitter": "^0.25.0"
   }
 }
