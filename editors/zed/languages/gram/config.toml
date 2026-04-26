@@ -12,5 +12,5 @@ word_characters = ["_"]
 [prettier]
 allowed = false
 
-# [language_servers]
-# Add language server configuration here if you develop one for Gram
+# Language servers are declared in extension.toml (`[language_servers.gram-lsp]`)
+# and started from `src/lib.rs`. Per-server options go in Zed settings.json under `lsp`.

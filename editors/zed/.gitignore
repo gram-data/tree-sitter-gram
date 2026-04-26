@@ -1,2 +1,5 @@
 # Populated by Zed when loading the extension (grammar clone). Do not commit.
 grammars/
+
+# Rust / Wasm extension build output
+target/

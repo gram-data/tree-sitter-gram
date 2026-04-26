@@ -5,7 +5,19 @@ schema_version = 1
 authors = ["Gram Data Contributors"]
 description = "Support for Gram notation - composable data patterns"
 
+capabilities = [
+  { kind = "process:exec", command = "*", args = ["stdio"] },
+  { kind = "download_file", host = "github.com", path = ["gram-data", "tree-sitter-gram", "**"] },
+]
+
 # path = "grammars/tree-sitter-gram"
 [grammars.gram]
 repository = "file:///Users/akollegger/Developer/gram-data/tree-sitter-gram"
 rev = "7207f53ab244228e6e56d799283619bb0a5d669c"
+
+[language_servers.gram-lsp]
+name = "Gram LSP"
+languages = ["Gram"]
+
+[language_servers.gram-lsp.language_ids]
+Gram = "gram"

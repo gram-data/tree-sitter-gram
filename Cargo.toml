@@ -1,7 +1,8 @@
 [workspace]
 members = [
     ".",
-    "tools/gram-lint"
+    "tools/gram-lint",
+    "tools/lsp"
 ]
 resolver = "2"
 
