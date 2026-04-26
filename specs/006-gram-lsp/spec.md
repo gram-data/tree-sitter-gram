@@ -3,7 +3,7 @@
 **Feature Branch**: `006-gram-lsp`  
 **Created**: 2026-04-26  
 **Status**: Draft  
-**Input**: User description: "An LSP server for the gram grammar which can improve editors and cli tools, helping users to understand syntac and semantics"
+**Input**: User description: "An LSP server for the gram grammar which can improve editors and cli tools, helping users to understand syntax and semantics"
 
 ## Clarifications
 

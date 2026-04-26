@@ -55,7 +55,7 @@ impl Backend {
             Some(n) => n,
             None => return String::new(),
         };
-        let idx = Self::symbol_index(text);
+        let idx = SymbolIndex::from_tree(&tree, text.as_bytes());
         let mut parts = vec![format!("**{}**", n.kind())];
         if let Some(name) = idx.definition_at(offset) {
             parts.push(format!("(definition-introducing `{name}`)"));
@@ -209,7 +209,8 @@ impl LanguageServer for Backend {
         let mut col_utf16 = 0u32;
         let rest = &text[line_start..];
         for (i, ch) in rest.char_indices() {
-            if col_utf16 >= pos.character {
+            let end_utf16 = col_utf16 + ch.len_utf16() as u32;
+            if pos.character < end_utf16 {
                 let offset = line_start + i;
                 let h = Self::hover_text(&text, offset);
                 if h.is_empty() {
@@ -223,7 +224,7 @@ impl LanguageServer for Backend {
                     range: None,
                 }));
             }
-            col_utf16 += ch.len_utf16() as u32;
+            col_utf16 = end_utf16;
         }
         Ok(None)
     }
@@ -374,10 +375,11 @@ fn position_to_byte(source: &str, pos: Position) -> usize {
     let rest = &source[line_start..];
     let mut utf16 = 0u32;
     for (i, ch) in rest.char_indices() {
-        if utf16 >= pos.character {
+        let end_utf16 = utf16 + ch.len_utf16() as u32;
+        if pos.character < end_utf16 {
             return line_start + i;
         }
-        utf16 += ch.len_utf16() as u32;
+        utf16 = end_utf16;
     }
     line_start + rest.len()
 }

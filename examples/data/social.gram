@@ -4,8 +4,6 @@
 // Meet ABK, a person.
 (abk:Person {name: "Andreas"})
 
-(abk:King {name: "Andreas"})
-
 // Some more people.
 // Use a `,` to concatenate a series of elements.
 (ee:Person {name: "Emil"})

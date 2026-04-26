@@ -48,12 +48,10 @@ fn point_to_byte_offset(source: &str, point: Point) -> usize {
     let mut line_start = 0usize;
     for (i, ch) in source.char_indices() {
         if row == point.row {
-            let line_slice = &source[line_start..];
-            let col_b = point.column;
-            if col_b <= line_slice.len() {
-                return line_start + col_b;
-            }
-            return line_start + line_slice.len();
+            let rest = &source[line_start..];
+            let line_len = rest.find('\n').unwrap_or(rest.len());
+            let col_b = point.column.min(line_len);
+            return line_start + col_b;
         }
         if ch == '\n' {
             row += 1;
@@ -74,5 +72,13 @@ mod tests {
         assert_eq!(byte_offset_to_position(s, 1), (0, 1));
         assert_eq!(byte_offset_to_position(s, 2), (0, 2)); // start of `\n`
         assert_eq!(byte_offset_to_position(s, 3), (1, 0)); // `c`
+    }
+
+    #[test]
+    fn point_column_clamped_to_current_line_bytes() {
+        let s = "hi\nyo";
+        // Row 0, column past end of "hi" (2 bytes) must not extend into "yo" or `\n`.
+        let p = Point { row: 0, column: 99 };
+        assert_eq!(point_to_byte_offset(s, p), 2);
     }
 }

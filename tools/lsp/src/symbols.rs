@@ -70,6 +70,7 @@ fn walk(node: Node, source: &[u8], idx: &mut SymbolIndex) {
                         idx.defs
                             .push((text.to_string(), id.start_byte(), id.end_byte()));
                     } else if relationship_parent_field(node).is_some() {
+                        // Bare endpoints on a relationship are use sites (names bind to prior introductions).
                         idx.refs
                             .push((text.to_string(), id.start_byte(), id.end_byte()));
                     }
@@ -111,3 +112,4 @@ fn relationship_parent_field(node: Node) -> Option<&'static str> {
     }
     None
 }
+

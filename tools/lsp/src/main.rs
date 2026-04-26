@@ -155,12 +155,18 @@ fn run_check(paths: &[PathBuf], json: bool) -> i32 {
     } else {
         for f in &files_out {
             for d in &f.diagnostics {
+                let sev = match d.severity {
+                    1 => "error",
+                    2 => "warning",
+                    3 => "info",
+                    4 => "hint",
+                    _ => "diagnostic",
+                };
                 eprintln!(
-                    "{}:{}:{}: {:?}: {}",
+                    "{}:{}:{}: {sev}: {}",
                     f.path,
                     d.range.start.line + 1,
                     d.range.start.character + 1,
-                    d.severity,
                     d.message
                 );
             }

@@ -12,11 +12,11 @@ Cross-file and in-file **go to definition**, **find references**, and **name com
 Treat as a **definition** of an identifier `name` when `name` appears in:
 
 - Subject of a `subject_pattern`,
-- Subject of a `node_pattern`,
-- Left/right subject of a `relationship_pattern`, and subject used as relationship “kind” where the query marks definition,
+- Subject of a `node_pattern` **that carries** introducing structure (`labels` and/or `record`)—that is, the identifier **introduces** a named element in the sense of duplicate-element rules,
+- Subject used as relationship “kind” where the grammar marks a definition site,
 - Identifier or labels in an `identified_annotation`,
 
-as described by `@local.definition` captures in `locals.scm`.
+**MVP note (LSP vs `locals.scm`)**: `queries/locals.scm` also marks bare `node_pattern` identifiers on `relationship_pattern` left/right as `@local.definition` for editor locals. For **navigation and references** in `gram-lsp`, bare left/right endpoints **without** `labels`/`record` are instead classified as **references** (use sites that bind to a prior introducing occurrence in the file). This matches graph-pattern reading: `(a)-[]->(b)` reuses `a` and `b`, it does not introduce new names.
 
 ## References (use sites)
 
