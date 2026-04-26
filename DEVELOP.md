@@ -85,12 +85,14 @@ echo "(person {name: 'Bob'})" | gram-lint
 ## Workflows
 
 - **CI** (`.github/workflows/ci.yml`) — Runs on every push to the default branch and on pull requests when grammar, bindings, or tests change. It runs the test suite and the full build (Wasm + Node prebuilds on all OSes). Use this to **validate that the build succeeds before you tag**; no publishing happens here.
-- **Publish** (`.github/workflows/publish.yml`) — Runs only when you push a **tag**. It runs the same build, then publishes to npm, PyPI, and crates.io. All publish jobs depend on the build, so a failed build blocks publishing.
+- **Publish** (`.github/workflows/publish.yml`) — Runs only when you push a **tag**. It runs the same build, then publishes to npm, PyPI, and crates.io (`tree-sitter-gram`, `gram-lint`, and `gram-lsp`). All publish jobs depend on the build, so a failed build blocks publishing.
 - **Release** (`.github/workflows/release.yml`) — Optional. Also runs on tag push; creates a GitHub Release with Wasm binaries, a source tarball, and attestations. Remove this file if you do not use GitHub Releases.
 
 Build steps live in the reusable **Build** workflow (`.github/workflows/build.yml`), which is used by both CI and Publish.
 
 ## Releasing to npm, PyPI, and crates.io
+
+Merging to the default branch **does not** publish anything. When you **push a `v*` version tag** to GitHub, **Publish** (`.github/workflows/publish.yml`) runs on that tag: npm (`@gram-data/tree-sitter-gram`), PyPI (`tree-sitter-gram`), and crates.io (`tree-sitter-gram`, `gram-lint`, `gram-lsp`). The same tag also runs **Release** if you keep that workflow. You need the usual repo secrets (`NPM_TOKEN`, `PYPI_API_TOKEN`, `CARGO_REGISTRY_TOKEN`).
 
 1. Bump version everywhere using `tree-sitter version 1.2.3`
    - `package.json` (`version`)
@@ -104,7 +106,7 @@ Build steps live in the reusable **Build** workflow (`.github/workflows/build.ym
    git tag -a v1.2.3 -m "Release 1.2.3"
    git push --follow-tags
    ```
-5. The **Publish** workflow runs on the tag: it builds again and publishes to npm, PyPI, and crates.io. Optionally, **Release** creates the GitHub Release.
+5. The **Publish** workflow runs on the tag: it builds again and publishes to npm, PyPI, and crates.io (Rust crates `tree-sitter-gram`, `gram-lint`, `gram-lsp` in that order). Optionally, **Release** creates the GitHub Release.
 
 ## Local install (without publishing)
 
