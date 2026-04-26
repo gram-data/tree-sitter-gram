@@ -5,6 +5,7 @@ A [Zed](https://zed.dev) extension providing syntax highlighting and language su
 ## Features
 
 - **Syntax Highlighting**: Full syntax highlighting for all Gram constructs including subjects, nodes, relationships, and data types
+- **Language server**: When [`gram-lsp`](../../tools/lsp/) is on your `PATH`, Zed starts it for `.gram` files (diagnostics, hover, definitions, references, completions)
 - **Subject Pattern Matching**: Automatic matching for `()`, `[]`, and `{}`
 - **File Type Detection**: Automatic recognition of `.gram` files
 - **Smart Indentation**: Proper indentation handling for nested structures
@@ -40,7 +41,7 @@ Then restart Zed.
 
 ## Usage
 
-Once installed, the extension automatically provides syntax highlighting for any file with a `.gram` extension.
+Once installed, the extension provides syntax highlighting for `.gram` files. With `gram-lsp` installed and on `PATH`, Zed also attaches the language server automatically.
 
 ### Example Gram Syntax
 
@@ -108,14 +109,25 @@ To work on this extension:
    - Select the `editors/zed` directory
    - Restart Zed
 
-3. Make changes to the extension files
-4. Restart Zed to see changes
+3. Build the Wasm extension once after Rust changes (Zed loads the cdylib):
+
+   ```bash
+   rustup target add wasm32-wasip1
+   cd editors/zed && cargo check --target wasm32-wasip1
+   ```
+
+4. Make changes to the extension files
+5. Restart Zed to see changes
 
 ### Extension Structure
 
 ```
 editors/zed/
-├── extension.toml          # Extension metadata; points at grammar repo (repository + rev)
+├── Cargo.toml              # Wasm extension crate (zed_extension_api)
+├── build.rs                # Embeds `extension.toml` version for release asset lookup
+├── Cargo.lock
+├── src/lib.rs              # `language_server_command`: PATH, then GitHub release download
+├── extension.toml          # Extension metadata; grammar repo + `[language_servers.gram-lsp]`
 ├── languages/
 │   └── gram/
 │       ├── config.toml     # Zed language config (brackets, suffixes, etc.)
@@ -144,6 +156,12 @@ After either command, `extension.toml` is updated in place. For local dev you ty
 
 **If Zed shows an old version (e.g. 0.1.11) after installing the dev extension:** Zed may be using a cached clone of the grammar (at an old rev) or an older copy of the extension. Try: (1) Uninstall the Gram extension from Zed’s Extensions panel. (2) Delete the grammar cache: remove `editors/zed/grammars/` if it exists (Zed recreates it when needed). (3) Run `npm run zed:dev` again so `extension.toml` has the current version and rev. (4) In Zed, run “Install Dev Extension” and select `editors/zed` again. Restart Zed and recheck the extension version.
 
+### Bundled `gram-lsp` (GitHub Releases)
+
+Zed extensions ship a **Wasm** adapter only; native `gram-lsp` binaries cannot be embedded in that bundle. Instead, when `gram-lsp` is **not** on `PATH`, the extension downloads a platform archive from **this repo’s GitHub Release** whose tag is **`v` + `version` from `extension.toml`** (for example `v0.3.5` for `version = "0.3.5"`).
+
+Maintainers: pushing a **`v*`** tag runs **`.github/workflows/gram-lsp-release-assets.yml`**, which builds `gram-lsp` for common targets and uploads `gram-lsp-{target}.tar.gz` to the matching GitHub Release. Filenames must stay in sync with `editors/zed/src/lib.rs`. Keep `extension.toml`’s `version` aligned with the tag you ship to the Zed extension registry (for example tag `v0.3.5` and `version = "0.3.5"`) so installs download the intended binaries.
+
 ## Contributing
 
 Contributions are welcome! Please see the main [repository](https://github.com/gram-data/tree-sitter-gram) for contribution guidelines.
@@ -156,7 +174,7 @@ To improve syntax highlighting and editor behavior:
 
 ## License
 
-This extension is part of the tree-sitter-gram project and is licensed under the ISC License. See the main repository's [LICENSE](../../LICENSE) file for details.
+This extension is part of the tree-sitter-gram project and is licensed under the MIT License. See the main repository's [LICENSE](../../LICENSE) file for details.
 
 ## Learn More
 

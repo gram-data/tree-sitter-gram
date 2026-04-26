@@ -96,6 +96,8 @@ fi
 echo "✅ Validating extension structure..."
 required_files=(
     "$ZED_EXTENSION_DIR/extension.toml"
+    "$ZED_EXTENSION_DIR/Cargo.toml"
+    "$ZED_EXTENSION_DIR/src/lib.rs"
     "$ZED_EXTENSION_DIR/languages/gram/config.toml"
     "$ZED_EXTENSION_DIR/languages/gram/highlights.scm"
     "$ZED_EXTENSION_DIR/languages/gram/indents.scm"
@@ -111,6 +113,20 @@ for file in "${required_files[@]}"; do
 done
 
 echo "✅ Extension validation passed!"
+
+# Optional: ensure the Wasm extension crate compiles (Zed loads the cdylib target).
+if command -v cargo &> /dev/null; then
+    if rustup target list --installed 2>/dev/null | grep -q 'wasm32-wasip1'; then
+        echo "🦀 Checking Zed extension Wasm build..."
+        (cd "$ZED_EXTENSION_DIR" && cargo check --target wasm32-wasip1 --locked) || {
+            echo "⚠️  Wasm check failed (install target: rustup target add wasm32-wasip1)"
+        }
+    else
+        echo "ℹ️  Skipping Wasm check (wasm32-wasip1 not installed; rustup target add wasm32-wasip1)"
+    fi
+else
+    echo "ℹ️  Skipping Wasm check (cargo not on PATH)"
+fi
 
 # Test the extension by creating a test file
 echo "🧪 Testing syntax highlighting..."

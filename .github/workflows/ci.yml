@@ -13,6 +13,9 @@ on:
       - binding.gyp
       - package.json
       - tree-sitter.json
+      - Cargo.toml
+      - tools/**
+      - .github/workflows/**
   pull_request:
     paths:
       - grammar.js
@@ -22,6 +25,9 @@ on:
       - binding.gyp
       - package.json
       - tree-sitter.json
+      - Cargo.toml
+      - tools/**
+      - .github/workflows/**
   workflow_dispatch:
 
 concurrency:

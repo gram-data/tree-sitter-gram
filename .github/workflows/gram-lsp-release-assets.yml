@@ -1,0 +1,81 @@
+# Cross-built `gram-lsp` archives attached to the Git tag’s GitHub Release.
+# The Zed extension downloads `gram-lsp-{target}.tar.gz` when `gram-lsp` is not on PATH
+# (see editors/zed/src/lib.rs and extension.toml `capabilities`).
+name: Gram LSP release assets
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gram-lsp-release-assets-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-gram-lsp:
+    name: ${{ matrix.target }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15
+            target: aarch64-apple-darwin
+          - os: macos-15-intel
+            target: x86_64-apple-darwin
+          - os: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+          - os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+          - os: windows-2025
+            target: x86_64-pc-windows-msvc
+          - os: windows-11-arm
+            target: aarch64-pc-windows-msvc
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - name: Build gram-lsp
+        run: cargo build -p gram-lsp --release --target ${{ matrix.target }}
+      - name: Package (Unix)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          set -eux
+          mkdir pack
+          cp "target/${{ matrix.target }}/release/gram-lsp" pack/gram-lsp
+          tar -C pack -czf "gram-lsp-${{ matrix.target }}.tar.gz" gram-lsp
+      - name: Package (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path pack
+          Copy-Item "target/${{ matrix.target }}/release/gram-lsp.exe" pack/gram-lsp.exe
+          tar -C pack -czf "gram-lsp-${{ matrix.target }}.tar.gz" gram-lsp.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gram-lsp-${{ matrix.target }}
+          path: gram-lsp-${{ matrix.target }}.tar.gz
+
+  upload-release-assets:
+    name: Upload to GitHub Release
+    needs: build-gram-lsp
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: gram-lsp-*
+          path: dist
+          merge-multiple: true
+      - name: List assets
+        run: find dist -type f -print
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
