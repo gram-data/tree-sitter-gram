@@ -6,18 +6,18 @@ fn gram() -> Command {
     Command::cargo_bin("gram").unwrap()
 }
 
+// Point at an unreachable address so registry fetches fail immediately without
+// relying on external network availability.
+const FAKE_REGISTRY: &str = "http://127.0.0.1:1/registry.toml";
+
 #[test]
-fn extension_list_runs_without_error() {
-    // List may fail to fetch registry in CI (no network), but should not panic
-    let result = gram().args(["extension", "list", "--installed"]).output();
-    assert!(result.is_ok(), "command should not panic");
-    let output = result.unwrap();
-    // Should print something about installed extensions
-    let stdout = String::from_utf8_lossy(&output.stdout);
-    assert!(
-        stdout.contains("Installed extensions") || output.status.success(),
-        "expected installed header or success"
-    );
+fn extension_list_installed_requires_no_network() {
+    // --installed only reads ~/.gram/extensions.toml; no registry fetch needed.
+    gram()
+        .args(["extension", "list", "--installed"])
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("Installed extensions"));
 }
 
 #[test]
@@ -30,22 +30,32 @@ fn extension_remove_unknown_exits_nonzero() {
 }
 
 #[test]
-fn extension_install_unknown_exits_nonzero() {
-    // This will try to fetch registry; if network unavailable it exits 1 with network error.
-    // If network available but extension not in registry, it exits 2.
+fn extension_install_fails_when_registry_unreachable() {
     gram()
-        .args(["extension", "install", "nonexistent-extension-xyz-abc"])
+        .args(["extension", "install", "lsp"])
+        .env("GRAM_REGISTRY_URL", FAKE_REGISTRY)
+        .assert()
+        .failure()
+        .stderr(predicate::str::contains("failed to fetch registry"));
+}
+
+#[test]
+fn extension_install_unknown_name_exits_nonzero_with_empty_registry() {
+    // Serve an empty registry (connection refused = immediate failure, exit 1).
+    // This verifies the CLI exits non-zero without depending on real network.
+    gram()
+        .args(["extension", "install", "no-such-extension"])
+        .env("GRAM_REGISTRY_URL", FAKE_REGISTRY)
         .assert()
         .failure();
 }
 
 #[test]
-fn extension_install_and_remove_roundtrip() {
-    // Set a fake GRAM home so we don't touch the real ~/.gram
+fn installed_extensions_toml_roundtrip() {
+    // Verifies the TOML data model used by extension commands, not the CLI itself.
+    // Full CLI roundtrip requires network for `install`; tested in integration/e2e suite.
     let fake_home = tempdir().unwrap();
 
-    // We can't actually download without network access in all CI environments,
-    // so we simulate the roundtrip by writing a fake binary and extensions.toml directly.
     let bin_dir = fake_home.path().join(".gram").join("bin");
     std::fs::create_dir_all(&bin_dir).unwrap();
 
@@ -57,14 +67,10 @@ fn extension_install_and_remove_roundtrip() {
         "[[installed]]\nname = \"fake\"\nversion = \"0.1.0\"\nbin_path = \"{}\"\ninstalled_at = \"2026-01-01T00:00:00Z\"\n",
         bin_path.display()
     );
-    std::fs::write(&ext_toml_path, toml_content).unwrap();
+    std::fs::write(&ext_toml_path, &toml_content).unwrap();
 
-    // Verify the binary exists
-    assert!(bin_path.exists());
-    assert!(ext_toml_path.exists());
-
-    // Read back and verify TOML
     let content = std::fs::read_to_string(&ext_toml_path).unwrap();
     assert!(content.contains("name = \"fake\""));
     assert!(content.contains("version = \"0.1.0\""));
+    assert!(bin_path.exists());
 }

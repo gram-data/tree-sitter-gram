@@ -116,11 +116,11 @@ gram-lsp-x86_64-pc-windows-msvc.zip
 
 ---
 
-## 7. `gram-lint` Deprecation Path
+## 7. `gram-lint` Removal
 
-**Decision**: Keep `gram-lint` in the workspace and in `Cargo.toml` workspace members for at least one major release after `gram` 1.0. Add a deprecation notice to its `--help` output pointing users to `gram check`.
+**Decision**: Remove `gram-lint` from the workspace immediately. The crate is deleted rather than kept with a deprecation shim.
 
-**Rationale**: Breaking existing user scripts immediately is poor form. The binary remains fully functional; only the recommendation changes.
+**Rationale**: The project is pre-1.0 and `gram-lint` had no published adoption surface beyond early internal use. `gram check` is a strict superset: same input modes (files, directories, stdin, `-e`), same `--tree` flag, plus JSON output and semantic diagnostics. The cost of a forced migration is low; the cost of maintaining a shim indefinitely is not. A note in the release changelog is sufficient for any existing users.
 
 ---
 

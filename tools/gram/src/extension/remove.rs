@@ -30,7 +30,8 @@ pub fn run(args: RemoveArgs) -> i32 {
     installed.installed.retain(|e| e.name != args.name);
 
     if let Err(e) = save_installed(&installed) {
-        eprintln!("warning: removed binary but failed to update extensions.toml: {e}");
+        eprintln!("error: removed binary but failed to update extensions.toml: {e}");
+        return 1;
     }
 
     eprintln!("Removed '{}'", args.name);

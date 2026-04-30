@@ -125,6 +125,16 @@ pub fn run(args: InstallArgs) -> i32 {
         }
     }
 
+    // On Windows, rename fails if the destination already exists; remove it first.
+    #[cfg(windows)]
+    if final_path.exists() {
+        if let Err(e) = std::fs::remove_file(&final_path) {
+            eprintln!("error: failed to remove existing binary: {e}");
+            let _ = std::fs::remove_file(&tmp_path);
+            return 1;
+        }
+    }
+
     if let Err(e) = std::fs::rename(&tmp_path, &final_path) {
         eprintln!("error: failed to install binary: {e}");
         let _ = std::fs::remove_file(&tmp_path);

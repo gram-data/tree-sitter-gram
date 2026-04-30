@@ -18,13 +18,16 @@ struct RegistryManifest {
 }
 
 pub fn fetch() -> Result<Vec<RegistryEntry>, String> {
+    let url = std::env::var("GRAM_REGISTRY_URL")
+        .unwrap_or_else(|_| REGISTRY_URL.to_string());
+
     let client = reqwest::blocking::Client::builder()
         .user_agent("gram-cli")
         .build()
         .map_err(|e| e.to_string())?;
 
     let resp = client
-        .get(REGISTRY_URL)
+        .get(&url)
         .send()
         .map_err(|e| format!("failed to fetch registry: {e}"))?;
 

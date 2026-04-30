@@ -97,7 +97,7 @@ New crate lives at `tools/gram/` within the existing workspace. All source paths
 
 - [X] T025 [US4] Configure cargo-dist in `tools/gram/Cargo.toml` `[package.metadata.dist]`: set `targets` to all 5 supported platform triples, enable installer generation, and set the install path to `~/.gram/bin/`
 - [X] T026 [US4] Extend `.github/workflows/release.yml` to include `gram` in the build matrix and upload platform-specific archives to GitHub Releases following the naming convention `gram-<target-triple>.(tar.gz|zip)`
-- [X] T027 [P] [US4] Add deprecation warning to `tools/gram-lint/src/main.rs`: print `"note: gram-lint is deprecated; use 'gram check' instead"` to stderr on startup (before processing)
+- [X] T027 [P] [US4] Remove `tools/gram-lint/` crate from workspace entirely (decision revised from deprecation-shim to immediate removal; see research.md §7)
 - [X] T028 [US4] Verify in `tools/gram/src/check.rs` that the tool handles a directory containing no `.gram` files gracefully: collect zero `FileResult`s, print an informational message to stderr, and exit 0
 
 **Checkpoint**: User Story 4 is complete — `gram` can be installed and used in CI pipelines without Rust.

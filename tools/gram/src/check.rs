@@ -50,7 +50,7 @@ pub fn run(args: CheckArgs) -> i32 {
         results.push(analyze(expr.clone(), "-e".to_string()));
     } else if args.paths.is_empty() {
         match read_stdin() {
-            Ok(src) => results.push(analyze(src, "<stdin>".to_string())),
+            Ok(src) => results.push(analyze(src, "-".to_string())),
             Err(e) => {
                 eprintln!("error reading stdin: {e}");
                 return 2;
@@ -63,7 +63,7 @@ pub fn run(args: CheckArgs) -> i32 {
                 for entry in WalkDir::new(path)
                     .into_iter()
                     .filter_map(|e| e.ok())
-                    .filter(|e| e.path().extension().is_some_and(|x| x == "gram"))
+                    .filter(|e| e.path().extension().and_then(|s| s.to_str()) == Some("gram"))
                 {
                     found = true;
                     match std::fs::read_to_string(entry.path()) {
@@ -189,10 +189,17 @@ fn print_pretty(results: &[SourceResult]) {
 }
 
 fn byte_to_char(s: &str, byte: usize) -> usize {
-    s[..byte.min(s.len())].chars().count()
+    let byte = byte.min(s.len());
+    // Snap back to a valid char boundary so we never slice mid-codepoint.
+    let byte = (0..=byte).rev().find(|&i| s.is_char_boundary(i)).unwrap_or(0);
+    s[..byte].chars().count()
 }
 
 fn run_tree(args: &CheckArgs) -> i32 {
+    if args.paths.len() > 1 {
+        eprintln!("error: --tree accepts at most one input");
+        return 2;
+    }
     let src = if let Some(expr) = &args.expression {
         expr.clone()
     } else if args.paths.is_empty() {
