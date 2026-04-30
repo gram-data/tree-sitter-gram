@@ -21,9 +21,9 @@ New crate lives at `tools/gram/` within the existing workspace. All source paths
 
 **Purpose**: Register the new crate and create the scaffolding that all subsequent work depends on.
 
-- [ ] T001 Add `"tools/gram"` to the `members` array in root `Cargo.toml`
-- [ ] T002 Create `tools/gram/Cargo.toml` with `[[bin]] name = "gram"`, edition 2021, version 0.3.6, and dependencies: clap 4.5 (features=["derive","cargo"]), serde + serde_json 1.x, reqwest 0.12 (features=["blocking"]), directories 5.x, walkdir 2.x, toml 0.8; workspace path deps for `gram-lsp` (`path = "../lsp"`) and `tree-sitter-gram`
-- [ ] T003 [P] Create directory structure: `tools/gram/src/extension/` and `tools/gram/tests/`
+- [X] T001 Add `"tools/gram"` to the `members` array in root `Cargo.toml`
+- [X] T002 Create `tools/gram/Cargo.toml` with `[[bin]] name = "gram"`, edition 2021, version 0.3.6, and dependencies: clap 4.5 (features=["derive","cargo"]), serde + serde_json 1.x, reqwest 0.12 (features=["blocking"]), directories 5.x, walkdir 2.x, toml 0.8; workspace path deps for `gram-lsp` (`path = "../lsp"`) and `tree-sitter-gram`
+- [X] T003 [P] Create directory structure: `tools/gram/src/extension/` and `tools/gram/tests/`
 
 ---
 
@@ -33,9 +33,9 @@ New crate lives at `tools/gram/` within the existing workspace. All source paths
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T004 Create `tools/gram/src/main.rs` with clap `Cli` struct: `check` subcommand (`CheckArgs` with PATHS, `-e/--expression`, `--json`, `--tree`, `--strict`), `extension` subcommand (`ExtensionSubcommand` enum for install/list/remove), and a catch-all `args: Vec<String>` for dispatch fallthrough
-- [ ] T005 [P] Create `tools/gram/src/types.rs` with serde-derived structs: `Severity` enum (`error`/`warning`/`information`/`hint`), `Position` (`line: u32`, `character: u32`), `Range` (`start`, `end`), `Diagnostic` (`severity`, `message`, `range`), `FileResult` (`path: String`, `diagnostics: Vec<Diagnostic>`), `CheckResult` (`schema_version: u32`, `tool: String`, `files: Vec<FileResult>`)
-- [ ] T006 [P] Create stub module files — each with a `pub fn run(...)` stub returning `Ok(())` — so `cargo build -p gram` succeeds: `tools/gram/src/check.rs`, `tools/gram/src/dispatch.rs`, `tools/gram/src/extension/mod.rs`, `tools/gram/src/extension/install.rs`, `tools/gram/src/extension/list.rs`, `tools/gram/src/extension/remove.rs`, `tools/gram/src/extension/registry.rs`
+- [X] T004 Create `tools/gram/src/main.rs` with clap `Cli` struct: `check` subcommand (`CheckArgs` with PATHS, `-e/--expression`, `--json`, `--tree`, `--strict`), `extension` subcommand (`ExtensionSubcommand` enum for install/list/remove), and a catch-all `args: Vec<String>` for dispatch fallthrough
+- [X] T005 [P] Create `tools/gram/src/types.rs` with serde-derived structs: `Severity` enum (`error`/`warning`/`information`/`hint`), `Position` (`line: u32`, `character: u32`), `Range` (`start`, `end`), `Diagnostic` (`severity`, `message`, `range`), `FileResult` (`path: String`, `diagnostics: Vec<Diagnostic>`), `CheckResult` (`schema_version: u32`, `tool: String`, `files: Vec<FileResult>`)
+- [X] T006 [P] Create stub module files — each with a `pub fn run(...)` stub returning `Ok(())` — so `cargo build -p gram` succeeds: `tools/gram/src/check.rs`, `tools/gram/src/dispatch.rs`, `tools/gram/src/extension/mod.rs`, `tools/gram/src/extension/install.rs`, `tools/gram/src/extension/list.rs`, `tools/gram/src/extension/remove.rs`, `tools/gram/src/extension/registry.rs`
 
 **Checkpoint**: `cargo build -p gram` succeeds — user story implementation can now begin in parallel.
 
@@ -49,14 +49,14 @@ New crate lives at `tools/gram/` within the existing workspace. All source paths
 
 ### Implementation for User Story 1
 
-- [ ] T007 [P] [US1] Implement single-file checking in `tools/gram/src/check.rs`: read file bytes, call gram-lsp library's `analyze_source()`, collect returned diagnostics into a `FileResult`
-- [ ] T008 [P] [US1] Implement recursive directory traversal in `tools/gram/src/check.rs` using walkdir: collect all `*.gram` files under each directory argument, run single-file check on each
-- [ ] T009 [US1] Implement stdin reading (no PATH args and no `-e`) and `-e` inline expression in `tools/gram/src/check.rs`: read from `std::io::stdin()` or parse the expression string directly
-- [ ] T010 [US1] Implement `--json` output in `tools/gram/src/check.rs`: build `CheckResult` with `schema_version: 1` and `tool: "gram/<version>"`, serialize with `serde_json::to_string_pretty` and print to stdout
-- [ ] T011 [US1] Implement `--tree` flag in `tools/gram/src/check.rs`: call tree-sitter parse on the input and print the s-expression via `tree.root_node().to_sexp()`
-- [ ] T012 [US1] Implement exit code logic in `tools/gram/src/check.rs`: exit 0 (no errors), exit 1 (at least one error-severity diagnostic), exit 2 (invocation error); respect `--strict` by treating warnings as errors
-- [ ] T013 [US1] Wire `check` subcommand in `tools/gram/src/main.rs` to call `check::run()` and pass the process exit code from the result
-- [ ] T014 [P] [US1] Write integration tests in `tools/gram/tests/cli_check.rs` using `assert_cmd`: valid file exits 0, invalid file exits 1 with error message, directory traversal finds all files, `-e` expression, stdin pipe, `--json` output validates schema, `--tree` outputs s-expression, empty directory exits 0 with informational message
+- [X] T007 [P] [US1] Implement single-file checking in `tools/gram/src/check.rs`: read file bytes, call gram-lsp library's `analyze_source()`, collect returned diagnostics into a `FileResult`
+- [X] T008 [P] [US1] Implement recursive directory traversal in `tools/gram/src/check.rs` using walkdir: collect all `*.gram` files under each directory argument, run single-file check on each
+- [X] T009 [US1] Implement stdin reading (no PATH args and no `-e`) and `-e` inline expression in `tools/gram/src/check.rs`: read from `std::io::stdin()` or parse the expression string directly
+- [X] T010 [US1] Implement `--json` output in `tools/gram/src/check.rs`: build `CheckResult` with `schema_version: 1` and `tool: "gram/<version>"`, serialize with `serde_json::to_string_pretty` and print to stdout
+- [X] T011 [US1] Implement `--tree` flag in `tools/gram/src/check.rs`: call tree-sitter parse on the input and print the s-expression via `tree.root_node().to_sexp()`
+- [X] T012 [US1] Implement exit code logic in `tools/gram/src/check.rs`: exit 0 (no errors), exit 1 (at least one error-severity diagnostic), exit 2 (invocation error); respect `--strict` by treating warnings as errors
+- [X] T013 [US1] Wire `check` subcommand in `tools/gram/src/main.rs` to call `check::run()` and pass the process exit code from the result
+- [X] T014 [P] [US1] Write integration tests in `tools/gram/tests/cli_check.rs` using `assert_cmd`: valid file exits 0, invalid file exits 1 with error message, directory traversal finds all files, `-e` expression, stdin pipe, `--json` output validates schema, `--tree` outputs s-expression, empty directory exits 0 with informational message
 
 **Checkpoint**: User Story 1 is fully functional and independently testable — MVP deliverable.
 
@@ -72,16 +72,16 @@ New crate lives at `tools/gram/` within the existing workspace. All source paths
 
 ### Implementation for User Story 2
 
-- [ ] T015 [P] [US2] Implement `RegistryEntry` struct and registry manifest fetching in `tools/gram/src/extension/registry.rs`: HTTP GET the manifest URL with reqwest blocking, parse `[[extension]]` TOML array into `Vec<RegistryEntry>`
-- [ ] T016 [P] [US2] Implement `InstalledExtension` struct (`name`, `version`, `bin_path`, `installed_at`) and `~/.gram/extensions.toml` read/write helpers in `tools/gram/src/extension/mod.rs` using the `directories` crate for home dir resolution
-- [ ] T017 [US2] Implement platform target triple detection in `tools/gram/src/extension/install.rs`: map `std::env::consts::OS` + `ARCH` (and optionally the build-time `TARGET` env var) to supported triples (`x86_64-unknown-linux-musl`, `aarch64-unknown-linux-musl`, `x86_64-apple-darwin`, `aarch64-apple-darwin`, `x86_64-pc-windows-msvc`)
-- [ ] T018 [US2] Implement GitHub Releases API query in `tools/gram/src/extension/install.rs`: fetch `https://api.github.com/repos/<github>/releases/latest` for latest or `/releases/tags/v<version>` for pinned; extract matching asset URL for the detected target triple
-- [ ] T019 [US2] Implement archive download + extract in `tools/gram/src/extension/install.rs`: download to a temp file, extract `.tar.gz` (Unix) or `.zip` (Windows), atomically rename the binary into `~/.gram/bin/<bin-name>`, set executable permissions (Unix), and record entry in `~/.gram/extensions.toml`
-- [ ] T020 [US2] Implement `~/.gram/bin/` PATH check in `tools/gram/src/extension/install.rs`: after install, check if the bin dir is on `$PATH` and print a one-time warning with the appropriate `export PATH` snippet if not
-- [ ] T021 [US2] Implement `gram extension list` in `tools/gram/src/extension/list.rs`: show installed extensions (from `extensions.toml`) and available extensions (from registry); support `--installed`, `--available`, and `--json` flags
-- [ ] T022 [US2] Implement `gram extension remove` in `tools/gram/src/extension/remove.rs`: delete `~/.gram/bin/<bin-name>`, remove the entry from `~/.gram/extensions.toml`, exit non-zero if not installed
-- [ ] T023 [US2] Wire all extension subcommands in `tools/gram/src/extension/mod.rs`: dispatch to `install::run`, `list::run`, `remove::run` based on the clap subcommand
-- [ ] T024 [P] [US2] Write integration tests for extension commands in `tools/gram/tests/cli_extension.rs`: list shows registry entries, install writes binary to temp dir (mock or real download), remove deletes binary and errors when not installed, network failure exits 1 with clear error
+- [X] T015 [P] [US2] Implement `RegistryEntry` struct and registry manifest fetching in `tools/gram/src/extension/registry.rs`: HTTP GET the manifest URL with reqwest blocking, parse `[[extension]]` TOML array into `Vec<RegistryEntry>`
+- [X] T016 [P] [US2] Implement `InstalledExtension` struct (`name`, `version`, `bin_path`, `installed_at`) and `~/.gram/extensions.toml` read/write helpers in `tools/gram/src/extension/mod.rs` using the `directories` crate for home dir resolution
+- [X] T017 [US2] Implement platform target triple detection in `tools/gram/src/extension/install.rs`: map `std::env::consts::OS` + `ARCH` (and optionally the build-time `TARGET` env var) to supported triples (`x86_64-unknown-linux-musl`, `aarch64-unknown-linux-musl`, `x86_64-apple-darwin`, `aarch64-apple-darwin`, `x86_64-pc-windows-msvc`)
+- [X] T018 [US2] Implement GitHub Releases API query in `tools/gram/src/extension/install.rs`: fetch `https://api.github.com/repos/<github>/releases/latest` for latest or `/releases/tags/v<version>` for pinned; extract matching asset URL for the detected target triple
+- [X] T019 [US2] Implement archive download + extract in `tools/gram/src/extension/install.rs`: download to a temp file, extract `.tar.gz` (Unix) or `.zip` (Windows), atomically rename the binary into `~/.gram/bin/<bin-name>`, set executable permissions (Unix), and record entry in `~/.gram/extensions.toml`
+- [X] T020 [US2] Implement `~/.gram/bin/` PATH check in `tools/gram/src/extension/install.rs`: after install, check if the bin dir is on `$PATH` and print a one-time warning with the appropriate `export PATH` snippet if not
+- [X] T021 [US2] Implement `gram extension list` in `tools/gram/src/extension/list.rs`: show installed extensions (from `extensions.toml`) and available extensions (from registry); support `--installed`, `--available`, and `--json` flags
+- [X] T022 [US2] Implement `gram extension remove` in `tools/gram/src/extension/remove.rs`: delete `~/.gram/bin/<bin-name>`, remove the entry from `~/.gram/extensions.toml`, exit non-zero if not installed
+- [X] T023 [US2] Wire all extension subcommands in `tools/gram/src/extension/mod.rs`: dispatch to `install::run`, `list::run`, `remove::run` based on the clap subcommand
+- [X] T024 [P] [US2] Write integration tests for extension commands in `tools/gram/tests/cli_extension.rs`: list shows registry entries, install writes binary to temp dir (mock or real download), remove deletes binary and errors when not installed, network failure exits 1 with clear error
 
 **Checkpoint**: User Story 2 is fully functional — extension install/list/remove work independently.
 
@@ -95,10 +95,10 @@ New crate lives at `tools/gram/` within the existing workspace. All source paths
 
 ### Implementation for User Story 4
 
-- [ ] T025 [US4] Configure cargo-dist in `tools/gram/Cargo.toml` `[package.metadata.dist]`: set `targets` to all 5 supported platform triples, enable installer generation, and set the install path to `~/.gram/bin/`
-- [ ] T026 [US4] Extend `.github/workflows/release.yml` to include `gram` in the build matrix and upload platform-specific archives to GitHub Releases following the naming convention `gram-<target-triple>.(tar.gz|zip)`
-- [ ] T027 [P] [US4] Add deprecation warning to `tools/gram-lint/src/main.rs`: print `"note: gram-lint is deprecated; use 'gram check' instead"` to stderr on startup (before processing)
-- [ ] T028 [US4] Verify in `tools/gram/src/check.rs` that the tool handles a directory containing no `.gram` files gracefully: collect zero `FileResult`s, print an informational message to stderr, and exit 0
+- [X] T025 [US4] Configure cargo-dist in `tools/gram/Cargo.toml` `[package.metadata.dist]`: set `targets` to all 5 supported platform triples, enable installer generation, and set the install path to `~/.gram/bin/`
+- [X] T026 [US4] Extend `.github/workflows/release.yml` to include `gram` in the build matrix and upload platform-specific archives to GitHub Releases following the naming convention `gram-<target-triple>.(tar.gz|zip)`
+- [X] T027 [P] [US4] Add deprecation warning to `tools/gram-lint/src/main.rs`: print `"note: gram-lint is deprecated; use 'gram check' instead"` to stderr on startup (before processing)
+- [X] T028 [US4] Verify in `tools/gram/src/check.rs` that the tool handles a directory containing no `.gram` files gracefully: collect zero `FileResult`s, print an informational message to stderr, and exit 0
 
 **Checkpoint**: User Story 4 is complete — `gram` can be installed and used in CI pipelines without Rust.
 
@@ -112,11 +112,11 @@ New crate lives at `tools/gram/` within the existing workspace. All source paths
 
 ### Implementation for User Story 3
 
-- [ ] T029 [US3] Implement `$PATH` search for `gram-<name>` binary in `tools/gram/src/dispatch.rs`: iterate `$PATH` entries, look for an executable file named `gram-<subcommand>`, return the first match
-- [ ] T030 [US3] Implement exec with argument and exit code forwarding in `tools/gram/src/dispatch.rs`: on Unix use `std::os::unix::process::CommandExt::exec` for true process replacement; on Windows use `Command::spawn` + `wait` and forward the exit code
-- [ ] T031 [US3] Implement the "unknown sub-command" error in `tools/gram/src/dispatch.rs` when no matching `gram-<name>` binary is found: print the error message from `contracts/cli-commands.md` and exit 2
-- [ ] T032 [US3] Ensure built-in priority in `tools/gram/src/main.rs`: `check`, `extension`, `help`, `--version`, `-V` are matched before the catch-all dispatch path is reached
-- [ ] T033 [P] [US3] Write integration tests for dispatch in `tools/gram/tests/cli_dispatch.rs`: PATH binary found (args forwarded, exit code passes through), no binary found (prints error + exits 2), built-in name (check) is not dispatched to PATH binary
+- [X] T029 [US3] Implement `$PATH` search for `gram-<name>` binary in `tools/gram/src/dispatch.rs`: iterate `$PATH` entries, look for an executable file named `gram-<subcommand>`, return the first match
+- [X] T030 [US3] Implement exec with argument and exit code forwarding in `tools/gram/src/dispatch.rs`: on Unix use `std::os::unix::process::CommandExt::exec` for true process replacement; on Windows use `Command::spawn` + `wait` and forward the exit code
+- [X] T031 [US3] Implement the "unknown sub-command" error in `tools/gram/src/dispatch.rs` when no matching `gram-<name>` binary is found: print the error message from `contracts/cli-commands.md` and exit 2
+- [X] T032 [US3] Ensure built-in priority in `tools/gram/src/main.rs`: `check`, `extension`, `help`, `--version`, `-V` are matched before the catch-all dispatch path is reached
+- [X] T033 [P] [US3] Write integration tests for dispatch in `tools/gram/tests/cli_dispatch.rs`: PATH binary found (args forwarded, exit code passes through), no binary found (prints error + exits 2), built-in name (check) is not dispatched to PATH binary
 
 **Checkpoint**: All user stories are independently functional — the full extension dispatch chain works end-to-end.
 
@@ -126,11 +126,11 @@ New crate lives at `tools/gram/` within the existing workspace. All source paths
 
 **Purpose**: Quality gates and final validation across all user stories.
 
-- [ ] T034 [P] Run `cargo test -p gram` and fix all test failures
-- [ ] T035 [P] Run `cargo clippy -p gram -- -D warnings` and fix all warnings
-- [ ] T036 Validate every `gram check` and `gram extension` scenario in `specs/007-unified-gram-cli/quickstart.md` works with the built binary
-- [ ] T037 [P] Verify `gram --version` outputs the correct semver from `tools/gram/Cargo.toml`
-- [ ] T038 Verify `cargo build` succeeds for the entire workspace (no regressions in `tools/gram-lint` or `tools/lsp`)
+- [X] T034 [P] Run `cargo test -p gram` and fix all test failures
+- [X] T035 [P] Run `cargo clippy -p gram -- -D warnings` and fix all warnings
+- [X] T036 Validate every `gram check` and `gram extension` scenario in `specs/007-unified-gram-cli/quickstart.md` works with the built binary
+- [X] T037 [P] Verify `gram --version` outputs the correct semver from `tools/gram/Cargo.toml`
+- [X] T038 Verify `cargo build` succeeds for the entire workspace (no regressions in `tools/gram-lint` or `tools/lsp`)
 
 ---
 

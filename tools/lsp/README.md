@@ -1,12 +1,13 @@
 # gram-lsp
 
-Rust [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) implementation for **Gram** (`.gram`) files in the [tree-sitter-gram](https://github.com/gram-data/tree-sitter-gram) workspace. It shares parsing and diagnostics with the `tree-sitter-gram` crate and the `gram-lint` tool.
+Rust [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) implementation for **Gram** (`.gram`) files in the [tree-sitter-gram](https://github.com/gram-data/tree-sitter-gram) workspace. It shares parsing and diagnostics with the `tree-sitter-gram` crate and the `gram` tool.
 
 ## Features
 
 - **stdio LSP** — diagnostics, hover, go to definition, find references, basic completions.
-- **`gram-lsp check`** — same analysis as the editor path; `--json` emits the schema described in `specs/006-gram-lsp/contracts/cli-diagnostics.md`.
 - **Semantic checks** — duplicate *named* element definitions inside a `subject_pattern_elements` list (per spec).
+
+> To validate `.gram` files from the command line, use [`gram check`](../gram/). `gram-lsp` focuses purely on the language server.
 
 ## Build
 
@@ -26,27 +27,11 @@ cargo install --path tools/lsp/
 
 ## Run
 
-### Language server (stdio)
-
 ```bash
 gram-lsp stdio
 ```
 
 Editors should launch this command and speak LSP over the process stdin/stdout. The server uses UTF-8 sources and UTF-16 positions on the wire, as required by LSP.
-
-### CLI check
-
-Human-readable diagnostics on stderr:
-
-```bash
-gram-lsp check path/to/models path/to/file.gram
-```
-
-Machine-readable JSON on stdout (non-zero exit if any error-level diagnostic):
-
-```bash
-gram-lsp check --json path/to/file.gram
-```
 
 ## Tests
 
@@ -85,5 +70,5 @@ Open a `.gram` file and use **Zed: open LSP logs** if diagnostics or hover do no
 ## See also
 
 - Spec: `specs/006-gram-lsp/spec.md`
-- CLI contract: `specs/006-gram-lsp/contracts/cli-diagnostics.md`
 - Quickstart: `specs/006-gram-lsp/quickstart.md`
+- CLI tool: `tools/gram/` (`gram check`, `gram extension`)
