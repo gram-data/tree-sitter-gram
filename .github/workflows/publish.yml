@@ -84,18 +84,6 @@ jobs:
           echo "Publishing packages with version: $VERSION"
       - name: Publish tree-sitter-gram
         run: cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
-      - name: Update gram-lint dependency for publishing
-        run: |
-          VERSION="${{ steps.version.outputs.version }}"
-          sed -i "s|tree-sitter-gram = { path = \"../..\" }|tree-sitter-gram = \"$VERSION\"|" tools/gram-lint/Cargo.toml
-          echo "Updated gram-lint to depend on published tree-sitter-gram = \"$VERSION\""
-      - name: Publish gram-lint
-        run: cargo publish --package gram-lint --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
-      - name: Restore gram-lint dependency to workspace
-        run: |
-          VERSION="${{ steps.version.outputs.version }}"
-          sed -i "s|tree-sitter-gram = \"$VERSION\"|tree-sitter-gram = { path = \"../..\" }|" tools/gram-lint/Cargo.toml
-          echo "Restored gram-lint dependency to workspace path"
       - name: Update gram-lsp dependency for publishing
         run: |
           VERSION="${{ steps.version.outputs.version }}"
@@ -108,3 +96,17 @@ jobs:
           VERSION="${{ steps.version.outputs.version }}"
           sed -i "s|tree-sitter-gram = \"$VERSION\"|tree-sitter-gram = { path = \"../..\" }|" tools/lsp/Cargo.toml
           echo "Restored gram-lsp dependency to workspace path"
+      - name: Update gram dependencies for publishing
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          sed -i "s|tree-sitter-gram = { path = \"../..\" }|tree-sitter-gram = \"$VERSION\"|" tools/gram/Cargo.toml
+          sed -i "s|gram-lsp = { path = \"../lsp\" }|gram-lsp = \"$VERSION\"|" tools/gram/Cargo.toml
+          echo "Updated gram to depend on published tree-sitter-gram and gram-lsp = \"$VERSION\""
+      - name: Publish gram
+        run: cargo publish --package gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
+      - name: Restore gram dependencies to workspace
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          sed -i "s|tree-sitter-gram = \"$VERSION\"|tree-sitter-gram = { path = \"../..\" }|" tools/gram/Cargo.toml
+          sed -i "s|gram-lsp = \"$VERSION\"|gram-lsp = { path = \"../lsp\" }|" tools/gram/Cargo.toml
+          echo "Restored gram dependencies to workspace paths"

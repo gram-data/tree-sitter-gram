@@ -1,4 +1,4 @@
 {
-  "integration": "cursor-agent",
+  "integration": "claude",
   "version": "0.8.2.dev0"
 }

@@ -26,73 +26,64 @@ Run tests matching a specific filter:
 npx tree-sitter test -f 'Node'
 ```
 
-## gram-lint Tool
+## gram CLI
 
-The `gram-lint` tool is a command-line linter for gram notation files, located in `tools/gram-lint/`.
+The `gram` tool is the unified CLI for gram notation files, located in `tools/gram/`.
 
 ### Build and Test
 
 ```bash
-# Build the linter
-cargo build --manifest-path tools/gram-lint/Cargo.toml
-
-# Run the linter
-cargo run --manifest-path tools/gram-lint/Cargo.toml -- [OPTIONS] [FILES]
-
-# Run tests (if any)
-cargo test --manifest-path tools/gram-lint/Cargo.toml
+cargo build -p gram
+cargo test -p gram
 ```
 
 ### Install Locally
 
-Install to `~/.cargo/bin/` for system-wide use:
-
 ```bash
-cargo install --path tools/gram-lint
+cargo install --path tools/gram
 ```
 
 ### Usage Examples
 
 ```bash
-# Check version
-gram-lint --version
+# Check a file
+gram check path/to/file.gram
 
-# Lint a file
-gram-lint path/to/file.gram
+# Check multiple files or a directory
+gram check file1.gram file2.gram
+gram check data/
 
-# Lint multiple files
-gram-lint file1.gram file2.gram
+# Check an inline expression
+gram check -e "(alice:Person)-[:KNOWS]->(bob:Person)"
 
-# Lint an expression directly
-gram-lint -e "(person {name: 'Alice'})"
+# Read from stdin
+cat file.gram | gram check
+
+# Machine-readable JSON output
+gram check --json file.gram
 
 # Show parse tree
-gram-lint -t file.gram
+gram check --tree file.gram
 
-# Lint from stdin
-cat file.gram | gram-lint
-echo "(person {name: 'Bob'})" | gram-lint
+# Manage extensions
+gram extension list
+gram extension install lsp
+gram extension remove lsp
 ```
-
-### Development Notes
-
-- The linter uses the same grammar version as the main tree-sitter-gram package (inherited via workspace)
-- Error reporting includes line/column numbers and visual indicators
-- Supports both ERROR nodes (unexpected tokens) and MISSING nodes (expected tokens)
 
 # CI and release
 
 ## Workflows
 
 - **CI** (`.github/workflows/ci.yml`) — Runs on every push to the default branch and on pull requests when grammar, bindings, or tests change. It runs the test suite and the full build (Wasm + Node prebuilds on all OSes). Use this to **validate that the build succeeds before you tag**; no publishing happens here.
-- **Publish** (`.github/workflows/publish.yml`) — Runs only when you push a **tag**. It runs the same build, then publishes to npm, PyPI, and crates.io (`tree-sitter-gram`, `gram-lint`, and `gram-lsp`). All publish jobs depend on the build, so a failed build blocks publishing.
+- **Publish** (`.github/workflows/publish.yml`) — Runs only when you push a **tag**. It runs the same build, then publishes to npm, PyPI, and crates.io (`tree-sitter-gram`, `gram-lsp`, and `gram`). All publish jobs depend on the build, so a failed build blocks publishing.
 - **Release** (`.github/workflows/release.yml`) — Optional. Also runs on tag push; creates a GitHub Release with Wasm binaries, a source tarball, and attestations. Remove this file if you do not use GitHub Releases.
 
 Build steps live in the reusable **Build** workflow (`.github/workflows/build.yml`), which is used by both CI and Publish.
 
 ## Releasing to npm, PyPI, and crates.io
 
-Merging to the default branch **does not** publish anything. When you **push a `v*` version tag** to GitHub, **Publish** (`.github/workflows/publish.yml`) runs on that tag: npm (`@gram-data/tree-sitter-gram`), PyPI (`tree-sitter-gram`), and crates.io (`tree-sitter-gram`, `gram-lint`, `gram-lsp`). The same tag also runs **Release** if you keep that workflow. You need the usual repo secrets (`NPM_TOKEN`, `PYPI_API_TOKEN`, `CARGO_REGISTRY_TOKEN`).
+Merging to the default branch **does not** publish anything. When you **push a `v*` version tag** to GitHub, **Publish** (`.github/workflows/publish.yml`) runs on that tag: npm (`@gram-data/tree-sitter-gram`), PyPI (`tree-sitter-gram`), and crates.io (`tree-sitter-gram`, `gram-lsp`, `gram`). The same tag also runs **Release** if you keep that workflow. You need the usual repo secrets (`NPM_TOKEN`, `PYPI_API_TOKEN`, `CARGO_REGISTRY_TOKEN`).
 
 1. Bump version everywhere using `tree-sitter version 1.2.3`
    - `package.json` (`version`)
@@ -106,7 +97,7 @@ Merging to the default branch **does not** publish anything. When you **push a `
    git tag -a v1.2.3 -m "Release 1.2.3"
    git push --follow-tags
    ```
-5. The **Publish** workflow runs on the tag: it builds again and publishes to npm, PyPI, and crates.io (Rust crates `tree-sitter-gram`, `gram-lint`, `gram-lsp` in that order). Optionally, **Release** creates the GitHub Release.
+5. The **Publish** workflow runs on the tag: it builds again and publishes to npm, PyPI, and crates.io (Rust crates `tree-sitter-gram`, `gram-lsp`, `gram` in that order). Optionally, **Release** creates the GitHub Release.
 
 ## Local install (without publishing)
 

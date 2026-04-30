@@ -1,0 +1,86 @@
+# Cross-built `gram` archives attached to the Git tag's GitHub Release.
+# The extension installer downloads `gram-{target}.tar.gz` (or .zip on Windows).
+name: Gram release assets
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gram-release-assets-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-gram:
+    name: ${{ matrix.target }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15
+            target: aarch64-apple-darwin
+            archive_ext: tar.gz
+          - os: macos-15-intel
+            target: x86_64-apple-darwin
+            archive_ext: tar.gz
+          - os: ubuntu-24.04
+            target: x86_64-unknown-linux-musl
+            archive_ext: tar.gz
+          - os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-musl
+            archive_ext: tar.gz
+          - os: windows-2025
+            target: x86_64-pc-windows-msvc
+            archive_ext: zip
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - name: Install musl tools (Linux only)
+        if: contains(matrix.target, 'linux-musl')
+        run: sudo apt-get install -y musl-tools
+      - name: Build gram
+        run: cargo build -p gram --release --target ${{ matrix.target }}
+      - name: Package (Unix)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          set -eux
+          mkdir pack
+          cp "target/${{ matrix.target }}/release/gram" pack/gram
+          tar -C pack -czf "gram-${{ matrix.target }}.tar.gz" gram
+      - name: Package (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path pack
+          Copy-Item "target/${{ matrix.target }}/release/gram.exe" pack/gram.exe
+          Compress-Archive -Path pack/gram.exe -DestinationPath "gram-${{ matrix.target }}.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gram-${{ matrix.target }}
+          path: gram-${{ matrix.target }}.${{ matrix.archive_ext }}
+
+  upload-release-assets:
+    name: Upload to GitHub Release
+    needs: build-gram
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: gram-*
+          path: dist
+          merge-multiple: true
+      - name: List assets
+        run: find dist -type f -print
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: "dist/gram-*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,8 +1,9 @@
 # Publishing to crates.io
 
-This project publishes two crates to crates.io:
-- `tree-sitter-gram` - The main grammar crate
-- `gram-lint` - The linter CLI tool
+This project publishes three crates to crates.io (in dependency order):
+- `tree-sitter-gram` — The main grammar crate
+- `gram-lsp` — Language server library and binary
+- `gram` — Unified CLI tool
 
 ## Prerequisites
 
@@ -32,43 +33,44 @@ This project publishes two crates to crates.io:
 
 Publishing is automated via GitHub Actions when you push a git tag:
 
-1. **Update versions** in both `Cargo.toml` files:
-   - `Cargo.toml` (tree-sitter-gram)
-   - `tools/gram-lint/Cargo.toml` (gram-lint)
+1. **Update versions** using `tree-sitter version <X.Y.Z>`, which updates all version fields consistently.
 
 2. **Commit and tag**:
    ```bash
-   git commit -am "Release 0.2.1"
-   git tag -a v0.2.1 -m "Release 0.2.1"
+   git commit -am "Release 0.3.7"
+   git tag -a v0.3.7 -m "Release 0.3.7"
    git push --follow-tags
    ```
 
 3. **GitHub Actions will automatically**:
-   - Publish `tree-sitter-gram` to crates.io
-   - Update `gram-lint`'s dependency to the published version
-   - Publish `gram-lint` to crates.io
+   - Publish `tree-sitter-gram`
+   - Update and publish `gram-lsp` (path deps swapped for version deps)
+   - Update and publish `gram` (path deps swapped for version deps)
 
 ## Manual Publishing (if needed)
 
-If you need to publish manually:
-
 ```bash
-# Publish tree-sitter-gram first
+VERSION="0.3.7"
+
+# 1. Publish tree-sitter-gram first
 cargo publish --package tree-sitter-gram
 
-# Then update gram-lint's dependency (remove path)
-# Edit tools/gram-lint/Cargo.toml:
-# Change: tree-sitter-gram = { version = "0.2.1", path = "../.." }
-# To:     tree-sitter-gram = "0.2.1"
+# 2. Swap path dep → version dep in gram-lsp, publish, restore
+sed -i "s|tree-sitter-gram = { path = \"../..\" }|tree-sitter-gram = \"$VERSION\"|" tools/lsp/Cargo.toml
+cargo publish --package gram-lsp --allow-dirty
+sed -i "s|tree-sitter-gram = \"$VERSION\"|tree-sitter-gram = { path = \"../..\" }|" tools/lsp/Cargo.toml
 
-# Then publish gram-lint
-cargo publish --package gram-lint
+# 3. Swap path deps → version deps in gram, publish, restore
+sed -i "s|tree-sitter-gram = { path = \"../..\" }|tree-sitter-gram = \"$VERSION\"|" tools/gram/Cargo.toml
+sed -i "s|gram-lsp = { path = \"../lsp\" }|gram-lsp = \"$VERSION\"|" tools/gram/Cargo.toml
+cargo publish --package gram --allow-dirty
+sed -i "s|tree-sitter-gram = \"$VERSION\"|tree-sitter-gram = { path = \"../..\" }|" tools/gram/Cargo.toml
+sed -i "s|gram-lsp = \"$VERSION\"|gram-lsp = { path = \"../lsp\" }|" tools/gram/Cargo.toml
 ```
 
 ## Important Notes
 
-- **Version synchronization**: The `gram-lint` crate's dependency on `tree-sitter-gram` must match the published version
-- **Path dependencies**: The workflow automatically removes path dependencies before publishing
-- **First-time publishing**: You may need to run `cargo publish --dry-run` first to verify everything is correct
-- **Yanking**: If you need to remove a version, use `cargo yank --vers <version> <package-name>`
-
+- **Publish order matters**: `tree-sitter-gram` → `gram-lsp` → `gram` (each depends on the previous)
+- **Path dependencies**: The workflow automatically swaps path deps for version deps before publishing and restores them after
+- **Dry run**: Use `cargo publish --dry-run` to verify before publishing
+- **Yanking**: `cargo yank --vers <version> <package-name>`
