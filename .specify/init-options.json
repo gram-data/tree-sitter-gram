@@ -1,10 +1,10 @@
 {
-  "ai": "cursor-agent",
+  "ai": "claude",
   "ai_skills": true,
   "branch_numbering": "sequential",
-  "context_file": ".cursor/rules/specify-rules.mdc",
+  "context_file": "CLAUDE.md",
   "here": true,
-  "integration": "cursor-agent",
+  "integration": "claude",
   "script": "sh",
   "speckit_version": "0.8.2.dev0"
 }

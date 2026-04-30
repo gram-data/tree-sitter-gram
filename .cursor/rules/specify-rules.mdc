@@ -17,6 +17,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-26
 - N/A (grammar, parser artifacts, docs, and tests in-repo) (005-tighten-quoted-identifiers)
 - Rust (workspace `edition = "2021"`, align MSRV with existing `tools/gram-lint`, typically Rust 1.74+ unless CI pins higher) + `tower-lsp`, `tokio`, `tree-sitter` 0.25, `tree-sitter-gram` (path `../..` from `tools/lsp`), `clap` for CLI; optional `ropey` or line-index helpers for UTF-16/LSP positions (see research) (006-gram-lsp)
 - In-memory workspace index (open buffers + scanned `.gram` files under workspace root); no database (006-gram-lsp)
+- Rust, edition 2021, workspace version 0.3.6 + clap 4.5 (derive), tree-sitter 0.25, tree-sitter-gram (workspace local), serde + serde_json 1.x, reqwest 0.12 (extension downloads), directories 5.x (platform-aware `~/.gram/bin`), walkdir 2.x (directory traversal), toml 0.8 (extension registry parsing) (007-unified-gram-cli)
+- `~/.gram/bin/` for installed extension binaries; extension registry is a static TOML file fetched from GitHub (007-unified-gram-cli)
 
 - JavaScript (Node.js), tree-sitter grammar DSL + ree-sitter-cli ^0.25.10, tree-sitter ^0.25.0 (001-line-comments)
 
@@ -36,9 +38,9 @@ npm test && npm run lint
 JavaScript (Node.js), tree-sitter grammar DSL: Follow standard conventions
 
 ## Recent Changes
+- 007-unified-gram-cli: Added Rust, edition 2021, workspace version 0.3.6 + clap 4.5 (derive), tree-sitter 0.25, tree-sitter-gram (workspace local), serde + serde_json 1.x, reqwest 0.12 (extension downloads), directories 5.x (platform-aware `~/.gram/bin`), walkdir 2.x (directory traversal), toml 0.8 (extension registry parsing)
 - 006-gram-lsp: Added Rust (workspace `edition = "2021"`, align MSRV with existing `tools/gram-lint`, typically Rust 1.74+ unless CI pins higher) + `tower-lsp`, `tokio`, `tree-sitter` 0.25, `tree-sitter-gram` (path `../..` from `tools/lsp`), `clap` for CLI; optional `ropey` or line-index helpers for UTF-16/LSP positions (see research)
 - 005-tighten-quoted-identifiers: Added JavaScript grammar DSL (`grammar.js`), generated C parser (`src/`), Node.js package tooling + `tree-sitter`, `tree-sitter-cli`, Node.js binding toolchain; Tree-sitter queries for editor suppor
-- 001-editor-improvements: Added Tree-sitter query language (scheme-like .scm); grammar.js (JavaScript, Node); parser generated to C via tree-sitter-cli + ree-sitter, tree-sitter-cli (npm); editors consume queries (Zed, Neovim, Helix, Emacs)
 
 
 <!-- MANUAL ADDITIONS START -->
