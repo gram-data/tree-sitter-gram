@@ -69,11 +69,20 @@ main() {
   echo ""
 
   # Step 1: Install dependencies
+  # Use --ignore-scripts to skip native builds (tree-sitter v0.25.0 fails to
+  # compile with Node 24 using its default C++17 flag; we rebuild it below with C++20).
   log_step "Installing dependencies..."
   if [[ "$VERBOSE" == true ]]; then
-    npm ci --omit=peer --omit=optional
+    npm ci --omit=peer --omit=optional --ignore-scripts
   else
-    npm ci --omit=peer --omit=optional 2>&1 | grep -E "^(added|packages|found|up to date)" || true
+    npm ci --omit=peer --omit=optional --ignore-scripts 2>&1 | grep -E "^(added|packages|found|up to date)" || true
+  fi
+  # Download the tree-sitter-cli prebuilt binary (skipped by --ignore-scripts).
+  (cd node_modules/tree-sitter-cli && node install.js)
+  # Rebuild tree-sitter native bindings with C++20 (required for Node 24+ V8 headers).
+  if ! CXXFLAGS="-std=c++20" npm rebuild tree-sitter 2>&1; then
+    log_error "Failed to build tree-sitter native bindings"
+    return 1
   fi
   log_success "Dependencies installed"
   echo ""
