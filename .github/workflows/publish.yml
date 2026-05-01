@@ -75,7 +75,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
-          skip_existing: true
+          skip-existing: true
 
   crates:
     name: Publish to crates.io
@@ -92,12 +92,11 @@ jobs:
           echo "Publishing packages with version: $VERSION"
       - name: Publish tree-sitter-gram
         run: |
-          OUTPUT=$(cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }} 2>&1); EXIT=$?
-          echo "$OUTPUT"
-          if [ $EXIT -ne 0 ] && echo "$OUTPUT" | grep -q "already exists"; then
-            echo "tree-sitter-gram@${{ steps.version.outputs.version }} already published, skipping"
+          VERSION="${{ steps.version.outputs.version }}"
+          if curl -sf "https://crates.io/api/v1/crates/tree-sitter-gram/$VERSION" > /dev/null; then
+            echo "tree-sitter-gram@$VERSION already published, skipping"
           else
-            exit $EXIT
+            cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
           fi
       - name: Update gram-lsp dependency for publishing
         run: |
@@ -106,12 +105,11 @@ jobs:
           echo "Updated gram-lsp to depend on published tree-sitter-gram = \"$VERSION\""
       - name: Publish gram-lsp
         run: |
-          OUTPUT=$(cargo publish --package gram-lsp --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty 2>&1); EXIT=$?
-          echo "$OUTPUT"
-          if [ $EXIT -ne 0 ] && echo "$OUTPUT" | grep -q "already exists"; then
-            echo "gram-lsp@${{ steps.version.outputs.version }} already published, skipping"
+          VERSION="${{ steps.version.outputs.version }}"
+          if curl -sf "https://crates.io/api/v1/crates/gram-lsp/$VERSION" > /dev/null; then
+            echo "gram-lsp@$VERSION already published, skipping"
           else
-            exit $EXIT
+            cargo publish --package gram-lsp --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
           fi
       - name: Restore gram-lsp dependency to workspace
         run: |
