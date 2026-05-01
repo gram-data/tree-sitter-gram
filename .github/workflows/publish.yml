@@ -45,7 +45,14 @@ jobs:
       - run: find prebuilds -type f
       - name: Move Wasm to root
         run: mv -v prebuilds/*.wasm . 2>/dev/null || true
-      - run: npm publish
+      - name: Publish to npm (skip if already published)
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "@gram-data/tree-sitter-gram@${VERSION}" version 2>/dev/null; then
+            echo "Version ${VERSION} already published to npm, skipping"
+          else
+            npm publish
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -68,6 +75,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+          skip_existing: true
 
   crates:
     name: Publish to crates.io
@@ -83,14 +91,28 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Publishing packages with version: $VERSION"
       - name: Publish tree-sitter-gram
-        run: cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: |
+          OUTPUT=$(cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }} 2>&1); EXIT=$?
+          echo "$OUTPUT"
+          if [ $EXIT -ne 0 ] && echo "$OUTPUT" | grep -q "already exists"; then
+            echo "tree-sitter-gram@${{ steps.version.outputs.version }} already published, skipping"
+          else
+            exit $EXIT
+          fi
       - name: Update gram-lsp dependency for publishing
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           sed -i "s|tree-sitter-gram = { path = \"../..\" }|tree-sitter-gram = \"$VERSION\"|" tools/lsp/Cargo.toml
           echo "Updated gram-lsp to depend on published tree-sitter-gram = \"$VERSION\""
       - name: Publish gram-lsp
-        run: cargo publish --package gram-lsp --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
+        run: |
+          OUTPUT=$(cargo publish --package gram-lsp --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty 2>&1); EXIT=$?
+          echo "$OUTPUT"
+          if [ $EXIT -ne 0 ] && echo "$OUTPUT" | grep -q "already exists"; then
+            echo "gram-lsp@${{ steps.version.outputs.version }} already published, skipping"
+          else
+            exit $EXIT
+          fi
       - name: Restore gram-lsp dependency to workspace
         run: |
           VERSION="${{ steps.version.outputs.version }}"
