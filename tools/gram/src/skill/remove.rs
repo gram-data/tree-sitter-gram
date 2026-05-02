@@ -21,16 +21,21 @@ pub fn run(args: RemoveArgs) -> i32 {
         }
     }
 
-    let root = if args.global {
+    let roots: Vec<std::path::PathBuf> = if args.global {
         match directories::BaseDirs::new() {
-            Some(d) => d.home_dir().to_path_buf(),
+            Some(d) => vec![d.home_dir().to_path_buf()],
             None => {
                 eprintln!("error: could not determine home directory");
                 return 1;
             }
         }
     } else {
-        std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."))
+        let project = std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."));
+        let mut r = vec![project];
+        if let Some(d) = directories::BaseDirs::new() {
+            r.push(d.home_dir().to_path_buf());
+        }
+        r
     };
 
     let mut any_failure = false;
@@ -40,13 +45,19 @@ pub fn run(args: RemoveArgs) -> i32 {
             continue;
         }
 
-        let skill_dir = root.join(config_dir).join("skills").join("gram");
-        let skill_path = skill_dir.join("SKILL.md");
-
-        if !skill_path.exists() {
-            println!("  {:<8}   not installed", name);
-            continue;
-        }
+        // Find first root where this agent's skill is installed.
+        let found = roots.iter().find_map(|root| {
+            let skill_dir = root.join(config_dir).join("skills").join("gram");
+            let skill_path = skill_dir.join("SKILL.md");
+            if skill_path.exists() { Some((skill_dir, skill_path)) } else { None }
+        });
+        let (skill_dir, skill_path) = match found {
+            Some(p) => p,
+            None => {
+                println!("  {:<8}   not installed", name);
+                continue;
+            }
+        };
 
         match std::fs::remove_file(&skill_path) {
             Ok(()) => {

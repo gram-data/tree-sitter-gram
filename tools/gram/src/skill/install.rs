@@ -1,4 +1,6 @@
 use clap::Args;
+use agent_skills_rs::{install_skill, InstallConfig};
+use agent_skills_rs::embedded::register_embedded_skill;
 
 use super::SKILL_MD;
 
@@ -28,6 +30,23 @@ enum Outcome {
     Failed(String),
 }
 
+// Returns candidate roots for agent detection. When not --global, project-local is
+// checked first; home dir is the fallback so users with only global agent configs
+// (e.g. ~/.claude/) are still detected.
+fn candidate_roots(global: bool) -> Option<Vec<std::path::PathBuf>> {
+    if global {
+        let home = directories::BaseDirs::new()?.home_dir().to_path_buf();
+        Some(vec![home])
+    } else {
+        let project = std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."));
+        let mut roots = vec![project];
+        if let Some(d) = directories::BaseDirs::new() {
+            roots.push(d.home_dir().to_path_buf());
+        }
+        Some(roots)
+    }
+}
+
 pub fn run(args: InstallArgs) -> i32 {
     if let Some(ref name) = args.agent {
         if !SUPPORTED_AGENTS.iter().any(|(id, _)| *id == name.as_str()) {
@@ -37,16 +56,20 @@ pub fn run(args: InstallArgs) -> i32 {
         }
     }
 
-    let root = if args.global {
-        match directories::BaseDirs::new() {
-            Some(d) => d.home_dir().to_path_buf(),
-            None => {
-                eprintln!("error: could not determine home directory");
-                return 1;
-            }
+    let roots = match candidate_roots(args.global) {
+        Some(r) => r,
+        None => {
+            eprintln!("error: could not determine home directory");
+            return 1;
         }
-    } else {
-        std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."))
+    };
+
+    let skill = match register_embedded_skill(SKILL_MD, &[]) {
+        Ok(s) => s,
+        Err(e) => {
+            eprintln!("error: failed to load bundled skill: {e}");
+            return 1;
+        }
     };
 
     let agents: Vec<_> = SUPPORTED_AGENTS.iter()
@@ -57,30 +80,31 @@ pub fn run(args: InstallArgs) -> i32 {
     let mut any_installed = false;
 
     for (name, config_dir) in &agents {
-        let agent_root = root.join(config_dir);
-        if !agent_root.exists() {
-            print_outcome(name, &Outcome::NotDetected);
-            continue;
-        }
+        // Use first root where this agent's config dir exists (project-local before global).
+        let agent_root = roots.iter()
+            .map(|r| r.join(config_dir))
+            .find(|p| p.exists());
+
+        let agent_root = match agent_root {
+            Some(r) => r,
+            None => {
+                print_outcome(name, &Outcome::NotDetected);
+                continue;
+            }
+        };
 
         any_installed = true;
-        let skill_dir = agent_root.join("skills").join("gram");
-        let skill_path = skill_dir.join("SKILL.md");
+        let skill_path = agent_root.join("skills").join("gram").join("SKILL.md");
         let pre_existing = skill_path.exists();
 
-        if let Err(e) = std::fs::create_dir_all(&skill_dir) {
-            let outcome = Outcome::Failed(e.to_string());
-            print_outcome(name, &outcome);
-            any_failure = true;
-            continue;
-        }
-
-        match std::fs::write(&skill_path, SKILL_MD) {
-            Ok(()) => {
+        let config = InstallConfig::new(agent_root.join("skills"));
+        match install_skill(&skill, &config) {
+            Ok(result) => {
+                let installed_path = result.path.join("SKILL.md");
                 let outcome = if pre_existing {
-                    Outcome::Overwritten(skill_path)
+                    Outcome::Overwritten(installed_path)
                 } else {
-                    Outcome::Installed(skill_path)
+                    Outcome::Installed(installed_path)
                 };
                 print_outcome(name, &outcome);
             }

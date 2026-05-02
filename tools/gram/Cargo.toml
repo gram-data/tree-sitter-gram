@@ -23,7 +23,6 @@ flate2 = "1"
 tar = "0.4"
 zip = "2"
 ariadne = "0.6"
-agent-skills = "0.2"
 agent-skills-rs = "0.3"
 gram-lsp = { path = "../lsp" }
 tree-sitter-gram = { path = "../.." }
@@ -33,6 +32,7 @@ tree-sitter = "0.25"
 assert_cmd = "2"
 predicates = "3"
 tempfile = "3"
+agent-skills = "0.2"
 
 [package.metadata.dist]
 targets = [

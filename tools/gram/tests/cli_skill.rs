@@ -12,9 +12,11 @@ fn gram() -> Command {
 #[test]
 fn skill_install_no_agents_detected() {
     let dir = TempDir::new().unwrap();
+    let home_dir = TempDir::new().unwrap();
     gram()
         .args(["skill", "install"])
         .current_dir(dir.path())
+        .env("HOME", home_dir.path())
         .assert()
         .success()
         .stdout(predicate::str::contains("No gram-compatible agents detected"));
@@ -92,9 +94,11 @@ fn skill_install_unknown_agent_exits_2() {
 #[test]
 fn skill_list_nothing_installed() {
     let dir = TempDir::new().unwrap();
+    let home_dir = TempDir::new().unwrap();
     gram()
         .args(["skill", "list"])
         .current_dir(dir.path())
+        .env("HOME", home_dir.path())
         .assert()
         .success()
         .stdout(predicate::str::contains("No gram skill installations found"));
@@ -120,9 +124,11 @@ fn skill_list_shows_installed() {
 #[test]
 fn skill_remove_not_installed() {
     let dir = TempDir::new().unwrap();
+    let home_dir = TempDir::new().unwrap();
     gram()
         .args(["skill", "remove"])
         .current_dir(dir.path())
+        .env("HOME", home_dir.path())
         .assert()
         .success()
         .stdout(predicate::str::contains("not installed"));
@@ -131,12 +137,14 @@ fn skill_remove_not_installed() {
 #[test]
 fn skill_list_and_remove_roundtrip() {
     let dir = TempDir::new().unwrap();
+    let home_dir = TempDir::new().unwrap();
     fs::create_dir(dir.path().join(".claude")).unwrap();
 
     // install
     gram()
         .args(["skill", "install"])
         .current_dir(dir.path())
+        .env("HOME", home_dir.path())
         .assert()
         .success();
 
@@ -144,6 +152,7 @@ fn skill_list_and_remove_roundtrip() {
     gram()
         .args(["skill", "list"])
         .current_dir(dir.path())
+        .env("HOME", home_dir.path())
         .assert()
         .success()
         .stdout(predicate::str::contains("claude"));
@@ -152,6 +161,7 @@ fn skill_list_and_remove_roundtrip() {
     gram()
         .args(["skill", "remove"])
         .current_dir(dir.path())
+        .env("HOME", home_dir.path())
         .assert()
         .success()
         .stdout(predicate::str::contains("removed"));
@@ -160,9 +170,98 @@ fn skill_list_and_remove_roundtrip() {
     gram()
         .args(["skill", "list"])
         .current_dir(dir.path())
+        .env("HOME", home_dir.path())
         .assert()
         .success()
         .stdout(predicate::str::contains("No gram skill installations found"));
+}
+
+// --- global flag ---
+
+#[test]
+fn skill_install_global_detects_home_dir_agent() {
+    let home_dir = TempDir::new().unwrap();
+    fs::create_dir(home_dir.path().join(".claude")).unwrap();
+
+    gram()
+        .args(["skill", "install", "--global"])
+        .env("HOME", home_dir.path())
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("claude"));
+
+    let installed = home_dir.path().join(".claude/skills/gram/SKILL.md");
+    assert!(installed.exists(), "SKILL.md should be installed globally for claude");
+    let content = fs::read_to_string(&installed).unwrap();
+    assert!(content.contains("name: gram"), "installed SKILL.md should contain 'name: gram'");
+}
+
+#[test]
+fn skill_list_global_shows_home_dir_installation() {
+    let home_dir = TempDir::new().unwrap();
+    let skill_dir = home_dir.path().join(".cursor/skills/gram");
+    fs::create_dir_all(&skill_dir).unwrap();
+    fs::write(skill_dir.join("SKILL.md"), "---\nname: gram\n---\n").unwrap();
+
+    gram()
+        .args(["skill", "list", "--global"])
+        .env("HOME", home_dir.path())
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("cursor"));
+}
+
+#[test]
+fn skill_global_install_list_remove_roundtrip() {
+    let home_dir = TempDir::new().unwrap();
+    fs::create_dir(home_dir.path().join(".claude")).unwrap();
+
+    gram()
+        .args(["skill", "install", "--global"])
+        .env("HOME", home_dir.path())
+        .assert()
+        .success();
+
+    gram()
+        .args(["skill", "list", "--global"])
+        .env("HOME", home_dir.path())
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("claude"));
+
+    gram()
+        .args(["skill", "remove", "--global"])
+        .env("HOME", home_dir.path())
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("removed"));
+
+    gram()
+        .args(["skill", "list", "--global"])
+        .env("HOME", home_dir.path())
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("No gram skill installations found"));
+}
+
+#[test]
+fn skill_install_falls_back_to_global_when_no_project_local_agent() {
+    // Project dir has no agent config dirs; home dir has .claude/.
+    // Without --global, install should fall back and detect the global agent.
+    let project_dir = TempDir::new().unwrap();
+    let home_dir = TempDir::new().unwrap();
+    fs::create_dir(home_dir.path().join(".claude")).unwrap();
+
+    gram()
+        .args(["skill", "install"])
+        .current_dir(project_dir.path())
+        .env("HOME", home_dir.path())
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("claude"));
+
+    let installed = home_dir.path().join(".claude/skills/gram/SKILL.md");
+    assert!(installed.exists(), "should install to global ~/.claude when no project-local .claude exists");
 }
 
 #[test]
