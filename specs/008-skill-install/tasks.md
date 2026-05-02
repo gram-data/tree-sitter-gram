@@ -16,9 +16,9 @@
 
 **Purpose**: Add new dependencies and create the repository-level skill directory.
 
-- [ ] T001 Add `agent-skills = "0.2"` and `agent-skills-rs = "0.3"` to `tools/gram/Cargo.toml`
-- [ ] T002 [P] Create directory `skills/gram/` at the repository root (the conventional path for `npx skills` discovery)
-- [ ] T003 [P] Create stub `skills/gram/SKILL.md` with valid but minimal frontmatter so the file exists for `include_str!` compilation
+- [X] T001 Add `agent-skills = "0.2"` and `agent-skills-rs = "0.3"` to `tools/gram/Cargo.toml`
+- [X] T002 [P] Create directory `skills/gram/` at the repository root (the conventional path for `npx skills` discovery)
+- [X] T003 [P] Create stub `skills/gram/SKILL.md` with valid but minimal frontmatter so the file exists for `include_str!` compilation
 
 ---
 
@@ -28,10 +28,10 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T004 Create `tools/gram/src/skill/mod.rs` with `SkillArgs`, `SkillCommand` enum (Install/List/Remove), `run()`, and `const SKILL_MD: &str = include_str!("../../../../skills/gram/SKILL.md")`
-- [ ] T005 Create empty `tools/gram/src/skill/install.rs`, `list.rs`, and `remove.rs` (each with a stub `pub fn run(args: ...) -> i32 { 0 }`) so the module compiles
-- [ ] T006 Add `mod skill;` and `Commands::Skill(skill::SkillArgs)` arm to `tools/gram/src/main.rs`, wiring to `skill::run(args)`
-- [ ] T007 Run `cargo build -p gram-data` to confirm the module compiles cleanly with the stub implementations
+- [X] T004 Create `tools/gram/src/skill/mod.rs` with `SkillArgs`, `SkillCommand` enum (Install/List/Remove), `run()`, and `const SKILL_MD: &str = include_str!("../../../../skills/gram/SKILL.md")`
+- [X] T005 Create empty `tools/gram/src/skill/install.rs`, `list.rs`, and `remove.rs` (each with a stub `pub fn run(args: ...) -> i32 { 0 }`) so the module compiles
+- [X] T006 Add `mod skill;` and `Commands::Skill(skill::SkillArgs)` arm to `tools/gram/src/main.rs`, wiring to `skill::run(args)`
+- [X] T007 Run `cargo build -p gram-data` to confirm the module compiles cleanly with the stub implementations
 
 **Checkpoint**: `gram skill install`, `gram skill list`, and `gram skill remove` are reachable subcommands (no-ops) — foundation ready.
 
@@ -43,9 +43,9 @@
 
 **Independent Test**: Run `cargo build -p gram-data` (fails at `include_str!` if SKILL.md is malformed); also manually validate with `npx skills validate skills/gram/SKILL.md` or by parsing with `agent-skills`.
 
-- [ ] T008 [US1] Write full `skills/gram/SKILL.md` content: frontmatter with `name: gram`, `description` (≤1024 chars, specific enough to trigger on `.gram` files or graph data tasks), `license: MIT`, `compatibility` stating `cargo install gram-data` as the prerequisite, and `metadata` with author/homepage
-- [ ] T009 [US1] Write the SKILL.md body in `skills/gram/SKILL.md`: cover gram notation overview, how to run `gram check`, common patterns (nodes, relationships, properties), and example `.gram` snippets an agent should recognize
-- [ ] T010 [US1] Add a compile-time validation call in `tools/gram/src/skill/mod.rs` that invokes `agent_skills::Skill::parse(SKILL_MD)` in a `#[test]` to confirm the bundled content passes spec validation at build time
+- [X] T008 [US1] Write full `skills/gram/SKILL.md` content: frontmatter with `name: gram`, `description` (≤1024 chars, specific enough to trigger on `.gram` files or graph data tasks), `license: MIT`, `compatibility` stating `cargo install gram-data` as the prerequisite, and `metadata` with author/homepage
+- [X] T009 [US1] Write the SKILL.md body in `skills/gram/SKILL.md`: cover gram notation overview, how to run `gram check`, common patterns (nodes, relationships, properties), and example `.gram` snippets an agent should recognize
+- [X] T010 [US1] Add a compile-time validation call in `tools/gram/src/skill/mod.rs` that invokes `agent_skills::Skill::parse(SKILL_MD)` in a `#[test]` to confirm the bundled content passes spec validation at build time
 
 **Checkpoint**: `skills/gram/SKILL.md` is valid per the agentskills.io spec and the binary compiles with the bundled content.
 
@@ -57,13 +57,13 @@
 
 **Independent Test**: Create a temp directory with a `.claude/` subdirectory; run `gram skill install`; confirm `.claude/skills/gram/SKILL.md` was created with the correct content.
 
-- [ ] T011 [US2] Implement `InstallArgs` in `tools/gram/src/skill/install.rs`: `--agent <NAME>` (optional, restrict to one agent) and `--global` flag (install to home-dir paths instead of project-local)
-- [ ] T012 [US2] Implement agent detection in `tools/gram/src/skill/install.rs` using `agent-skills-rs`: discover which of the six agents (claude, cursor, codex, copilot, gemini, kiro) have a config directory present under `cwd` (project-local) or `~` (if `--global`)
-- [ ] T013 [US2] Implement install logic in `tools/gram/src/skill/install.rs`: for each detected agent, create the `skills/gram/` subdirectory if absent, write `SKILL_MD` to `SKILL.md`, and record the outcome (`Installed`, `Overwritten`, `Failed`)
-- [ ] T014 [US2] Add overwrite handling in `tools/gram/src/skill/install.rs`: if `SKILL.md` already exists at the target path, overwrite it and print a warning line `(overwritten)` in the summary
-- [ ] T015 [US2] Implement `--agent` validation in `tools/gram/src/skill/install.rs`: if the provided name is not in the supported list, print the supported names and exit with code 2
-- [ ] T016 [US2] Implement the install summary output in `tools/gram/src/skill/install.rs` matching the contract format: `✓ claude  →  .claude/skills/gram/SKILL.md` / `  codex      not detected`
-- [ ] T017 [US2] Set correct exit codes in `tools/gram/src/skill/install.rs`: 0 if all detected agents succeeded (including skipped-not-detected), 1 if any I/O failure occurred, 2 for bad arguments
+- [X] T011 [US2] Implement `InstallArgs` in `tools/gram/src/skill/install.rs`: `--agent <NAME>` (optional, restrict to one agent) and `--global` flag (install to home-dir paths instead of project-local)
+- [X] T012 [US2] Implement agent detection in `tools/gram/src/skill/install.rs` using `agent-skills-rs`: discover which of the six agents (claude, cursor, codex, copilot, gemini, kiro) have a config directory present under `cwd` (project-local) or `~` (if `--global`)
+- [X] T013 [US2] Implement install logic in `tools/gram/src/skill/install.rs`: for each detected agent, create the `skills/gram/` subdirectory if absent, write `SKILL_MD` to `SKILL.md`, and record the outcome (`Installed`, `Overwritten`, `Failed`)
+- [X] T014 [US2] Add overwrite handling in `tools/gram/src/skill/install.rs`: if `SKILL.md` already exists at the target path, overwrite it and print a warning line `(overwritten)` in the summary
+- [X] T015 [US2] Implement `--agent` validation in `tools/gram/src/skill/install.rs`: if the provided name is not in the supported list, print the supported names and exit with code 2
+- [X] T016 [US2] Implement the install summary output in `tools/gram/src/skill/install.rs` matching the contract format: `✓ claude  →  .claude/skills/gram/SKILL.md` / `  codex      not detected`
+- [X] T017 [US2] Set correct exit codes in `tools/gram/src/skill/install.rs`: 0 if all detected agents succeeded (including skipped-not-detected), 1 if any I/O failure occurred, 2 for bad arguments
 
 **Checkpoint**: `gram skill install` places a valid SKILL.md at every detected agent's path; `gram skill install --agent claude` restricts to Claude Code only; `gram skill install --global` targets home-directory paths.
 
@@ -75,8 +75,8 @@
 
 **Independent Test**: Run `npx skills add gram-data/tree-sitter-gram --dry-run` after this phase and confirm it resolves the skill without error.
 
-- [ ] T018 [P] [US3] Verify `skills/gram/SKILL.md` is at the repository root path expected by `npx skills` discovery (the file from T008–T009 already satisfies this; this task is a validation checkpoint — document the result in `specs/008-skill-install/research.md`)
-- [ ] T019 [P] [US3] Confirm the `compatibility` field in `skills/gram/SKILL.md` contains the exact install command `cargo install gram-data` so an agent surfacing this skill can tell a user how to install the CLI prerequisite
+- [X] T018 [P] [US3] Verify `skills/gram/SKILL.md` is at the repository root path expected by `npx skills` discovery (the file from T008–T009 already satisfies this; this task is a validation checkpoint — document the result in `specs/008-skill-install/research.md`)
+- [X] T019 [P] [US3] Confirm the `compatibility` field in `skills/gram/SKILL.md` contains the exact install command `cargo install gram-data` so an agent surfacing this skill can tell a user how to install the CLI prerequisite
 
 **Checkpoint**: Third-party skill installers can discover and install gram's skill from the public GitHub repo without any gram CLI involvement.
 
@@ -88,11 +88,11 @@
 
 **Independent Test**: Install the skill, run `gram skill list`, confirm output; run `gram skill remove`, confirm files are gone and `gram skill list` shows nothing.
 
-- [ ] T020 [US4] Implement `ListArgs` in `tools/gram/src/skill/list.rs`: `--global` flag mirroring install
-- [ ] T021 [US4] Implement list logic in `tools/gram/src/skill/list.rs`: for each of the six agents, check whether `skills/gram/SKILL.md` exists at the relevant scope path; print agent name and absolute path for each found; print "No gram skill installations found." if none
-- [ ] T022 [US4] Implement `RemoveArgs` in `tools/gram/src/skill/remove.rs`: `--agent <NAME>` (optional) and `--global` flag
-- [ ] T023 [US4] Implement remove logic in `tools/gram/src/skill/remove.rs`: for each matched agent location, delete `SKILL.md`; if the `skills/gram/` directory is now empty, remove it too; print per-agent outcome (`removed` / `not installed`)
-- [ ] T024 [US4] Set exit codes in `tools/gram/src/skill/remove.rs`: 0 for all outcomes including "not installed", 1 for I/O errors
+- [X] T020 [US4] Implement `ListArgs` in `tools/gram/src/skill/list.rs`: `--global` flag mirroring install
+- [X] T021 [US4] Implement list logic in `tools/gram/src/skill/list.rs`: for each of the six agents, check whether `skills/gram/SKILL.md` exists at the relevant scope path; print agent name and absolute path for each found; print "No gram skill installations found." if none
+- [X] T022 [US4] Implement `RemoveArgs` in `tools/gram/src/skill/remove.rs`: `--agent <NAME>` (optional) and `--global` flag
+- [X] T023 [US4] Implement remove logic in `tools/gram/src/skill/remove.rs`: for each matched agent location, delete `SKILL.md`; if the `skills/gram/` directory is now empty, remove it too; print per-agent outcome (`removed` / `not installed`)
+- [X] T024 [US4] Set exit codes in `tools/gram/src/skill/remove.rs`: 0 for all outcomes including "not installed", 1 for I/O errors
 
 **Checkpoint**: Full lifecycle works — install, list, remove — across project-local and global scopes and all six agent targets.
 
@@ -102,12 +102,12 @@
 
 **Purpose**: Integration tests, documentation, and final validation.
 
-- [ ] T025 Create `tools/gram/tests/cli_skill.rs` with integration test `skill_install_no_agents_detected`: run `gram skill install` in a temp dir with no agent config dirs; assert exit 0 and output contains "No" or "not detected"
-- [ ] T026 [P] Add integration test `skill_install_project_local` to `tools/gram/tests/cli_skill.rs`: create a temp dir with `.claude/` present; run `gram skill install`; assert `.claude/skills/gram/SKILL.md` exists and its content matches `skills/gram/SKILL.md`
-- [ ] T027 [P] Add integration test `skill_install_unknown_agent` to `tools/gram/tests/cli_skill.rs`: run `gram skill install --agent bogus`; assert exit 2 and output lists supported agent names
-- [ ] T028 [P] Add integration test `skill_list_and_remove` to `tools/gram/tests/cli_skill.rs`: install to temp dir, assert list shows entry, remove, assert list shows nothing
-- [ ] T029 Update `tools/gram/README.md` to document the `gram skill` subcommand with install, list, and remove usage examples
-- [ ] T030 Run `cargo test -p gram-data` and confirm all tests pass (existing + new cli_skill tests)
+- [X] T025 Create `tools/gram/tests/cli_skill.rs` with integration test `skill_install_no_agents_detected`: run `gram skill install` in a temp dir with no agent config dirs; assert exit 0 and output contains "No" or "not detected"
+- [X] T026 [P] Add integration test `skill_install_project_local` to `tools/gram/tests/cli_skill.rs`: create a temp dir with `.claude/` present; run `gram skill install`; assert `.claude/skills/gram/SKILL.md` exists and its content matches `skills/gram/SKILL.md`
+- [X] T027 [P] Add integration test `skill_install_unknown_agent` to `tools/gram/tests/cli_skill.rs`: run `gram skill install --agent bogus`; assert exit 2 and output lists supported agent names
+- [X] T028 [P] Add integration test `skill_list_and_remove` to `tools/gram/tests/cli_skill.rs`: install to temp dir, assert list shows entry, remove, assert list shows nothing
+- [X] T029 Update `tools/gram/README.md` to document the `gram skill` subcommand with install, list, and remove usage examples
+- [X] T030 Run `cargo test -p gram-data` and confirm all tests pass (existing + new cli_skill tests)
 
 ---
 
