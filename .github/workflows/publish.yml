@@ -116,17 +116,17 @@ jobs:
           VERSION="${{ steps.version.outputs.version }}"
           sed -i "s|tree-sitter-gram = \"$VERSION\"|tree-sitter-gram = { path = \"../..\" }|" tools/lsp/Cargo.toml
           echo "Restored gram-lsp dependency to workspace path"
-      - name: Update gram-cli dependencies for publishing
+      - name: Update gram-data dependencies for publishing
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           sed -i "s|tree-sitter-gram = { path = \"../..\" }|tree-sitter-gram = \"$VERSION\"|" tools/gram/Cargo.toml
           sed -i "s|gram-lsp = { path = \"../lsp\" }|gram-lsp = \"$VERSION\"|" tools/gram/Cargo.toml
-          echo "Updated gram-cli to depend on published tree-sitter-gram and gram-lsp = \"$VERSION\""
-      - name: Publish gram-cli
-        run: cargo publish --package gram-cli --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
-      - name: Restore gram-cli dependencies to workspace
+          echo "Updated gram-data to depend on published tree-sitter-gram and gram-lsp = \"$VERSION\""
+      - name: Publish gram-data
+        run: cargo publish --package gram-data --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
+      - name: Restore gram-data dependencies to workspace
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           sed -i "s|tree-sitter-gram = \"$VERSION\"|tree-sitter-gram = { path = \"../..\" }|" tools/gram/Cargo.toml
           sed -i "s|gram-lsp = \"$VERSION\"|gram-lsp = { path = \"../lsp\" }|" tools/gram/Cargo.toml
-          echo "Restored gram-cli dependencies to workspace paths"
+          echo "Restored gram-data dependencies to workspace paths"

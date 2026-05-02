@@ -1,5 +1,5 @@
 [package]
-name = "gram-cli"
+name = "gram-data"
 version.workspace = true
 edition.workspace = true
 description = "Unified gram CLI for validating and extending gram notation"

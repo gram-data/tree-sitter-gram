@@ -179,7 +179,7 @@ fn resolve_version(github: &str, pin: Option<&str>) -> Result<String, String> {
 
     let url = format!("https://api.github.com/repos/{}/releases/latest", github);
     let client = reqwest::blocking::Client::builder()
-        .user_agent("gram-cli")
+        .user_agent("gram-data")
         .build()
         .map_err(|e| e.to_string())?;
 
@@ -202,7 +202,7 @@ fn resolve_version(github: &str, pin: Option<&str>) -> Result<String, String> {
 
 fn download_and_extract(url: &str, bin_name: &str) -> Result<Vec<u8>, String> {
     let client = reqwest::blocking::Client::builder()
-        .user_agent("gram-cli")
+        .user_agent("gram-data")
         .build()
         .map_err(|e| e.to_string())?;
 

@@ -22,7 +22,7 @@ pub fn fetch() -> Result<Vec<RegistryEntry>, String> {
         .unwrap_or_else(|_| REGISTRY_URL.to_string());
 
     let client = reqwest::blocking::Client::builder()
-        .user_agent("gram-cli")
+        .user_agent("gram-data")
         .build()
         .map_err(|e| e.to_string())?;
 

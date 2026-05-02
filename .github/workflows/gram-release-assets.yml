@@ -46,7 +46,7 @@ jobs:
         if: contains(matrix.target, 'linux-musl')
         run: sudo apt-get install -y musl-tools
       - name: Build gram
-        run: cargo build -p gram-cli --release --target ${{ matrix.target }}
+        run: cargo build -p gram-data --release --target ${{ matrix.target }}
       - name: Package (Unix)
         if: runner.os != 'Windows'
         shell: bash
