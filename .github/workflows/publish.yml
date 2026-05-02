@@ -93,7 +93,7 @@ jobs:
       - name: Publish tree-sitter-gram
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          if curl -sf "https://crates.io/api/v1/crates/tree-sitter-gram/$VERSION" > /dev/null; then
+          if curl -sf -A "gram-data/tree-sitter-gram CI" "https://crates.io/api/v1/crates/tree-sitter-gram/$VERSION" > /dev/null; then
             echo "tree-sitter-gram@$VERSION already published, skipping"
           else
             cargo publish --package tree-sitter-gram --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
@@ -106,7 +106,7 @@ jobs:
       - name: Publish gram-lsp
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          if curl -sf "https://crates.io/api/v1/crates/gram-lsp/$VERSION" > /dev/null; then
+          if curl -sf -A "gram-data/tree-sitter-gram CI" "https://crates.io/api/v1/crates/gram-lsp/$VERSION" > /dev/null; then
             echo "gram-lsp@$VERSION already published, skipping"
           else
             cargo publish --package gram-lsp --token ${{ secrets.CARGO_REGISTRY_TOKEN }} --allow-dirty
