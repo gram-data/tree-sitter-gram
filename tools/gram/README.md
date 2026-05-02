@@ -49,6 +49,29 @@ gram extension install <name>
 gram extension remove <name>
 ```
 
+### Install agent skills
+
+`gram skill` installs gram's SKILL.md into AI coding agents (Claude Code, Cursor, Codex, Copilot, Gemini CLI, Kiro). The skill tells the agent how to work with `.gram` files and surfaces `cargo install gram-data` as a prerequisite for users who discover the skill first.
+
+```sh
+# Install to all detected agents in the current project
+gram skill install
+
+# Install globally (home-directory paths)
+gram skill install --global
+
+# Install to a specific agent only
+gram skill install --agent claude
+
+# List installed locations
+gram skill list
+
+# Remove from all detected locations
+gram skill remove
+```
+
+Supported agents: `claude`, `cursor`, `codex`, `copilot`, `gemini`, `kiro`
+
 ### Dispatch to extensions
 
 Any subcommand not built into `gram` is dispatched to a `gram-<name>` binary on `PATH` or in `~/.gram/bin/`:
