@@ -40,6 +40,7 @@ pub fn duplicate_top_level_element_diagnostics(root: Node, source: &[u8]) -> Vec
                     ),
                     severity: DiagnosticSeverity::Error,
                     code: Some("duplicate-element".into()),
+                    help: None,
                 });
             } else {
                 seen.push((name, start, end));

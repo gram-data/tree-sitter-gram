@@ -13,6 +13,7 @@ pub(crate) struct Diagnostic {
     pub message: String,
     pub severity: DiagnosticSeverity,
     pub code: Option<String>,
+    pub help: Option<String>,
 }
 
 #[derive(Clone, Debug)]
@@ -52,21 +53,24 @@ pub(crate) fn to_public(source: &str, d: &Diagnostic) -> gram_diagnostics::Diagn
             end: gram_diagnostics::Position { line: el, character: ec },
         },
         code: d.code.clone(),
+        help: d.help.clone(),
     }
 }
 
 fn collect_syntax_errors(node: Node, source: &[u8], out: &mut Vec<Diagnostic>) {
     if node.is_error() {
-        let msg = node
-            .utf8_text(source)
-            .map(|t| format!("unexpected: {t:?}"))
-            .unwrap_or_else(|_| "invalid syntax".into());
+        let token = node.utf8_text(source).unwrap_or("");
         out.push(Diagnostic {
             start_byte: node.start_byte(),
             end_byte: node.end_byte(),
-            message: msg,
+            message: if token.is_empty() {
+                "invalid syntax".into()
+            } else {
+                format!("unexpected: {token:?}")
+            },
             severity: DiagnosticSeverity::Error,
             code: Some("syntax-error".into()),
+            help: syntax_error_help(token),
         });
     } else if node.is_missing() {
         out.push(Diagnostic {
@@ -75,10 +79,30 @@ fn collect_syntax_errors(node: Node, source: &[u8], out: &mut Vec<Diagnostic>) {
             message: format!("expected {}", node.kind()),
             severity: DiagnosticSeverity::Error,
             code: Some("missing-node".into()),
+            help: missing_node_help(node.kind()),
         });
     }
     let mut cursor = node.walk();
     for child in node.children(&mut cursor) {
         collect_syntax_errors(child, source, out);
+    }
+}
+
+fn syntax_error_help(token: &str) -> Option<String> {
+    let t = token.trim();
+    if t.starts_with('#') {
+        Some("\"#\" is not valid in a node pattern; labels use a colon prefix, e.g. (node:Label), not (node#Tag)".into())
+    } else if t.chars().next().map_or(false, |c| c.is_ascii_digit()) {
+        Some("identifiers must start with a letter or underscore, e.g. use `counter` not `2counter`".into())
+    } else {
+        None
+    }
+}
+
+fn missing_node_help(kind: &str) -> Option<String> {
+    match kind {
+        ")" => Some("opening \"(\" has no matching \")\"".into()),
+        "]" => Some("opening \"[\" has no matching \"]\"".into()),
+        _ => None,
     }
 }

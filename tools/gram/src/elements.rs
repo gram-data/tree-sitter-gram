@@ -37,6 +37,7 @@ fn check_elements_list(elements: Node, source: &[u8], out: &mut Vec<Diagnostic>)
                     ),
                     severity: DiagnosticSeverity::Error,
                     code: Some("duplicate-element".into()),
+                    help: None,
                 });
             } else {
                 seen.push((name, start, end));

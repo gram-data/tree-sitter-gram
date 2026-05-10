@@ -50,6 +50,7 @@ fn check_entries(
                 ),
                 severity: DiagnosticSeverity::Error,
                 code: Some("duplicate-key".into()),
+                help: None,
             });
         } else {
             seen.push((id, start, end));
