@@ -1,7 +1,7 @@
 # Extension Registry Contract
 
 **Format**: TOML  
-**Location**: Static file hosted in the `gram-data` GitHub organization  
+**Location**: `registry.toml` on `main` of [`gram-data/gram-extensions`](https://github.com/gram-data/gram-extensions); override with `GRAM_REGISTRY_URL`  
 **Fetched by**: `gram extension list` and `gram extension install`
 
 ---
