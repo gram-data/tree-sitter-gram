@@ -113,8 +113,10 @@ A gram element is `[id:Label1:Label2 {properties} | e1, e2, ...]`: a subject (id
 | `?` | zero or one | `min_count: 0`, `max_count: 1` |
 | `+` | one or more | `min_count: 1` |
 | `*` | zero or more (unconstrained) | no count |
-| `{n}` | exactly n | `count: n` |
-| `{n,m}` / `{n,}` | between n and m / at least n | `min_count: n`, `max_count: m` |
+| `n` | exactly n (`1` above is the case n = 1) | `count: n` |
+| `n..m` | between n and m, inclusive | `min_count: n`, `max_count: m` |
+| `n..` | at least n (`+` is `1..`) | `min_count: n` |
+| `..m` | at most m, minimum 0 (`?` is `..1`) | `max_count: m` |
 
 The meaning follows the ontology spec's relationship end (`reference/relationships.adoc`): the cardinality at an end is the **number of relationships of this kind per node at that end**, not the number of nodes at the other end. For `[:ACTED_IN | person, movie]`, `@target + ...` says every movie has at least one incoming `ACTED_IN`, matching the spec's `to: {node: movie, min_count: 1}`. `@source` maps to the spec's `from`, `@target` to `to`. This is the reverse of UML multiplicity, so the README and proposal should say so explicitly (question 9).
 
@@ -144,7 +146,7 @@ The meaning follows the ontology spec's relationship end (`reference/relationshi
 6. **Attachment.** Adjacency convention only, or structural? What about a doc comment followed by annotations and then an element?
 7. **Context variants.** The French example documents the same element in a second context. Does gramdoc need a language/context marker, or does the surrounding annotation carry that?
 8. **pato / lint.** Should `pato` validate that `@property` and `@label` names exist on the documented element, that `@element` count matches the sequence, and that `@source`/`@target` appear only on arity-2 elements? (See `proposals/gram-lint-rules.md`.)
-9. **Cardinality.** Confirm the punctuation forms (`1`, `?`, `+`, `*`, `{n}`, `{n,m}`, `{n,}`) and the ontology-spec meaning (relationships per node at that end, the reverse of UML), and whether the description is required after the cardinality.
+9. **Cardinality.** Confirm the punctuation forms (`n`, `n..m`, `n..`, `..m`, plus `?`, `+`, `*`) and the ontology-spec meaning (relationships per node at that end, the reverse of UML), and whether the description is required after the cardinality.
 
 ## Implementation plan
 
