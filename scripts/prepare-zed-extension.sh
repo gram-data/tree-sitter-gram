@@ -77,24 +77,31 @@ else
     REPO_URL="file://$PROJECT_ROOT"
 fi
 
-# Rev is always the version tag — readable, stable, and set before the commit exists.
-REV="v$PACKAGE_VERSION"
+# Zed fetches `rev` and then runs `git checkout <rev>`, which only works for a commit SHA:
+# a tag name is fetched but never becomes a local ref ("pathspec 'v…' did not match").
+# Use the current commit. It must be pushed for repository = https://… (pub mode).
+REV=$(git -C "$PROJECT_ROOT" rev-parse HEAD)
 
 echo "🔗 Repository: $REPO_URL"
 echo "🔖 Rev: $REV"
 
-# Use sed in a cross-platform way
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # macOS
-    sed -i '' "s/^version = \".*\"/version = \"$PACKAGE_VERSION\"/" "$ZED_EXTENSION_DIR/extension.toml"
-    sed -i '' "s#^repository = \".*\"#repository = \"$REPO_URL\"#" "$ZED_EXTENSION_DIR/extension.toml"
-    sed -i '' "s/^rev = \".*\"/rev = \"$REV\"/" "$ZED_EXTENSION_DIR/extension.toml"
-else
-    # Linux and others
-    sed -i "s/^version = \".*\"/version = \"$PACKAGE_VERSION\"/" "$ZED_EXTENSION_DIR/extension.toml"
-    sed -i "s#^repository = \".*\"#repository = \"$REPO_URL\"#" "$ZED_EXTENSION_DIR/extension.toml"
-    sed -i "s/^rev = \".*\"/rev = \"$REV\"/" "$ZED_EXTENSION_DIR/extension.toml"
-fi
+# Update version, and the gram grammar's repository and rev. Only the [grammars.gram]
+# section is touched: [grammars.gramdoc] pins a separate repository and commit.
+EXT_TOML="$ZED_EXTENSION_DIR/extension.toml" PACKAGE_VERSION="$PACKAGE_VERSION" REPO_URL="$REPO_URL" REV="$REV" node -e '
+const fs = require("fs");
+const p = process.env.EXT_TOML;
+let inGram = false;
+let top = true;
+const out = fs.readFileSync(p, "utf8").split("\n").map((line) => {
+  const section = line.match(/^\[(.+)\]\s*$/);
+  if (section) { top = false; inGram = section[1] === "grammars.gram"; }
+  if (top && /^version = "/.test(line)) return `version = "${process.env.PACKAGE_VERSION}"`;
+  if (inGram && /^repository = "/.test(line)) return `repository = "${process.env.REPO_URL}"`;
+  if (inGram && /^rev = "/.test(line)) return `rev = "${process.env.REV}"`;
+  return line;
+});
+fs.writeFileSync(p, out.join("\n"));
+'
 
 # Validate extension structure
 echo "✅ Validating extension structure..."
@@ -107,6 +114,8 @@ required_files=(
     "$ZED_EXTENSION_DIR/languages/gram/indents.scm"
     "$ZED_EXTENSION_DIR/languages/gram/locals.scm"
     "$ZED_EXTENSION_DIR/languages/gram/injections.scm"
+    "$ZED_EXTENSION_DIR/languages/gramdoc/config.toml"
+    "$ZED_EXTENSION_DIR/languages/gramdoc/highlights.scm"
 )
 
 for file in "${required_files[@]}"; do
