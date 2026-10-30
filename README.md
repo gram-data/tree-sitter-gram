@@ -89,6 +89,19 @@ Gram files support comments using `//` syntax:
 (hello)-->(world)  // End-of-line comment
 ```
 
+Documentation comments use `/** ... */` and parse as a `doc_comment` node. Editors inject the
+[`gramdoc`](https://github.com/gram-data/tree-sitter-gramdoc) language into them (see `queries/injections.scm`):
+```gram
+/**
+ * A human individual.
+ *
+ * @property name The full name of the person.
+ */
+(Person {name: "STRING!"})
+```
+A doc comment may appear anywhere a `//` comment may, including inside records and between pattern elements.
+Plain `/* ... */` block comments are not supported, and `/**/` is not a doc comment.
+
 Learn more about `gram` at the [gram-data github org](https://github.com/gram-data).
 
 ## Editor Support

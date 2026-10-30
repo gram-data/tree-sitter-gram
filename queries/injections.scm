@@ -27,3 +27,8 @@
 (tagged_string
   tag: (symbol) @injection.language
   content: (string_content) @injection.content)
+
+; Documentation comments: /** ... */ is gramdoc (https://github.com/gram-data/tree-sitter-gramdoc).
+; The whole comment text, including the delimiters, is the injected content.
+((doc_comment) @injection.content
+  (#set! injection.language "gramdoc"))

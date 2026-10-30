@@ -1,0 +1,279 @@
+==================
+Doc comment before node with property docs
+==================
+
+/**
+ * A human individual.
+ *
+ * @property name The full name of the person.
+ */
+(Person {
+    name: "STRING!"
+})
+
+---
+
+(gram_pattern
+  (doc_comment)
+  (node_pattern
+    (symbol)
+    (record
+      (record_property
+        (symbol)
+        (string_literal
+          (string_content))))))
+
+==================
+Doc comment before annotation-style subject pattern
+==================
+
+/**
+ * Un être humain.
+ *
+ * @property name Le nom complet de la personne.
+ */
+[:French {
+      name: "nom"
+} | Person ]
+
+---
+
+(gram_pattern
+  (doc_comment)
+  (subject_pattern
+    (labels
+      (symbol))
+    (record
+      (record_property
+        (symbol)
+        (string_literal
+          (string_content))))
+    (subject_pattern_elements
+      (pattern_reference
+        (symbol)))))
+
+==================
+Single-line doc comment
+==================
+
+/** A person. */
+(Person)
+
+---
+
+(gram_pattern
+  (doc_comment)
+  (node_pattern
+    (symbol)))
+
+==================
+Doc comment before annotated pattern
+==================
+
+/** Documents the annotation. */
+@key(id) (n)
+
+---
+
+(gram_pattern
+  (doc_comment)
+  (annotated_pattern
+    (annotations
+      (property_annotation
+        (symbol)
+        (symbol)))
+    (node_pattern
+      (symbol))))
+
+==================
+Doc comment before relationship pattern
+==================
+
+/**
+ * @source * A person may know many people.
+ * @target * A person may be known by many people.
+ */
+(a)-[:KNOWS]->(b)
+
+---
+
+(gram_pattern
+  (doc_comment)
+  (relationship_pattern
+    (node_pattern
+      (symbol))
+    (right_arrow
+      (labels
+        (symbol)))
+    (node_pattern
+      (symbol))))
+
+==================
+Doc comments inside a record before properties
+==================
+
+(Person {
+  /** The full name. */
+  name: "x",
+  /** Age in years. */
+  age: 3
+})
+
+---
+
+(gram_pattern
+  (node_pattern
+    (symbol)
+    (record
+      (doc_comment)
+      (record_property
+        (symbol)
+        (string_literal
+          (string_content)))
+      (doc_comment)
+      (record_property
+        (symbol)
+        (integer)))))
+
+==================
+Doc comments inside subject pattern elements
+==================
+
+[g | /** first */ (a), /** second */ (b)]
+
+---
+
+(gram_pattern
+  (subject_pattern
+    (symbol)
+    (doc_comment)
+    (subject_pattern_elements
+      (node_pattern
+        (symbol))
+      (doc_comment)
+      (node_pattern
+        (symbol)))))
+
+==================
+Doc comment inside relationship record
+==================
+
+(a)-[:KNOWS {/** since */ since: 2020}]->(b)
+
+---
+
+(gram_pattern
+  (relationship_pattern
+    (node_pattern
+      (symbol))
+    (right_arrow
+      (labels
+        (symbol))
+      (record
+        (doc_comment)
+        (record_property
+          (symbol)
+          (integer))))
+    (node_pattern
+      (symbol))))
+
+==================
+Doc comment between top-level patterns
+==================
+
+(a)
+/** about b */
+(b)
+
+---
+
+(gram_pattern
+  (node_pattern
+    (symbol))
+  (doc_comment)
+  (node_pattern
+    (symbol)))
+
+==================
+Empty doc comment with three stars
+==================
+
+/***/
+(a)
+
+---
+
+(gram_pattern
+  (doc_comment)
+  (node_pattern
+    (symbol)))
+
+==================
+Doc comment containing slashes and stars
+==================
+
+/**
+ * Path a/b and wildcard * and // not a line comment
+ */
+(a)
+
+---
+
+(gram_pattern
+  (doc_comment)
+  (node_pattern
+    (symbol)))
+
+==================
+Doc comment alongside line comment
+==================
+
+// line
+/** doc */
+(a) // trailing
+
+---
+
+(gram_pattern
+  (comment)
+  (doc_comment)
+  (node_pattern
+    (symbol))
+  (comment))
+
+==================
+Unterminated doc comment
+:error
+==================
+
+(a)
+/** never closed
+(b)
+
+---
+
+
+
+==================
+Plain block comment is not a doc comment
+:error
+==================
+
+/* plain */
+(a)
+
+---
+
+
+
+==================
+Empty plain block comment is not a doc comment
+:error
+==================
+
+/**/
+(a)
+
+---
+
+

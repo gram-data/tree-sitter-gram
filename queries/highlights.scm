@@ -14,6 +14,7 @@
 
 ; Comment (FR-003)
 (comment) @comment
+(doc_comment) @comment.documentation
 
 ; Tagged-string tag distinct from content (FR-002)
 (tagged_string tag: (symbol) @attribute)
