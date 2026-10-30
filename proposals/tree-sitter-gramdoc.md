@@ -89,7 +89,14 @@ Modeled on the cypherdoc layout:
 
 ### Attachment
 
-A doc comment documents the next element in source order: an element, an annotation, or a `record_property` when placed inside a record. Because annotations are patterns whose single element is the annotated thing, a doc comment can sit on the original element or on any annotation attached to it. Attachment is a consumer rule over adjacency unless we decide the host grammar should make it structural (open question 6).
+`doc_comment` is an `extras` node, so in the CST it is a sibling of whatever it documents, inside the same container. Attachment is a consumer rule over adjacency, not part of the grammar. The proposed rules (question 6), checked against the parse trees of the host grammar:
+
+1. **Next sibling.** A doc comment documents the next sibling node in the same container, in source order: a top-level pattern, a pattern in a subject pattern's element list, or a `record_property` inside a record.
+2. **Annotated patterns.** A doc comment before `@key(id) (n)` is a top-level sibling of the `annotated_pattern`, so it documents the annotated pattern as a whole. A doc comment between the annotations and the element (`@key(id) /** doc */ (n)`) is a child of the `annotated_pattern` just before its `elements` field, so it documents that element. Because annotations are patterns whose single element is the annotated thing, a doc comment can sit on the original element or on any annotation attached to it.
+3. **Orphans.** A doc comment with no following sibling in its container (trailing at top level, last before a closing `]` or `}`) documents nothing. Consumers should keep it and may lint it.
+4. **Several in a row.** Consecutive doc comments before one element all attach to it, in source order. Consumers choose whether to merge or use the last, and may warn.
+
+Making attachment structural in the host grammar would be a larger change; these rules do not prevent it later.
 
 ### Tag set
 
@@ -145,8 +152,8 @@ The meaning follows the ontology spec's relationship end (`reference/relationshi
 3. **Tag set.** Should arbitrary user tags be allowed beyond those above, and when do `@see`, `@deprecated` and `@example` join?
 4. **Description format.** Plain prose, or Markdown (gram already injects `md`)?
 5. **Block comments.** Do we also add plain `/* */`, or only `/** */`?
-6. **Attachment.** Adjacency convention only, or structural? What about a doc comment followed by annotations and then an element?
-7. **Context variants.** The French example documents the same element in a second context. Does gramdoc need a language/context marker, or does the surrounding annotation carry that?
+6. **Attachment.** Adjacency convention only, or structural? What about a doc comment followed by annotations and then an element? *Proposed answer*: adjacency, with the four rules in "Attachment" above.
+7. **Context variants.** The French example documents the same element in a second context. Does gramdoc need a language/context marker, or does the surrounding annotation carry that? *Proposed answer*: no marker. The context is the annotation (`:French`) the doc comment is attached to, and the comment documents that annotation as an element in its own right, per rule 2 of "Attachment". Consumers read the language from the annotation, not from the comment.
 8. **pato / lint.** Should `pato` validate that `@property` and `@label` names exist on the documented element, that `@element` count matches the sequence, and that `@source`/`@target` appear only on arity-2 elements? (See `proposals/gram-lint-rules.md`.)
 9. **Cardinality.** Confirm the punctuation forms (`n`, `n..m`, `n..`, `..m`, plus `?`, `+`, `*`) and the ontology-spec meaning (relationships per node at that end, the reverse of UML), and whether the description is required after the cardinality.
 10. **Loops and symmetry.** `@self` requires loops. Do we also need a marker for "loops forbidden" (irreflexive) and for symmetric relationships such as `MARRIED_TO`, or is that left to prose?
