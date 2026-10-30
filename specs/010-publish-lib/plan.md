@@ -170,7 +170,9 @@ pub mod lint {
 
 ### Correction from issue comment
 
-The issue comment proposes a `tree-sitter-gramdoc` grammar or extending `tree-sitter-cypherdoc`. This is the wrong approach.
+The issue comment proposes a `tree-sitter-gramdoc` grammar or extending `tree-sitter-cypherdoc`. This is the wrong approach **for gram embedded in markdown**.
+
+> Not to be confused with `proposals/tree-sitter-gramdoc.md`, which goes the opposite direction: documentation comments (`/** ... */`) inside gram, injected with a separate `gramdoc` grammar (https://github.com/gram-data/tree-sitter-gramdoc). That proposal does not conflict with the decision below.
 
 Tree-sitter has a first-class **language injection** mechanism: a host grammar (markdown) parses the document structure, and content inside designated nodes is parsed by a different grammar. No new grammar is needed.
 
