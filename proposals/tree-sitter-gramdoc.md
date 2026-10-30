@@ -91,11 +91,23 @@ Modeled on the cypherdoc layout:
 
 A doc comment documents the next element in source order: an element, an annotation, or a `record_property` when placed inside a record. Because annotations are patterns whose single element is the annotated thing, a doc comment can sit on the original element or on any annotation attached to it. Attachment is a consumer rule over adjacency unless we decide the host grammar should make it structural (open question 6).
 
-### Initial tag set (to settle)
+### Tag set
 
-- `@property <name> <description>` documents a property of the element, so no property-addressing syntax is needed in the structure.
-- A tag for aliases and one for external references, covering the ontology spec's `aliases` and `reference`.
-- The description prose covers the spec's `description`.
+A gram element is `[id:Label1:Label2 {properties} | e1, e2, ...]`: a subject (identifier, labels, record) plus a sequence of pattern elements. The tags mirror those parts, and the description prose covers the ontology spec's `description`.
+
+**Subject**
+- `@property <name> <description>` documents a property in the record, so no property-addressing syntax is needed in the structure.
+- `@label <name> <description>` documents a label.
+- `@alias <name>` (repeatable) and `@reference <target> [description]` cover the ontology spec's `aliases` and `reference`.
+
+**Pattern elements**
+- `@elements <description>` documents the intent of the sequence as a whole.
+- `@element <description>` (repeatable) documents one member. Position is implied by order of appearance: the nth `@element` documents the nth member, so no addressing syntax is needed, and anonymous members are covered. A count mismatch with the documented element is a lint matter (question 8), not a parse error.
+- `@source <cardinality> <description>` and `@target <cardinality> <description>` document the two ends of a relationship (arity 2, `[r | source, target]`). They are the relationship-specific, property-graph-friendly form of the first two `@element` entries, and are expected to dominate early use. They may coexist with `@element`/`@elements`.
+
+**Cardinality** is `1`, `0..1`, `1..*`, `*` or `n..m`, in the UML-style end convention: the number of instances at that end that can relate to one instance at the other end. For example, `@source 1..* Each :KNOWS may start at one or more people` is shorthand for the multiplicity at the source end. This convention needs confirmation (question 9).
+
+**Deferred beyond the first tag set**: `@see`, `@deprecated`, `@example`.
 
 ## Alternatives considered
 
@@ -115,12 +127,13 @@ A doc comment documents the next element in source order: an element, an annotat
 
 1. **Tag syntax.** cypherdoc uses `@param {type} name - description` (distinct required/optional nodes, a deliberately retained `-`). The driving example uses `@property name description` with no braces or dash. Which do we adopt, and do we want `{type}` at all, given gram already has `::` and tagged strings for types?
 2. **Sigil overlap.** Is `@` in tags acceptable alongside `@key(id)` annotations for readability?
-3. **Tag set.** Beyond `@property`: names for aliases and references, and whether to allow arbitrary user tags.
+3. **Tag set.** Should arbitrary user tags be allowed beyond those above, and when do `@see`, `@deprecated` and `@example` join?
 4. **Description format.** Plain prose, or Markdown (gram already injects `md`)?
 5. **Block comments.** Do we also add plain `/* */`, or only `/** */`?
 6. **Attachment.** Adjacency convention only, or structural? What about a doc comment followed by annotations and then an element?
 7. **Context variants.** The French example documents the same element in a second context. Does gramdoc need a language/context marker, or does the surrounding annotation carry that?
-8. **pato / lint.** Should `pato` validate that `@property` names exist on the documented element? (See `proposals/gram-lint-rules.md`.)
+8. **pato / lint.** Should `pato` validate that `@property` and `@label` names exist on the documented element, that `@element` count matches the sequence, and that `@source`/`@target` appear only on arity-2 elements? (See `proposals/gram-lint-rules.md`.)
+9. **Cardinality.** Confirm the UML-style end convention and the accepted forms (`1`, `0..1`, `1..*`, `*`, `n..m`), and whether the description is required after it.
 
 ## Implementation plan
 
