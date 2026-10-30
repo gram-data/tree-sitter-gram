@@ -4,6 +4,8 @@ name: Publish packages
 on:
   push:
     tags: ["*"]
+  # Re-run publishing for the version in package.json (already-published versions are skipped).
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -51,10 +53,9 @@ jobs:
           if npm view "@gram-data/tree-sitter-gram@${VERSION}" version 2>/dev/null; then
             echo "Version ${VERSION} already published to npm, skipping"
           else
+            # Authenticates with npm trusted publishing (OIDC, id-token: write); no token.
             npm publish
           fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   pypi:
     name: Publish to PyPI
