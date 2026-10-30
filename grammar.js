@@ -4,6 +4,7 @@ module.exports = grammar({
   extras: ($) => [
     /\s/,
     $.comment,
+    $.doc_comment,
   ],
 
   rules: {
@@ -397,6 +398,10 @@ module.exports = grammar({
       ),
 
     comment: ($) => token(seq("//", /.*/)),
+
+    // Documentation comment: `/** ... */`. Content is injected as `gramdoc`
+    // (see queries/injections.scm). `/**/` is not a doc comment.
+    doc_comment: ($) => token(seq("/**", /[^*]*\*+([^/*][^*]*\*+)*/, "/")),
   },
 });
 
