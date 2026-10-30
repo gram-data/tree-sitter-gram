@@ -1,7 +1,9 @@
 use serde::Deserialize;
 
+// The registry lives in its own repository so that listing an extension never needs a
+// change to this one (extensions depend on this repo's crates).
 const REGISTRY_URL: &str =
-    "https://raw.githubusercontent.com/gram-data/tree-sitter-gram/main/registry.toml";
+    "https://raw.githubusercontent.com/gram-data/gram-extensions/main/registry.toml";
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct RegistryEntry {
