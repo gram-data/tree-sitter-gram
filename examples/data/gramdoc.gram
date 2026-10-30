@@ -1,0 +1,131 @@
+// gramdoc: structured documentation comments (/** ... */) for gram.
+// Editors inject the gramdoc language into each doc comment.
+// https://github.com/gram-data/tree-sitter-gramdoc
+
+// --- A node: description, name, label, properties, alias, reference ---
+
+/**
+ * Person
+ *
+ * A human individual.
+ *
+ * @label Person The kind of thing this describes.
+ * @alias Human
+ * @alias Individual
+ * @reference https://schema.org/Person A comparable external definition.
+ * @property name The full name of the person.
+ * @property born
+ *   Year of birth. Descriptions continue onto following lines
+ *   until the next tag.
+ */
+(:Person {name: "STRING!", born: "INTEGER"})
+
+// --- The same element in another context (language) ---
+
+/**
+ * Un être humain.
+ *
+ * @property name Le nom complet de la personne.
+ * @property born L'année de naissance.
+ */
+[:French {name: "nom", born: "naissance"} | (:Person)]
+
+// --- Relationships: cardinality counts relationships per node at that end ---
+
+/**
+ * KNOWS
+ *
+ * A social tie between two people.
+ *
+ * @label KNOWS
+ * @alias ACQUAINTED_WITH
+ * @property since When the two people met.
+ * @source * A person may know any number of people.
+ * @target * A person may be known by any number of people.
+ */
+[:KNOWS {since: date} | (a:Person), (b:Person)]
+
+/**
+ * PARENT_OF
+ *
+ * @label PARENT_OF
+ * @alias HAS_CHILD
+ * @source * A person may be recorded as parent of any number of children.
+ * @target ..2 A child has at most two recorded parents, so at most two
+ *   incoming PARENT_OF relationships end at any one person.
+ */
+[:PARENT_OF | (parent:Person), (child:Person)]
+
+/**
+ * MARRIED_TO
+ *
+ * @source ? A person starts at most one marriage.
+ * @target ? A person ends at most one marriage.
+ */
+[:MARRIED_TO | (a:Person), (b:Person)]
+
+/**
+ * WORKS_FOR
+ *
+ * Employment of a person by an organization.
+ *
+ * @label WORKS_FOR
+ * @property role The job title.
+ * @property start_date The first day of employment.
+ * @source 1..3 A person holds between one and three jobs.
+ * @target + An employer has at least one employee.
+ */
+[:WORKS_FOR {role: "STRING", start_date: date} | (employee:Person), (employer:Organization)]
+
+/**
+ * REPORTS_TO
+ *
+ * @source ..1 Each person has at most one manager.
+ * @target 0.. A manager may have any number of direct reports.
+ */
+[:REPORTS_TO | (report:Person), (manager:Person)]
+
+// --- A self-loop: @self says source and target are the same node ---
+
+/**
+ * SAME_AS
+ *
+ * @label SAME_AS
+ * @self
+ * @source ? A person has at most one SAME_AS loop.
+ * @target ..1 Likewise at the other end.
+ */
+[:SAME_AS | (p:Person), (p)]
+
+// --- A sequence of elements, documented by position ---
+
+/**
+ * Team
+ *
+ * @elements The members of the team.
+ * @element The team lead.
+ * @element A regular member.
+ */
+[team:Team | (lead:Person), (member:Person)]
+
+// --- Doc comments also work inside records, before a property ---
+
+(:Account {
+  /** The login name, unique across accounts. */
+  username: "ada",
+  /**
+   * When the account was created.
+   * @reference https://www.w3.org/TR/xmlschema11-2/#dateTime ISO 8601 timestamps.
+   */
+  created: datetime`2024-01-01T00:00:00Z`
+})
+
+// --- Other tags are accepted and kept as unknown tags ---
+
+/**
+ * Draft
+ *
+ * @deprecated Use Person instead.
+ * @since 0.4.0
+ */
+(:Draft)
