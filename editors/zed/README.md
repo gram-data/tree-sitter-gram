@@ -135,6 +135,9 @@ editors/zed/
 │       ├── indents.scm
 │       ├── locals.scm
 │       └── injections.scm
+│   └── gramdoc/
+│       ├── config.toml     # Injection-only language for `/** ... */` doc comments
+│       └── highlights.scm  # Copied from tree-sitter-gramdoc (see header comment)
 ├── test.gram               # Example file for testing
 └── .gitignore              # Ignores grammars/ (populated by Zed from extension.toml)
 ```
@@ -142,6 +145,10 @@ editors/zed/
 Query files (`.scm`) in `languages/gram/` are symlinks to the canonical `queries/` directory at the repo root. Edit `queries/*.scm` there; do not edit the copies under `editors/zed` directly. Running `scripts/prepare-zed-extension.sh` copies `queries/*.scm` into this directory (e.g. for distribution) and updates extension version/rev.
 
 The `grammars/` directory is created by Zed when it loads the extension (it clones the grammar from the URL in `extension.toml`). It is gitignored. If you see a nested `editors/zed/grammars/gram/...` path, that is the cloned repo inside Zed’s cache; you can ignore or delete `editors/zed/grammars/` locally.
+
+### Doc comments (gramdoc)
+
+`/** ... */` comments in gram files are injected with the [gramdoc](https://github.com/gram-data/tree-sitter-gramdoc) language (`queries/injections.scm`). Zed only applies an injection when the language is registered, so the extension declares a second grammar, `[grammars.gramdoc]`, and an injection-only language in `languages/gramdoc/`. The gramdoc grammar is pinned by full commit SHA (Zed requires one); `languages/gramdoc/highlights.scm` is a copy from the same release. When bumping gramdoc, update the SHA in `extension.toml` and re-copy `highlights.scm` from that tag. `prepare-zed-extension.sh` only rewrites the `gram` grammar's `repository` and `rev`, never gramdoc's.
 
 ### Keeping the grammar revision in sync
 

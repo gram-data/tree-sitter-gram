@@ -1,0 +1,5 @@
+name = "Gramdoc"
+grammar = "gramdoc"
+# Injected into gram doc comments only; not a standalone file type.
+path_suffixes = []
+word_characters = ["_"]
