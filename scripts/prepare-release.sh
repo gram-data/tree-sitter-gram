@@ -9,7 +9,7 @@
 #   tree-sitter version       →  package.json, Cargo.toml (workspace), pyproject.toml,
 #                                tree-sitter.json, Makefile
 #   npm --package-lock-only   →  package-lock.json (tree-sitter version does not touch it)
-#   prepare-zed-extension.sh  →  editors/zed/extension.toml version and rev = "v<version>"
+#   prepare-zed-extension.sh  →  editors/zed/extension.toml version and rev = current commit SHA
 #   cargo check --workspace   →  validate all Rust crates compile at new version
 
 set -euo pipefail
@@ -61,8 +61,9 @@ npm install --package-lock-only --ignore-scripts --silent
 
 # ---------------------------------------------------------------------------
 # 2. Prepare Zed extension
-#    Sets extension.toml version and rev = "v<version>" (the git tag that will
-#    be created in the next step — no amend needed).
+#    Sets extension.toml version and rev = the current commit SHA. Zed cannot check
+#    out a tag name, and the release commit cannot contain its own SHA, so rev points
+#    at the commit the release is prepared on (it must be pushed).
 # ---------------------------------------------------------------------------
 echo "→ Preparing Zed extension..."
 "$SCRIPT_DIR/prepare-zed-extension.sh"

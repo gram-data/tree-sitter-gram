@@ -77,8 +77,10 @@ else
     REPO_URL="file://$PROJECT_ROOT"
 fi
 
-# Rev is always the version tag — readable, stable, and set before the commit exists.
-REV="v$PACKAGE_VERSION"
+# Zed fetches `rev` and then runs `git checkout <rev>`, which only works for a commit SHA:
+# a tag name is fetched but never becomes a local ref ("pathspec 'v…' did not match").
+# Use the current commit. It must be pushed for repository = https://… (pub mode).
+REV=$(git -C "$PROJECT_ROOT" rev-parse HEAD)
 
 echo "🔗 Repository: $REPO_URL"
 echo "🔖 Rev: $REV"

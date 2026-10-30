@@ -13,7 +13,7 @@ capabilities = [
 # path = "grammars/tree-sitter-gram"
 [grammars.gram]
 repository = "https://github.com/gram-data/tree-sitter-gram"
-rev = "v0.4.0"
+rev = "cabe0ed5c39c1bfbe49705c1dac94d2384259d61"
 
 # Doc comments (`/** ... */`) in gram files are injected with gramdoc.
 # Zed needs a full commit SHA here: v0.2.0 of gram-data/tree-sitter-gramdoc.
