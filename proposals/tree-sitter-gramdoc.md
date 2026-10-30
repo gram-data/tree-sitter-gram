@@ -120,6 +120,8 @@ A gram element is `[id:Label1:Label2 {properties} | e1, e2, ...]`: a subject (id
 
 The meaning follows the ontology spec's relationship end (`reference/relationships.adoc`): the cardinality at an end is the **number of relationships of this kind per node at that end**, not the number of nodes at the other end. For `[:ACTED_IN | person, movie]`, `@target + ...` says every movie has at least one incoming `ACTED_IN`, matching the spec's `to: {node: movie, min_count: 1}`. `@source` maps to the spec's `from`, `@target` to `to`. This is the reverse of UML multiplicity, so the README and proposal should say so explicitly (question 9).
 
+**Self-loops**: `@self` is a bare marker (no argument, no description) saying relationships of this kind MUST be self-loops: source and target are the same node. Its absence says nothing: loops are neither required nor forbidden, as in the ontology spec, GQL edge types and PG-Schema, none of which can express either rule natively. A loop counts at both ends for its one node, so cardinalities on `@source`/`@target` still apply to it. A rule that loops are forbidden, and symmetry, are not covered (question 10).
+
 **Deferred beyond the first tag set**: `@see`, `@deprecated`, `@example`.
 
 ## Alternatives considered
@@ -147,6 +149,7 @@ The meaning follows the ontology spec's relationship end (`reference/relationshi
 7. **Context variants.** The French example documents the same element in a second context. Does gramdoc need a language/context marker, or does the surrounding annotation carry that?
 8. **pato / lint.** Should `pato` validate that `@property` and `@label` names exist on the documented element, that `@element` count matches the sequence, and that `@source`/`@target` appear only on arity-2 elements? (See `proposals/gram-lint-rules.md`.)
 9. **Cardinality.** Confirm the punctuation forms (`n`, `n..m`, `n..`, `..m`, plus `?`, `+`, `*`) and the ontology-spec meaning (relationships per node at that end, the reverse of UML), and whether the description is required after the cardinality.
+10. **Loops and symmetry.** `@self` requires loops. Do we also need a marker for "loops forbidden" (irreflexive) and for symmetric relationships such as `MARRIED_TO`, or is that left to prose?
 
 ## Implementation plan
 
