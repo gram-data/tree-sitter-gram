@@ -105,7 +105,18 @@ A gram element is `[id:Label1:Label2 {properties} | e1, e2, ...]`: a subject (id
 - `@element <description>` (repeatable) documents one member. Position is implied by order of appearance: the nth `@element` documents the nth member, so no addressing syntax is needed, and anonymous members are covered. A count mismatch with the documented element is a lint matter (question 8), not a parse error.
 - `@source <cardinality> <description>` and `@target <cardinality> <description>` document the two ends of a relationship (arity 2, `[r | source, target]`). They are the relationship-specific, property-graph-friendly form of the first two `@element` entries, and are expected to dominate early use. They may coexist with `@element`/`@elements`.
 
-**Cardinality** is `1`, `0..1`, `1..*`, `*` or `n..m`, in the UML-style end convention: the number of instances at that end that can relate to one instance at the other end. For example, `@source 1..* Each :KNOWS may start at one or more people` is shorthand for the multiplicity at the source end. This convention needs confirmation (question 9).
+**Cardinality** uses punctuation shorthand, regex-style:
+
+| Form | Meaning | Ontology spec equivalent |
+| --- | --- | --- |
+| `1` | exactly one | `count: 1` |
+| `?` | zero or one | `min_count: 0`, `max_count: 1` |
+| `+` | one or more | `min_count: 1` |
+| `*` | zero or more (unconstrained) | no count |
+| `{n}` | exactly n | `count: n` |
+| `{n,m}` / `{n,}` | between n and m / at least n | `min_count: n`, `max_count: m` |
+
+The meaning follows the ontology spec's relationship end (`reference/relationships.adoc`): the cardinality at an end is the **number of relationships of this kind per node at that end**, not the number of nodes at the other end. For `[:ACTED_IN | person, movie]`, `@target + ...` says every movie has at least one incoming `ACTED_IN`, matching the spec's `to: {node: movie, min_count: 1}`. `@source` maps to the spec's `from`, `@target` to `to`. This is the reverse of UML multiplicity, so the README and proposal should say so explicitly (question 9).
 
 **Deferred beyond the first tag set**: `@see`, `@deprecated`, `@example`.
 
@@ -133,7 +144,7 @@ A gram element is `[id:Label1:Label2 {properties} | e1, e2, ...]`: a subject (id
 6. **Attachment.** Adjacency convention only, or structural? What about a doc comment followed by annotations and then an element?
 7. **Context variants.** The French example documents the same element in a second context. Does gramdoc need a language/context marker, or does the surrounding annotation carry that?
 8. **pato / lint.** Should `pato` validate that `@property` and `@label` names exist on the documented element, that `@element` count matches the sequence, and that `@source`/`@target` appear only on arity-2 elements? (See `proposals/gram-lint-rules.md`.)
-9. **Cardinality.** Confirm the UML-style end convention and the accepted forms (`1`, `0..1`, `1..*`, `*`, `n..m`), and whether the description is required after it.
+9. **Cardinality.** Confirm the punctuation forms (`1`, `?`, `+`, `*`, `{n}`, `{n,m}`, `{n,}`) and the ontology-spec meaning (relationships per node at that end, the reverse of UML), and whether the description is required after the cardinality.
 
 ## Implementation plan
 
