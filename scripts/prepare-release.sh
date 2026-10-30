@@ -6,8 +6,9 @@
 #   ./scripts/prepare-release.sh 0.4.0
 #
 # Covers:
-#   tree-sitter version       →  package.json, package-lock.json, Cargo.toml (workspace),
-#                                pyproject.toml, tree-sitter.json
+#   tree-sitter version       →  package.json, Cargo.toml (workspace), pyproject.toml,
+#                                tree-sitter.json, Makefile
+#   npm --package-lock-only   →  package-lock.json (tree-sitter version does not touch it)
 #   prepare-zed-extension.sh  →  editors/zed/extension.toml version and rev = "v<version>"
 #   cargo check --workspace   →  validate all Rust crates compile at new version
 
@@ -15,6 +16,9 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(dirname "$SCRIPT_DIR")"
+
+# Use the repo-pinned tree-sitter CLI (a devDependency) when no global one is installed.
+export PATH="$ROOT/node_modules/.bin:$PATH"
 
 # ---------------------------------------------------------------------------
 # Args
@@ -51,6 +55,9 @@ tree-sitter version "$@"
 
 NEW_VERSION=$(node -p "require('./package.json').version")
 echo "  version: $NEW_VERSION"
+
+# tree-sitter version leaves package-lock.json at the old version.
+npm install --package-lock-only --ignore-scripts --silent
 
 # ---------------------------------------------------------------------------
 # 2. Prepare Zed extension

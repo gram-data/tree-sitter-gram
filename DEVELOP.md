@@ -85,11 +85,12 @@ Build steps live in the reusable **Build** workflow (`.github/workflows/build.ym
 
 Merging to the default branch **does not** publish anything. When you **push a `v*` version tag** to GitHub, **Publish** (`.github/workflows/publish.yml`) runs on that tag: npm (`@gram-data/tree-sitter-gram`), PyPI (`tree-sitter-gram`), and crates.io (`tree-sitter-gram`, `gram-lsp`, `gram`). The same tag also runs **Release** if you keep that workflow. You need the usual repo secrets (`NPM_TOKEN`, `PYPI_API_TOKEN`, `CARGO_REGISTRY_TOKEN`).
 
-1. Bump version everywhere using `tree-sitter version 1.2.3`
-   - `package.json` (`version`)
-   - `tree-sitter.json` (`metadata.version`)
-   - `Cargo.toml` (workspace and crates)
-   - Bump zed editor: `npm run zed:publish`
+1. Bump the version everywhere with the release script (it needs `npm ci` first, and uses the repo-pinned `tree-sitter` CLI):
+   ```bash
+   ./scripts/prepare-release.sh 1.2.3      # or --bump patch|minor|major
+   ```
+   It runs `tree-sitter version` (`package.json`, `tree-sitter.json`, `pyproject.toml`, workspace `Cargo.toml`, `Makefile`), refreshes `package-lock.json`, runs `prepare-zed-extension.sh` (`editors/zed/extension.toml` version and `rev = "v1.2.3"`), then `cargo check --workspace`.
+   Do not commit the output of `npm run zed:publish` as part of a release: it replaces the symlinked queries under `editors/zed/languages/gram/` with copies.
 2. Commit and push (or open a PR and merge) to check that build succeeds
 3. Wait for **CI** to pass (test + build) on the branch you will tag.
 4. Tag the release and push tags:

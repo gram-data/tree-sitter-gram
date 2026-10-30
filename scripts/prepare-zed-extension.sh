@@ -7,6 +7,9 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
+# Use the repo-pinned tree-sitter CLI (a devDependency) when no global one is installed.
+export PATH="$PROJECT_ROOT/node_modules/.bin:$PATH"
 ZED_EXTENSION_DIR="$PROJECT_ROOT/editors/zed"
 
 echo "🔧 Preparing Zed extension for publication..."
