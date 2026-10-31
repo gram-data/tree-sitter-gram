@@ -12,8 +12,13 @@ pub struct ListArgs {
     #[arg(long, conflicts_with = "installed")]
     pub available: bool,
     /// Output as JSON array
-    #[arg(long)]
+    #[arg(long, conflicts_with = "lines")]
     pub json: bool,
+    /// One tab-separated line per extension, for sed, awk and cut. Columns: name, status
+    /// (installed, outdated or available), installed version, latest version, source,
+    /// description. Empty values are `-`.
+    #[arg(short = 'l', long, conflicts_with = "json")]
+    pub lines: bool,
 }
 
 #[derive(Serialize)]
@@ -108,6 +113,38 @@ pub fn run(args: ListArgs) -> i32 {
             Err(e) => {
                 eprintln!("error serializing JSON: {e}");
                 return 2;
+            }
+        }
+        return 0;
+    }
+
+    if args.lines {
+        use std::io::Write;
+        let mut out = std::io::stdout().lock();
+        let dash = |v: Option<&str>| match v {
+            Some(v) if !v.is_empty() => v.to_string(),
+            _ => "-".to_string(),
+        };
+        for e in &entries {
+            let status = if e.update_available {
+                "outdated"
+            } else {
+                e.status
+            };
+            // A closed pipe (`| head`) ends the output quietly instead of panicking.
+            if writeln!(
+                out,
+                "{}\t{}\t{}\t{}\t{}\t{}",
+                e.name,
+                status,
+                dash(e.version.as_deref()),
+                dash(e.latest.as_deref()),
+                dash(e.source.as_deref()),
+                dash(Some(e.description.as_str())),
+            )
+            .is_err()
+            {
+                break;
             }
         }
         return 0;

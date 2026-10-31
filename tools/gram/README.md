@@ -44,6 +44,10 @@ Extensions are external binaries named `gram-<name>` installed to `~/.gram/bin/`
 # List available and installed extensions, with latest versions
 gram extension list
 
+# One tab-separated line per extension, for sed, awk and cut
+# (name, status, installed, latest, source, description; empty values are -)
+gram extension list -l
+
 # Install an extension
 gram extension install <name>
 
