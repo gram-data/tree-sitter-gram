@@ -282,13 +282,44 @@ fn warn_if_not_on_path(bin_dir: &std::path::Path) {
 
     if !on_path {
         eprintln!("\nwarning: {} is not on your PATH.", bin_dir.display());
-        #[cfg(unix)]
+        let shell = std::env::var("SHELL").unwrap_or_default();
         eprintln!(
-            "Add to your shell profile:\n  export PATH=\"{}:$PATH\"",
-            bin_dir.display()
+            "{}",
+            path_instructions(&shell, &bin_dir.display().to_string())
         );
-        #[cfg(windows)]
-        eprintln!("Add to your system PATH: {}", bin_dir.display());
+    }
+}
+
+/// How to put `bin_dir` on PATH for the shell named by `shell` (a path such as
+/// `/opt/homebrew/bin/fish`, or empty when unknown; Windows has no `SHELL`).
+fn path_instructions(shell: &str, bin_dir: &str) -> String {
+    let name = shell.rsplit(['/', '\\']).next().unwrap_or("");
+    let name = name.strip_suffix(".exe").unwrap_or(name);
+    match name {
+        "fish" => format!("Add it for fish (saved across sessions):\n  fish_add_path {bin_dir}"),
+        "zsh" => format!(
+            "Add it for zsh:\n  echo 'export PATH=\"{bin_dir}:$PATH\"' >> ~/.zshrc"
+        ),
+        "bash" => {
+            let rc = if cfg!(target_os = "macos") {
+                "~/.bash_profile"
+            } else {
+                "~/.bashrc"
+            };
+            format!("Add it for bash:\n  echo 'export PATH=\"{bin_dir}:$PATH\"' >> {rc}")
+        }
+        "nu" => format!(
+            "Add it for nushell, in your env.nu:\n  $env.PATH = ($env.PATH | prepend \"{bin_dir}\")"
+        ),
+        "pwsh" | "powershell" => format!(
+            "Add it for PowerShell (user PATH):\n  [Environment]::SetEnvironmentVariable(\"Path\", \"{bin_dir};\" + [Environment]::GetEnvironmentVariable(\"Path\", \"User\"), \"User\")"
+        ),
+        _ if cfg!(windows) => format!(
+            "Add it to your user PATH (System Properties > Environment Variables):\n  {bin_dir}"
+        ),
+        _ => format!(
+            "Add it to your shell profile, in the form your shell uses:\n  export PATH=\"{bin_dir}:$PATH\""
+        ),
     }
 }
 
@@ -343,4 +374,46 @@ fn doy_to_month_day(mut doy: u64, leap: bool) -> (u64, u64) {
         mo += 1;
     }
     (12, 31)
+}
+
+#[cfg(test)]
+mod path_tests {
+    use super::path_instructions;
+
+    const DIR: &str = "/home/u/.gram/bin";
+
+    #[test]
+    fn fish_uses_fish_add_path() {
+        let out = path_instructions("/opt/homebrew/bin/fish", DIR);
+        assert!(out.contains("fish_add_path /home/u/.gram/bin"));
+        assert!(!out.contains("export"));
+    }
+
+    #[test]
+    fn zsh_appends_to_zshrc() {
+        let out = path_instructions("/bin/zsh", DIR);
+        assert!(out.contains("~/.zshrc"));
+        assert!(out.contains("export PATH=\"/home/u/.gram/bin:$PATH\""));
+    }
+
+    #[test]
+    fn bash_appends_to_a_bash_rc_file() {
+        let out = path_instructions("/bin/bash", DIR);
+        assert!(out.contains("~/.bashrc") || out.contains("~/.bash_profile"));
+    }
+
+    #[test]
+    fn nushell_and_powershell_have_their_own_syntax() {
+        assert!(path_instructions("/usr/bin/nu", DIR).contains("prepend"));
+        assert!(
+            path_instructions("C:\\Program Files\\PowerShell\\pwsh.exe", DIR)
+                .contains("SetEnvironmentVariable")
+        );
+    }
+
+    #[test]
+    fn unknown_shell_falls_back_to_export() {
+        let out = path_instructions("", DIR);
+        assert!(out.contains("shell profile") || out.contains("user PATH"));
+    }
 }
