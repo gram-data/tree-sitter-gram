@@ -282,7 +282,7 @@ fn warn_if_not_on_path(bin_dir: &std::path::Path) {
 
     if !on_path {
         eprintln!("\nwarning: {} is not on your PATH.", bin_dir.display());
-        let shell = std::env::var("SHELL").unwrap_or_default();
+        let shell = detect_shell();
         eprintln!(
             "{}",
             path_instructions(&shell, &bin_dir.display().to_string())
@@ -290,12 +290,52 @@ fn warn_if_not_on_path(bin_dir: &std::path::Path) {
     }
 }
 
+const KNOWN_SHELLS: [&str; 6] = ["fish", "zsh", "bash", "nu", "pwsh", "powershell"];
+
+fn shell_name(shell: &str) -> &str {
+    let name = shell.rsplit(['/', '\\']).next().unwrap_or("");
+    let name = name.strip_prefix('-').unwrap_or(name);
+    name.strip_suffix(".exe").unwrap_or(name)
+}
+
+/// The shell that is running `gram`: the parent process when it is a known shell,
+/// since `$SHELL` is the login shell and can differ (fish started from zsh), else `$SHELL`.
+fn pick_shell(parent: Option<&str>, login_shell: &str) -> String {
+    match parent {
+        Some(p) if KNOWN_SHELLS.contains(&shell_name(p)) => p.to_string(),
+        _ => login_shell.to_string(),
+    }
+}
+
+#[cfg(unix)]
+fn parent_process_name() -> Option<String> {
+    let ppid = std::os::unix::process::parent_id();
+    let out = std::process::Command::new("ps")
+        .args(["-p", &ppid.to_string(), "-o", "comm="])
+        .output()
+        .ok()?;
+    out.status
+        .success()
+        .then(|| String::from_utf8_lossy(&out.stdout).trim().to_string())
+        .filter(|s| !s.is_empty())
+}
+
+#[cfg(not(unix))]
+fn parent_process_name() -> Option<String> {
+    None
+}
+
+fn detect_shell() -> String {
+    pick_shell(
+        parent_process_name().as_deref(),
+        &std::env::var("SHELL").unwrap_or_default(),
+    )
+}
+
 /// How to put `bin_dir` on PATH for the shell named by `shell` (a path such as
 /// `/opt/homebrew/bin/fish`, or empty when unknown; Windows has no `SHELL`).
 fn path_instructions(shell: &str, bin_dir: &str) -> String {
-    let name = shell.rsplit(['/', '\\']).next().unwrap_or("");
-    let name = name.strip_suffix(".exe").unwrap_or(name);
-    match name {
+    match shell_name(shell) {
         "fish" => format!("Add it for fish (saved across sessions):\n  fish_add_path {bin_dir}"),
         "zsh" => format!(
             "Add it for zsh:\n  echo 'export PATH=\"{bin_dir}:$PATH\"' >> ~/.zshrc"
@@ -378,7 +418,7 @@ fn doy_to_month_day(mut doy: u64, leap: bool) -> (u64, u64) {
 
 #[cfg(test)]
 mod path_tests {
-    use super::path_instructions;
+    use super::{path_instructions, pick_shell};
 
     const DIR: &str = "/home/u/.gram/bin";
 
@@ -415,5 +455,25 @@ mod path_tests {
     fn unknown_shell_falls_back_to_export() {
         let out = path_instructions("", DIR);
         assert!(out.contains("shell profile") || out.contains("user PATH"));
+    }
+
+    #[test]
+    fn the_running_shell_wins_over_the_login_shell() {
+        assert_eq!(pick_shell(Some("-fish"), "/bin/zsh"), "-fish");
+        assert_eq!(
+            pick_shell(Some("/opt/homebrew/bin/fish"), "/bin/zsh"),
+            "/opt/homebrew/bin/fish"
+        );
+    }
+
+    #[test]
+    fn a_parent_that_is_not_a_shell_falls_back_to_the_login_shell() {
+        assert_eq!(pick_shell(Some("cargo"), "/bin/zsh"), "/bin/zsh");
+        assert_eq!(pick_shell(None, "/bin/zsh"), "/bin/zsh");
+    }
+
+    #[test]
+    fn a_leading_dash_from_a_login_shell_is_ignored() {
+        assert!(path_instructions("-fish", DIR).contains("fish_add_path"));
     }
 }
