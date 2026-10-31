@@ -6,17 +6,19 @@ use super::{load_installed, registry};
 #[derive(Args)]
 pub struct ListArgs {
     /// Show only installed extensions
-    #[arg(long, conflicts_with = "available")]
+    #[arg(long, conflicts_with_all = ["available", "outdated"])]
     pub installed: bool,
     /// Show only extensions available in the registry
-    #[arg(long, conflicts_with = "installed")]
+    #[arg(long, conflicts_with_all = ["installed", "outdated"])]
     pub available: bool,
+    /// Show only installed extensions that have a newer release
+    #[arg(long, conflicts_with_all = ["installed", "available"])]
+    pub outdated: bool,
     /// Output as JSON array
     #[arg(long, conflicts_with = "lines")]
     pub json: bool,
-    /// One tab-separated line per extension, for sed, awk and cut. Columns: name, status
-    /// (installed, outdated or available), installed version, latest version, source,
-    /// description. Empty values are `-`.
+    /// One tab-separated line per extension, for sed, awk and cut. Columns: name,
+    /// installed version, latest version, source, description. Empty values are `-`.
     #[arg(short = 'l', long, conflicts_with = "json")]
     pub lines: bool,
 }
@@ -107,6 +109,10 @@ pub fn run(args: ListArgs) -> i32 {
         }
     }
 
+    if args.outdated {
+        entries.retain(|e| e.update_available);
+    }
+
     if args.json {
         match serde_json::to_string_pretty(&entries) {
             Ok(json) => println!("{json}"),
@@ -126,17 +132,11 @@ pub fn run(args: ListArgs) -> i32 {
             _ => "-".to_string(),
         };
         for e in &entries {
-            let status = if e.update_available {
-                "outdated"
-            } else {
-                e.status
-            };
             // A closed pipe (`| head`) ends the output quietly instead of panicking.
             if writeln!(
                 out,
-                "{}\t{}\t{}\t{}\t{}\t{}",
+                "{}\t{}\t{}\t{}\t{}",
                 e.name,
-                status,
                 dash(e.version.as_deref()),
                 dash(e.latest.as_deref()),
                 dash(e.source.as_deref()),
@@ -147,6 +147,11 @@ pub fn run(args: ListArgs) -> i32 {
                 break;
             }
         }
+        return 0;
+    }
+
+    if args.outdated && entries.is_empty() {
+        println!("All installed extensions are up to date.");
         return 0;
     }
 
