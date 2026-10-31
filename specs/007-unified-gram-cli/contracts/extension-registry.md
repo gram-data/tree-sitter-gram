@@ -2,6 +2,8 @@
 
 **Format**: TOML  
 **Location**: `registry.toml` on `main` of [`gram-data/gram-extensions`](https://github.com/gram-data/gram-extensions); override with `GRAM_REGISTRY_URL`  
+
+**Versions**: `versions.toml` beside `registry.toml` records `updated_at` and the latest release of each entry under `[versions]`. A workflow in gram-extensions generates it. `gram extension list` reads it to show latest versions and flag updates, and treats a missing file as no version information. With a custom `GRAM_REGISTRY_URL` the file is looked up by replacing a trailing `registry.toml`; any other URL has no versions file.
 **Fetched by**: `gram extension list` and `gram extension install`
 
 ---

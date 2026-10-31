@@ -24,6 +24,9 @@ struct ListEntry {
     version: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     source: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    latest: Option<String>,
+    update_available: bool,
     status: &'static str,
 }
 
@@ -42,6 +45,8 @@ pub fn run(args: ListArgs) -> i32 {
                 description: String::new(),
                 version: Some(ext.version.clone()),
                 source: None,
+                latest: None,
+                update_available: false,
                 status: "installed",
             });
         }
@@ -64,6 +69,8 @@ pub fn run(args: ListArgs) -> i32 {
                             description: re.description,
                             version: None,
                             source: Some(re.github),
+                            latest: None,
+                            update_available: false,
                             status: "available",
                         });
                     }
@@ -72,6 +79,26 @@ pub fn run(args: ListArgs) -> i32 {
             Err(e) => {
                 eprintln!("warning: could not fetch registry: {e}");
             }
+        }
+    }
+
+    // Latest versions come from one file beside the registry; without it the columns stay empty.
+    let mut versions_updated_at: Option<String> = None;
+    if show_available {
+        match registry::fetch_versions() {
+            Ok(v) => {
+                versions_updated_at = v.updated_at.clone();
+                for e in entries.iter_mut() {
+                    if let Some(latest) = v.versions.get(&e.name) {
+                        e.update_available = e
+                            .version
+                            .as_deref()
+                            .is_some_and(|installed| registry::is_newer(latest, installed));
+                        e.latest = Some(latest.clone());
+                    }
+                }
+            }
+            Err(e) => eprintln!("warning: could not fetch latest versions: {e}"),
         }
     }
 
@@ -96,7 +123,11 @@ pub fn run(args: ListArgs) -> i32 {
             println!("Installed extensions:");
             for e in &installed_entries {
                 let ver = e.version.as_deref().unwrap_or("unknown");
-                println!("  {}  {}  {}", e.name, ver, e.description);
+                let update = match (&e.latest, e.update_available) {
+                    (Some(latest), true) => format!("  (update available: {latest})"),
+                    _ => String::new(),
+                };
+                println!("  {}  {}  {}{}", e.name, ver, e.description, update);
             }
         }
     }
@@ -105,8 +136,13 @@ pub fn run(args: ListArgs) -> i32 {
         println!("Available extensions:");
         for e in &available_entries {
             let src = e.source.as_deref().unwrap_or("");
-            println!("  {}  {}  ({})", e.name, e.description, src);
+            let latest = e.latest.as_deref().unwrap_or("?");
+            println!("  {}  {}  (latest {}, {})", e.name, e.description, latest, src);
         }
+    }
+
+    if let Some(updated_at) = versions_updated_at {
+        println!("\nLatest versions last changed {updated_at}");
     }
 
     0
