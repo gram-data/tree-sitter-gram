@@ -44,7 +44,8 @@ Extensions are external binaries named `gram-<name>` installed to `~/.gram/bin/`
 # List available and installed extensions, with latest versions
 gram extension list
 
-# One tab-separated line per extension, for sed, awk and cut
+# One tab-separated line per extension, for sed, awk and cut.
+# This is the default whenever stdout is not a terminal, so `gram extension list | cut -f1` works as is.
 # (name, installed, latest, source, description; empty values are -)
 gram extension list -l
 

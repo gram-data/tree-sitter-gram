@@ -1,3 +1,5 @@
+use std::io::IsTerminal;
+
 use clap::Args;
 use serde::Serialize;
 
@@ -19,6 +21,7 @@ pub struct ListArgs {
     pub json: bool,
     /// One tab-separated line per extension, for sed, awk and cut. Columns: name,
     /// installed version, latest version, source, description. Empty values are `-`.
+    /// This is already the default when stdout is not a terminal.
     #[arg(short = 'l', long, conflicts_with = "json")]
     pub lines: bool,
 }
@@ -124,7 +127,8 @@ pub fn run(args: ListArgs) -> i32 {
         return 0;
     }
 
-    if args.lines {
+    // Piped or redirected output defaults to lines, as `gh` does; --json stays explicit.
+    if args.lines || (!args.json && !std::io::stdout().is_terminal()) {
         use std::io::Write;
         let mut out = std::io::stdout().lock();
         let dash = |v: Option<&str>| match v {
