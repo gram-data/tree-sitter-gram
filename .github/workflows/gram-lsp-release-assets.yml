@@ -1,6 +1,9 @@
 # Cross-built `gram-lsp` archives attached to the Git tag’s GitHub Release.
 # The Zed extension downloads `gram-lsp-{target}.tar.gz` when `gram-lsp` is not on PATH
-# (see editors/zed/src/lib.rs and extension.toml `capabilities`).
+# (see editors/zed/src/lib.rs and extension.toml `capabilities`). It uses gnu Linux
+# triples and .tar.gz on Windows.
+# `gram extension install lsp` downloads `gram-lsp-{target}.tar.gz` (.zip on Windows)
+# with musl Linux triples, so both sets are published.
 name: Gram LSP release assets
 
 on:
@@ -30,6 +33,10 @@ jobs:
             target: x86_64-unknown-linux-gnu
           - os: ubuntu-24.04-arm
             target: aarch64-unknown-linux-gnu
+          - os: ubuntu-24.04
+            target: x86_64-unknown-linux-musl
+          - os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-musl
           - os: windows-2025
             target: x86_64-pc-windows-msvc
           - os: windows-11-arm
@@ -40,6 +47,9 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
+      - name: Install musl tools (Linux musl only)
+        if: contains(matrix.target, 'linux-musl')
+        run: sudo apt-get install -y musl-tools
       - name: Build gram-lsp
         run: cargo build -p gram-lsp --release --target ${{ matrix.target }}
       - name: Package (Unix)
@@ -57,10 +67,11 @@ jobs:
           New-Item -ItemType Directory -Path pack
           Copy-Item "target/${{ matrix.target }}/release/gram-lsp.exe" pack/gram-lsp.exe
           tar -C pack -czf "gram-lsp-${{ matrix.target }}.tar.gz" gram-lsp.exe
+          Compress-Archive -Path pack/gram-lsp.exe -DestinationPath "gram-lsp-${{ matrix.target }}.zip"
       - uses: actions/upload-artifact@v7
         with:
           name: gram-lsp-${{ matrix.target }}
-          path: gram-lsp-${{ matrix.target }}.tar.gz
+          path: gram-lsp-${{ matrix.target }}.*
 
   upload-release-assets:
     name: Upload to GitHub Release
@@ -76,6 +87,8 @@ jobs:
         run: find dist -type f -print
       - uses: softprops/action-gh-release@v3
         with:
-          files: dist/*.tar.gz
+          files: |
+            dist/*.tar.gz
+            dist/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
