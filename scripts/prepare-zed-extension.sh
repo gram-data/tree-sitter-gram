@@ -67,15 +67,11 @@ fi
 PACKAGE_VERSION=$(node -p "require('$PROJECT_ROOT/package.json').version")
 echo "🔄 Updating extension version to $PACKAGE_VERSION..."
 
-if [ "$ZED_REPO_MODE" = "pub" ] || [ "$ZED_REPO_MODE" = "publish" ]; then
-    # Use the public repository URL from package.json, normalized to https
-    REPO_URL=$(node -p "require('$PROJECT_ROOT/package.json').repository.url")
-    REPO_URL=${REPO_URL#git+}
-    REPO_URL=${REPO_URL%.git}
-else
-    # Use local repository for development
-    REPO_URL="file://$PROJECT_ROOT"
-fi
+# extension.toml is committed, so it always points at the public repository, never a local path
+# (the repository mode above only controls how queries are synced).
+REPO_URL=$(node -p "require('$PROJECT_ROOT/package.json').repository.url")
+REPO_URL=${REPO_URL#git+}
+REPO_URL=${REPO_URL%.git}
 
 # Zed fetches `rev` and then runs `git checkout <rev>`, which only works for a commit SHA:
 # a tag name is fetched but never becomes a local ref ("pathspec 'v…' did not match").

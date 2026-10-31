@@ -12,7 +12,7 @@ capabilities = [
 
 # path = "grammars/tree-sitter-gram"
 [grammars.gram]
-repository = "file:///Users/abk/Developer/gram-data/tree-sitter-gram"
+repository = "https://github.com/gram-data/tree-sitter-gram"
 rev = "df107649113418001d4e69a0abe23f9e51d361d2"
 
 # Doc comments (`/** ... */`) in gram files are injected with gramdoc.

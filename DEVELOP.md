@@ -89,7 +89,7 @@ Merging to the default branch **does not** publish anything. When you **push a `
    ```bash
    ./scripts/prepare-release.sh 1.2.3      # or --bump patch|minor|major
    ```
-   It runs `tree-sitter version` (`package.json`, `tree-sitter.json`, `pyproject.toml`, workspace `Cargo.toml`, `Makefile`), refreshes `package-lock.json`, runs `prepare-zed-extension.sh` (`editors/zed/extension.toml` version and `rev = "v1.2.3"`), then `cargo check --workspace`.
+   It runs `tree-sitter version` (`package.json`, `tree-sitter.json`, `pyproject.toml`, workspace `Cargo.toml`, `Makefile`), refreshes `package-lock.json`, runs `prepare-zed-extension.sh` (`editors/zed/extension.toml` version, and the gram grammar `rev` as the current commit SHA; the repository stays the public https URL), then `cargo check --workspace`.
    Do not commit the output of `npm run zed:publish` as part of a release: it replaces the symlinked queries under `editors/zed/languages/gram/` with copies.
 2. Commit and push (or open a PR and merge) to check that build succeeds
 3. Wait for **CI** to pass (test + build) on the branch you will tag.
