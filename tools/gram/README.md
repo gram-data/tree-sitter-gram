@@ -41,11 +41,15 @@ gram lint --json file.gram
 Extensions are external binaries named `gram-<name>` installed to `~/.gram/bin/`.
 
 ```sh
-# List available and installed extensions
+# List available and installed extensions, with latest versions
 gram extension list
 
 # Install an extension
 gram extension install <name>
+
+# Upgrade one extension, or all of them (--dry-run shows what would change)
+gram extension upgrade <name>
+gram extension upgrade --all
 
 # Remove an extension
 gram extension remove <name>

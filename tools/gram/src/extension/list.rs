@@ -137,7 +137,10 @@ pub fn run(args: ListArgs) -> i32 {
         for e in &available_entries {
             let src = e.source.as_deref().unwrap_or("");
             let latest = e.latest.as_deref().unwrap_or("?");
-            println!("  {}  {}  (latest {}, {})", e.name, e.description, latest, src);
+            println!(
+                "  {}  {}  (latest {}, {})",
+                e.name, e.description, latest, src
+            );
         }
     }
 

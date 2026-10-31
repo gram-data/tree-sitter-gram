@@ -68,6 +68,7 @@ gram check --tree file.gram
 # Manage extensions
 gram extension list
 gram extension install lsp
+gram extension upgrade --all
 gram extension remove lsp
 ```
 

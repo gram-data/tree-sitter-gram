@@ -2,6 +2,7 @@ pub mod install;
 pub mod list;
 pub mod registry;
 pub mod remove;
+pub mod upgrade;
 
 use clap::{Args, Subcommand};
 use directories::BaseDirs;
@@ -21,6 +22,8 @@ pub enum ExtensionCommand {
     Install(install::InstallArgs),
     /// List available and installed extensions
     List(list::ListArgs),
+    /// Upgrade installed extensions to their latest release
+    Upgrade(upgrade::UpgradeArgs),
     /// Uninstall an extension
     Remove(remove::RemoveArgs),
 }
@@ -78,6 +81,7 @@ pub fn run(args: ExtensionArgs) -> i32 {
     match args.command {
         ExtensionCommand::Install(a) => install::run(a),
         ExtensionCommand::List(a) => list::run(a),
+        ExtensionCommand::Upgrade(a) => upgrade::run(a),
         ExtensionCommand::Remove(a) => remove::run(a),
     }
 }
