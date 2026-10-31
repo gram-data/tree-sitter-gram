@@ -13,11 +13,30 @@ const FAKE_REGISTRY: &str = "http://127.0.0.1:1/registry.toml";
 #[test]
 fn extension_list_installed_requires_no_network() {
     // --installed only reads ~/.gram/extensions.toml; no registry fetch needed.
+    // The test harness pipes stdout, so the output is tab-separated lines, not the
+    // human-readable headings.
     gram()
         .args(["extension", "list", "--installed"])
         .assert()
         .success()
-        .stdout(predicate::str::contains("Installed extensions"));
+        .stdout(predicate::str::contains("Installed extensions").not());
+}
+
+#[test]
+fn extension_list_defaults_to_lines_when_piped() {
+    let piped = gram()
+        .args(["extension", "list", "--installed"])
+        .output()
+        .unwrap();
+    let lines = gram()
+        .args(["extension", "list", "--installed", "--lines"])
+        .output()
+        .unwrap();
+    assert!(piped.status.success());
+    assert_eq!(piped.stdout, lines.stdout);
+    for line in String::from_utf8(piped.stdout).unwrap().lines() {
+        assert_eq!(line.split('\t').count(), 5, "five columns in {line:?}");
+    }
 }
 
 #[test]
