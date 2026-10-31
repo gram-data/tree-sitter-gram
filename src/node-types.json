@@ -398,6 +398,10 @@
         "required": true,
         "types": [
           {
+            "type": "array",
+            "named": true
+          },
+          {
             "type": "boolean_literal",
             "named": true
           },

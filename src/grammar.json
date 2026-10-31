@@ -838,8 +838,17 @@
           "type": "FIELD",
           "name": "value",
           "content": {
-            "type": "SYMBOL",
-            "name": "_scalar_value"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_scalar_value"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "array"
+              }
+            ]
           }
         }
       ]

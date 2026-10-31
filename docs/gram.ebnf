@@ -134,13 +134,14 @@ label_separator = ":" | "::" ;
 
 (* ------------------------------------------------------------
    6. RECORD AND MAP
-   The property system has two bounded levels — intentionally
+   The property system has three bounded levels — intentionally
    deeper than Cypher but shallower than JSON.
 
    Depth budget:
      0  scalar      — primitives only
-     1  array, map  — scalar values only
-     2  record      — any value, including array and map
+     1  array       — scalar values only
+     2  map         — scalar values or arrays of scalars
+     3  record      — any value, including array and map
      structural     — promote to node/relationship/pattern instead
 
    record and map share surface syntax { key: value } but are
@@ -158,8 +159,8 @@ record_property = key_name, label_separator, value ;
 
 map             = "{", [ map_entry, { ",", map_entry } ], "}" ;
 
-map_entry       = key_name, ":", scalar_value ;
-                  (* map entries are always ":" only, values always scalar *)
+map_entry       = key_name, ":", ( scalar_value | array ) ;
+                  (* map entries are always ":" only; values are scalar or an array of scalars *)
 
 
 (* ------------------------------------------------------------
@@ -208,7 +209,8 @@ bidirectional_arrow = "<-", [ "[", [ subject ], "]" ], "->"
 (* ------------------------------------------------------------
    8. VALUES
    value includes all types; scalar_value excludes array and map.
-   scalar_value is used inside array and map to bound nesting depth. *)
+   scalar_value is used inside array, and inside map next to array, to bound
+   nesting depth. *)
 
 value        = range
              | numeric_literal

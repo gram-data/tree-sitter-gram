@@ -129,7 +129,11 @@ module.exports = grammar({
     map: ($) => seq("{", commaSep($.map_entry), "}"),
 
     map_entry: ($) =>
-      seq(field("key", $._key_name), ":", field("value", $._scalar_value)),
+      seq(
+        field("key", $._key_name),
+        ":",
+        field("value", choice($._scalar_value, $.array)),
+      ),
 
     symbol: ($) => token(/[a-zA-Z_][0-9a-zA-Z_.\-@]*/),
 

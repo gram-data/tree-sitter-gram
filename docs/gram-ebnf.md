@@ -136,7 +136,7 @@ label_separator = ":" | "::" ;
 
 ## 6. Record and Map
 
-The property system has two bounded levels, intentionally shallower than JSON but deeper than Cypher:
+The property system has three bounded levels, intentionally shallower than JSON but deeper than Cypher:
 
 ```ebnf
 (* Appears in subject position — values may be any value including map *)
@@ -144,10 +144,10 @@ record = "{", [ record_property, { ",", record_property } ], "}" ;
 
 record_property = key_name, label_separator, value ;
 
-(* Appears in value position — values must be scalar *)
+(* Appears in value position — values are scalar or an array of scalars *)
 map = "{", [ map_entry, { ",", map_entry } ], "}" ;
 
-map_entry = key_name, ":", scalar_value ;
+map_entry = key_name, ":", ( scalar_value | array ) ;
 ```
 
 **Depth budget:**
@@ -155,8 +155,9 @@ map_entry = key_name, ":", scalar_value ;
 | Level | Construct | Value constraint |
 |---|---|---|
 | 0 | scalar | primitives only |
-| 1 | `array`, `map` | scalar values only |
-| 2 | `record` | any value (including `array` and `map`) |
+| 1 | `array` | scalar values only |
+| 2 | `map` | scalar values or arrays of scalars |
+| 3 | `record` | any value (including `array` and `map`) |
 | structural | node, relationship, pattern | promote instead of nesting deeper |
 
 **Note:** `record` and `map` share surface syntax `{ key: value }` but are distinguished by **context**: `record` appears in subject position (attached to a node, relationship, or pattern); `map` appears in value position (as a property value inside a `record_property`). The double-colon separator `::` is permitted on `record_property` but not `map_entry`, providing a visual cue for the distinction.
@@ -239,7 +240,7 @@ value = range
       | map
       ;
 
-(* scalar_value excludes array and map — used inside array and map *)
+(* scalar_value excludes array and map — used inside array, and inside map next to array *)
 scalar_value = range
              | numeric_literal
              | boolean_literal

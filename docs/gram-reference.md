@@ -337,8 +337,9 @@ is bounded by type, not convention:
 | Depth | Construct | Value constraint |
 |---|---|---|
 | 0 | scalar | primitives only |
-| 1 | `array`, `map` | scalar values only |
-| 2 | `record` | any value, including `array` and `map` |
+| 1 | `array` | scalar values only |
+| 2 | `map` | scalar values or arrays of scalars |
+| 3 | `record` | any value, including `array` and `map` |
 | structural | node, relationship, pattern | promote instead of nesting deeper |
 
 **`record`** — appears in subject position, attached to a node, relationship, or pattern.
@@ -350,12 +351,14 @@ or `::`.
 (a:Person {name: "Alice", scores: [10, 20, 30], address: {city: "Portland"}})
 ```
 
-**`map`** — appears in value position (as a property value inside a record). Keys and values
-must both be scalar. Only `:` is permitted as separator.
+**`map`** — appears in value position (as a property value inside a record). Entry values must be
+scalar or an array of scalars. Only `:` is permitted as separator.
 
 ```gram
 { address: {city: "Portland", zip: "97201"} }
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ this is a map
+
+{ identity: {name: "John Doe", aliases: ["John", "Johnny"]} }
 ```
 
 **`array`** — an ordered sequence of scalars. Cannot contain `map` values.

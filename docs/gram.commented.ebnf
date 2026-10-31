@@ -166,12 +166,13 @@ labelSeparator
 /* ------------------------------------------------------------
    Record and Map
 
-   The property system has two bounded levels — intentionally
+   The property system has three bounded levels — intentionally
    deeper than Cypher but shallower than JSON:
 
      depth 0  scalar          primitives only
-     depth 1  array, map      scalar values only
-     depth 2  record          any value, including array and map
+     depth 1  array           scalar values only
+     depth 2  map             scalar values or arrays of scalars
+     depth 3  record          any value, including array and map
      structural               promote to node/relationship instead
 
    record and map share surface syntax { key: value } but are
@@ -189,10 +190,10 @@ record   ::= '{' ( recordProperty ( ',' recordProperty )* )? '}'
 recordProperty
          ::= keyName labelSeparator value
 
-/* Map entries are limited to scalar values — no nested maps or arrays. */
+/* Map entries are limited to scalar values and arrays of scalars — no nested maps. */
 map      ::= '{' ( mapEntry ( ',' mapEntry )* )? '}'
 
-mapEntry ::= keyName ':' scalarValue
+mapEntry ::= keyName ':' ( scalarValue | array )
 
 
 /* ------------------------------------------------------------
@@ -247,7 +248,7 @@ bidirectionalArrow
    Values
 
    value      — full set; used in record properties and annotations
-   scalarValue — excludes array and map; used inside array and map
+   scalarValue — excludes array and map; used inside array, and inside map next to array
                  to enforce the two-level depth limit
    ------------------------------------------------------------ */
 

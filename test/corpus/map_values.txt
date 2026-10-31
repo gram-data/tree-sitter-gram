@@ -148,14 +148,60 @@ Map values may not appear within an array
 ---
 
 ==================
-Map values may not contain arrays
-:error
+Map values may contain arrays of scalars
 ==================
 
 (a:Person {
   identity: {
     name: "John Doe",
     aliases: ["John", "Johnny"]
+  }
+})
+
+---
+
+(gram_pattern
+  (node_pattern
+    (symbol)
+    (labels
+      (symbol))
+    (record
+      (record_property
+        (symbol)
+        (map
+          (map_entry
+            (symbol)
+            (string_literal
+              (string_content)))
+          (map_entry
+            (symbol)
+            (array
+              (string_literal
+                (string_content))
+              (string_literal
+                (string_content)))))))))
+
+==================
+Map values may not contain arrays of maps
+:error
+==================
+
+(a:Person {
+  identity: {
+    aliases: [{ name: "John" }]
+  }
+})
+
+---
+
+==================
+Map values may not contain nested arrays
+:error
+==================
+
+(a:Person {
+  identity: {
+    aliases: [["John"]]
   }
 })
 
