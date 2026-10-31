@@ -1,6 +1,6 @@
 id = "gram"
 name = "Gram Language Support"
-version = "0.5.0"
+version = "0.6.0"
 schema_version = 1
 authors = ["Gram Data Contributors"]
 description = "Support for Gram notation - composable data patterns"
@@ -13,7 +13,7 @@ capabilities = [
 # path = "grammars/tree-sitter-gram"
 [grammars.gram]
 repository = "https://github.com/gram-data/tree-sitter-gram"
-rev = "b3207d0d3befa4a722a7435b0b93d5c1fe206706"
+rev = "31e9d5c9bd733d58206f205a1fbd9572f07d4c59"
 
 # Doc comments (`/** ... */`) in gram files are injected with gramdoc.
 # Zed needs a full commit SHA here: v0.2.0 of gram-data/tree-sitter-gramdoc.
