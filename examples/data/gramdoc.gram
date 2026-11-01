@@ -3,6 +3,8 @@
 // https://github.com/gram-data/tree-sitter-gramdoc
 
 // --- A node: description, name, label, properties, alias, reference ---
+// Cardinality, constraints and other structure are not documentation: they
+// belong in annotations on the definition, not in the comment.
 
 /**
  * Person
@@ -13,24 +15,28 @@
  * @alias Human
  * @alias Individual
  * @reference https://schema.org/Person A comparable external definition.
- * @property name The full name of the person.
+ * @property name "name": The full name of the person. (@aliases: "full name")
  * @property born
  *   Year of birth. Descriptions continue onto following lines
  *   until the next tag.
  */
 (:Person {name: "STRING!", born: "INTEGER"})
 
-// --- The same element in another context (language) ---
+// --- The same element in another language ---
+// @language applies to the whole comment. A quoted term after the property
+// name is its localized name; (@key value) groups at the end are attributes.
+// The description of every tag is Markdown.
 
 /**
  * Un être humain.
  *
- * @property name Le nom complet de la personne.
- * @property born L'année de naissance.
+ * @language "fr"
+ * @property name "nom": Le nom complet de la personne. (@aliases: "anon")
+ * @property born "naissance": L'année de naissance, par exemple **1815**.
  */
-[:French {name: "nom", born: "naissance"} | (:Person)]
+[:Doc | (:Person)]
 
-// --- Relationships: cardinality counts relationships per node at that end ---
+// --- A relationship, documented by position ---
 
 /**
  * KNOWS
@@ -39,63 +45,12 @@
  *
  * @label KNOWS
  * @alias ACQUAINTED_WITH
- * @property since When the two people met.
- * @source * A person may know any number of people.
- * @target * A person may be known by any number of people.
+ * @property since "since": When the two people met. (@see [schema.org](https://schema.org/knows))
+ * @elements The two acquainted people.
+ * @element The person who recorded the acquaintance.
+ * @element The person who is known.
  */
 [:KNOWS {since: date} | (a:Person), (b:Person)]
-
-/**
- * PARENT_OF
- *
- * @label PARENT_OF
- * @alias HAS_CHILD
- * @source * A person may be recorded as parent of any number of children.
- * @target ..2 A child has at most two recorded parents, so at most two
- *   incoming PARENT_OF relationships end at any one person.
- */
-[:PARENT_OF | (parent:Person), (child:Person)]
-
-/**
- * MARRIED_TO
- *
- * @source ? A person starts at most one marriage.
- * @target ? A person ends at most one marriage.
- */
-[:MARRIED_TO | (a:Person), (b:Person)]
-
-/**
- * WORKS_FOR
- *
- * Employment of a person by an organization.
- *
- * @label WORKS_FOR
- * @property role The job title.
- * @property start_date The first day of employment.
- * @source 1..3 A person holds between one and three jobs.
- * @target + An employer has at least one employee.
- */
-[:WORKS_FOR {role: "STRING", start_date: date} | (employee:Person), (employer:Organization)]
-
-/**
- * REPORTS_TO
- *
- * @source ..1 Each person has at most one manager.
- * @target 0.. A manager may have any number of direct reports.
- */
-[:REPORTS_TO | (report:Person), (manager:Person)]
-
-// --- A self-loop: @self says source and target are the same node ---
-
-/**
- * SAME_AS
- *
- * @label SAME_AS
- * @self
- * @source ? A person has at most one SAME_AS loop.
- * @target ..1 Likewise at the other end.
- */
-[:SAME_AS | (p:Person), (p)]
 
 // --- A sequence of elements, documented by position ---
 

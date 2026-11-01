@@ -16,7 +16,7 @@ repository = "https://github.com/gram-data/tree-sitter-gram"
 rev = "31e9d5c9bd733d58206f205a1fbd9572f07d4c59"
 
 # Doc comments (`/** ... */`) in gram files are injected with gramdoc.
-# Zed needs a full commit SHA here: v0.2.0 of gram-data/tree-sitter-gramdoc.
+# Zed needs a full commit SHA here: v0.3.0 of gram-data/tree-sitter-gramdoc.
 [grammars.gramdoc]
 repository = "https://github.com/gram-data/tree-sitter-gramdoc"
-rev = "ee35f3a1d1c2db642c8d8cec7e6a91a1abff02d6"
+rev = "4a1a4323e82ce3d72f1dfba71552dcf4966b52a8"
