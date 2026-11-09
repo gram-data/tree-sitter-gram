@@ -336,3 +336,184 @@ In-line comment between adjacent tokens (parentheses)
   (ERROR)
   (comment))
 
+
+==================
+Double-quoted text starting with // is not a comment
+==================
+
+(a {k: "//x"})
+
+---
+
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (string_literal
+          content: (string_content))))))
+
+==================
+Quoted text starting with blanks then // is not a comment
+==================
+
+(a {k: " //x"})
+
+---
+
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (string_literal
+          content: (string_content))))))
+
+==================
+Backticked identifier starting with // is not a comment
+==================
+
+(`//x`)
+
+---
+
+(gram_pattern
+  (node_pattern
+    identifier: (quoted_name
+      content: (string_content))))
+
+==================
+Quoted key starting with // is not a comment
+==================
+
+(a {"//k": 1})
+
+---
+
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    record: (record
+      (record_property
+        key: (double_quoted_name
+          content: (string_content))
+        value: (integer)))))
+
+==================
+Quoted text starting with /** is not a doc comment when */ appears later
+==================
+
+(a:`/**x` {`ta/*/ `: 1})
+
+---
+
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    labels: (labels
+      (quoted_name
+        content: (string_content)))
+    record: (record
+      (record_property
+        key: (quoted_name
+          content: (string_content))
+        value: (integer)))))
+
+==================
+Single-quoted text starting with // is not a comment
+==================
+
+(a {k: '//x'})
+
+---
+
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (string_literal
+          content: (string_content))))))
+
+==================
+Single-quoted text starting with /** is not a doc comment when */ appears later
+==================
+
+(a {k: '/**x', j: 'y*/'})
+
+---
+
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (string_literal
+          content: (string_content)))
+      (record_property
+        key: (symbol)
+        value: (string_literal
+          content: (string_content))))))
+
+==================
+Fenced text starting with // is not a comment
+==================
+
+(a {k: ```
+//x
+```})
+
+---
+
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (string_literal
+          content: (string_content))))))
+
+==================
+Fenced text starting with /** is not a doc comment when */ appears later
+==================
+
+(a {k: ```
+/**x
+*/ y
+```})
+
+---
+
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (string_literal
+          content: (string_content))))))
+
+==================
+Tagged fenced text starting with // is not a comment
+==================
+
+(a {k: ```md
+//x
+```})
+
+---
+
+(gram_pattern
+  (node_pattern
+    identifier: (symbol)
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (tagged_string
+          tag: (symbol)
+          content: (string_content))))))

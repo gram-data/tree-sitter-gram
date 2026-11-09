@@ -1116,8 +1116,12 @@
     "_single_quoted_text": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "(\\\\['bfnrt/\\\\]|[^'\\\\\\n])*"
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "(\\\\['bfnrt/\\\\]|[^'\\\\\\n])*"
+        }
       }
     },
     "_double_quoted_string": {
@@ -1149,8 +1153,12 @@
     "_double_quoted_text": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "(\\\\[\"bfnrt/\\\\]|[^\"\\\\\\n])*"
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "(\\\\[\"bfnrt/\\\\]|[^\"\\\\\\n])*"
+        }
       }
     },
     "_backticked_string": {
@@ -1182,8 +1190,12 @@
     "_backticked_text": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "(\\\\[`bfnrt/\\\\]|[^`\\\\\\n])*"
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "(\\\\[`bfnrt/\\\\]|[^`\\\\\\n])*"
+        }
       }
     },
     "_fenced_string": {
@@ -1236,8 +1248,12 @@
     "_fenced_string_content": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "([^`]|`[^`]|``[^`])+"
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "([^`]|`[^`]|``[^`])+"
+        }
       }
     },
     "tagged_string": {
