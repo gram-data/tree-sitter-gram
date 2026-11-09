@@ -199,17 +199,17 @@ module.exports = grammar({
     _single_quoted_string: ($) =>
       delimit_string(alias($._single_quoted_text, $.string_content), "'"),
 
-    _single_quoted_text: ($) => token.immediate(/(\\['bfnrt/\\]|[^'\\\n])*/),
+    _single_quoted_text: ($) => token.immediate(prec(1, /(\\['bfnrt/\\]|[^'\\\n])*/)),
 
     _double_quoted_string: ($) =>
       delimit_string(alias($._double_quoted_text, $.string_content), '"'),
 
-    _double_quoted_text: ($) => token.immediate(/(\\["bfnrt/\\]|[^"\\\n])*/),
+    _double_quoted_text: ($) => token.immediate(prec(1, /(\\["bfnrt/\\]|[^"\\\n])*/)),
 
     _backticked_string: ($) =>
       delimit_string(alias($._backticked_text, $.string_content), "`"),
 
-    _backticked_text: ($) => token.immediate(/(\\[`bfnrt/\\]|[^`\\\n])*/),
+    _backticked_text: ($) => token.immediate(prec(1, /(\\[`bfnrt/\\]|[^`\\\n])*/)),
 
     _fenced_string: ($) => seq("```", $._fenced_string_body),
 
@@ -223,7 +223,7 @@ module.exports = grammar({
         "```",
       ),
 
-    _fenced_string_content: ($) => token.immediate(/([^`]|`[^`]|``[^`])+/),
+    _fenced_string_content: ($) => token.immediate(prec(1, /([^`]|`[^`]|``[^`])+/)),
 
     tagged_string: ($) =>
       choice(
