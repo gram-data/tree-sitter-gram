@@ -625,27 +625,35 @@
           "value": "["
         },
         {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "_scalar_value"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_scalar_value"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_scalar_value"
+                      }
+                    ]
+                  }
+                }
+              ]
             },
             {
-              "type": "REPEAT",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": ","
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_scalar_value"
-                  }
-                ]
-              }
+              "type": "BLANK"
             }
           ]
         },
@@ -994,7 +1002,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "-?(0|[1-9]\\d*)([a-zA-Z]+)"
+        "value": "-?(0|[1-9]\\d*)(\\.\\d+)?([a-zA-Z]+)"
       }
     },
     "quoted_name": {

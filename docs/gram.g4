@@ -299,9 +299,9 @@ scalarValue
     | stringLiteral
     ;
 
-// array is non-empty — [] parses as an empty subjectPattern, not an array
+// array may be empty: [] is a valid array in a value position
 array
-    : '[' scalarValue ( ',' scalarValue )* ']'
+    : '[' ( scalarValue ( ',' scalarValue )* )? ']'
     ;
 
 
@@ -384,7 +384,7 @@ OCTAL
 // Note: any alphabetic suffix is accepted; unit validation
 // is left to consumers.
 MEASUREMENT
-    : '-'? ( '0' | [1-9] [0-9]* ) [a-zA-Z]+
+    : '-'? ( '0' | [1-9] [0-9]* ) ( '.' [0-9]+ )? [a-zA-Z]+
     ;
 
 
