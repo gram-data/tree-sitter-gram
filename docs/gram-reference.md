@@ -367,8 +367,8 @@ scalar or an array of scalars. Only `:` is permitted as separator.
 { tags: ["graph", "data"], counts: [1, 2, 3] }
 ```
 
-Note: `[]` is not a valid array literal — it parses as an empty `subject_pattern`.
-`{ tags: [] }` is therefore a parse error.
+An array may be empty: `{ tags: [] }` is valid. (At the top level, `[]` is still an
+empty `subject_pattern`; arrays only occur in value positions.)
 
 ---
 
@@ -550,10 +550,9 @@ Items still requiring a decision before this document is complete:
    canonical when lowering to `Pattern<Subject>`?
 2. **Document root representation** (§8.6) — bare `Vec<Pattern>` vs. implicit root wrapper.
 3. **Forward reference mechanics** (§8.3) — two-pass, lazy binding, or other strategy?
-4. **Empty array** (§6) — `[]` currently parses as an empty `subject_pattern`, making
-   `{ tags: [] }` a parse error. Confirm whether this is intentional.
-5. **`measurement` regex scope** — the current pattern accepts any alphabetic suffix; unit
-   validation is left to consumers. Confirm whether this is intentional.
+4. **Empty array** (§6) — resolved: `{ tags: [] }` is valid.
+5. **`measurement` regex scope** — the pattern accepts an integer or decimal magnitude and any
+   alphabetic suffix (`168cm`, `3.5kg`). Unit validation is left to consumers.
 6. **Label case conventions** — uppercase (`KNOWS`) for relationship labels and titlecase
    (`Person`) for node labels is common but unenforced. Worth documenting as convention.
 7. **Error handling** — behaviour on malformed input, duplicate definitions, and

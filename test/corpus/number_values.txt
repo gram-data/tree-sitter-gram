@@ -87,3 +87,138 @@ Number: boolean true
         (record_property
           key: (symbol)
           value: (boolean_literal)))))
+
+==================
+Number: measurements may have a decimal magnitude
+==================
+
+({ weight : 3.5kg, delta : -0.25m })
+
+---
+
+(gram_pattern
+  (node_pattern
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (measurement))
+      (record_property
+        key: (symbol)
+        value: (measurement)))))
+
+==================
+Number: decimal without a suffix is still a decimal
+==================
+
+({ w : 3.5 })
+
+---
+
+(gram_pattern
+  (node_pattern
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (decimal)))))
+
+==================
+Number: range of integers is not a measurement
+==================
+
+({ r : 1..10 })
+
+---
+
+(gram_pattern
+  (node_pattern
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (range
+          lower: (integer)
+          upper: (integer))))))
+
+==================
+Number: zero with decimal magnitude is a measurement
+==================
+
+({ w : 0.5kg })
+
+---
+
+(gram_pattern
+  (node_pattern
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (measurement)))))
+
+==================
+Number: measurements with decimal magnitudes in an array
+==================
+
+({ a : [1.5m, 2kg] })
+
+---
+
+(gram_pattern
+  (node_pattern
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (array
+          (measurement)
+          (measurement))))))
+
+==================
+Number: range of decimal measurements
+==================
+
+({ r : -1.5m..2m })
+
+---
+
+(gram_pattern
+  (node_pattern
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (range
+          lower: (measurement)
+          upper: (measurement))))))
+
+==================
+Number: decimal point without fraction digits is not a measurement
+:error
+==================
+
+({ w : 3.kg })
+
+---
+
+==================
+Number: decimal point without leading digits is not a measurement
+:error
+==================
+
+({ w : .5kg })
+
+---
+
+==================
+Number: two decimal points is not a measurement
+:error
+==================
+
+({ w : 3.5.2kg })
+
+---
+
+==================
+Number: leading zero before decimal magnitude is not a measurement
+:error
+==================
+
+({ w : 03.5kg })
+
+---

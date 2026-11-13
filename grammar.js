@@ -111,7 +111,7 @@ module.exports = grammar({
         $.string_literal,
       ),
 
-    array: ($) => seq("[", commaSep1($._scalar_value), "]"),
+    array: ($) => seq("[", commaSep($._scalar_value), "]"),
 
     labels: ($) => repeat1($._label),
 
@@ -174,8 +174,9 @@ module.exports = grammar({
     },
 
     measurement: ($) => {
-      // /-?(?:[0-9]|[1-9][0-9]+)(?:\.[0-9]+)?[a-zA-Z]+\b(?!@)/
-      const measurement = /-?(0|[1-9]\d*)([a-zA-Z]+)/;
+      // Integer or decimal magnitude followed by a letter suffix,
+      // e.g. 168cm, -5m, 3.5kg.
+      const measurement = /-?(0|[1-9]\d*)(\.\d+)?([a-zA-Z]+)/;
       return token(measurement);
     },
 

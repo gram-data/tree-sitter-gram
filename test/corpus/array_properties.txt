@@ -20,3 +20,86 @@ Array of arrays is not ok.
 { count: [[1,2],[3,4]] }
 
 ---
+
+==================
+Empty array in a property
+==================
+
+{ tags: [] }
+
+---
+
+(gram_pattern (record (record_property
+    (symbol)
+    (array)
+)))
+
+
+==================
+Empty array with whitespace
+==================
+
+{ tags: [ ] }
+
+---
+
+(gram_pattern (record (record_property
+    (symbol)
+    (array)
+)))
+
+==================
+Empty array as a map entry value
+==================
+
+({ m: { k: [] } })
+
+---
+
+(gram_pattern
+  (node_pattern
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (map
+          (map_entry
+            key: (symbol)
+            value: (array)))))))
+
+==================
+Empty and non-empty arrays side by side
+==================
+
+({ a: [], b: [1] })
+
+---
+
+(gram_pattern
+  (node_pattern
+    record: (record
+      (record_property
+        key: (symbol)
+        value: (array))
+      (record_property
+        key: (symbol)
+        value: (array (integer))))))
+
+==================
+Array of empty arrays is not ok.
+:error
+==================
+
+({ a: [[]] })
+
+---
+
+==================
+Bare [] at top level is still an empty subject pattern
+==================
+
+[]
+
+---
+
+(gram_pattern
+  (subject_pattern))

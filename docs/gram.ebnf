@@ -230,10 +230,9 @@ scalar_value = range
              | string_literal
              ;
 
-(* array is a non-empty ordered sequence of scalars.
-   Note: [] is not a valid array literal — it parses as an
-   empty subject_pattern. { tags: [] } is therefore a parse error. *)
-array        = "[", scalar_value, { ",", scalar_value }, "]" ;
+(* array is an ordered, possibly empty, sequence of scalars.
+   [] is a valid array in a value position: { tags: [] }. *)
+array        = "[", [ scalar_value, { ",", scalar_value } ], "]" ;
 
 
 (* ------------------------------------------------------------
@@ -266,7 +265,7 @@ octal           = /0[0-7]+/ ;
    Examples: 5m, 10kg, 2.5s
    Note: the regex is intentionally permissive — any alpha suffix
    is accepted; unit validation is left to consumers. *)
-measurement     = /\-?(0|[1-9]\d*)([a-zA-Z]+)/ ;
+measurement     = /\-?(0|[1-9]\d*)(\.\d+)?([a-zA-Z]+)/ ;
 
 
 (* 9.3 Range
